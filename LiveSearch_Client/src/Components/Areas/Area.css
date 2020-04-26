@@ -1,0 +1,316 @@
+
+
+.titleDiv {
+    position: fixed;
+    height: 50px;
+    margin-left: 200px;
+    margin-right: 200px;
+    z-index: 100;
+    top: 355px;
+    left: 0px;
+    right: 0px;
+    font-family: 'Mandali', sans-serif;
+    font-size: 20px;
+    font-weight: 100;
+    text-align: center;
+    color: rgba(235, 235, 235, 0.836);
+    opacity: 0.9;
+}
+
+.titleDivEdit {
+    position: fixed;
+    z-index: 700;
+    font-family: 'Mandali', sans-serif;
+    font-size: 20px;
+    font-weight: 100;
+    text-align: center;
+    color: rgba(241, 241, 241, 0.836);
+    opacity: 0.9;
+    padding: 1px;
+    z-index: 500;
+    top: 365px;
+    left: 0px;
+    right: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 560px;
+}
+
+.titleDivEdit input {
+    border-radius: 3px;
+    background-color: rgba(78, 78, 78, 0.404);
+    border-width: 0px;
+    height: 30px;
+    width: 560px;
+    font-family: 'Mandali', sans-serif;
+    font-size: 18px;
+    font-weight: 100;
+    color: rgba(197, 197, 197, 0.637);
+    text-align: center;
+}
+
+.title2 {
+    box-shadow: rgb(255, 255, 255) 0px 0px 5px, rgb(255, 255, 255) 0px 0px 10px, rgb(255, 255, 255) 0px 0px 10px, rgba(231, 173, 64, 0.637) 0px 0px 10px, rgba(231, 173, 64, 0.637) 0px 0px 20px, rgba(231, 173, 64, 0.637) 0px 0px 10px, rgba(231, 173, 64, 0.637) 0px 0px 2px, rgba(231, 173, 64, 0.637) 0px 0px 5px;
+}
+
+.title1 {
+    position: fixed;
+    height: 50px;
+    z-index: 100;
+    top: 40px;
+    
+    right: 9px;
+    font-family: 'Mandali', sans-serif;
+    font-size: 13px;
+    font-weight: 100;
+    text-align: center;
+    color: rgba(235, 235, 235, 0.836);
+    opacity: 0.9;
+}
+
+.plus {
+    width: 20px;
+    height: 20px;
+    position: fixed;
+    right: 158px;
+    z-index: 300;
+    bottom: 9px;
+    transition: all 0.3s;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .plus:hover {
+    background-color: rgb(211, 211, 211);
+  }
+
+
+
+.folder {
+    position: fixed;
+    cursor: default;
+    color: rgb(255, 255, 255);
+    z-index: 157;
+    background-color: rgba(0, 0, 0, 0.61);
+    opacity: 0.5;
+    text-align: center;
+    margin: 0px;
+    transition: opacity 0.2s;
+    box-shadow: 0px 0px 3px 1px rgb(255, 255, 255);
+    height: 80px;
+    width: 80px;
+}
+
+.folderDis {
+    position: fixed;
+    pointer-events: none;
+    color: rgb(255, 255, 255);
+    z-index: 157;
+    background-color: rgba(0, 0, 0, 0.61);
+    opacity: 0.3;
+    filter: blur(2px);
+    text-align: center;
+    margin: 0px;
+    transition: opacity 0.2s;
+    box-shadow: 0px 0px 3px 1px rgb(255, 255, 255);
+    height: 80px;
+    width: 80px;
+}
+
+#plusField {
+    cursor: default;
+    display: none;
+    padding: 15px;
+    padding-top: 0px;
+    font-size: 13px;
+    position: fixed;
+    bottom: 27px;
+    right: 150px;
+    background-color: rgba(32, 32, 32, 0.856);
+    z-index: 155;
+    color: rgba(255, 255, 255, 0.678);
+}
+
+#addText {
+    cursor: default;
+    display: none;
+    padding: 10px;
+    font-family: 'Mandali', sans-serif;
+    font-size: 12px;
+    position: fixed;
+    bottom: 27px;
+    right: 160px;
+    background-color: rgba(32, 32, 32, 0.856);
+    z-index: 155;
+    color: rgba(255, 255, 255, 0.678);
+}
+
+#plus:hover #plusField {
+    display: block;
+}
+
+#addOwn:hover #addText {
+    display: block;   
+}
+
+.containerIconsContainer {
+    position: absolute;
+    top: 50px;
+    right: 175px;
+    z-index: 0;
+}
+
+
+.iconsContainer {
+    overflow-x: auto;
+ 
+    position: relative;
+    height: 80vh;
+    width: 170px;
+    z-index: 0;
+   
+}
+
+.addOwn {
+    color: rgb(17, 114, 240);
+    font-family: Verdana, Geneva, sans-serif;
+    cursor: pointer;
+    text-shadow: -9px 13px 15px -1px #000000;
+    font-size: 25px;
+   
+}
+
+.addOwn:hover {
+    color: rgb(113, 171, 248);
+}
+
+
+
+#ownField {
+    cursor: default;
+    font-weight: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 13px;
+    position: absolute;
+    left: 50%;
+    margin-left: -185px;
+    top: 380px;
+    width: 340px;
+    height: 140px;
+    background-color: rgba(32, 32, 32, 0.856);
+    z-index: 153;
+    color: rgba(255, 255, 255, 0.678); 
+}
+
+.addIconInfo {
+    color: rgb(86, 159, 255);
+    font-family: Verdana, Geneva, sans-serif;
+    text-shadow: -9px 13px 15px -1px #000000;
+    font-size: 18px;
+    text-shadow: rgba(0, 0, 0, 0.979) 0px 0px 1px, rgba(0, 0, 0, 0.911) 0px 0px 5px
+}
+
+
+.stopAdding {
+   
+    
+    color: rgb(226, 0, 0);
+    transition: all 0.5s;
+    font-size: 40px;
+    position: absolute;
+    top: -20px; right: -9px;
+
+  
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    cursor: pointer;
+}
+
+#closeAdd {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+}
+
+.stopAdding:hover {
+    color:  rgb(255, 108, 108);
+    cursor: pointer;
+    text-shadow:  rgb(0, 0, 0) -6px 1px 3px, rgb(0, 0, 0) 6px 0px 15px
+}
+
+.area1 {
+    filter: blur(15px);
+}
+
+
+
+
+
+.lds-ellipsiss {
+    display: inline-block;
+    position: relative;
+    width: 60px;
+    height: 60px;
+    margin-left: auto;
+    margin-right: auto;
+}
+   
+
+
+  .lds-ellipsiss div {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(218, 218, 218, 0.295);
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+
+    
+  }
+  .lds-ellipsiss div:nth-child(1) {
+    left: 6px;
+    animation: lds-ellipsis1 1s infinite;
+ 
+  }
+  .lds-ellipsiss div:nth-child(2) {
+    left: 6px;
+    animation: lds-ellipsis2 1s infinite;
+  }
+  .lds-ellipsiss div:nth-child(3) {
+    left: 26px;
+    animation: lds-ellipsis2 1s infinite;
+  }
+ 
+  @keyframes lds-ellipsis1 {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes lds-ellipsis3 {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(0);
+    }
+  }
+  @keyframes lds-ellipsis2 {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(19px, 0);
+    }
+  }
+
+
+
+
+
+

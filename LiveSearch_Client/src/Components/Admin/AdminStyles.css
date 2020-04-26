@@ -1,0 +1,37 @@
+
+
+#adminTable td  {
+    border: 1px solid rgb(80, 80, 80);
+  }
+  
+  #adminTable {
+    border-collapse: collapse;
+    width: 90%;
+  }
+
+  
+
+  .mainContent {
+    font-family: 'Mandali', sans-serif;
+    background-color: rgb(0, 0, 0);
+    position: absolute;
+    top: 80px;
+    color: rgb(180, 180, 180);
+    opacity: 0,3;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.5);
+    overflow-y: auto;
+    height: 80vh;
+    left: 50vw;
+    margin-left: -45vw;
+    width: 90vw;
+}
+
+.adminActive:hover {
+  color: red;
+}
+
+  
+::-webkit-scrollbar {
+    display: none;
+    }

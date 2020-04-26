@@ -1,0 +1,153 @@
+/* Chrome, Safari and Opera syntax */
+:-webkit-full-screen {
+  background-color: rgb(0, 0, 0);
+}
+
+/* Firefox syntax */
+:-moz-full-screen {
+  background-color: rgb(0, 0, 0);
+}
+
+/* IE/Edge syntax */
+:-ms-fullscreen {
+  background-color: rgb(0, 0, 0);
+}
+
+/* Standard syntax */
+:fullscreen {
+  background-color: rgb(0, 0, 0);
+}
+
+@media screen and (max-width: 992px) {
+  body {
+    background-color: blue;
+    color: white;
+  }
+}
+
+
+
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background: rgb(23,36,0);
+  background: linear-gradient(234deg, rgb(0, 0, 0) 0%, 
+  rgb(4, 4, 77) 30%, rgb(0, 0, 0) 100%);
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+
+.body{
+background-color: #e0dfdff3;
+}
+
+body{
+  background-color: #000000;
+  }
+
+.header
+{
+  background-color: #ffffff;
+  position: fixed;
+  width: 100vw;
+  top: 0px;
+  left: 0px;
+  z-index: 450;
+  font-size: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 15px;
+  font-family: 'Mandali', sans-serif;
+  color: #3b3b3b;
+  font-weight: 100;
+  box-shadow: 4px -4px 5px rgba(0, 0, 0, 0.274);
+}
+
+.First 
+{
+    font-size: 50px;
+    color: rgba(231, 173, 64, 0.637);
+    display: block;
+    left: 50vw;
+    margin-left: -125px;
+    position: fixed;
+    transition: top 3s;
+    z-index: 300;
+    width: 250px;
+}
+
+.fullScreen {
+  font-size: 18px;
+  color: rgba(170, 170, 170, 0.637);
+  display: inline-flex;
+  bottom: 15px;
+  position: fixed;
+  z-index: 310;
+  left: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: color 1s;
+}
+
+.fullScreen:hover {
+  color: rgb(233, 233, 233);
+  display: block;
+}
+
+
+.glassMain {
+  width: 560px;
+  filter: 'blur(100px)';
+  -webkit-transform: scaleY(-1);
+  transform: scaleY(-1);
+  z-index: 90;
+  left: 50vw;
+  width: 250px;
+  margin-left: -125px;
+  opacity: 0.6;
+  font-size: 50px;
+  color: rgba(231, 173, 64, 0.637);
+  display: block;
+  position: fixed;
+  transition: top 3s;
+  }
+
+  .blurMain {
+    background: rgba(0, 0, 0, 0.02);
+    background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.199) 0%, rgba(0, 0, 0, 0.73) 43%, rgb(0, 0, 0) 75%);
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.199) 0%, rgba(0, 0, 0, 0.73) 43%, rgb(0, 0, 0) 75%);
+    background: -o-linear-gradient(top, rgba(0, 0, 0, 0.199) 0%, rgba(0, 0, 0, 0.73) 43%, rgb(0, 0, 0) 75%);
+    background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.199) 0%, rgba(0, 0, 0, 0.73) 43%, rgb(0, 0, 0) 75%);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.199) 0%, rgba(0, 0, 0, 0.73) 43%, rgb(0, 0, 0) 75%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e0dfdf', GradientType=0 );
+    position: fixed;
+    height: 370px;
+    z-index: 149;
+    top: 260px;
+    left: 0px;
+    right: 0px;
+    }
+

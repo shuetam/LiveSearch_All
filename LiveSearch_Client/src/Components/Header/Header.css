@@ -1,0 +1,1022 @@
+.header {
+    background-color: rgb(0, 0, 0);
+    position: fixed;
+    width: 100vw;
+    top: 0px;
+    left: 0px;
+    z-index: 160;
+    font-size: 20px;
+    padding: 0px;
+    font-family: 'Mandali', sans-serif;
+    color: #3b3b3b;
+    font-weight: 100;
+    display: flex;
+}
+
+.menu {
+    display: flex;
+    width: 100%;
+    z-index: 170;
+}
+
+.menuForSmall {
+    display: inline-flex;
+    z-index: 170;
+    display: none;
+    font-family: 'Mandali', sans-serif;
+    color: rgba(255, 255, 255, 0.575);
+    font-size: 12px;
+    opacity: 0,3;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 5px;
+}
+
+
+@media only screen and (max-width: 650px) {
+    .menu {
+      display: none;
+    }
+  }
+
+
+@media only screen and (max-width: 750px) {
+    .menuForSmall {
+      display: block;
+    }
+  }
+
+.main {
+    margin-left: 50px;
+    margin-top: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 3px;
+    z-index: 170;
+    color: rgba(231, 173, 64, 0.637);
+}
+
+    .main:hover {
+        color: rgba(231, 173, 64, 0.836);
+    }
+
+.switch {
+    margin-left: 30px;
+    margin-top: 7px;
+    cursor: pointer;
+    opacity: 0,3;
+    font-size: 15px;
+    padding: 3px;
+    color: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s;
+    white-space: nowrap; 
+}
+
+.activeSwitch {
+    margin-left: 30px;
+    margin-top: 7px;
+    cursor: pointer;
+    opacity: 0,3;
+    font-size: 15px;
+    padding: 3px;
+    color: rgba(255, 255, 255, 0.822);
+    transition: all 0.3s;
+    white-space: nowrap; 
+}
+
+.switch:hover {
+    color: rgba(255, 255, 255, 0.822)
+}
+
+.switchFooter {
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    opacity: 0,3;
+    font-size: 10px;
+    padding: 0px;
+    color: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s;
+    white-space: nowrap; 
+    display: inline-flex;
+    margin-top: 10px;
+}
+
+.addSwitcher {
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.addSwitcher:hover {
+    color: rgba(255, 255, 255, 0.925);
+    text-decoration: rgba(255, 255, 255, 0.925) underline;
+}
+
+.addSwitcherActive {
+    color: rgb(255, 255, 255);
+    text-decoration: rgb(255, 255, 255) underline;
+}
+
+
+
+.switcher {
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.switchB {
+    margin-left: 30px;
+    margin-top: 7px;
+    cursor: pointer;
+    opacity: 0,3;
+    font-size: 17px;
+    padding: 3px;
+    color: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+
+.switchDisable {
+    margin-left: 50px;
+    margin-top: 5px;
+    pointer-events: none;
+    opacity: 0,1;
+    font-size: 17px;
+    padding: 3px;
+    color: rgba(255, 255, 255, 0.199);
+    white-space: nowrap;
+}
+
+
+.logIn {
+    margin-top: 7px;
+    cursor: pointer;
+    opacity: 0,3;
+    font-size: 17px;
+    padding: 3px;
+    color: rgba(231, 173, 64, 0.637);
+    transition: all 0.3s;
+    white-space: nowrap;
+    margin-left: 10px; 
+    margin-right: 20px;
+    align-items: left;
+}
+
+.screenSwitch {
+    margin-top: 7px;
+    cursor: pointer;
+    opacity: 0,3;
+    font-size: 18px;
+    padding: 3px;
+    color: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s;
+    white-space: nowrap;
+    margin-left: auto; 
+    margin-right: 0px;
+    align-items: left;
+}
+
+.screenSwitch:hover {
+    color: rgba(255, 255, 255, 0.842);
+    font-size: 20px;
+}
+
+.desktop {
+    margin-top: 5px;
+    cursor: pointer;
+    opacity: 0,3;
+    font-size: 15px;
+    padding: 3px;
+    color: rgba(196, 194, 191, 0.925);
+    transition: all 0.3s;
+    white-space: nowrap;
+    margin-left: 0px;
+    margin-right: 0px;
+    align-items: left;
+}
+
+.desktopC {
+    margin-top: 5px;
+    cursor: default;
+    opacity: 0,3;
+    font-size: 14px;
+    color: rgba(170, 167, 161, 0.61);
+    white-space: nowrap;
+  
+}
+
+.desktop:hover {
+    color: rgba(255, 255, 255, 0.877);
+    text-decoration-line: underline;
+
+}
+
+#userP:hover #login {
+    display: block;
+}
+
+
+.switchSearch {
+    border-radius: 3px;
+    background-color: rgba(65, 65, 65, 0.466);
+    border-width: 0px;
+    height: 20px;
+    font-family: 'Mandali', sans-serif;
+    color: rgba(231, 173, 64, 0.637);
+    position: fixed;
+    right: 5px;
+    z-index: 300;
+    bottom: 8px;
+    width: 120px;
+}
+
+.textFolder {
+    border-radius: 3px;
+    background-color: rgba(65, 65, 65, 0.466);
+    border-width: 0px;
+    height: 20px;
+    font-family: 'Mandali', sans-serif;
+    color: rgba(231, 173, 64, 0.637);
+    position: fixed;
+    right: 5px;
+    z-index: 157;
+    bottom: 150px;
+}
+
+.logIn:hover {
+    color: rgba(231, 173, 64, 0.836);
+}
+
+
+
+.switchFooter:hover {
+    color: rgba(255, 255, 255, 0.842);
+    text-decoration: underline;
+}
+
+.switchB:hover {
+    color: rgba(255, 255, 255, 0.87)
+}
+
+.switcher:hover {
+    color: rgba(255, 255, 255, 0.925)
+}
+
+#login {
+    cursor: default;
+    padding: 15px;
+    padding-top: 10px;
+    font-size: 13px;
+    display: none;
+    position: absolute;
+    top: 33px;
+    right: 5px;
+    background-color: rgba(32, 32, 32, 0.856);
+    z-index: 165;
+    color: rgba(255, 255, 255, 0.678);
+}
+
+#propField hr {
+    border: 0; border-top: 1px solid rgb(90, 90, 90);
+}
+
+.desktop hr {
+    border: 0; border-top: 1px solid rgb(90, 90, 90);
+}
+
+.logIn hr {
+    border: 0; border-top: 1px solid rgb(90, 90, 90);
+}
+
+#propField {
+    cursor: default;
+    display: none;
+    padding: 15px;
+    padding-top: 0px;
+    font-size: 13px;
+    position: fixed;
+    bottom: 27px;
+    right: 40px;
+    background-color: rgba(32, 32, 32, 0.856);
+    z-index: 155;
+    color: rgba(255, 255, 255, 0.678);
+}
+
+
+#saveIconsField {
+    cursor: default;
+    display: none;
+    padding: 10px;
+    font-size: 12px;
+    position: fixed;
+    bottom: 27px;
+    right: 40px;
+    background-color: rgba(32, 32, 32, 0.856);
+    z-index: 155;
+    color: rgba(255, 255, 255, 0.678);
+}
+
+#saveIcons:hover #saveIconsField {
+    display: block;
+}
+
+#backFolderField {
+    cursor: default;
+    display: none;
+    padding: 10px;
+    font-size: 12px;
+    position: fixed;
+    bottom: 27px;
+    right: 100px;
+    background-color: rgba(32, 32, 32, 0.856);
+    z-index: 155;
+    color: rgba(255, 255, 255, 0.678);
+}
+
+#backFolder:hover #backFolderField {
+    display: block;
+}
+
+#prop:hover #propField {
+    display: block;
+}
+
+.slide {
+    width: 100%;
+}
+
+#s:hover {
+    cursor: pointer;
+}
+
+
+
+#music:hover #radio {
+    display: block;
+}
+
+#movie:hover #movieField {
+    display: block;
+}
+
+#book:hover #bookField {
+    display: block;
+}
+
+#series:hover #seriesField {
+    display: block;
+}
+
+#events:hover #eventsField {
+    display: block;
+}
+
+#explore:hover #exploreField {
+    display: block;
+}
+
+
+#screenS:hover #screenField {
+    display: block;
+}
+
+#music label:hover {
+    cursor: pointer;
+    text-decoration: rgb(255, 255, 255) underline; 
+}
+
+#music label {
+    color: rgba(255, 255, 255, 0.842);
+    margin-left: 10px;
+}
+
+
+#music label input {
+    display: none;
+} 
+
+
+
+.cityCinema:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.mainChoice {
+    cursor: pointer;
+    font-size: 13px;
+    text-align: left;
+    color: rgba(255, 255, 255, 0.842);
+    margin-left: 10px;
+}
+
+.mainChoice:hover {
+    text-decoration: rgb(255, 255, 255) underline ;
+   
+} 
+
+.mainChoice input {
+    display: none;
+} 
+
+.headHeader {
+    color: rgba(255, 255, 255, 0.842);
+    margin-left: 9px;
+}
+
+#bookField {
+    cursor: default;
+    padding: 15px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-size: 13px;
+    display: none;
+    position: absolute;
+    top: 33px;
+    left: 530px;
+    background-color: rgba(32, 32, 32, 0.856);
+    z-index: 155;
+    color: rgba(255, 255, 255, 0.678);
+}
+
+#seriesField {
+    cursor: default;
+    padding: 15px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-size: 13px;
+    display: none;
+    position: absolute;
+    top: 33px;
+    left: 450px;
+    background-color: rgba(32, 32, 32, 0.856);
+    z-index: 155;
+    color: rgba(255, 255, 255, 0.678);
+}
+
+#exploreField {
+    cursor: default;
+    padding: 15px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-size: 13px;
+    display: none;
+    position: absolute;
+    top: 33px;
+    left: 160px;
+    background-color: rgba(32, 32, 32, 0.856);
+    z-index: 155;
+    color: rgba(255, 255, 255, 0.678);
+}
+
+
+
+#eventsField {
+    cursor: default;
+    padding: 15px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-size: 13px;
+    display: none;
+    position: absolute;
+    top: 33px;
+    left: 700px;
+    background-color: rgba(32, 32, 32, 0.856);
+    z-index: 155;
+    color: rgba(255, 255, 255, 0.678);
+}
+
+#screenField {
+    cursor: default;
+    padding: 15px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-size: 13px;
+    display: none;
+    position: absolute;
+    top: 33px;
+    background-color: rgba(32, 32, 32, 0.856);
+    z-index: 155;
+    color: rgba(255, 255, 255, 0.678);
+}
+
+#movieField {
+    cursor: default;
+    padding: 15px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-size: 13px;
+    display: none;
+    position: absolute;
+    top: 33px;
+    left: 330px;
+    background-color: rgba(32, 32, 32, 0.856);
+    z-index: 155;
+    color: rgba(255, 255, 255, 0.678);
+}
+
+#radio {
+    cursor: default;
+    padding: 15px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-size: 13px;
+    display: none;
+    position: absolute;
+    top: 33px;
+    left: 230px;
+    background-color: rgba(32, 32, 32, 0.856);
+    z-index: 155;
+    color: rgba(255, 255, 255, 0.678);
+}
+
+
+#alert {
+    font-size: 12px;
+    padding: 1px;
+    font-family: 'Mandali', sans-serif;
+    color: #ffffffbd;
+    display: none;
+}
+
+#infoLink {
+    font-size: 11px;
+    color: #c4c4c4;
+    opacity: 1;
+    position: relative;
+    margin-left: 9px;
+    width: 20px;
+}
+
+    #infoLink:hover {
+        font-size: 11px;
+        cursor: default;
+    }
+
+#infoLink:hover #info {
+            display: block;
+        }
+
+#info {
+    cursor: default;
+    padding: 10px;
+    font-size: 12px;
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 20px;
+    width: 230px;
+    background-color: rgb(68, 68, 68);
+    z-index: 150;
+    white-space: normal;
+}
+
+#imageGoogle {
+    height: 20px;
+}
+
+.musicButtton {
+    width: 200px;
+    height: 25px;
+    border: rgb(0, 0, 0) 1px solid;
+    border-radius: 5px;
+    background-color: rgb(0, 110, 255);
+    display: block;
+    color: white;
+    transition: border 0.5s;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 11px;
+}
+
+.cookieButtton {
+    width: 80px;
+    height: 25px;
+    border: rgb(0, 0, 0) 1px solid;
+    border-radius: 5px;
+    background-color: rgb(0, 110, 255);
+    color: white;
+    transition: border 0.5s;
+    font-size: 11px;
+    position: absolute;
+    top: 20px;
+    right: 10px;
+
+}
+
+
+.cookieButtton:hover {
+    border: rgba(187, 187, 187, 0.801) 1px solid;
+    cursor: pointer;
+}
+
+
+    .musicButtton:hover {
+        border: rgba(187, 187, 187, 0.801) 1px solid;
+        cursor: pointer;
+    }
+
+    .filmButtton {
+        width: 210px;
+        height: 25px;
+        border: rgb(0, 0, 0) 1px solid;
+        border-radius: 5px;
+        background-color: rgb(0, 110, 255);
+        display: block;
+        color: white;
+        transition: border 0.5s;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 11px;
+    }
+
+    .filmButtton:hover {
+        border: rgba(187, 187, 187, 0.801) 1px solid;
+        cursor: pointer;
+    }
+
+
+    .filmButttonEnabled {
+        width: 210px;
+        height: 25px;
+        border: rgb(0, 0, 0) 1px solid;
+        border-radius: 5px;
+        background-color: rgba(0, 110, 255, 0.459);
+        display: block;
+        color: rgba(255, 255, 255, 0.322);
+        transition: border 0.5s;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 11px;
+        pointer-events: none;
+    }
+
+    .bookButtton {
+        width: 210px;
+        height: 25px;
+        border: rgb(0, 0, 0) 1px solid;
+        border-radius: 5px;
+        background-color: rgb(0, 110, 255);
+        display: block;
+        color: white;
+        transition: border 0.5s;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 11px;
+    }
+
+
+    .bookButttonEnabled {
+        width: 210px;
+        height: 25px;
+        border: rgb(0, 0, 0) 1px solid;
+        border-radius: 5px;
+        background-color: rgba(0, 110, 255, 0.459);
+        display: block;
+        color: rgba(255, 255, 255, 0.322);
+        transition: border 0.5s;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 11px;
+        pointer-events: none;
+    }
+
+    
+        .bookButtton:hover {
+            border: rgba(187, 187, 187, 0.801) 1px solid;
+            cursor: pointer;
+        }
+
+button:focus {
+    outline: 0;
+}
+
+.googleLogout {
+   color: rgb(148, 0, 0);
+}
+
+.cookieInfo {
+    position: fixed;
+    font-size: 11px;
+    bottom: 40px;
+    height: 55px;
+    left: 20px;
+    border: 0px solid;
+    width: 400px;
+    color: rgb(126, 126, 126);
+    text-align: left;
+    z-index: 600;
+    transition: all 2s;
+    padding: 5px;
+    background-color: rgb(8, 8, 8);
+    
+ }
+
+
+
+
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    height: 10px;
+    left: 50%;
+    margin-left: -150px;
+    border: 0px solid;
+    border-top-right-radius: 30px 10px;
+    border-top-left-radius: 30px 10px;
+    width: 300px;
+    color: white;
+    text-align: center;
+    z-index: 100;
+    -webkit-box-shadow: 0px -1px 7px 0px rgba(192, 192, 192, 0.705);
+    -moz-box-shadow: 0px -1px 7px 0px rgba(192, 192, 192, 0.705);
+    box-shadow: 0px -1px 7px 0px rgba(192, 192, 192, 0.705);
+    transition: all 0.5s;
+    z-index: 700;
+ }
+
+ .mainFooter {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    margin-left: -150px;
+    border: 0px solid;
+    border-top-right-radius: 30px 10px;
+    border-top-left-radius: 30px 10px;
+    width: 300px;
+    color: white;
+    text-align: center;
+    transition: all 0.5s;
+    height:  30px;
+    z-index: 500;
+    -webkit-box-shadow: 0px -1px 7px 0px rgba(0, 0, 0, 0.705);
+    -moz-box-shadow: 0px -1px 7px 0px rgba(0, 0, 0, 0.705);
+    box-shadow: 0px -1px 7px 0px rgba(0, 0, 0, 0.705);
+ }
+
+ .footer:hover {
+    height:  30px;
+    z-index: 500;
+    -webkit-box-shadow: 0px -1px 7px 0px rgba(0, 0, 0, 0.705);
+    -moz-box-shadow: 0px -1px 7px 0px rgba(0, 0, 0, 0.705);
+    box-shadow: 0px -1px 7px 0px rgba(0, 0, 0, 0.705);
+ 
+ }
+
+ .dna-table {
+    margin: auto;
+    text-align: center;
+  }
+
+ .loginBtn {
+    box-sizing: border-box;
+    position: relative;
+    left: 0;
+    width: 193.08px;
+    height: 43px;
+    /* margin: 0.2em; */
+    padding: 0 15px 0 46px;
+    border: none;
+    text-align: left;
+    line-height: 34px;
+    white-space: nowrap;
+    border-radius: 0.2em;
+    font-size: 16px;
+    color: #FFF;
+    
+  }
+
+  .loginBtn:before {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    top: 4px;
+    left: 2px;
+    width: 32px; 
+    height: 100%;
+  }
+  .loginBtn:focus {
+    outline: none;
+  }
+  .loginBtn:active {
+    box-shadow: inset 0 0 0 32px rgba(0,0,0,0.1);
+  }
+  
+  .loginBtn--facebook {
+    background-color: #4C69BA;
+    background-image: linear-gradient(#4C69BA, #3B55A0);
+    font-size: 12px;
+    text-shadow: 0 -1px 0 #354C8C;
+    cursor: pointer;
+    /* left: -4px; */
+  }
+  .loginBtn--facebook:before {
+    border-right: #364e92 0px solid;
+    background: url("icon_facebook.png") 6px 6px no-repeat;
+  }
+  .loginBtn--facebook:hover,
+  .loginBtn--facebook:focus {
+    background-color: #5B7BD5;
+    background-image: linear-gradient(#5B7BD5, #4864B1);
+  }
+
+
+ 
+
+  .construction {
+    width: 14px;
+    height: 14px;
+    background:  url("underconstruction.png") no-repeat;
+    background-size: 100%;
+    float: left;
+  }
+
+  .popup {
+    position: fixed;
+    left: 50%;
+    margin-left: -150px;
+    border-radius: 10px;
+    width: 350px;
+    color: rgb(177, 177, 177);
+    text-align: center;
+    z-index: 500;
+    background-color: rgba(0, 0, 0, 0.822);
+    -webkit-box-shadow:  0px 0px 1px 1px rgba(190, 190, 190, 0.637);
+    -moz-box-shadow: 0px 0px 1px 1px rgba(190, 190, 190, 0.637);
+    box-shadow:  0px 0px 1px 1px rgba(190, 190, 190, 0.637);
+    transition: all 0.5s;
+    font-size: 15px;
+    padding: 10px;
+    font-family: 'Mandali', sans-serif;
+    word-wrap: break-word;
+  }
+
+  .titleButton {
+    border-radius: 5px;
+    background-color: rgb(0, 110, 255);
+    color: rgb(255, 255, 255);
+    border: rgb(0, 0, 0) 1px solid;
+    cursor: pointer;
+  }
+
+  .titleButton:hover {
+    border: rgba(187, 187, 187, 0.801) 1px solid;
+    cursor: pointer;
+    color: white;
+  }
+
+
+  .popupButtton {
+    width: 50px;
+    border: rgb(0, 0, 0) 1px solid;
+    border-radius: 5px;
+    background-color: rgb(0, 110, 255);
+    display: block;
+    color: rgb(255, 255, 255);
+    transition: all 0.5s;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+    padding: 2px;
+}
+
+.popupButttonDis {
+    width: 50px;
+    border: rgb(0, 0, 0) 1px solid;
+    border-radius: 5px;
+    background-color: rgb(0, 110, 255);
+    display: block;
+    color: rgb(189, 189, 189);
+    transition: all 0.5s;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+    padding: 2px;
+    pointer-events: none
+}
+
+.popupButtton:hover {
+    border: rgba(187, 187, 187, 0.801) 1px solid;
+    cursor: pointer;
+    color: white;
+}
+
+
+.loginPanel {
+    position: absolute;
+    top: 200px;
+    left: 45vw;
+}
+
+
+.switchHref {
+    cursor: pointer;
+    opacity: 0,3;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s;
+    white-space: nowrap; 
+    width: 5px;
+    text-decoration: underline;
+    padding-bottom: 4px;
+}
+
+.switchHref:hover {
+    color: rgba(255, 255, 255, 0.842);
+   
+}
+
+
+.infoArrow {
+    color: rgba(255, 0, 0, 0.774);
+    position: absolute;
+    animation: arrowAnimation 1s 7;
+    animation-direction: alternate;
+    left: 50px; 
+    top: 24px;
+    font-size: 15px;
+    padding-right: 30px;
+    width: 20px;
+    text-align: right;
+  }
+
+  .infoArrowBestsellers {
+    color: rgba(255, 0, 0, 0.774);
+    position: absolute;
+    animation: arrowAnimation 1s 7;
+    animation-direction: alternate;
+    left: 50px;
+    top: 53px;
+    font-size: 15px;
+    padding-right: 30px;
+    width: 20px;
+    text-align: right;
+  }
+  
+  @keyframes arrowAnimation {
+    0%   { left: 50px;}
+    100% { left: 70px;}
+  }
+
+  .checkL div{
+    background-color: rgb(255, 255, 255);
+    width: 13px;
+    height: 13px;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0px 0px 1px 0.7px rgba(59, 59, 59, 0.75);
+    -moz-box-shadow: inset 0px 0px 1px 0.7px rgba(59, 59, 59, 0.75);
+    box-shadow: inset 0px 0px 1px 0.7px rgba(59, 59, 59, 0.75);
+    display: inline-block;
+    position: relative;
+    left: -4px;
+    top: 2px;
+    color: black;
+  }
+
+  .checkL button{
+    border: rgb(0, 0, 0) 1px solid;
+    border-radius: 3px;
+    background-color: rgb(0, 110, 255);
+    display: block;
+    color: rgb(0, 110, 255);
+    transition: border 0.5s;
+    margin-left: 10px;
+    margin-right: auto;
+    font-size: 19px;
+    padding: 4px;
+    width: 13px;
+    height: 13px;
+}
+    
+     
+
+  .uncheckL div{
+    background-color: rgb(0, 110, 255);
+    width: 9px;
+    height: 9px;
+    border-radius: 4px;
+    color: white;
+    font-size: 11px;
+    padding-top: 2px;
+ 
+   /*  -webkit-box-shadow: inset 0px 0px 1px 0.7px rgba(59, 59, 59, 0.75);
+    -moz-box-shadow: inset 0px 0px 1px 0.7px rgba(59, 59, 59, 0.75);
+    box-shadow: inset 0px 0px 1px 0.7px rgba(59, 59, 59, 0.75); */
+    display: inline-block;
+    position: relative;
+    left: -4px;
+    top: 2px;
+  }
+
+  #userNick:hover #userNickEdit {
+display: inline-block;
+  }
+
+  #userNickEdit {
+      display: none;
+  }
