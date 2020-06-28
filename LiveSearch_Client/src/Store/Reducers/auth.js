@@ -14,7 +14,7 @@ const initialState = {
     addingIcon: null,
     removingIconId: null,
     fullScreen: false,
-    firstField: 0
+    firstField: false
 };
 
 const  manageEsc = (state, action) => {

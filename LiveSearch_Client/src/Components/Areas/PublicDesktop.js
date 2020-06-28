@@ -69,7 +69,10 @@ class PublicDesktop extends Component {
 
     componentDidMount() {
         
+        var firstField = localStorage.getItem("firstField");
+        
         this.setState({firstField: this.props.firstField});
+      //this.props.showFirst(false);
         this.startFetchingIcons();
         this.getUserIconsId();
     }
@@ -134,7 +137,7 @@ class PublicDesktop extends Component {
         }
         axios.post(URL.api+URL.userIconsIds, null, config)
         .then((result) => {
-           // debugger;
+          
             this.setState({ userIconsId: result.data })});
         //.catch(error => {this.Alert()}); 
         }
@@ -224,9 +227,6 @@ class PublicDesktop extends Component {
        
             fetchData = URL.api + URL.explore;
 
-         
-
-           // console.log(data);
         }
 
 
@@ -420,6 +420,7 @@ class PublicDesktop extends Component {
 
     neonShadowHandler = (id) => {
         this.setState({firstField: false});
+        
 
         var played = document.getElementById(this.state.nowPlayed);
         if (played !== null) {
@@ -1123,8 +1124,8 @@ const mapStateToProps = state => {
     
     return {
         isAuthenticated: state.auth.jwttoken !== null,
-        //userId: state.auth.userId,
-    
+        jwtToken: state.auth.jwttoken,
+        firstField: state.auth.firstField
         //fullScreen: state.auth.fullScreen
     };
 };

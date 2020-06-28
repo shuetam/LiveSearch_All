@@ -116,7 +116,7 @@ class YTArea extends Component {
         }
         axios.post(URL.api+URL.userIconsIds, null, config)
         .then((result) => {
-           // debugger;
+            debugger;
             this.setState({ userIconsId: result.data })});
         //.catch(error => {this.Alert()}); 
         }

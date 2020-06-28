@@ -80,10 +80,11 @@ class Header extends Component {
         Update();
 
         var firstField = localStorage.getItem("firstField");
-    
+        //this.props.showFirst(true);
         if(firstField === null) {
-            this.setState({firstField: true});
+            this.props.showFirst(true);
             localStorage.setItem("firstField", new Date());
+
         }
         
 
@@ -193,6 +194,7 @@ this.setHeaderType();
 
     Main = () => {
      //window.location.replace("/");
+     this.props.showFirst(false);
      this.props.history.push('/');
 
      this.setState({headerType: 'hot'});
@@ -614,14 +616,14 @@ responseErrorGoogle = (response) => {
 
 
     activeExplore = (query) => {
-    
+        this.props.showFirst(false);
         this.props.history.push(PATHES.explore+ "?q="+ this.state.explQuery + "&skip=0");
         this.setState({headerType: "explore"});
     }
 
         
     searchTag = (query) => {
-        
+        this.props.showFirst(false);
         this.props.history.push(PATHES.explore + "?q="+ query + "&skip=0");
         this.setState({headerType: "explore"});
         
@@ -723,7 +725,7 @@ let infoArrowBest = this.state.showBooksArrow? <div  class="infoArrowBestsellers
 
     let first =  <Route path={'/'} exact component={(props) => (
         <PublicDesktop {...props} searchTag={this.searchTag} 
-        fetchData={URL.api + URL.actuallTopIcons} firstField={this.state.firstField} isStart={true}
+        fetchData={URL.api + URL.actuallTopIcons} isStart={true}
         headerType="hot" 
         />
     )} />;
