@@ -74,6 +74,8 @@ namespace Live
             services.AddScoped<IBestsellersRepository, BestsellersRepository>();
             services.AddScoped<IAdminRepository, AdminRepository>();
             services.AddScoped<IUpdatingRepository, UpdatingRepository>();
+            services.AddScoped<IExploreRepository, ExploreRepository>();
+            
             services.AddScoped<IJwtService, JwtService>();
             services.AddSingleton(Configuration.GetSection("Jwt").Get<TokenParameters>());
             services.AddSingleton(AutoMapperConfig.Initialize());

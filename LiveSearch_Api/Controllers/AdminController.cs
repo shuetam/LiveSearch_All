@@ -109,16 +109,16 @@ namespace Live.Controllers
             return Json("Movies updated without Youtubes");
         }
 
-    private  async void MoviesUpdate(Object source, System.Timers.ElapsedEventArgs e)
+ /*    private  async void MoviesUpdate(Object source, System.Timers.ElapsedEventArgs e)
     {
        //await  _updateRepository.TvMoviesUpdateAsync();
-    }
+    } */
 
 
         [HttpPost("startbooksupdating")]
         public async Task<IActionResult> StartBooksUpdating()
         {
-            await _bestSellersRepository.UpdateAsync();
+            await _updateRepository.BooksUpdateAsync();
            
            /*  var BooksInterval = 48;
             var random = new Random();
@@ -130,10 +130,10 @@ namespace Live.Controllers
             return Json("Books updated and started");
         }
 
-   private  async void BooksUpdate(Object source, System.Timers.ElapsedEventArgs e)
+  /*  private  async void BooksUpdate(Object source, System.Timers.ElapsedEventArgs e)
     {
-        await _bestSellersRepository.UpdateAsync();
-    }
+      await _updateRepository.BooksUpdateAsync();
+    } */
 
 
         [HttpPost("getallusers")]

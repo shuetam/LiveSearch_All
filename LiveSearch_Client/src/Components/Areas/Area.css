@@ -1,16 +1,46 @@
 
 
+.addingIconTitle {
+    position: fixed;
+    margin-left: auto;
+    margin-right: auto;
+    width: 560px;
+    z-index: 10;
+    top: 385px;
+    left: 0px;
+    right: 0px;
+    font-family: 'Mandali', sans-serif;
+    font-size: 14px;
+    font-weight: 100;
+    text-align: center;
+    color: rgba(235, 235, 235, 0.589);
+    opacity: 0.7;
+}
+
+#prev:hover #prevField {
+    display: block;
+}
+
+#next:hover #nextField {
+    display: block;
+}
+
+.nextPrev {
+    margin-top: 6px;
+    margin-left: 15px;
+}
+
 .titleDiv {
     position: fixed;
     height: 50px;
     margin-left: 200px;
     margin-right: 200px;
     z-index: 100;
-    top: 355px;
+    top: 375px;
     left: 0px;
     right: 0px;
     font-family: 'Mandali', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 100;
     text-align: center;
     color: rgba(235, 235, 235, 0.836);
@@ -28,24 +58,42 @@
     opacity: 0.9;
     padding: 1px;
     z-index: 500;
-    top: 365px;
+    top: 385px;
     left: 0px;
     right: 0px;
     margin-left: auto;
     margin-right: auto;
     width: 560px;
+  
 }
 
-.titleDivEdit input {
-    border-radius: 3px;
+.titleDivEdit #editT {
+    border-radius: 0px;
     background-color: rgba(78, 78, 78, 0.404);
     border-width: 0px;
-    height: 30px;
+    height: 23px;
     width: 560px;
     font-family: 'Mandali', sans-serif;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 100;
-    color: rgba(197, 197, 197, 0.637);
+    color: rgba(197, 197, 197, 0.815);
+    text-align: center;
+}
+
+.titleDivEdit #editTags {
+    border-radius: 0px;
+    background-color: rgba(78, 78, 78, 0.404);
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 0.5px;
+    border-top-color: rgba(197, 197, 197, 0.699);
+    height: 23px;
+    width: 560px;
+    font-family: 'Mandali', sans-serif;
+    font-size: 15px;
+    font-weight: 100;
+    color: rgba(197, 197, 197, 0.815);
     text-align: center;
 }
 
@@ -116,41 +164,9 @@
     width: 80px;
 }
 
-#plusField {
-    cursor: default;
-    display: none;
-    padding: 15px;
-    padding-top: 0px;
-    font-size: 13px;
-    position: fixed;
-    bottom: 27px;
-    right: 150px;
-    background-color: rgba(32, 32, 32, 0.856);
-    z-index: 155;
-    color: rgba(255, 255, 255, 0.678);
-}
 
-#addText {
-    cursor: default;
-    display: none;
-    padding: 10px;
-    font-family: 'Mandali', sans-serif;
-    font-size: 12px;
-    position: fixed;
-    bottom: 27px;
-    right: 160px;
-    background-color: rgba(32, 32, 32, 0.856);
-    z-index: 155;
-    color: rgba(255, 255, 255, 0.678);
-}
 
-#plus:hover #plusField {
-    display: block;
-}
 
-#addOwn:hover #addText {
-    display: block;   
-}
 
 .containerIconsContainer {
     position: absolute;
@@ -162,7 +178,6 @@
 
 .iconsContainer {
     overflow-x: auto;
- 
     position: relative;
     height: 80vh;
     width: 170px;
@@ -170,20 +185,19 @@
    
 }
 
-.addOwn {
-    color: rgb(17, 114, 240);
+.removeExpl {
+ position: absolute;
+  top: -4px;
+   right: 2px;
     font-family: Verdana, Geneva, sans-serif;
-    cursor: pointer;
-    text-shadow: -9px 13px 15px -1px #000000;
-    font-size: 25px;
-   
+    font-size: 22px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
-
-.addOwn:hover {
-    color: rgb(113, 171, 248);
-}
-
-
 
 #ownField {
     cursor: default;
@@ -203,11 +217,11 @@
 }
 
 .addIconInfo {
-    color: rgb(86, 159, 255);
-    font-family: Verdana, Geneva, sans-serif;
-    text-shadow: -9px 13px 15px -1px #000000;
-    font-size: 18px;
-    text-shadow: rgba(0, 0, 0, 0.979) 0px 0px 1px, rgba(0, 0, 0, 0.911) 0px 0px 5px
+    font-weight: 900;
+    
+   font-size: 24px;
+    color: rgba(0, 110, 255, 0.979);
+    text-shadow: rgba(14, 14, 14, 0.979) -3px 2px 3px, rgba(0, 0, 0, 0.911) 0px 0px 15px
 }
 
 

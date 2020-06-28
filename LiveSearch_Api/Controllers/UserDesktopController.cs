@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System;
 
 namespace Live.Controllers
 {
@@ -25,19 +26,41 @@ namespace Live.Controllers
         [HttpPost("addicon")]
         public async Task<IActionResult> AddIcon([FromBody] EntitySetter icon)
         {
+          string tagsString =  "";
+
+      
+        if(icon.tags != null )
+        {
+            foreach(var tag in icon.tags)
+            {
+                  string tagT = tag.Trim();
+                  if(!string.IsNullOrEmpty(tagT))
+                  {
+                    tagsString += $"{tagT}||";
+                  }
+            }
+            if(tagsString.Length>2)
+            {
+              tagsString = tagsString.Substring(0, tagsString.Length-2);
+            }
+
+        }
+  
+
+
            if(icon.Type == "YT")
            {
-            var added = await _desktopRepository.AddYouTubeAsync(icon, this.UserId);
+            var added = await _desktopRepository.AddYouTubeAsync(icon, this.UserId, tagsString);
              return Json(added);
            }
           if(icon.Type == "SPOTIFY")
            {
-            var added = await _desktopRepository.AddSpotifyAsync(icon, this.UserId);
+            var added = await _desktopRepository.AddSpotifyAsync(icon, this.UserId, tagsString);
              return Json(added);
            }
            if(icon.Type == "IMG" || icon.Type == "BOOK")
            {
-            var added = await _desktopRepository.AddImageAsync(icon, this.UserId);
+            var added = await _desktopRepository.AddImageAsync(icon, this.UserId, tagsString);
             return Json(added);
            }
            return (Json(false));
@@ -138,11 +161,38 @@ namespace Live.Controllers
         [HttpPost("changetitle")]
         public async Task<IActionResult> ChangeTitle([FromBody] EntitySetter entity)
         {
-            
-           var icon = await _desktopRepository.ChangeEntityTitleAsync(entity, this.UserId);
+          string tagsString =  null;
+            if(entity.tags != null )
+            {
+                foreach(var tag in entity.tags)
+                {
+                  string tagT = tag.Trim();
+                  if(!string.IsNullOrEmpty(tagT))
+                  {
+                    tagsString += $"{tagT}||";
+                  }
+                }
+                if(tagsString != null)
+                {
+                  if(tagsString.Length>2)
+                  {
+                    tagsString = tagsString.Substring(0, tagsString.Length-2);
+                     if(tagsString.Length > 200)
+                        {
+                            tagsString = tagsString.Substring(0, 200);
+                        }
+                  }
+                }
+
+            }
+         
+
+           var icon = await _desktopRepository.ChangeEntityTitleAsync(entity, this.UserId,tagsString );
            return Json(icon);
           
         }
+
+       
     }
 
 }

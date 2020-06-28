@@ -2707,3 +2707,377 @@
    at Live.Core.YouTube.SetID(String name) in /Users/mateuszbieda/Dropbox/App/Live/Live.Core/YouTube.cs:line 96
 2020-04-26 01:00:50.033 +02:00 [Warning] First ERROR from TVMovie Update
 2020-04-26 01:01:47.622 +02:00 [Information] Finish TV movies update with 85 and 39 youtube errors
+2020-05-04 16:56:36.542 +02:00 [Information] Finish radio songs update with 194 songs and 0 youtube errors
+2020-05-04 17:00:54.277 +02:00 [Information] Finish radio songs update with 95 songs and 0 youtube errors
+2020-05-04 18:28:51.018 +02:00 [Information] Finish radio songs update with 95 songs and 0 youtube errors
+2020-05-04 19:46:37.965 +02:00 [Information] Finish radio songs update with 95 songs and 0 youtube errors
+2020-05-04 20:14:41.846 +02:00 [Information] Finish radio songs update with 85 songs and 0 youtube errors
+2020-05-04 21:05:53.002 +02:00 [Information] Finish radio songs update with 84 songs and 0 youtube errors
+2020-05-04 22:03:41.673 +02:00 [Information] Finish radio songs update with 86 songs and 0 youtube errors
+2020-05-04 23:53:50.370 +02:00 [Information] Finish radio songs update with 95 songs and 0 youtube errors
+2020-05-05 00:12:56.919 +02:00 [Information] Finish radio songs update with 86 songs and 1 youtube errors
+2020-05-05 01:07:20.378 +02:00 [Information] Finish radio songs update with 93 songs and 0 youtube errors
+2020-05-06 02:08:03.676 +02:00 [Information] Finish radio songs update with 90 songs and 0 youtube errors
+2020-05-06 22:42:10.772 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=1&date=06-05-2020&time_from=21&time_to=22
+2020-05-06 22:42:10.826 +02:00 [Error] The remote server returned an error: (504) Gateway Time-out.
+2020-05-06 22:42:10.983 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=2&date=06-05-2020&time_from=21&time_to=22
+2020-05-06 22:42:10.984 +02:00 [Error] The remote server returned an error: (502) Bad Gateway.
+2020-05-06 22:42:11.146 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=3&date=06-05-2020&time_from=21&time_to=22
+2020-05-06 22:42:11.147 +02:00 [Error] The remote server returned an error: (502) Bad Gateway.
+2020-05-06 22:42:11.242 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=4&date=06-05-2020&time_from=21&time_to=22
+2020-05-06 22:42:11.242 +02:00 [Error] The remote server returned an error: (502) Bad Gateway.
+2020-05-06 22:42:11.337 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=9&date=06-05-2020&time_from=21&time_to=22
+2020-05-06 22:42:11.338 +02:00 [Error] The remote server returned an error: (502) Bad Gateway.
+2020-05-06 22:42:11.453 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=30&date=06-05-2020&time_from=21&time_to=22
+2020-05-06 22:42:11.453 +02:00 [Error] The remote server returned an error: (502) Bad Gateway.
+2020-05-06 22:42:12.529 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=48&date=06-05-2020&time_from=21&time_to=22
+2020-05-06 22:42:12.529 +02:00 [Error] The remote server returned an error: (502) Bad Gateway.
+2020-05-06 22:48:01.580 +02:00 [Information] Finish radio songs update with 82 songs and 0 youtube errors
+2020-05-07 00:14:26.046 +02:00 [Information] Finish radio songs update with 186 songs and 2 youtube errors
+2020-05-07 00:47:19.179 +02:00 [Error] First error in Yuotube: The remote server returned an error: (403) Forbidden.
+2020-05-07 00:47:19.214 +02:00 [Error]    at System.Net.HttpWebRequest.GetResponse()
+   at Live.Core.YouTube.SetID(String name) in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/YouTube.cs:line 96
+2020-05-07 00:47:19.214 +02:00 [Warning] First ERROR from TVMovie Update
+2020-05-07 00:50:04.106 +02:00 [Information] Finish TV movies update with 140 and 51 youtube errors
+2020-05-07 01:09:48.950 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=2&date=07-05-2020&time_from=0&time_to=1
+2020-05-07 01:09:48.958 +02:00 [Error] The remote server returned an error: (504) Gateway Time-out.
+2020-05-07 01:09:52.042 +02:00 [Information] Finish radio songs update with 85 songs and 0 youtube errors
+2020-05-07 21:45:37.703 +02:00 [Information] Finish radio songs update with 1040 songs and 2 youtube errors
+2020-05-07 22:12:21.192 +02:00 [Information] Finish radio songs update with 90 songs and 0 youtube errors
+2020-05-07 23:03:34.516 +02:00 [Information] Finish radio songs update with 100 songs and 0 youtube errors
+2020-05-08 00:20:10.015 +02:00 [Information] Finish radio songs update with 83 songs and 0 youtube errors
+2020-05-08 22:57:31.273 +02:00 [Information] Finish radio songs update with 1021 songs and 2 youtube errors
+2020-05-08 23:02:32.375 +02:00 [Information] Finish radio songs update with 66 songs and 0 youtube errors
+2020-05-09 00:00:50.071 +02:00 [Information] Finish radio songs update with 67 songs and 1 youtube errors
+2020-05-09 01:29:59.599 +02:00 [Information] Finish radio songs update with 81 songs and 0 youtube errors
+2020-05-09 02:01:12.355 +02:00 [Information] Finish radio songs update with 83 songs and 0 youtube errors
+2020-05-09 12:43:37.804 +02:00 [Information] Finish radio songs update with 640 songs and 2 youtube errors
+2020-05-09 13:35:41.345 +02:00 [Information] Finish radio songs update with 77 songs and 0 youtube errors
+2020-05-09 14:01:52.611 +02:00 [Information] Finish radio songs update with 75 songs and 0 youtube errors
+2020-05-09 15:23:05.726 +02:00 [Information] Finish radio songs update with 80 songs and 0 youtube errors
+2020-05-09 16:00:27.581 +02:00 [Information] Finish radio songs update with 74 songs and 0 youtube errors
+2020-05-09 17:03:49.114 +02:00 [Information] Finish radio songs update with 77 songs and 0 youtube errors
+2020-05-11 22:49:51.513 +02:00 [Information] Finish radio songs update with 900 songs and 1 youtube errors
+2020-05-11 23:22:06.291 +02:00 [Information] Finish radio songs update with 83 songs and 0 youtube errors
+2020-05-12 00:02:39.336 +02:00 [Information] Finish radio songs update with 69 songs and 1 youtube errors
+2020-05-12 20:41:53.283 +02:00 [Information] Finish radio songs update with 993 songs and 0 youtube errors
+2020-05-12 21:02:06.870 +02:00 [Information] Finish radio songs update with 88 songs and 0 youtube errors
+2020-05-12 22:18:10.650 +02:00 [Information] Finish radio songs update with 84 songs and 0 youtube errors
+2020-05-13 00:25:35.535 +02:00 [Information] Finish radio songs update with 175 songs and 0 youtube errors
+2020-05-13 01:08:11.159 +02:00 [Information] Finish radio songs update with 92 songs and 0 youtube errors
+2020-05-14 14:24:42.111 +02:00 [Information] Finish radio songs update with 1087 songs and 2 youtube errors
+2020-05-14 15:27:11.559 +02:00 [Information] Finish radio songs update with 83 songs and 0 youtube errors
+2020-05-14 17:06:27.046 +02:00 [Information] Finish radio songs update with 178 songs and 0 youtube errors
+2020-05-14 20:33:56.420 +02:00 [Information] Finish radio songs update with 263 songs and 0 youtube errors
+2020-05-14 22:25:32.649 +02:00 [Information] Finish radio songs update with 178 songs and 0 youtube errors
+2020-05-14 23:44:49.225 +02:00 [Information] Finish radio songs update with 97 songs and 0 youtube errors
+2020-05-15 00:00:21.567 +02:00 [Information] Finish radio songs update with 84 songs and 0 youtube errors
+2020-05-15 01:00:18.077 +02:00 [Information] Finish radio songs update with 96 songs and 0 youtube errors
+2020-05-15 20:23:50.836 +02:00 [Information] Finish radio songs update with 1051 songs and 2 youtube errors
+2020-05-15 20:53:55.000 +02:00 [Information] Finish TV movies update with 149 and 128 youtube errors
+2020-05-15 21:09:01.966 +02:00 [Information] Finish radio songs update with 97 songs and 0 youtube errors
+2020-05-15 22:02:44.467 +02:00 [Information] Finish radio songs update with 90 songs and 0 youtube errors
+2020-05-15 23:28:30.984 +02:00 [Information] Finish radio songs update with 82 songs and 0 youtube errors
+2020-05-16 00:05:15.569 +02:00 [Information] Finish radio songs update with 82 songs and 0 youtube errors
+2020-05-16 12:19:47.072 +02:00 [Information] Finish radio songs update with 982 songs and 2 youtube errors
+2020-05-16 14:09:15.683 +02:00 [Information] Finish radio songs update with 154 songs and 0 youtube errors
+2020-05-16 16:41:20.511 +02:00 [Information] Finish radio songs update with 151 songs and 0 youtube errors
+2020-05-16 21:23:36.618 +02:00 [Information] Finish radio songs update with 338 songs and 0 youtube errors
+2020-05-16 23:58:01.983 +02:00 [Information] Finish radio songs update with 142 songs and 0 youtube errors
+2020-05-17 13:08:06.425 +02:00 [Information] Finish radio songs update with 954 songs and 0 youtube errors
+2020-05-17 21:38:40.201 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 21:38:40.580 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 21:38:40.905 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 21:38:40.909 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 21:38:41.237 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 21:38:41.239 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 21:38:41.449 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 21:38:41.452 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 21:38:42.019 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 21:38:42.066 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 21:38:42.123 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 21:38:42.125 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 21:38:42.175 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 21:38:42.177 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 21:38:42.177 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 21:38:42.179 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 21:39:14.442 +02:00 [Information] Finish radio songs update with 612 songs and 0 youtube errors
+2020-05-17 21:39:24.826 +02:00 [Error] BOOK error in Gandalf: Object reference not set to an instance of an object.
+2020-05-17 21:39:24.845 +02:00 [Error]    at Live.Core.BookStores.Gandalf.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Gandalf.cs:line 74
+2020-05-17 21:39:31.007 +02:00 [Error] Network error in Livro: The remote server returned an error: (403) Forbidden.
+2020-05-17 21:39:31.393 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 21:39:31.412 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 21:39:31.796 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 21:39:31.798 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 21:39:32.190 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 21:39:32.192 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 21:39:32.438 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 21:39:32.439 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 21:39:32.971 +02:00 [Information] Finish bestsellers update with 213 books
+2020-05-17 21:39:32.971 +02:00 [Information] 92 from Bonito
+2020-05-17 21:39:32.971 +02:00 [Information] 19 from Aros
+2020-05-17 21:39:32.971 +02:00 [Information] 24 from Czytam
+2020-05-17 21:39:32.971 +02:00 [Information] 30 from Empik
+2020-05-17 21:39:32.971 +02:00 [Information] 28 from Gandalf
+2020-05-17 21:39:32.971 +02:00 [Information] 0 from Livro
+2020-05-17 21:39:32.971 +02:00 [Information] 20 from Profit24
+2020-05-17 21:39:33.085 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 21:39:33.135 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 21:39:33.198 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 21:39:33.200 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 21:39:33.250 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 21:39:33.252 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 21:39:33.253 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 21:39:33.255 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 21:40:08.771 +02:00 [Error] BOOK error in Gandalf: Object reference not set to an instance of an object.
+2020-05-17 21:40:08.817 +02:00 [Error]    at Live.Core.BookStores.Gandalf.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Gandalf.cs:line 74
+2020-05-17 21:40:15.084 +02:00 [Error] Network error in Livro: The remote server returned an error: (403) Forbidden.
+2020-05-17 21:40:16.909 +02:00 [Information] Finish bestsellers update with 213 books
+2020-05-17 21:40:16.910 +02:00 [Information] 92 from Bonito
+2020-05-17 21:40:16.910 +02:00 [Information] 19 from Aros
+2020-05-17 21:40:16.910 +02:00 [Information] 24 from Czytam
+2020-05-17 21:40:16.910 +02:00 [Information] 30 from Empik
+2020-05-17 21:40:16.910 +02:00 [Information] 28 from Gandalf
+2020-05-17 21:40:16.910 +02:00 [Information] 0 from Livro
+2020-05-17 21:40:16.910 +02:00 [Information] 20 from Profit24
+2020-05-17 21:48:23.492 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 21:48:23.638 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 21:48:23.934 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 21:48:23.936 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 21:48:24.290 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 21:48:24.292 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 21:48:24.504 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 21:48:24.506 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 21:48:25.029 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 21:48:25.031 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 21:48:25.085 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 21:48:25.108 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 21:48:25.166 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 21:48:25.168 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 21:48:25.169 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 21:48:25.170 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 21:49:11.654 +02:00 [Error] BOOK error in Gandalf: Object reference not set to an instance of an object.
+2020-05-17 21:49:11.697 +02:00 [Error]    at Live.Core.BookStores.Gandalf.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Gandalf.cs:line 74
+2020-05-17 21:49:17.961 +02:00 [Error] Network error in Livro: The remote server returned an error: (403) Forbidden.
+2020-05-17 21:49:20.299 +02:00 [Information] Finish bestsellers update with 213 books
+2020-05-17 21:49:20.299 +02:00 [Information] 92 from Bonito
+2020-05-17 21:49:20.299 +02:00 [Information] 19 from Aros
+2020-05-17 21:49:20.299 +02:00 [Information] 24 from Czytam
+2020-05-17 21:49:20.299 +02:00 [Information] 30 from Empik
+2020-05-17 21:49:20.299 +02:00 [Information] 28 from Gandalf
+2020-05-17 21:49:20.299 +02:00 [Information] 0 from Livro
+2020-05-17 21:49:20.299 +02:00 [Information] 20 from Profit24
+2020-05-17 22:28:58.720 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 22:28:58.834 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 22:28:59.225 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 22:28:59.228 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 22:28:59.665 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 22:28:59.687 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 22:28:59.970 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 22:28:59.972 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 22:29:00.574 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 22:29:00.575 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 22:29:00.723 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 22:29:00.724 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 22:29:00.777 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 22:29:00.778 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 22:29:00.779 +02:00 [Error] BOOK error in Bonito: Object reference not set to an instance of an object.
+2020-05-17 22:29:00.780 +02:00 [Error]    at Live.Core.BookStores.Bonito.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Bonito.cs:line 68
+2020-05-17 22:29:02.493 +02:00 [Information] Finish radio songs update with 77 songs and 0 youtube errors
+2020-05-17 22:29:29.779 +02:00 [Error] BOOK error in Gandalf: Object reference not set to an instance of an object.
+2020-05-17 22:29:29.823 +02:00 [Error]    at Live.Core.BookStores.Gandalf.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Gandalf.cs:line 74
+2020-05-17 22:29:36.052 +02:00 [Error] Network error in Livro: The remote server returned an error: (403) Forbidden.
+2020-05-17 22:29:37.879 +02:00 [Information] Finish bestsellers update with 213 books
+2020-05-17 22:29:37.879 +02:00 [Information] 92 from Bonito
+2020-05-17 22:29:37.879 +02:00 [Information] 19 from Aros
+2020-05-17 22:29:37.879 +02:00 [Information] 24 from Czytam
+2020-05-17 22:29:37.879 +02:00 [Information] 30 from Empik
+2020-05-17 22:29:37.879 +02:00 [Information] 28 from Gandalf
+2020-05-17 22:29:37.879 +02:00 [Information] 0 from Livro
+2020-05-17 22:29:37.879 +02:00 [Information] 20 from Profit24
+2020-05-17 23:28:03.358 +02:00 [Information] Finish radio songs update with 104 songs and 0 youtube errors
+2020-05-21 00:23:32.051 +02:00 [Information] Finish radio songs update with 1061 songs and 0 youtube errors
+2020-05-21 00:30:11.737 +02:00 [Information] Finish TV movies update with 149 and 131 youtube errors
+2020-05-24 18:07:48.706 +02:00 [Information] Finish radio songs update with 1066 songs and 0 youtube errors
+2020-05-26 10:26:50.329 +02:00 [Information] Finish radio songs update with 1175 songs and 4 youtube errors
+2020-05-26 14:39:50.056 +02:00 [Error] First error in Yuotube: The remote server returned an error: (403) Forbidden.
+2020-05-26 14:39:50.058 +02:00 [Error]    at System.Net.HttpWebRequest.GetResponse()
+   at Live.Core.YouTube.SetID(String name) in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/YouTube.cs:line 96
+2020-05-26 14:39:50.059 +02:00 [Warning] First ERROR from Song Update
+2020-05-26 14:39:54.361 +02:00 [Information] Finish radio songs update with 353 songs and 7 youtube errors
+2020-05-28 14:35:23.530 +02:00 [Information] Finish radio songs update with 1059 songs and 0 youtube errors
+2020-05-28 15:25:30.673 +02:00 [Information] Finish radio songs update with 89 songs and 0 youtube errors
+2020-05-28 16:00:20.242 +02:00 [Information] Finish radio songs update with 93 songs and 0 youtube errors
+2020-05-28 22:26:04.491 +02:00 [Information] Finish radio songs update with 517 songs and 0 youtube errors
+2020-05-28 23:03:56.667 +02:00 [Information] Finish radio songs update with 101 songs and 0 youtube errors
+2020-05-29 01:09:08.629 +02:00 [Information] Finish radio songs update with 185 songs and 1 youtube errors
+2020-05-29 11:09:55.641 +02:00 [Error] First error in Yuotube: The remote server returned an error: (403) Forbidden.
+2020-05-29 11:09:55.643 +02:00 [Error]    at System.Net.HttpWebRequest.GetResponse()
+   at Live.Core.YouTube.SetID(String name) in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/YouTube.cs:line 96
+2020-05-29 11:09:55.644 +02:00 [Warning] First ERROR from Song Update
+2020-05-29 11:10:24.930 +02:00 [Information] Finish radio songs update with 890 songs and 19 youtube errors
+2020-05-29 12:23:18.488 +02:00 [Information] Finish radio songs update with 93 songs and 0 youtube errors
+2020-05-29 16:19:44.243 +02:00 [Information] Finish radio songs update with 332 songs and 0 youtube errors
+2020-05-29 17:09:16.612 +02:00 [Information] Finish radio songs update with 84 songs and 1 youtube errors
+2020-05-29 18:22:38.721 +02:00 [Information] Finish radio songs update with 90 songs and 1 youtube errors
+2020-05-29 19:00:55.878 +02:00 [Information] Finish radio songs update with 85 songs and 0 youtube errors
+2020-05-30 15:46:31.639 +02:00 [Information] Finish radio songs update with 1090 songs and 5 youtube errors
+2020-05-30 16:02:22.885 +02:00 [Information] Finish radio songs update with 86 songs and 0 youtube errors
+2020-05-30 17:06:52.928 +02:00 [Information] Finish radio songs update with 89 songs and 0 youtube errors
+2020-05-30 17:39:17.892 +02:00 [Error] First error in Yuotube: The remote server returned an error: (403) Forbidden.
+2020-05-30 17:39:17.925 +02:00 [Error]    at System.Net.HttpWebRequest.GetResponse()
+   at Live.Core.YouTube.SetID(String name) in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/YouTube.cs:line 96
+2020-05-30 17:39:17.926 +02:00 [Warning] First ERROR from TVMovie Update
+2020-05-30 17:44:03.519 +02:00 [Information] Finish TV movies update with 151 and 93 youtube errors
+2020-05-30 23:06:17.875 +02:00 [Information] Finish radio songs update with 479 songs and 2 youtube errors
+2020-05-31 00:13:32.333 +02:00 [Information] Finish radio songs update with 66 songs and 0 youtube errors
+2020-05-31 17:26:46.043 +02:00 [Information] Finish radio songs update with 1153 songs and 1 youtube errors
+2020-05-31 19:29:42.212 +02:00 [Information] Finish radio songs update with 188 songs and 0 youtube errors
+2020-05-31 20:01:00.557 +02:00 [Information] Finish radio songs update with 86 songs and 0 youtube errors
+2020-05-31 22:19:17.624 +02:00 [Information] Finish radio songs update with 179 songs and 0 youtube errors
+2020-05-31 23:02:13.220 +02:00 [Information] Finish radio songs update with 96 songs and 0 youtube errors
+2020-06-01 01:14:23.637 +02:00 [Information] Finish radio songs update with 184 songs and 2 youtube errors
+2020-06-01 12:39:53.926 +02:00 [Information] Finish radio songs update with 995 songs and 5 youtube errors
+2020-06-01 13:21:05.703 +02:00 [Information] Finish radio songs update with 84 songs and 0 youtube errors
+2020-06-01 14:35:52.458 +02:00 [Information] Finish radio songs update with 83 songs and 0 youtube errors
+2020-06-01 15:11:34.075 +02:00 [Information] Finish radio songs update with 79 songs and 0 youtube errors
+2020-06-01 22:07:59.422 +02:00 [Information] Finish radio songs update with 582 songs and 1 youtube errors
+2020-06-01 23:00:31.018 +02:00 [Information] Finish radio songs update with 96 songs and 0 youtube errors
+2020-06-02 14:43:20.901 +02:00 [Information] Finish radio songs update with 1063 songs and 3 youtube errors
+2020-06-02 15:02:25.379 +02:00 [Information] Finish radio songs update with 85 songs and 0 youtube errors
+2020-06-02 16:01:22.992 +02:00 [Information] Finish radio songs update with 84 songs and 0 youtube errors
+2020-06-02 23:41:03.229 +02:00 [Information] Finish radio songs update with 591 songs and 3 youtube errors
+2020-06-03 00:01:36.076 +02:00 [Information] Finish radio songs update with 88 songs and 1 youtube errors
+2020-06-03 11:47:58.092 +02:00 [Information] Finish radio songs update with 1007 songs and 1 youtube errors
+2020-06-03 12:02:11.420 +02:00 [Information] Finish radio songs update with 83 songs and 0 youtube errors
+2020-06-03 12:12:39.467 +02:00 [Error] Error in adding icon: Could not find a part of the path '/Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/https:https:/openbase.io/js/react-copy-to-clipboard/openbase.io/js/react-copy-to-clipboard'.
+2020-06-03 12:12:39.777 +02:00 [Error]    at System.Net.FileWebRequest.CreateResponse()
+   at System.Net.FileWebRequest.<>c.<BeginGetResponse>b__59_0(Object s)
+   at System.Threading.Tasks.Task`1.InnerInvoke()
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at System.Threading.Tasks.TaskToApm.End[TResult](IAsyncResult asyncResult)
+   at System.Net.FileWebRequest.EndGetResponse(IAsyncResult asyncResult)
+   at System.Net.FileWebRequest.GetResponse()
+   at System.Net.WebClient.GetWebResponse(WebRequest request)
+   at System.Net.WebClient.DownloadBits(WebRequest request, Stream writeStream)
+   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   at System.Net.WebClient.DownloadString(Uri address)
+   at System.Net.WebClient.DownloadString(String address)
+   at Live.Core.IconsUrl.<>c__DisplayClass2_4.<GetIdsFromUrl>b__5() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/IconsUrl.cs:line 181
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Live.Core.IconsUrl.<GetIdsFromUrl>d__2.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/IconsUrl.cs:line 179
+2020-06-03 12:12:52.257 +02:00 [Error] Error in adding icon: Could not find a part of the path '/Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/https:https:/openbase.io/js/react-copy-to-clipboard/openbase.io/js/react-copy-to-clipboard'.
+2020-06-03 12:12:52.308 +02:00 [Error]    at System.Net.FileWebRequest.CreateResponse()
+   at System.Net.FileWebRequest.<>c.<BeginGetResponse>b__59_0(Object s)
+   at System.Threading.Tasks.Task`1.InnerInvoke()
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at System.Threading.Tasks.TaskToApm.End[TResult](IAsyncResult asyncResult)
+   at System.Net.FileWebRequest.EndGetResponse(IAsyncResult asyncResult)
+   at System.Net.FileWebRequest.GetResponse()
+   at System.Net.WebClient.GetWebResponse(WebRequest request)
+   at System.Net.WebClient.DownloadBits(WebRequest request, Stream writeStream)
+   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   at System.Net.WebClient.DownloadString(Uri address)
+   at System.Net.WebClient.DownloadString(String address)
+   at Live.Core.IconsUrl.<>c__DisplayClass2_4.<GetIdsFromUrl>b__5() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/IconsUrl.cs:line 181
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Live.Core.IconsUrl.<GetIdsFromUrl>d__2.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/IconsUrl.cs:line 179
+2020-06-03 14:02:16.136 +02:00 [Information] Finish radio songs update with 165 songs and 0 youtube errors
+2020-06-03 23:24:20.263 +02:00 [Information] Finish radio songs update with 759 songs and 1 youtube errors
+2020-06-04 00:01:38.384 +02:00 [Information] Finish radio songs update with 86 songs and 0 youtube errors
+2020-06-04 21:45:49.454 +02:00 [Information] Finish radio songs update with 1003 songs and 1 youtube errors
+2020-06-04 22:03:21.327 +02:00 [Information] Finish radio songs update with 85 songs and 0 youtube errors
+2020-06-04 23:22:32.785 +02:00 [Information] Finish radio songs update with 95 songs and 0 youtube errors
+2020-06-05 00:08:06.205 +02:00 [Information] Finish radio songs update with 86 songs and 1 youtube errors
+2020-06-05 01:04:25.332 +02:00 [Information] Finish radio songs update with 97 songs and 0 youtube errors
+2020-06-06 00:35:52.966 +02:00 [Information] Finish radio songs update with 989 songs and 0 youtube errors
+2020-06-06 01:12:02.087 +02:00 [Information] Finish radio songs update with 95 songs and 1 youtube errors
+2020-06-06 11:44:35.129 +02:00 [Information] Finish radio songs update with 914 songs and 0 youtube errors
+2020-06-07 12:32:23.131 +02:00 [Information] Finish radio songs update with 1112 songs and 1 youtube errors
+2020-06-08 00:24:39.951 +02:00 [Information] Finish radio songs update with 1111 songs and 0 youtube errors
+2020-06-10 12:32:24.797 +02:00 [Information] Finish radio songs update with 1065 songs and 3 youtube errors
+2020-06-10 13:02:39.513 +02:00 [Information] Finish radio songs update with 79 songs and 0 youtube errors
+2020-06-13 22:05:17.985 +02:00 [Information] Finish radio songs update with 986 songs and 2 youtube errors
+2020-06-13 23:02:18.570 +02:00 [Information] Finish radio songs update with 97 songs and 0 youtube errors
+2020-06-14 00:21:26.508 +02:00 [Information] Finish radio songs update with 81 songs and 0 youtube errors
+2020-06-14 01:03:31.992 +02:00 [Information] Finish radio songs update with 96 songs and 0 youtube errors
+2020-06-14 13:11:36.120 +02:00 [Information] Finish radio songs update with 1050 songs and 0 youtube errors
+2020-06-14 14:03:18.694 +02:00 [Information] Finish radio songs update with 81 songs and 0 youtube errors
+2020-06-14 15:16:20.002 +02:00 [Information] Finish radio songs update with 85 songs and 0 youtube errors
+2020-06-20 19:56:45.934 +02:00 [Information] Finish radio songs update with 971 songs and 3 youtube errors
+2020-06-21 13:31:15.196 +02:00 [Information] Finish radio songs update with 1041 songs and 1 youtube errors
+2020-06-21 14:02:48.048 +02:00 [Information] Finish radio songs update with 86 songs and 0 youtube errors
+2020-06-21 14:03:07.207 +02:00 [Error] BOOK error in Gandalf: Object reference not set to an instance of an object.
+2020-06-21 14:03:07.447 +02:00 [Error]    at Live.Core.BookStores.Gandalf.<GetBestsellersAsync>d__0.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/BookStores/Gandalf.cs:line 74
+2020-06-21 14:03:10.313 +02:00 [Error] Network error in Livro: The remote server returned an error: (403) Forbidden.
+2020-06-21 14:03:13.807 +02:00 [Information] Finish bestsellers update with 222 books
+2020-06-21 14:03:13.807 +02:00 [Information] 100 from Bonito
+2020-06-21 14:03:13.807 +02:00 [Information] 20 from Aros
+2020-06-21 14:03:13.807 +02:00 [Information] 24 from Czytam
+2020-06-21 14:03:13.807 +02:00 [Information] 30 from Empik
+2020-06-21 14:03:13.807 +02:00 [Information] 28 from Gandalf
+2020-06-21 14:03:13.807 +02:00 [Information] 0 from Livro
+2020-06-21 14:03:13.807 +02:00 [Information] 20 from Profit24
+2020-06-21 14:10:16.512 +02:00 [Information] Finish TV movies update with 134 and 11 youtube errors
+2020-06-21 14:47:55.668 +02:00 [Error] Error in adding icon: Object reference not set to an instance of an object.
+2020-06-21 14:47:56.338 +02:00 [Error]    at Live.Core.IconsUrl.<GetIdsFromUrl>d__2.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/IconsUrl.cs:line 217
+2020-06-21 15:12:16.376 +02:00 [Information] Finish radio songs update with 85 songs and 0 youtube errors
+2020-06-21 15:28:58.586 +02:00 [Error] Error in adding spotify: The remote server returned an error: (400) Bad Request.
+2020-06-21 15:28:58.751 +02:00 [Error]    at System.Net.HttpWebRequest.GetResponse()
+   at System.Net.WebClient.GetWebResponse(WebRequest request)
+   at System.Net.WebClient.DownloadBits(WebRequest request, Stream writeStream)
+   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   at System.Net.WebClient.DownloadString(Uri address)
+   at System.Net.WebClient.DownloadString(String address)
+   at Live.Core.IconsUrl.<>c__DisplayClass2_2.<GetIdsFromUrl>b__2() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/IconsUrl.cs:line 112
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Live.Core.IconsUrl.<GetIdsFromUrl>d__2.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/IconsUrl.cs:line 110
+2020-06-21 18:52:39.078 +02:00 [Information] Finish radio songs update with 264 songs and 0 youtube errors
+2020-06-21 19:38:02.483 +02:00 [Information] Finish radio songs update with 97 songs and 0 youtube errors
+2020-06-27 21:59:22.087 +02:00 [Information] Finish radio songs update with 979 songs and 0 youtube errors
+2020-06-27 22:07:09.177 +02:00 [Error] First error in Yuotube: The remote server returned an error: (403) Forbidden.
+2020-06-27 22:07:09.198 +02:00 [Error]    at System.Net.HttpWebRequest.GetResponse()
+   at Live.Core.YouTube.SetID(String name) in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/YouTube.cs:line 96
+2020-06-27 22:07:09.198 +02:00 [Warning] First ERROR from TVMovie Update
+2020-06-27 22:08:17.569 +02:00 [Information] Finish TV movies update with 172 and 32 youtube errors
+2020-06-27 22:39:56.169 +02:00 [Error] First error in Yuotube: The remote server returned an error: (403) Forbidden.
+2020-06-27 22:39:56.214 +02:00 [Error]    at System.Net.HttpWebRequest.GetResponse()
+   at Live.Core.YouTube.SetID(String name) in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/YouTube.cs:line 96
+2020-06-27 22:39:56.215 +02:00 [Warning] First ERROR from Song Update
+2020-06-27 22:39:58.680 +02:00 [Information] Finish radio songs update with 74 songs and 3 youtube errors
+2020-06-27 23:01:55.936 +02:00 [Error] First error in Yuotube: The remote server returned an error: (403) Forbidden.
+2020-06-27 23:01:55.977 +02:00 [Error]    at System.Net.HttpWebRequest.GetResponse()
+   at Live.Core.YouTube.SetID(String name) in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/YouTube.cs:line 96
+2020-06-27 23:01:55.977 +02:00 [Warning] First ERROR from Song Update
+2020-06-27 23:01:58.881 +02:00 [Information] Finish radio songs update with 96 songs and 2 youtube errors
+2020-06-28 00:24:36.279 +02:00 [Error] First error in Yuotube: The remote server returned an error: (403) Forbidden.
+2020-06-28 00:24:36.288 +02:00 [Error]    at System.Net.HttpWebRequest.GetResponse()
+   at Live.Core.YouTube.SetID(String name) in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/YouTube.cs:line 96
+2020-06-28 00:24:36.288 +02:00 [Warning] First ERROR from Song Update
+2020-06-28 00:24:37.023 +02:00 [Information] Finish radio songs update with 84 songs and 2 youtube errors
+2020-06-28 10:54:46.065 +02:00 [Information] Finish radio songs update with 871 songs and 1 youtube errors
+2020-06-28 11:03:04.672 +02:00 [Information] Finish radio songs update with 85 songs and 0 youtube errors
+2020-06-28 12:26:26.984 +02:00 [Information] Finish radio songs update with 81 songs and 0 youtube errors
+2020-06-28 13:02:32.240 +02:00 [Information] Finish radio songs update with 89 songs and 0 youtube errors

@@ -21,6 +21,7 @@ namespace Live.Controllers
         public string Left {get; set;}
         public string Top {get; set;}
         public string FolderId {get; set;}
+        public List<string> tags {get; set;}
     }
 
 }

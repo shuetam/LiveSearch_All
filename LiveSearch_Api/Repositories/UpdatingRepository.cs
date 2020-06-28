@@ -13,6 +13,9 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using Live.Settings;
 using Live.Extensions;
+using Live.DataBase.DatabaseModels;
+using Live.Core.BookStores;
+using Live.Live.Core.BookStores;
 
 namespace Live.Repositories
 {
@@ -51,7 +54,8 @@ namespace Live.Repositories
         //Log.Information("Start radio songs updating");
         //Console.WriteLine($"{DateTime.Now}  Start radio songs updating");
 
-            var stations = new Dictionary<int, string>(){{1,"zet"},{2,"rmf"},{3,"eska"},{4, "rmfmaxx"},{9, "zloteprzeboje"},{30, "vox"},{48, "trojka"}};
+            var stations = new Dictionary<int, string>()
+            {{1,"zet"},{2,"rmf"},{3,"eska"},{4, "rmfmaxx"},{9, "zloteprzeboje"},{30, "vox"},{40, "chillizet"}};
            var dateLast = await GetLastDate();
         Console.WriteLine("Context works  datelst -> " + dateLast);
                 //Console.WriteLine(dateLast);
@@ -468,7 +472,100 @@ namespace Live.Repositories
 
         public async Task BooksUpdateAsync()
         {
-            throw new NotImplementedException();
+                  
+        
+            Console.WriteLine("Start updatign books");
+            var bestList  = new List<Book>();
+            
+            
+            await _context.SaveChangesAsync();
+            var bonitos = await new Bonito().GetBestsellersAsync();
+            bestList.AddRange(bonitos);
+            var aros = await new Aros().GetBestsellersAsync();
+            bestList.AddRange(aros);
+            var czytams = await new Czytam().GetBestsellersAsync();
+            bestList.AddRange(czytams);
+            var empiks = await new Empik().GetBestsellersAsync();
+            bestList.AddRange(empiks);
+            var gandalfs = await new Gandalf().GetBestsellersAsync();
+            bestList.AddRange(gandalfs);
+            var livros = await new Livro().GetBestsellersAsync();
+            bestList.AddRange(livros);
+            var profit24s = await new Profit24().GetBestsellersAsync();
+            bestList.AddRange(profit24s);
+     
+            Log.Information($"Finish bestsellers update with {bestList.Count} books");
+            Log.Information($"{bonitos.Count} from Bonito");
+            Log.Information($"{aros.Count} from Aros");
+            Log.Information($"{czytams.Count} from Czytam");
+            Log.Information($"{empiks.Count} from Empik");
+            Log.Information($"{gandalfs.Count} from Gandalf");
+            Log.Information($"{livros.Count} from Livro");
+            Log.Information($"{profit24s.Count} from Profit24");
+
+            var actualBestsellers = _context.Bestsellers.ToList();
+
+            _context.Bestsellers.RemoveRange(_context.Bestsellers.Where(x => x.Store != ""));
+             _context.SaveChanges();
+
+            int group = 1;
+            foreach(var book in bestList)
+            {
+                     var theSameList = bestList.Where(x => x.GroupNo == -1)
+                     .Where(x => x.TheSame(book.Title, book.Author)).ToList();
+
+                if(theSameList.Count>0)
+                {     
+                        foreach(var theSameBook in theSameList)
+                        {
+                            theSameBook.GroupNo = group;
+                        }
+                          group++;
+                }
+            }
+
+        int no = 1;
+        foreach(var book in bestList)
+        {
+                var exists = actualBestsellers.FirstOrDefault( x => x.ImageSrc == book.ImageSrc);
+
+                if(exists != null)
+                {
+                    Console.WriteLine("Added exists");
+                    exists.Added = DateTime.Now;
+
+                    var theSame = bestList
+                    .FirstOrDefault(x => x.TheSame(exists.Title, exists.Author));
+
+                    if(theSame != null)
+                    {
+                        exists.SetGroupNo(theSame.GroupNo);
+                       
+                    }
+                    else
+                    {
+                        int max = bestList.Select(x => x.GroupNo).Max() + no;
+                        no++;
+                        exists.SetGroupNo(max);
+                    }
+
+                    await _context.Bestsellers.AddAsync(exists);
+                }
+                else 
+                {
+                        var bestseller = new Bestseller(book);
+                        bestseller.Added = DateTime.Now;
+                        Console.WriteLine("Added new");
+                        await _context.Bestsellers.AddAsync(bestseller);
+                }
+
+                 
+            }
+            await _context.SaveChangesAsync();
+            InfoCaches._booksUpdatingRunning = true;
+           // Console.WriteLine("========Finish book update==========");
+
+            
         }
 
     }

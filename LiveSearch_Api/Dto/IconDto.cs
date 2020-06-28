@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System;
 using Live.DataBase.DatabaseModels;
+using System.Collections.Generic;
 
 namespace Live.Core
 {
@@ -30,6 +31,7 @@ namespace Live.Core
             //this.title = source;
             this.setLocation(true);
             this.count = "1";
+            this.source = source;
         }
 
         public IconDto(Bestseller agent,  int count)
@@ -40,19 +42,25 @@ namespace Live.Core
             this.setLocation(false);
             this.count = count.ToString();
             this.countValue = count;
+            this.source = agent.Store;
+            this.tags = agent.getTags();
+            this.playAt = agent.Added.HasValue? agent.Added.Value : DateTime.Now ;
+            this.guidId = agent.ID.ToString();
         }
 
 
         public string  id {get; set;}
+        public string guidId {get; set;}
         public string title {get; set;}
         public string  top {get; set;}
         public string left {get; set;}
         public string  count {get; set;}
         public string  type {get; set;}
         public string  source {get; set;}
+        public List<string>  tags {get; set;}
         public DateTime  playAt {get; set;}
-
         public int countValue;
+        public int groupBook {get; set;}
 
         private void setAddingLocation () 
         {
@@ -87,7 +95,7 @@ namespace Live.Core
 
 
 
-    private void setLocation (bool adding) 
+    public void setLocation (bool adding) 
         {
             Random random = new Random();
             int region = random.Next(1, 4);

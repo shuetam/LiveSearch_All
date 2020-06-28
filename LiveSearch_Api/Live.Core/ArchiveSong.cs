@@ -13,6 +13,7 @@ namespace Live.Core
     public class ArchiveSong : Entity
     {
         public string Name {get; protected set;}
+         public string Station {get; protected set;}
         public YouTube YouTube {get; protected set;}
 /* 
         public Song(string station, Song archive_song)
@@ -29,9 +30,9 @@ namespace Live.Core
 
         public ArchiveSong(Song song)
         {
-
             this.Name = song.Name;
             this.YouTube = song.YouTube;
+            this.Station = song.Station;
         }
 
         public void ChangeYouTubeId(string id)
@@ -47,5 +48,29 @@ public void ChangeLocation(string left, string top)
         {
             this.Name = name;
         }
+
+
+   public List<string> getTags()
+        {
+
+        var tags = new List<string>();
+   
+        string name = this.Name.Replace(",", " ");
+        //tags.Add(name);
+        string pattern = @"\s+[-]\s+";
+        var artTitle = Regex.Split(name, pattern ).ToList();
+        tags.AddRange(artTitle);
+        foreach(var ta in artTitle)
+        {
+            tags.AddRange(ta.Split('/').ToList());
+        }
+        if(!string.IsNullOrEmpty(this.Station))
+        {
+            tags.Add(this.Station);
+        }
+
+          return new HashSet<string>(tags).ToList();
+        }
+
     }
 }

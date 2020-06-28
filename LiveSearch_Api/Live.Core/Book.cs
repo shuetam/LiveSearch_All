@@ -17,6 +17,7 @@ namespace Live.Core
         public string ImageSrc;
         public int Size;
         public string Store;
+        public int GroupNo {get; set;}
 
 
         public Book(string title, string author, string img, string store)
@@ -25,6 +26,7 @@ namespace Live.Core
             this.Author = author;
             this.ImageSrc = img;
             this.Store = store;
+            this.GroupNo = -1;
         }
 
           public Book(Bestseller book)

@@ -211,7 +211,7 @@ namespace Live.Repositories
             var songs = new List<Song>();
             Random random = new Random();
  
-        var stations = new Dictionary<int, string>(){{1,"zet"},{2,"rmf"},{3,"eska"},{4, "rmfmaxx"},{9, "zloteprzeboje"},{30, "vox"},{48, "trojka"}};
+        var stations = new Dictionary<int, string>(){{1,"zet"},{2,"rmf"},{3,"eska"},{4, "rmfmaxx"},{9, "zloteprzeboje"},{30, "vox"},{40, "chillizet"}};
 
         //var arrayLog  = songsDto.ToArray();
        

@@ -273,6 +273,16 @@ namespace Live.Core
             this.Title = name;
         }
 
+            public List<string> getTags()
+            {
+                var tags = new List<string>();
+                    tags.Add(this.Title.Replace(",", ""));
+                    tags.Add(this.TrailerSearch.Replace(",", ""));
+                    tags.Add(this.Station);
+                    return new HashSet<string>(tags).ToList();
+            }
+
+
 
     }
 }

@@ -59,6 +59,11 @@ ADD ImgType NVARCHAR (20) NULL;
 alter table UserYoutubes
 add AddedToFolder DATETIME NULL
 
+select * from UserYoutubes
+
+alter table UserSpotify
+add Tags  NVARCHAR (400)  NULL
+
 ALTER TABLE Songs
 DROP COLUMN Added;
 
@@ -83,9 +88,18 @@ add Added DATETIME NULL
 
 alter table ArchiveMovies
 add Rating NVARCHAR (20) NULL
+--------------------------------
+alter table ArchiveMovies
+add Title NVARCHAR (300) NULL
 
+alter table ArchiveMovies
+add Station NVARCHAR (50) NULL
+
+alter table ArchiveSongs
+add Station NVARCHAR (50) NULL
+---------------------------------
 select * from ArchiveMovies
-select * from Songs
+select * from ArchiveSongs
 
 select * from TVMovies
 
@@ -194,6 +208,8 @@ SpotifyId like '%http%'
 
 SELECT * FROM UserSpotify
 
+select * from UserImages
+
 DELETE FROM Folders WHERE
 Title like '%www%'
 
@@ -277,6 +293,8 @@ Station like 'TVP ABC'
 
 SELECT * FROM TVMovies where Title like '%Logan%'
 
+SELECT * FROM YouTubes
+SELECT * FROM ArchiveSongs where Name like '%Quebo%'
 
 CREATE TABLE ArchiveSongs
 (

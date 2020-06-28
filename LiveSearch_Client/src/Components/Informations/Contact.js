@@ -20,7 +20,7 @@ class Contact extends Component {
 
     render() {
  
-        let contact = (<div style={{textAlign: "center"}}  className="mainContent">
+        let contact = (<div style={{textAlign: "center", fontSize: "14px"}}  className="mainContent">
         <p>
         Portal <span style={{ color: "rgba(231, 173, 64, 0.637)" }}>Live<span style={{ color: "rgba(255, 255, 255, 0.5)" }}>S</span>earch</span> jest wciąż w budowie. Systematycznie udoskonalamy aktualne funkcje i wprowadzamy nowe.</p>
         <p>Jesteśmy otwarci na Wasze sugestie, uwagi oraz propozycje, które prosimy kierować pod adres:</p>

@@ -13,7 +13,7 @@ import ReactScrollWheelHandler from "react-scroll-wheel-handler";
 import { connect } from 'react-redux';
 import {showServerPopup, manageScreen} from '../../Store/Actions/auth';
 import {URL} from '../../environment'
-
+import { leftToVw, topToVh } from '../../Converters.js';
 
 
 class BestSellersAdmin extends Component {
@@ -286,9 +286,22 @@ this.setState({showEditor: false})
      
         this.setState({ mainTitle: "" });
          document.getElementById("258").innerHTML = "";
-       
-            document.getElementById(event.target.id).style.opacity = this.state.actuallOpacity;
+         var entity = document.getElementById(event.target.id);
+         var top = entity.style.top;
+         var left = entity.style.left;
+ 
+         var leftE = leftToVw(left);
+         var topE= topToVh(top);
+ 
+         entity.style.left = leftE;
+         entity.style.top = topE;
+         this.setStateIconLocation(entity.id, leftE, topE);
+        document.getElementById(event.target.id).style.opacity = this.state.actuallOpacity;
         
+    }
+
+    setStateIconLocation = (Id, left, top) => {
+       
     }
 
     rangeHandler = (event) => {
@@ -386,16 +399,7 @@ this.setState({showEditor: false})
 
     getShadow = (left, top, id) => {
 
-        var entity = document.getElementById(id);
-
-        if(entity) {
-            var top_ = entity.style.top;
-            var left_ = entity.style.left;
-            if(top_.includes("px")) {
-                top = ((parseFloat(top_) / document.documentElement.clientHeight) * 100); 
-                left = ((parseFloat(left_) / document.documentElement.clientWidth) * 100); 
-            }
-        }
+        
 
         if(this.state.nowPlayed == id)
         {

@@ -63,6 +63,8 @@ class Popup extends Component {
         var withEl = (this.props.data && this.props.data.Type == "FOLDER")? 
         " wraz ze wszystkimi elementami w nim zawartymi" : "";
 
+        var fromDesk = isFolder? "": " ze swojego pulpitu"
+
         let doNot = <label id="doNotShow" style={{fontSize: "12px", display: isFolder? "none": "block" }} >
         <input name="doNotShow" type="checkbox" id="doNotShowBox" />
         Nie pokazuj więcej tego okna.
@@ -72,7 +74,7 @@ class Popup extends Component {
         return (
         <div class="popup" style={{top: this.props.showPopup? "10px" : "-1000px"}}>
 
-           Czy na pewno chcesz usunąć ze swojego pulpitu {folder} <span style={{color: "white"}} ><br/>{title}</span>{withEl}?
+           Czy na pewno chcesz usunąć {fromDesk} {folder} <span style={{color: "white"}} ><br/>{title}</span>{withEl}?
         <div style={{display: "flex", padding: "5px", marginLeft: "55px",marginRight: "55px"}}>
             <div class="popupButtton" onClick={this.okClick}>Tak</div> <div class="popupButtton" onClick={this.noClick}>Nie</div>
         </div>

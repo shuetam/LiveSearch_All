@@ -20,7 +20,7 @@ class App extends Component {
     componentWillMount () {
 
         document.title = "LiveSearch";
-        this.props.onTryAutoSignup();
+        this.props.onTryAutoSignup(); 
     }
        
  
@@ -30,7 +30,7 @@ class App extends Component {
             <BrowserRouter>
                 <div>
                 
-                    <Route path={'/:id?'} component={Header} />
+                    <Route path={'/:id?/:id1?/:id2?'} component={Header} />
                     <Popup/>
                     <ServerPopup/>
                

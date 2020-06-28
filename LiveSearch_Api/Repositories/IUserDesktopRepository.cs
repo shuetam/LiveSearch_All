@@ -14,11 +14,11 @@ namespace Live.Repositories
         Task<List<IconDto>> GetAllImagesForUserAsync(Guid userId, string folderId);
 
         Task<List<IconDto>> GetAllSpotifyForUserAsync(Guid userId, string folderId);
-         Task<IconDto> ChangeEntityTitleAsync(EntitySetter newTitle, Guid userId);
+         Task<IconDto> ChangeEntityTitleAsync(EntitySetter newTitle, Guid userId, string tagsString);
         
-        Task<bool> AddYouTubeAsync(EntitySetter addYoutube, Guid userId);
-        Task<bool> AddImageAsync(EntitySetter addYoutube, Guid userId);
-       Task<bool> AddSpotifyAsync(EntitySetter addSpotify, Guid userId);
+        Task<bool> AddYouTubeAsync(EntitySetter addYoutube, Guid userId, string tagsString);
+        Task<bool> AddImageAsync(EntitySetter addYoutube, Guid userId, string tagsString);
+       Task<bool> AddSpotifyAsync(EntitySetter addSpotify, Guid userId, string tagsString);
         Task<FolderDto> CreateFolderAsync(Guid userId, string Title);
         Task<object> AddEntityToFolder(Guid userId, string folderId, string entityId, string entityType);
     

@@ -14,7 +14,7 @@ import ReactScrollWheelHandler from "react-scroll-wheel-handler";
 import { connect } from 'react-redux';
 import {showServerPopup, manageScreen} from '../../Store/Actions/auth';
 import {URL} from '../../environment'
-
+import { leftToVw, topToVh } from '../../Converters.js';
 
 
 class YTAreaAdmin extends Component {
@@ -446,9 +446,44 @@ class YTAreaAdmin extends Component {
      
         this.setState({ mainTitle: "" });
          document.getElementById("258").innerHTML = "";
-       
+         var entity = document.getElementById(event.target.id);
+         var top = entity.style.top;
+         var left = entity.style.left;
+ 
+         var leftE = leftToVw(left);
+         var topE= topToVh(top);
+ 
+         entity.style.left = leftE;
+         entity.style.top = topE;
+        // this.setStateIconLocation(entity.id, leftE, topE);
+
             document.getElementById(event.target.id).style.opacity = this.state.actuallOpacity;
         
+    }
+
+    setStateIconLocation = (Id, left, top) => {
+        var icon = this.getIconById(Id);
+       
+        if(icon) {
+        
+            icon.top = top;
+            icon.left = left;
+        }
+    }
+
+    getIconById = (Id) => {
+        var allIcons = [...this.state.icons, ...this.state.images, ...this.state.spotify ];
+        var icon = allIcons.find( icon => icon.id === Id);
+        return icon;
+    }
+
+    getIconTags(Id) {
+        var icon = this.getIconById(Id);
+        if(icon) {
+            return icon.tags;
+        }
+        return [];
+
     }
 
     rangeHandler = (event) => {
@@ -477,16 +512,7 @@ class YTAreaAdmin extends Component {
 
     getShadow = (left, top, id) => {
 
-        var entity = document.getElementById(id);
-
-        if(entity) {
-            var top_ = entity.style.top;
-            var left_ = entity.style.left;
-            if(top_.includes("px")) {
-                top = ((parseFloat(top_) / document.documentElement.clientHeight) * 100); 
-                left = ((parseFloat(left_) / document.documentElement.clientWidth) * 100); 
-            }
-        }
+        
         if(this.state.nowPlayed == id)
         {
             return this.state.playedShadow;
@@ -519,7 +545,7 @@ editTitle = (value) => {
 }
 
 editID = (value) => {
-    debugger;
+   
     this.setState({editedID: value})
 }
 
@@ -690,14 +716,14 @@ var i = 0;
 
       <input id="editID" type="text"
         autofocus="true"
-        style={{backgroundColor: "black" }} 
+        style={{backgroundColor: "white" }} 
         onKeyPress = {this.onKeyTitle}
          onChange={e => this.editID(e.target.value)} 
          value={this.state.editedID} /> 
 
           <input id="editR" type="text"
         autofocus="true"
-        style={{backgroundColor: "black" }} 
+        style={{backgroundColor: "white" }} 
         onKeyPress = {this.onKeyTitle}
          onChange={e => this.editRating(e.target.value)} 
          value={this.state.editedRating} /> 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Icons.css';
 import Header from '../Header/Header';
+import {manageLogin, hideLogin} from '../../CommonManager'
 import Field from '../Fields/Field';
 import { Link, Route, NavLink, withRouter } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
@@ -127,20 +128,34 @@ class YTIcon extends Component {
                         Title: name,
                         Top: Top_,
                         Left: Left_,
-                        FolderId: this.props.folderId
+                        FolderId: this.props.folderId,
+                        tags: this.props.tags
                         }
 
     
          //debugger;    
         if(event.target.className == "addEntity")
         {
-            var url = URL.api+URL.addIcon;
-            //console.log("DKASHKDJHASKJDSA - " + url);
-            axios.post(URL.api+URL.addIcon, data, this.state.authConfig)
-            .then((response) => {
-                debugger;
-                cross.className = 'removeEntity'; cross.title = "Usuń z pulpitu";})
+
+            if(!this.props.isAuthenticated) {
+               manageLogin();
+            }
+            else {
+                var url = URL.api+URL.addIcon;
+                //console.log("DKASHKDJHASKJDSA - " + url);
+                axios.post(URL.api+URL.addIcon, data, this.state.authConfig)
+                .then((response) => {
+                if(response.data)
+                {
+                    cross.className = 'removeEntity'; cross.title = "Usuń z pulpitu";
+                }
+                else {
+                    this.Alert("Wybrana ikona znajduje się już w Twojej kolekcji.");
+                }
+                
+            })
             .catch(error => {console.log(error); this.Alert("Przepraszamy, nie udało się dodać ikony.")});
+        }
         }
 
         if(event.target.className == "addingEntity")
@@ -158,7 +173,9 @@ class YTIcon extends Component {
             .then((response) => {
                 debugger;
                 if(response.data){
-                    this.props.addToProps(icon)
+                    this.props.addToProps(icon);
+                   
+                  
                 }
                 else {
                     this.Alert("Wybrana ikona znajduje się już w Twojej kolekcji.");
@@ -190,14 +207,11 @@ class YTIcon extends Component {
             }
             else {
                 this.props.MagnagePopup(data, entityToDisable);
-            }
-
-            
+            }        
         }
-
-
     }
 
+   
     render() {
      
         var classEntity = "";
@@ -226,8 +240,8 @@ class YTIcon extends Component {
             iconTitle = "Usuń z pulpitu";
         }
        
-        var addIcon = this.props.isAuth?   <div id={this.props.id} onClick = {this.YTHandler}
-        title={iconTitle}  class={classEntity}>&#43;</div> : "";
+        var addIcon =   <div id={this.props.id} onClick = {this.YTHandler}
+        title={iconTitle}  class={classEntity}>&#43;</div>;
 
         var indexIcon = this.props.isAdmin? 
         <div style={{fontSize: "11px"}} title={iconTitle} id={this.props.id} >{this.props.index}</div> : "";
@@ -243,15 +257,19 @@ class YTIcon extends Component {
             showTitleEditor={this.props.showTitleEditor}
             title={this.props.title}
             bottom={this.props.bottom}
+            public={this.props.public}
+            guidId={this.props.guidId}
+            tags={this.props.tags}
+            location={this.props.location}
             iconType="YT"></IconEditor>
 
-            var editIcon = (this.props.remover!==3 && this.props.fromDesk)? 
+            var editIcon =  this.props.newIcon? "" :
             <div id={this.props.id} 
             class="editEntity" style={{left: this.props.leftEdit}}><i id={this.props.id}
             title="" class="icon-dot-3"
             />
             {editIconField}
-            </div> : "";
+            </div>;
 
         return (
             <div onDoubleClick={this.props.linkTo}
@@ -288,8 +306,10 @@ class YTIcon extends Component {
 const mapStateToProps = state => {
     return {
         jwtToken: state.auth.jwttoken,
+        isAuthenticated: state.auth.jwttoken !== null,
         url: state.auth.sourceUrl,
         isAdmin: state.auth.userRole == "ADMIN",
+        showLoginWindow: state.auth.showLoginWindow
     };
   };
 
@@ -298,7 +318,8 @@ const mapDispatchToProps = dispatch => {
         MagnagePopup: (data, cross) => dispatch(popup(data, cross)),
         serverAlert: (message) => dispatch(showServerPopup(message)),
         addToProps: (icon) => dispatch(addingIcon(icon)),
-        sendToRemove: (id) => dispatch(removingIcon(id))
+        sendToRemove: (id) => dispatch(removingIcon(id)),
+ 
         
     };
 };

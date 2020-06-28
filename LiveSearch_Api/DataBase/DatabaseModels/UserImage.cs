@@ -4,12 +4,13 @@ public class UserImage : Live.Core.Entity
 {
     public Guid UserId {get; protected set;}
     public Guid? FolderId {get; protected set;}
-    public string UrlAddress {get; protected set;}
+    public string UrlAddress {get; protected set;}//ths is id
     public string Source {get; protected set;}
     public string LocLeft {get; protected set;}
     public string LocTop {get; protected set;}
     public string Title {get; protected set;}
     public string ImgType {get; protected set;}
+    public string Tags {get; protected set;}
     
     //public User User {get; protected set;}
     public DateTime CreatedAt {get; protected set;}
@@ -20,7 +21,7 @@ public class UserImage : Live.Core.Entity
         {
         }
 
-        public UserImage(Guid userId, string source, string url, string title, string left, string top, string folderId, string type) 
+        public UserImage(Guid userId, string source, string url, string title, string left, string top, string folderId, string type, string tagsString) 
         {
             UserId = userId;
             Title = title;
@@ -40,6 +41,7 @@ public class UserImage : Live.Core.Entity
             LocTop = top;
             CreatedAt = DateTime.Now;
             ImgType = type;
+            Tags = tagsString;
         }
 
 
@@ -76,6 +78,14 @@ public class UserImage : Live.Core.Entity
                 newTitle = newTitle.Substring(0, 100) + "...";
             }
             this.Title = newTitle;
+        }
+
+        public void ChangeTags(string newTags)
+        {
+
+           
+          
+            this.Tags = newTags;
         }
 
         

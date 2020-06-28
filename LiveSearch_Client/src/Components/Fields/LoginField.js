@@ -15,7 +15,8 @@ class LoginField extends Component {
     render() {
  
     let field = 
-    (<div class="fieldAct"><span style={{fontSize: "20px", color: "rgba(255, 255, 255, 0.801)"}}>Nie jesteś zalogowany</span><p/>
+    (<div class="fieldAct"><span style={{fontSize: "20px", color: "rgba(255, 255, 255, 0.801)"}}>
+    </span><p/>
        Zaloguj się aby przeglądać swój pulpit i dodawać do niego nowe ikony
        
         </div>)

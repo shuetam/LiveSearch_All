@@ -359,6 +359,10 @@
     text-shadow: rgba(29, 29, 29, 0.979) -3px 2px 1px, rgba(0, 0, 0, 0.911) 0px 0px 5px
 }
 
+
+
+
+
 .removeEntity {
     position: absolute;
     top: -19px;
@@ -512,8 +516,8 @@ z-index: 600;
 
 .entBook {
     object-fit: cover;
-    width: 45px;
-    height: 60px;
+  
+  
     border-radius: 0px;
 }
 

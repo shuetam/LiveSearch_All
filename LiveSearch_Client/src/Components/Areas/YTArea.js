@@ -3,6 +3,7 @@ import '../../App.css';
 import './Area.css';
 import Header from '../Header/Header';
 import Field from '../Fields/Field';
+import TagsField from '../Fields/TagsField';
 import { Link, Route, NavLink } from 'react-router-dom';
 import YTIcon from '../Icons/YTIcon';
 import LoadingField from '../Fields/LoadingField';
@@ -13,8 +14,9 @@ import ReactScrollWheelHandler from "react-scroll-wheel-handler";
 //import {scrollU, scrollD} from '../../Store/Actions/scroll';
 import { connect } from 'react-redux';
 import {showServerPopup, manageScreen} from '../../Store/Actions/auth';
-import {URL} from '../../environment'
-
+import {URL} from '../../environment';
+import { leftToVw, topToVh } from '../../Converters.js';
+import { bottomIcon, getQuarter } from '../../CommonManager.js';
 
 
 class YTArea extends Component {
@@ -49,6 +51,7 @@ class YTArea extends Component {
             userIconsId: [],
             prevPlayed: [],
             noIcons: false,
+            firstHover: false,
         }
     }
 
@@ -72,7 +75,7 @@ class YTArea extends Component {
             
         this.setState({ icons: result.data })})
         .then(() => {
-            this.setMaxCount()})
+            this.prepareIcons()})
         .catch(error => {console.log(error); 
             this.Alert("Wystąpił błąd przy pobieraniu ikon. Spróbuj ponownie za chwilę.");
             this.setState({ loaded: true });
@@ -121,7 +124,7 @@ class YTArea extends Component {
 
 
 
-    setMaxCount = () => {
+    prepareIcons = () => {
         if (this.state.icons.length > 0) {
             var counts = [];
             this.state.icons.map(song => { counts.push(parseInt(song.count)) });
@@ -217,6 +220,22 @@ class YTArea extends Component {
     }
 
 
+    getIconById = (Id) => {
+        var allIcons = [...this.state.icons];
+        var icon = allIcons.find( icon => icon.id === Id);
+        return icon;
+    }
+
+    getIconTags(Id) {
+        var icon = this.getIconById(Id);
+        if(icon) {
+            return icon.tags;
+        }
+        return [];
+
+    }
+
+
 
     onDbClick = (event) => {
 
@@ -238,19 +257,51 @@ class YTArea extends Component {
         note.style.boxShadow = this.state.playedShadow;
     }
 
+    manageTrans = () => {
+        this.setState({firstHover: true});
+        var folders = document.getElementsByClassName("folder");
+        var icons = document.getElementsByClassName("entity");
+        if(icons.length>0)
+        {
+            for(var i=0;i<icons.length;i++)
+            {
+               icons[i].style.transition =  'top 0s, left 0s';
+            }
+        }
+        
+        if(folders.length>0)
+        {
+            for(var i=0;i<folders.length;i++)
+            {
+               folders[i].style.transition =  'top 0s, left 0s';
+            }
+        }
+    }
+
 
     onHover = (event) => {
 
-       // console.log( localStorage.getItem('inMove'));
+        if(!this.state.firstHover)
+        {
+            this.manageTrans();
+          }
 
         var entity = document.getElementById(event.target.id);
 
-
+        if(entity) {
         
         var titleMain = entity.title.replace("||","<br/>");
+
+
+
+        while(titleMain.includes("||"))
+        {
+            titleMain = titleMain.replace("||","<br/>");
+        }
+
+       /*  titleMain = titleMain.replace("||","<br/>");
         titleMain = titleMain.replace("||","<br/>");
-        titleMain = titleMain.replace("||","<br/>");
-        titleMain = titleMain.replace("||","<br/>");
+        titleMain = titleMain.replace("||","<br/>"); */
         
         this.setState({ mainTitle: titleMain });
         var iconTitle = document.getElementById("258");
@@ -309,6 +360,7 @@ class YTArea extends Component {
                 document.onmousemove = null;
             }
         }
+        }
     }
 
     ////////////////////////////////////////////////
@@ -324,10 +376,33 @@ class YTArea extends Component {
      
         this.setState({ mainTitle: "" });
          document.getElementById("258").innerHTML = "";
+
+        var entity = document.getElementById(event.target.id);
+         var top = entity.style.top;
+         var left = entity.style.left;
+ 
+         var leftE = leftToVw(left);
+         var topE= topToVh(top);
+ 
+         entity.style.left = leftE;
+         entity.style.top = topE;
+         this.setStateIconLocation(entity.id, leftE, topE);
        
-            document.getElementById(event.target.id).style.opacity = this.state.actuallOpacity;
+        document.getElementById(event.target.id).style.opacity = this.state.actuallOpacity;
         
     }
+
+    setStateIconLocation = (Id, left, top) => {
+        var icon = this.getIconById(Id);
+      
+        
+        if(icon) {
+        
+            icon.top = top;
+            icon.left = left;
+        }
+    }
+
 
     rangeHandler = (event) => {
         var icons = document.getElementsByClassName("entity");
@@ -353,18 +428,17 @@ class YTArea extends Component {
         }
     }
 
+    getClass = () => {
+
+        if(this.props.showLoginWindow) {
+            return "entityDis";
+        }
+        return "entity";
+    }
+
     getShadow = (left, top, id) => {
 
-        var entity = document.getElementById(id);
-
-        if(entity) {
-            var top_ = entity.style.top;
-            var left_ = entity.style.left;
-            if(top_.includes("px")) {
-                top = ((parseFloat(top_) / document.documentElement.clientHeight) * 100); 
-                left = ((parseFloat(left_) / document.documentElement.clientWidth) * 100); 
-            }
-        }
+        
         if(this.state.nowPlayed == id)
         {
             return this.state.playedShadow;
@@ -401,13 +475,17 @@ let field = "";
 
         }
 
+
+        let tagsField = this.state.loaded? <TagsField  searchTag={this.props.searchTag} tags = {this.getIconTags(this.state.ytID)} />  : "";
+
         let icons = this.state.icons.map(song => {
 //tu 1 bedzie dla tych ktore user ma juz na pulpicie i bedzie removeentity bez znikania
 // zapis do bazy zawsze z vh i vw - przy dodaniu ikony brac z bazy, przy aktualizacji pozycji przeliczac z px na vh vw
             return (
-                <YTIcon  remover={this.userOwner(song.id)? 1 : 0} isAuth = {this.props.isAuthenticated}   title={song.title} yt={song.id} id={song.id}
+                <YTIcon  remover={this.userOwner(song.id)? 1 : 0} isAuth = {this.props.isAuthenticated} 
+                  title={song.title} yt={song.id} id={song.id}
                     linkTo={this.onDbClick}
-                    classname="entity"
+                    classname= {this.getClass()} //"entity"
                     size={this.setSize(parseInt(song.count)) }
                     location={ this.state.loaded? 
                       {boxShadow: this.getShadow(parseInt(song.left),parseInt(song.top), song.id), 
@@ -417,6 +495,12 @@ let field = "";
                     onHover={this.onHover}
                     onLeave={this.cleanTitle}
                     count={song.count}
+                    tags={song.tags}
+                    leftEdit = "70%"
+                    bottom = {bottomIcon(song.id, song.top)}
+                    quarter = {getQuarter(song.id, song.left, song.top)}
+                    public={true}
+                    guidId={song.guidId}
                 />
             )
         })
@@ -443,7 +527,7 @@ let field = "";
                   <hr/>  */}
                 </div>
             </div>
-                 
+                 {tagsField}
                     {field}
                 <div id = "258" class= "titleDiv"> </div>
                
@@ -478,6 +562,7 @@ const mapStateToProps = state => {
         isAuthenticated: state.auth.jwttoken !== null,
         //userId: state.auth.userId,
         jwtToken: state.auth.jwttoken,
+        showLoginWindow: state.auth.showLoginWindow
         //fullScreen: state.auth.fullScreen
     };
 };

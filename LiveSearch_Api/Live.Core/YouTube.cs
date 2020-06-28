@@ -60,19 +60,19 @@ namespace Live.Core
             if (region == 1)
             {
                this.left = Math.Round((random_d.NextDouble() * (22 - 0) + 0), 3);
-               this.top =  Math.Round((random_d.NextDouble() * (85 - 6) + 6), 3);
+               this.top =  Math.Round((random_d.NextDouble() * (85 - 8) + 8), 3);
             }
 
             if (region == 2)
             {
                this.left =  Math.Round((random_d.NextDouble() * (72 - 22) + 22), 3);
-               this.top=  Math.Round((random_d.NextDouble() * (85 - 54) + 54), 3);
+               this.top=  Math.Round((random_d.NextDouble() * (85 - 56) + 56), 3);
             }
 
              if (region == 3)
             {
                 this.left = Math.Round( (random_d.NextDouble() * (95 - 72) + 72), 3);
-                this.top =  Math.Round((random_d.NextDouble() * (85 - 6) + 6), 3);   
+                this.top =  Math.Round((random_d.NextDouble() * (85 - 8) + 8), 3);   
             }
 
             this.left_ = Regex.Replace((this.left) + "vw", @"\,+", ".");
@@ -186,6 +186,15 @@ namespace Live.Core
            }
 
 
+        }
+
+         public bool HasYTId()
+        {
+            if(this.VideoID.Contains("Error") || this.VideoID.Contains("!!ID!!"))
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

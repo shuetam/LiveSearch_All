@@ -139,8 +139,16 @@ class SpotifyIcon extends Component {
          
             axios.post(URL.api+URL.addIcon, data, this.state.authConfig)
             .then((response) => {
-                debugger;
-                cross.className = 'removeEntity'; cross.title = "Usuń z pulpitu";})
+                if(response.data)
+                {
+                    cross.className = 'removeEntity'; cross.title = "Usuń z pulpitu";
+                }
+                else {
+                    this.Alert("Wybrana ikona znajduje się już w Twojej kolekcji.");
+                }
+            }
+            
+            )
             .catch(error => {console.log(error); this.Alert("Przepraszamy, nie udało się dodać ikony.")});
         }
 
@@ -241,15 +249,18 @@ class SpotifyIcon extends Component {
             showTitleEditor={this.props.showTitleEditor}
             title={this.props.title}
             bottom={this.props.bottom}
-            iconType="YT"></IconEditor>
+            public={this.props.public}
+            tags={this.props.tags}
+            location={this.props.location}
+            iconType="SPOTIFY"></IconEditor>
 
-            var editIcon = (this.props.remover!==3 && this.props.fromDesk)? 
+            var editIcon =   this.props.newIcon? "" :
             <div id={this.props.id} 
             class="editEntity" style={{left: this.props.leftEdit}}><i id={this.props.id}
             title="" class="icon-dot-3"
             />
             {editIconField}
-            </div> : "";
+            </div>;
 
         return (
             <div onDoubleClick={this.props.linkTo}

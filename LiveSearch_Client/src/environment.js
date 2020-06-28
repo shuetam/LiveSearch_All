@@ -2,10 +2,10 @@
 
 export const URL = {
 
-    //api: "http://localhost:53072/api/", 
-    //debugger//api: "http://localhost:5000/api/", 
+    api: "http://localhost:53072/api/", 
+    //api: "http://localhost:5000/api/", 
 
-    api: "https://www.fitize.pl/api/", 
+    //api: "https://www.fitize.pl/api/", 
 
     login: "SocialUser/user",
     radioSongs: "song/allradiosongs/",
@@ -41,22 +41,29 @@ export const URL = {
     changeBook: "admin/changebookproperties",
     startBooks:  "admin/startbooksupdating",
     changeMovieRating: "admin/changemovierating",
-    update: "updating/updates"
+    update: "updating/updates",
+    actuallTopIcons: "actuall/getactualltopicons",
+    explore: "explore/geticons",
+    getIconByGuidId: "explore/getIconByGuidId"
     
 }
 
 export const PATHES = {
+    //live: 'https://www.livesearch.pl',
+    live: 'http://localhost:3000',
     songs: '/muzyka_radio',
     songsAdmin: '/songsadmin',
     movies: '/filmy_tv',
     moviesAdmin: '/moviesadmin',
     adminPanel: '/adminpanel',
-    userPulpit: '/profil/pulpit',
+    userPulpit: '/pulpit',
     bestsellers: '/literatura_bestsellery',
+    folders: '/foldery',
+    explore: '/eksploruj',
     policy: '/polityka-prywatnosci',
     contact: '/kontakt',
     information: '/informacje',
-    userFolder: '/profil/folder/',
+    userFolder: 'pulpit/folder/',
     bestsellersAdmin: "/bestsellersadmin"
 }
 

@@ -42,10 +42,10 @@ public LiveContext() : this(new DbContextOptions<LiveContext>()) { }
         _sqlSettings = SqlSettings;
     } 
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+   /*  protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlServer(_sqlSettings.ConnectionString);
-    }
+    } */
         
  
 

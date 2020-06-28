@@ -15,10 +15,13 @@ namespace Live.Core
     {
     public string title {get; set;}
     public string  videoId {get; set;}
+
+    public string  guidId {get; set;}
     public string  top {get; set;}
     public string left {get; set;}
     public string  count {get; set;}
     public int countValue {get; set;}
+     public List<string>  tags {get; set;}
     public DateTime  playAt {get; set;}
 
     public FrontYouTube(Song song, int count)
@@ -29,12 +32,18 @@ namespace Live.Core
         this.left = song.YouTube.left_;
         this.count = count.ToString();
         this.playAt = song.PlayAt;
+        this.countValue = count;
+        this.guidId = song.ID.ToString();
+
+        this.tags = new HashSet<string>(song.getTags()).ToList();
+
     }
 
 //for admin
       public FrontYouTube(TVMovie movie)
     {
         this.title = movie.TrailerSearch;
+        this.guidId = movie.ID.ToString();
         this.videoId = movie.YouTube.VideoID;
         this.top = movie.YouTube.top_;
         this.left = movie.YouTube.left_;
@@ -58,6 +67,8 @@ namespace Live.Core
     public FrontYouTube(TVMovie movie,  List<DateTime> dates)
     {
         //var hour = movie.PlayAt.Hour;
+        this.guidId = movie.ID.ToString();
+        this.tags = movie.getTags();
         this.playAt = movie.PlayAt;
         var dateTimeFormats = new CultureInfo("pl-PL").DateTimeFormat;
         var day = movie.PlayAt.ToString("dddd", dateTimeFormats);
@@ -76,7 +87,7 @@ namespace Live.Core
             rating = "0";
         }
 
-    var hashDates = new HashSet<DateTime>(dates).ToList();
+        var hashDates = new HashSet<DateTime>(dates).ToList();
         foreach(var date in hashDates)
         {
             var daya = date.ToString("dddd", dateTimeFormats);

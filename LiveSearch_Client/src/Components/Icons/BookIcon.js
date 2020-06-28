@@ -8,8 +8,8 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import {popup, showServerPopup, addingIcon, removingIcon} from '../../Store/Actions/auth';
 import {URL} from '../../environment';
-
-
+import {manageLogin, hideLogin} from '../../CommonManager'
+import IconEditor from './IconEditor';
 class BookIcon extends Component {
 
     constructor(props) {
@@ -51,6 +51,9 @@ class BookIcon extends Component {
             .catch(error => {console.log(error); this.Alert("Przepraszamy, nie udało się usunąć ikony.")});
     }
 
+    zoomHandler = () => {
+        this.setState({showZoom: !this.state.showZoom});
+    }
 
     moveIcon = (event) => {
 
@@ -64,7 +67,8 @@ class BookIcon extends Component {
                         Type: "BOOK",
                         Source: ID,
                         UserId: this.props.userId,
-                        Title: name
+                        Title: name,
+                        tags: this.props.tags
                         }
 
         axios.post(URL.api+URL.moveIcon, data, this.state.authConfig)
@@ -124,17 +128,23 @@ class BookIcon extends Component {
                         Id: ID,
                         Type: "BOOK",
                         //UserId: this.props.userId,
-                        Source: name,
+                        Source: ID,
                         Title: name,
                         Top: Top_,
                         Left: Left_,
-                        FolderId: this.props.folderId
+                        FolderId: this.props.folderId,
+                        tags: this.props.tags
                         }
 
     
              
         if(event.target.className == "addEntity")
         {
+
+            if(!this.props.isAuth) {
+                manageLogin();
+             }
+             else {
             axios.post(URL.api+URL.addIcon, data, this.state.authConfig)
             .then((response) => {
                 //debugger;
@@ -148,6 +158,7 @@ class BookIcon extends Component {
                 }}
                // debugger;
             ).catch(error => { this.Alert("Nie udało się dodać ikony.")});
+        }
         }
 
         if(event.target.className == "addingEntity")
@@ -229,8 +240,8 @@ class BookIcon extends Component {
             iconTitle = "Usuń z pulpitu";
         }
        
-        var addIcon = this.props.isAuth?   <div id={this.props.id} onClick = {this.IconHandler}
-        title={iconTitle} style={{left: "83%"}}  class={classEntity}>&#43;</div> : "";
+        var addIcon =    <div id={this.props.id} onClick = {this.IconHandler}
+        title={iconTitle} style={{left: "83%"}}  class={classEntity}>&#43;</div> ;
 
         var moveIcon = //window.location.href.includes("folder")?
         (this.props.fromFolder && this.props.remover!==3)?
@@ -238,7 +249,31 @@ class BookIcon extends Component {
         title={this.props.title}  class="moveEntity" style={{left: "-27%"}}><i id={this.props.id} onClick = {this.moveIcon}
         title="Przenieś ikonę do głównego pulpitu" class="icon-left-bold" onClick = {this.moveIcon} /></div>  : "";
 
+        var editIconField = <IconEditor 
+        onHover = {this.props.onHover}
+        onLeave = {this.props.onLeave}
+        fromFolder={this.props.fromFolder}
+        moveIcon={this.moveIcon}
+        showImg={this.zoomHandler}
+        id={this.props.id}
+        showTitleEditor={this.props.showTitleEditor}
+        title={this.props.title}
+        bottom={this.props.bottom}
+        public={this.props.public}
+        guidId={this.props.guidId}
+        tags={this.props.tags}
+        location={this.props.location}
+        iconType="BOOK"></IconEditor>
         
+
+        var editIcon =  this.props.newIcon? "" :
+        <div id={this.props.id} 
+        class="editEntity" style={{left: this.props.leftEdit}}><i id={this.props.id}
+        title="" class="icon-dot-3"
+        />
+        {editIconField}
+        </div>;
+
         return (
             <div  onDoubleClick={this.props.linkTo}
             
@@ -266,7 +301,7 @@ class BookIcon extends Component {
                   title={this.props.title}  /> */} 
                     {addIcon}
                     {moveIcon}
-                   
+                   {editIcon}
                
                {/*    <div id={this.props.id} onClick = {this.saveYT}
                   title={this.props.title}  class="addEntity">&#43;</div> */}

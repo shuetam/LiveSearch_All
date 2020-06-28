@@ -13,8 +13,10 @@ import ReactScrollWheelHandler from "react-scroll-wheel-handler";
 import { connect } from 'react-redux';
 import {showServerPopup, manageScreen} from '../../Store/Actions/auth';
 import {URL} from '../../environment'
-
-
+import TagsField from '../Fields/TagsField';
+import ImageIcon from '../Icons/ImageIcon';
+import { leftToVw, topToVh } from '../../Converters.js';
+import { bottomIcon, getQuarter, getIconFromUrl } from '../../CommonManager.js';
 
 class BestSellers extends Component {
 
@@ -42,6 +44,7 @@ class BestSellers extends Component {
             userIconsId: [],
             prevPlayed: [],
             noIcons: false,
+            firstHover: false,
         }
     }
 
@@ -144,12 +147,37 @@ class BestSellers extends Component {
         note.style.boxShadow = this.state.playedShadow;
     }
 
+    manageTrans = () => {
+        this.setState({firstHover: true});
+        var folders = document.getElementsByClassName("folder");
+        var icons = document.getElementsByClassName("entity");
+        if(icons.length>0)
+        {
+            for(var i=0;i<icons.length;i++)
+            {
+               icons[i].style.transition =  'top 0s, left 0s';
+            }
+        }
+        
+        if(folders.length>0)
+        {
+            for(var i=0;i<folders.length;i++)
+            {
+               folders[i].style.transition =  'top 0s, left 0s';
+            }
+        }
+    }
+
 
     onHover = (event) => {
-
-       
+        if(!this.state.firstHover)
+        {
+            this.manageTrans();
+        }
 
         var entity = document.getElementById(event.target.id);
+
+        if(entity) {
 
         var titleMain = entity.title.replace("||","<br/>");
         titleMain = titleMain.replace("||","<br/>");
@@ -215,6 +243,7 @@ class BestSellers extends Component {
             }
         }
     }
+    }
 
     ////////////////////////////////////////////////
 
@@ -229,10 +258,32 @@ class BestSellers extends Component {
      
         this.setState({ mainTitle: "" });
          document.getElementById("258").innerHTML = "";
+
+         var entity = document.getElementById(event.target.id);
+         var top = entity.style.top;
+         var left = entity.style.left;
+ 
+         var leftE = leftToVw(left);
+         var topE= topToVh(top);
+ 
+         entity.style.left = leftE;
+         entity.style.top = topE;
+         this.setStateIconLocation(entity.id, leftE, topE);
        
-            document.getElementById(event.target.id).style.opacity = this.state.actuallOpacity;
+        document.getElementById(event.target.id).style.opacity = this.state.actuallOpacity;
         
     }
+
+    setStateIconLocation = (Id, left, top) => {
+        var icon = this.getIconById(Id);
+       
+        if(icon) {
+        
+            icon.top = top;
+            icon.left = left;
+        }
+    }
+
 
     rangeHandler = (event) => {
         var icons = document.getElementsByClassName("entity");
@@ -307,16 +358,7 @@ class BestSellers extends Component {
 
     getShadow = (left, top, id) => {
 
-        var entity = document.getElementById(id);
-
-        if(entity) {
-            var top_ = entity.style.top;
-            var left_ = entity.style.left;
-            if(top_.includes("px")) {
-                top = ((parseFloat(top_) / document.documentElement.clientHeight) * 100); 
-                left = ((parseFloat(left_) / document.documentElement.clientWidth) * 100); 
-            }
-        }
+        
 
         if(this.state.nowPlayed == id)
         {
@@ -338,6 +380,21 @@ class BestSellers extends Component {
         if(left<=50 && top>=50) {
             return "-1px -1px 3px 1px rgb(255, 255, 255)";
          }
+    }
+
+    getIconById = (Id) => {
+        var allIcons = [...this.state.icons];
+        var icon = allIcons.find( icon => icon.id === Id);
+        return icon;
+    }
+
+    getIconTags(Id) {
+        var icon = this.getIconById(Id);
+        if(icon) {
+            return icon.tags;
+        }
+        return [];
+
     }
 
     render(props) {
@@ -364,7 +421,8 @@ class BestSellers extends Component {
 
         let books = this.state.icons.map(book => {
             return (
-                <BookIcon  remover={0}  isAuth={this.props.isAuthenticated} userId={this.props.userId}   yt={book.id} id={book.id}
+                <ImageIcon  remover={0}  isAuth={this.props.isAuthenticated} 
+                userId={this.props.userId}   yt={book.id} id={book.id}
                 classname= "entity"
                     linkTo={this.onDbImgClick}
                     
@@ -373,7 +431,7 @@ class BestSellers extends Component {
                         top: book.top, left: book.left, transition: 'top '+3+'s, left '+3+'s' , width: this.getBookWidth(book.count), height: this.getBookHeight(book.count)} :
                       {top: this.getHPosition(101,200)+'vh', left: this.getWPosition(-50,200)+'vw',
                      }}
-              
+                     type="BOOK"
                     title = {book.title}
                     source = {book.id}
                     onHover={this.onHover}
@@ -382,9 +440,18 @@ class BestSellers extends Component {
                     srcHeight={this.getBookHeight(book.count)}
                     fromFolder = {this.state.fromFolder} 
                     newimage = {false}
+                    tags={book.tags}
+                    bottom = {bottomIcon(book.id, book.top)}
+                    quarter = {getQuarter(book.id, book.left, book.top)}
+                    bottom = {bottomIcon(book.id, book.top)}
+                    quarter = {getQuarter(book.id, book.left, book.top)}
+                    public={true}
+                    leftEdit = "70%" //to for share
                 />
             )
-        })
+        });
+
+        let tagsField = this.state.loaded? <TagsField    noIcons={this.state.noIcons}  searchTag={this.props.searchTag}  tags={this.getIconTags(this.state.imgSource)} />  : "";
 
         
 
@@ -415,7 +482,7 @@ class BestSellers extends Component {
                 show={this.state.loaded}/>
 
                 <div id = "258" class= "titleDiv"> </div>
-               
+               {tagsField}
                 {books}
 
     <div class="containerIconsContainer">

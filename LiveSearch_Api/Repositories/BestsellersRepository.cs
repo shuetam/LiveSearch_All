@@ -29,58 +29,24 @@ namespace Live.Repositories
         {
             var bestSellersData = await _liveContext.Bestsellers.ToListAsync();
 
-            var bestSellersBooks = new List<Book>();
-
-            foreach(var data in bestSellersData)
-            {
-                bestSellersBooks.Add(new Book(data));
-            }
-            
-            var bestSellers = new List<Bestseller>();
-            var i = 0;
-            while (bestSellersBooks.Count > 0)
-            {
-                var book = bestSellersBooks.FirstOrDefault();
-                if (book != null)
-                {
-
-                    var booksTheSame = bestSellersBooks.Where(x => x.TheSame(book.Title, book.Author)).ToList();
-                    foreach (var b in booksTheSame)
-                    {
-                        var bestseller = new Bestseller(b, i);
-                        //bestseller.Added = DateTime.Now;
-                       bestSellers.Add(bestseller);
-                    }
-                    bestSellersBooks.RemoveAll(x => booksTheSame.Contains(x));
-                    i++;
-                }
-            }
-
-
-
-            
+            var hashGroups = new HashSet<int>(bestSellersData.Select(x => x.GroupNo).ToList()).ToList();
             var books = new List<IconDto>();
-        if(bestSellers.Count>0)
-        {
-            int maxIndex = bestSellers.Select(x => x.GroupNo).Max();
-
-            for(int j=0;j<=maxIndex;j++)
+            foreach(var group in hashGroups)
             {
-                var theSameBooks = bestSellers.Where(x => x.GroupNo==j).ToList();
+                var theSameBooks = bestSellersData.Where(x => x.GroupNo==group).ToList();
                 var count = theSameBooks.Count;
                 var bestImg = theSameBooks.Select(x => x.Size).Max();
                 var agent = theSameBooks.FirstOrDefault(x => x.Size == bestImg);
                 var icon = new IconDto(agent, count);
-                 books.Add(icon);
+                books.Add(icon);
             }
-        }
-    
             books = books.OrderByDescending(x => x.countValue).ToList();
             return books;
         }
 
         public async Task UpdateAsync()
         {
+            Console.WriteLine("Start updatign books");
             var bestList  = new List<Book>();
             
             
@@ -114,23 +80,56 @@ namespace Live.Repositories
             _liveContext.Bestsellers.RemoveRange(_liveContext.Bestsellers.Where(x => x.Store != ""));
              _liveContext.SaveChanges();
 
+            int group = 1;
             foreach(var book in bestList)
             {
-                var exists =   actualBestsellers.FirstOrDefault( x => x.ImageSrc == book.ImageSrc);
+                     var theSameList = bestList.Where(x => x.GroupNo == -1)
+                     .Where(x => x.TheSame(book.Title, book.Author)).ToList();
 
-            if(exists != null)
-            {
-            Console.WriteLine("Added exists");
-             exists.Added = DateTime.Now;
-                await _liveContext.Bestsellers.AddAsync(exists);
+                if(theSameList.Count>0)
+                {     
+                        foreach(var theSameBook in theSameList)
+                        {
+                            theSameBook.GroupNo = group;
+                        }
+                          group++;
+                }
             }
-            else 
-            {
-                        var bestseller = new Bestseller(book, 0);
+
+        int no = 1;
+        foreach(var book in bestList)
+        {
+                var exists = actualBestsellers.FirstOrDefault( x => x.ImageSrc == book.ImageSrc);
+
+                if(exists != null)
+                {
+                    Console.WriteLine("Added exists");
+                    exists.Added = DateTime.Now;
+
+                    var theSame = bestList
+                    .FirstOrDefault(x => x.TheSame(exists.Title, exists.Author));
+
+                    if(theSame != null)
+                    {
+                        exists.SetGroupNo(theSame.GroupNo);
+                       
+                    }
+                    else
+                    {
+                        int max = bestList.Select(x => x.GroupNo).Max() + no;
+                        no++;
+                        exists.SetGroupNo(max);
+                    }
+
+                    await _liveContext.Bestsellers.AddAsync(exists);
+                }
+                else 
+                {
+                        var bestseller = new Bestseller(book);
                         bestseller.Added = DateTime.Now;
                         Console.WriteLine("Added new");
                         await _liveContext.Bestsellers.AddAsync(bestseller);
-            }
+                }
 
                  
             }
@@ -138,7 +137,7 @@ namespace Live.Repositories
             InfoCaches._booksUpdatingRunning = true;
            // Console.WriteLine("========Finish book update==========");
 
-        }
+            }
 
           public async Task ChangeBookTitle(string id, string newTitle, string newAuthor)
           {
@@ -155,11 +154,10 @@ namespace Live.Repositories
 
 
 
-
-       public async Task UpdateStoreAsync(string store)
+  /*      public async Task UpdateStoreAsync(string store)
         {
             Log.Information("Start bestsellers updating");
-            var bestList  = new List<Book>();
+            var bestList  = new List<Book>(); */
             
             /* await _liveContext.SaveChangesAsync();
             var bonitos = await new Bonito().GetBestsellersAsync();
@@ -170,11 +168,11 @@ namespace Live.Repositories
             bestList.AddRange(czytams);
             var empiks = await new Empik().GetBestsellersAsync();
             bestList.AddRange(empiks); */
-            if(store == "gandalf")
+          /*   if(store == "gandalf")
             {
                 var gandalfs = await new Gandalf().GetBestsellersAsync();
                 bestList.AddRange(gandalfs);
-            }
+            } */
 
 
             /* var livros = await new Livro().GetBestsellersAsync();
@@ -191,16 +189,16 @@ namespace Live.Repositories
             Log.Information($"{livros.Count} from Livro");
             Log.Information($"{profit24s.Count} from Profit24"); */
 
-            var bestSellers = await _liveContext.Bestsellers.ToListAsync();
+          /*   var bestSellers = await _liveContext.Bestsellers.ToListAsync();
             var i = 0;
 
             if(bestSellers.Count>0)
             {
                var theSames = bestSellers.Select(x => x.GroupNo).ToList() ;
                i = theSames.Max();
-            }
+            } */
 
-           foreach(var best in bestList)
+       /*     foreach(var best in bestList)
            {
                var theSame = bestSellers.FirstOrDefault(x => best.TheSame(x.Title, x.Author));
                 var groupNo = i;
@@ -218,11 +216,11 @@ namespace Live.Repositories
                 bestSeller.Added = DateTime.Now;
                 await _liveContext.Bestsellers.AddAsync(bestSeller);
 
-           }
-            await _liveContext.SaveChangesAsync();
+           } */
+           // await _liveContext.SaveChangesAsync();
            // Console.WriteLine("========Finish book update==========");
 
-        }
+        
 
 
     }

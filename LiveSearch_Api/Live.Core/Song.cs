@@ -102,6 +102,27 @@ namespace Live.Core
             this.Name = name;
         }
 
+        public List<string> getTags()
+        {
+
+        var tags = new List<string>();
+   
+
+        string name = this.Name.Replace(",", " ");
+        //tags.Add(name);
+        string pattern = @"\s+[-]\s+";
+        var artTitle = Regex.Split(name, pattern ).ToList();
+        tags.AddRange(artTitle);
+        foreach(var ta in artTitle)
+        {
+          tags.AddRange(ta.Split('/').ToList());
+        }
+        tags.Add(this.Station);
+          return new HashSet<string>(tags).ToList();
+        }
+
+
+
 
 
     }

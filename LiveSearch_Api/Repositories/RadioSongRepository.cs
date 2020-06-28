@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using Live.Mapper;
 
+//depreceted
 namespace Live.Repositories
 {
     public class RadioSongRepository : IRadioSongRepository

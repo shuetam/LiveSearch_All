@@ -23,7 +23,7 @@ namespace Live.Repositories
         }
 
 
-        public async Task<bool> AddYouTubeAsync(EntitySetter addYoutube, Guid userId)
+        public async Task<bool> AddYouTubeAsync(EntitySetter addYoutube, Guid userId, string tagsString)
         {
             var exist =_liveContext.UserYoutubes.FirstOrDefault(x => x.UserId == userId && x.VideoId == addYoutube.Id);
 
@@ -34,7 +34,7 @@ namespace Live.Repositories
                 string title = titles.Count>0? titles[0] : addYoutube.Title;
 
 
-                var newYoutube = new UserYoutube(userId, addYoutube.Id, title, addYoutube.Left, addYoutube.Top, addYoutube.FolderId);
+                var newYoutube = new UserYoutube(userId, addYoutube.Id, title, addYoutube.Left, addYoutube.Top, addYoutube.FolderId, tagsString);
            
                 _liveContext.UserYoutubes.Add(newYoutube);
                 await _liveContext.SaveChangesAsync();
@@ -111,6 +111,11 @@ namespace Live.Repositories
         public async Task<List<string>> GetAllIconsIdAsync(Guid userId)
         {
             var iconsIds = await _liveContext.UserYoutubes.Where(x => x.UserId == userId).Select(x => x.VideoId).ToListAsync();
+            var imgIds = await _liveContext.UserImages.Where(x => x.UserId == userId).Select(x => x.UrlAddress).ToListAsync();
+            var spotifyIds = await _liveContext.UserSpotify.Where(x => x.UserId == userId).Select(x => x.SpotifyId).ToListAsync();
+            
+            iconsIds.AddRange(imgIds);
+            iconsIds.AddRange(spotifyIds);
             return iconsIds;
         }
 
@@ -337,14 +342,14 @@ namespace Live.Repositories
             return icons;
           }
 
-        public async Task<bool> AddImageAsync(EntitySetter addImage, Guid userId)
+        public async Task<bool> AddImageAsync(EntitySetter addImage, Guid userId, string tagsString)
         {
 
         var exist =_liveContext.UserImages.FirstOrDefault(x => x.UserId == userId && x.UrlAddress == addImage.Id);
             if(exist == null)
             {
                 var newImage = new UserImage(userId, addImage.Source, addImage.Id, 
-                addImage.Title, addImage.Left, addImage.Top, addImage.FolderId, addImage.Type);
+                addImage.Title, addImage.Left, addImage.Top, addImage.FolderId, addImage.Type, tagsString);
                 _liveContext.UserImages.Add(newImage);
                 await _liveContext.SaveChangesAsync();
                 return true;
@@ -354,14 +359,14 @@ namespace Live.Repositories
             }
         }
 
-        public async Task<bool> AddSpotifyAsync(EntitySetter addSpotify, Guid userId)
+        public async Task<bool> AddSpotifyAsync(EntitySetter addSpotify, Guid userId, string tagsString)
         {
 
         var exist =_liveContext.UserSpotify.FirstOrDefault(x => x.UserId == userId && x.SpotifyId == addSpotify.Id);
             if(exist == null)
             {
                 var newSpot= new UserSpotify(userId, addSpotify.Id, addSpotify.Source, 
-                addSpotify.Title, addSpotify.Left, addSpotify.Top, addSpotify.FolderId);
+                addSpotify.Title, addSpotify.Left, addSpotify.Top, addSpotify.FolderId, tagsString);
                 _liveContext.UserSpotify.Add(newSpot);
                 await _liveContext.SaveChangesAsync();
                 return true;
@@ -373,7 +378,7 @@ namespace Live.Repositories
 
 
         
-        public async Task<IconDto> ChangeEntityTitleAsync(EntitySetter newTitle, Guid userId)
+        public async Task<IconDto> ChangeEntityTitleAsync(EntitySetter newTitle, Guid userId, string tagsString)
         {
             var enType = newTitle.Type;
       
@@ -386,6 +391,8 @@ namespace Live.Repositories
                 {
                     var title = newTitle.Title;
                     img.ChangeTitle(title);
+                  
+                     img.ChangeTags(tagsString);
                     _liveContext.Update(img);
                     await _liveContext.SaveChangesAsync();
                     return _autoMapper.Map<IconDto>(img);
@@ -399,6 +406,8 @@ namespace Live.Repositories
                 {
                     var titleYT = newTitle.Title;
                     yt.ChangeTitle(titleYT);
+                 
+                     yt.ChangeTags(tagsString);
                      _liveContext.Update(yt);
                      await _liveContext.SaveChangesAsync();
                      return _autoMapper.Map<IconDto>(yt);
@@ -412,6 +421,8 @@ namespace Live.Repositories
                 {
                     var titleSP = newTitle.Title;
                     sp.ChangeTitle(titleSP);
+                    
+                      sp.ChangeTags(tagsString);
                      _liveContext.Update(sp);
                      await _liveContext.SaveChangesAsync();
                      return _autoMapper.Map<IconDto>(sp);

@@ -81,7 +81,7 @@ class Folder extends Component {
         
         var classEntity = "disableEntity";
       
-        var removeIcon = <div id={this.props.id} onClick = {this.deleteFolder}
+        var removeIcon = this.props.hideEditors? "" : <div id={this.props.id} onClick = {this.deleteFolder}
         title="Usuń folder"  class={classEntity}>&#43;</div> ;
 
 
@@ -96,7 +96,7 @@ class Folder extends Component {
         bottom={this.props.bottom}
         iconType="FOLDER"></IconEditor>
 
-        var editIcon = 
+        var editIcon = this.props.hideEditors? "" :
         <div id={this.props.id} 
           class="editEntity" style={{left: this.props.leftEdit, top: this.props.topEdit}} ><i id={this.props.id}
         title="" class="icon-dot-3"

@@ -1,9 +1,14 @@
-import React, { Component } from 'react';
+/* import React, { Component } from 'react';
 import { Link, Route, NavLink, withRouter } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
-
+import {URL, PATHES} from '../../environment';
+import ServerPopup from '../Popup/ServerPopup';
+import {authLogin, authLogout, showServerPopup, escManage, manageScreen} from '../../Store/Actions/auth';
+import GoogleLogin from 'react-google-login';
+import FacebookLogin from 'react-facebook-login';
+import './LoginWindow.css';
 
 class LoginWindow extends Component {
 
@@ -36,6 +41,7 @@ class LoginWindow extends Component {
                 else {
                     
                     this.props.SocialLog(response.data.userId, name, image, response.data.jwtToken, response.data.role);
+                    this.props.history.push(PATHES.userPulpit);
                 }
             }).catch(error => { this.Alert("Wystąpił błąd przy próbie zalogowania.")});
         }
@@ -68,9 +74,37 @@ class LoginWindow extends Component {
 
     render() {
 
+        let loginButtons = <div class="loginWindow"> 
+        
+        <table class="dna-table"> 
+<tr>  
+        <GoogleLogin
+    clientId="117000838761-6dm3mpripvcovoqlsq00pbaoa207qbdl.apps.googleusercontent.com" 
+    buttonText="Zaloguj przez Google"
+    onSuccess={this.responseGoogle}
+    onFailure={this.responseErrorGoogle}
+   
+    //117000838761-6dm3mpripvcovoqlsq00pbaoa207qbdl.apps.googleusercontent.com
+    cookiePolicy={'single_host_origin'}/>
+<p/>
+ </tr>
+<tr>
+
+          <FacebookLogin
+            appId="227659324986702"//"2395943984012670"
+            autoLoad={false}
+            textButton="Zaloguj przez Facebook"
+            fields="name,email,picture"
+            cssClass="loginBtn loginBtn--facebook"
+            callback={this.responseFacebook}/>
+            </tr>
+</table> 
+            
+            </div>;
+
         return (
         <div>
-         
+         {loginButtons}
         </div>
                   
         )
@@ -95,4 +129,4 @@ const mapDispatchToProps = dispatch => {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ServerPopup);
+export default connect(mapStateToProps, mapDispatchToProps)(ServerPopup); */

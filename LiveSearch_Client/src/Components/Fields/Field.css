@@ -10,12 +10,102 @@
 }
 
 
+.tagsField #tagsLeft{
+  position: fixed;
+  left: 50%;
+  margin-left: -288px;
+  top: 35px;
+  font-size: 18px;
+  display: none;
+  width: 35px;
+ 
+}
+
+.tagsField #tagsRight{
+  position: fixed;
+  right: 50%;
+  margin-right: -297px;
+  top: 35px;
+  font-size: 18px;
+  display: none;
+  width: 35px;
+
+  padding-left: 20px;
+}
+
+.tagsField {
+  z-index: 10;
+  position: absolute;
+  left: 50%;
+  margin-left: -260px;
+  top: 37px;
+  color: rgba(212, 212, 212, 0.918);
+  overflow-x: auto;
+  width: 520px;
+  display: inline-flex;
+  font-family: 'Mandali', sans-serif;
+  font-size: 12px;
+
+}
+
+#tagsLeft:hover {
+  display: block;
+}
+
+#tagsRight:hover {
+  display: block;
+}
+
+.tagsField:hover #tagsRight {
+  display: block;
+}
+
+.tagsField:hover #tagsLeft {
+  display: block;
+}
+
+.singleTag {
+ padding: 1px;
+  padding-left: 5px;
+  padding-right: 5px;
+ 
+  color: rgb(226, 226, 226);
+  margin-left: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  word-wrap: none;
+  white-space: nowrap;
+  transition: all 0.3s;
+    background-color: rgb(70, 150, 255);
+    border: 0.5px solid;
+     
+  border-color: rgb(0, 110, 255);
+}
+
+.singleTag:hover {
+  color: rgb(255, 255, 255);
+  
+  
+}
+
+.noTag {
+  cursor: default;
+  border: none;
+  background-color: rgba(255, 255, 255, 0);;
+}
+.noTag:hover {
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+
 .field {
     z-index: 10;
     position: fixed;
     left: 50%;
     margin-left: -280px;
-    top: 40px;
+    top: 60px;
 }
 
 .fieldAct {
@@ -36,12 +126,17 @@
     color: rgba(255, 255, 255, 0.5);
 }
 
+.firstField {
+  font-size: 14px;
+  top: 40px;
+}
+
 .imageField {
   z-index: 10;
   position: fixed;
   left: 50%;
   margin-left: -280px;
-  top: 40px;
+  top: 60px;
   height: 315px;
   width: 560px;
   text-align: center;
@@ -103,7 +198,7 @@
     -webkit-transform: scaleY(-1);
     transform: scaleY(-1);
     position: fixed;
-    top: 365px;
+    top: 385px;
     left: 50%;
     margin-left: -280px;
     z-index: 90;
@@ -114,7 +209,7 @@
   -webkit-transform: scaleY(-1);
   transform: scaleY(-1);
   position: fixed;
-  top: 365px;
+  top: 385px;
   left: 50%;
   margin-left: -280px;
   z-index: 90;
@@ -135,7 +230,7 @@
     position: fixed;
     height: 350px;
     z-index: 100;
-    top: 350px;
+    top: 370px;
     left: 0px;
     right: 0px;
 }
@@ -152,7 +247,7 @@
     position: fixed;
     height: 350px;
     z-index: 149;
-    top: 360px;
+    top: 380px;
     left: 0px;
     right: 0px;
 }
@@ -180,7 +275,7 @@
     position: fixed;
     height: 350px;
     z-index: 149;
-    top: 360px;
+    top: 380px;
     left: 0px;
     right: 0px;
 }

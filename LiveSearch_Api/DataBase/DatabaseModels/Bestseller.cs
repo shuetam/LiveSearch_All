@@ -22,12 +22,12 @@ namespace Live.DataBase.DatabaseModels
         }
 
 
-        public Bestseller(Book book, int groupNo)
+        public Bestseller(Book book)
         {
             this.Title = book.Title;
             this.Author = book.Author;
-            this.ImageSrc = book.ImageSrc;
-            this.GroupNo = groupNo;
+            this.ImageSrc = book.ImageSrc; //this is id
+            this.GroupNo = book.GroupNo;
             this.Size = book.Size;
             this.Store = book.Store;
         }
@@ -43,6 +43,14 @@ namespace Live.DataBase.DatabaseModels
                 this.Title = newTitle;
             }
 
+        }
+
+        public  List<string> getTags()
+        {
+            var tags = new List<string>();
+            tags.Add(this.Title.Replace(",", ""));
+            tags.Add(this.Author.Replace(",", ""));
+            return new HashSet<string>(tags).ToList();
         }
  
 

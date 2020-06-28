@@ -15,9 +15,9 @@ namespace Live.Repositories
     Task<List<ArchiveSong>> GetByYouTubeFromArchive(string id);
     Task<ArchiveSong> GetByNameFromArchive(string name);
     Task<DateTime> GetLastDate();
-    Task UpdateTestAsync();
+   // Task UpdateTestAsync();
     Task AddToArchiveAsync(Song song);
-    Task UpdateArchiveAsync(Song actualSong);
+   // Task UpdateArchiveAsync(Song actualSong);
     Task<List<IconDto>> GetAllFromArchive();
     Task<List<IconDto>> GetAllErrorsFromArchive();
     Task<List<IconDto>> GetFromArchiveByIndex(int i, int j);

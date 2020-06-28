@@ -13,11 +13,56 @@
     display: flex;
 }
 
-.menu {
+.actuallMenu {
     display: flex;
-    width: 100%;
-    z-index: 170;
+    
+    z-index: 200;
 }
+
+.loginWindow {
+    z-index: 900;
+  position: fixed;
+  left: 50%;
+  margin-left: -200px;
+  top: 390px;
+  height: 180px;
+  width: 400px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.116);
+  font-family: 'Mandali', sans-serif;
+  color: rgba(255, 255, 255, 0.575);
+  font-size: 16px;
+  padding-top: 10px;
+}
+
+.disable {
+    display: none;
+}
+
+.deskMenu {
+    display: flex;
+
+    z-index: 300;
+   position: absolute;
+   top: 0px;
+   left: 0px;
+   min-width: 20px;
+   
+   margin-left: 210px;
+   margin-right: 100px;
+   
+   margin-right: 310px;
+}
+
+.deskMenu label {
+    white-space: nowrap;
+    color: rgba(255, 255, 255, 0.479);
+  
+    font-size: 13px;
+    margin-top: 11px;
+    margin-left: 20px;
+}
+ 
 
 .menuForSmall {
     display: inline-flex;
@@ -39,18 +84,24 @@
     }
   }
 
-
+/* this is responsible for responsible */
 @media only screen and (max-width: 750px) {
-    .menuForSmall {
-      display: block;
+    .actuallMenu {
+      display: none;
     }
+    .entity {
+        display: none;
+      }
+    .menuForSmall {
+        display: inline-flex;
+      }
   }
 
 .main {
-    margin-left: 50px;
-    margin-top: 5px;
+    margin-left: 30px;
+    margin-top: 3px;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 18px;
     padding: 3px;
     z-index: 170;
     color: rgba(231, 173, 64, 0.637);
@@ -65,28 +116,88 @@
     margin-top: 7px;
     cursor: pointer;
     opacity: 0,3;
-    font-size: 15px;
+    font-size: 14px;
     padding: 3px;
     color: rgba(255, 255, 255, 0.5);
-    transition: all 0.3s;
+    transition: color 0.3s;
     white-space: nowrap; 
-}
-
-.activeSwitch {
-    margin-left: 30px;
-    margin-top: 7px;
-    cursor: pointer;
-    opacity: 0,3;
-    font-size: 15px;
-    padding: 3px;
-    color: rgba(255, 255, 255, 0.822);
-    transition: all 0.3s;
-    white-space: nowrap; 
+   
 }
 
 .switch:hover {
     color: rgba(255, 255, 255, 0.822)
 }
+
+.clickElem {
+    color: rgba(255, 255, 255, 0.5);
+    transition: color 0.3s;
+    white-space: nowrap; 
+    cursor: pointer;
+}
+
+.clickElem:hover {
+    color: rgba(255, 255, 255, 0.9)
+}
+
+#switchMenu:hover #switchMenuField {
+    display: block;
+    
+}
+
+#switchMenuField { 
+    position: absolute;
+    display: none;
+    top: 30px;
+    background-color: rgba(0, 0, 0, 0.884);
+    padding-bottom: 10px;
+}
+
+.switchMenu {
+    margin-left: 15px;
+    margin-top: 4px;
+    cursor: pointer;
+    opacity: 0,3;
+    font-size: 18px;
+    padding: 3px;
+    color: rgba(255, 255, 255, 0.788);
+    transition: all 0.3s;
+    white-space: nowrap; 
+    z-index: 1000;
+    
+}
+.switchMenu:hover {
+    color: rgba(255, 255, 255, 0.945);
+
+}
+
+.activeSwitch {
+
+    margin-left: 30px;
+    margin-top: 7px;
+    cursor: pointer;
+    opacity: 0,3;
+    font-size: 14px;
+    padding: 3px;
+    color: rgba(231, 173, 64, 0.836);
+    transition: all 0.3s;
+    white-space: nowrap; 
+  
+}
+
+.activeSwitchTop {
+    margin-left: 30px;
+    margin-top: 7px;
+    cursor: pointer;
+    opacity: 0,3;
+    font-size: 14px;
+    padding: 3px;
+    color:  rgba(231, 173, 64, 0.836);
+    transition: all 0.3s;
+    white-space: nowrap; 
+  
+}
+
+
 
 .switchFooter {
     margin-left: 10px;
@@ -117,6 +228,37 @@
     text-decoration: rgb(255, 255, 255) underline;
 }
 
+.addOwn {
+    color: rgb(67, 149, 255);
+    font-family: Verdana, Geneva, sans-serif;
+    cursor: pointer;
+    
+    font-size: 23px;
+    margin-left: 20px;
+    margin-top: 2px;
+    font-weight: 200;
+   
+}
+
+.addOwnInfo {
+    color: rgb(67, 149, 255);
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 23px;
+    font-weight: 200;
+   
+}
+
+
+.activePlus {
+    
+    color: white;
+}
+
+
+
+.addOwn:hover {
+    color: rgba(243, 243, 243, 0.932);
+}
 
 
 .switcher {
@@ -125,34 +267,79 @@
 }
 
 .switchB {
-    margin-left: 30px;
-    margin-top: 7px;
+    margin-left: 10px;
+    margin-top: 5px;
     cursor: pointer;
     opacity: 0,3;
-    font-size: 17px;
+    font-size: 18px;
     padding: 3px;
     color: rgba(255, 255, 255, 0.5);
     transition: all 0.3s;
     white-space: nowrap;
 }
 
+.switchA {
+    margin-left: 10px;
+    margin-top: 5px;
+    cursor: pointer;
+    opacity: 0,3;
+    font-size: 18px;
+    padding: 3px;
+    color: rgba(255, 255, 255, 0.986);
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+
 .switchDisable {
-    margin-left: 50px;
+    margin-left: 10px;
     margin-top: 5px;
     pointer-events: none;
     opacity: 0,1;
-    font-size: 17px;
+    font-size: 18px;
     padding: 3px;
     color: rgba(255, 255, 255, 0.199);
     white-space: nowrap;
 }
 
+#plusField {
+    top: 30px;
+    left: 200px;
+}
+
+#plus:hover #plusField {
+    display: block;
+}
+
+.hoverInfo {
+    cursor: default;
+    display: none;
+    padding: 10px;
+    font-family: 'Mandali', sans-serif;
+    font-size: 12px;
+    position: fixed;
+    background-color: rgba(32, 32, 32, 0.932);
+    z-index: 155;
+    color: rgba(255, 255, 255, 0.678);
+    text-shadow: none;
+}
+
+#addText {
+    top: 30px;
+    left: 180px;
+}
+
+
+
+#addOwn:hover #addText {
+    display: block;   
+}
+
 
 .logIn {
-    margin-top: 7px;
+    margin-top: 3px;
     cursor: pointer;
     opacity: 0,3;
-    font-size: 17px;
+    font-size: 16px;
     padding: 3px;
     color: rgba(231, 173, 64, 0.637);
     transition: all 0.3s;
@@ -163,12 +350,12 @@
 }
 
 .screenSwitch {
-    margin-top: 7px;
+    margin-top: 5px;
     cursor: pointer;
     opacity: 0,3;
-    font-size: 18px;
+    font-size: 16px;
     padding: 3px;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.582);
     transition: all 0.3s;
     white-space: nowrap;
     margin-left: auto; 
@@ -177,8 +364,32 @@
 }
 
 .screenSwitch:hover {
-    color: rgba(255, 255, 255, 0.842);
-    font-size: 20px;
+    color: rgba(255, 255, 255, 0.986);
+   
+}
+
+.mainSwitch {
+    cursor: pointer;
+    opacity: 0,3;
+    font-size: 15px;
+    padding: 3px;
+     color: rgba(255, 255, 255, 0.644);
+    transition: all 0.3s;
+    white-space: nowrap;
+    margin-left: 0px;
+    margin-top: 3px;
+}
+
+.active {
+    color: rgb(255, 255, 255);
+    text-decoration-line: underline;
+}
+
+
+
+.mainSwitch:hover {
+    color: rgba(255, 255, 255, 0.966);
+    text-decoration-line: underline;
 }
 
 .desktop {
@@ -205,6 +416,7 @@
   
 }
 
+
 .desktop:hover {
     color: rgba(255, 255, 255, 0.877);
     text-decoration-line: underline;
@@ -228,6 +440,7 @@
     z-index: 300;
     bottom: 8px;
     width: 120px;
+    font-size: 11px;
 }
 
 .textFolder {
@@ -264,16 +477,17 @@
 
 #login {
     cursor: default;
-    padding: 15px;
-    padding-top: 10px;
+    padding: 5px;
     font-size: 13px;
     display: none;
     position: absolute;
-    top: 33px;
-    right: 5px;
+    top: 30px;
+    right: 10px;
     background-color: rgba(32, 32, 32, 0.856);
     z-index: 165;
     color: rgba(255, 255, 255, 0.678);
+    min-width: 100px;
+    text-align: center;
 }
 
 #propField hr {
@@ -309,8 +523,8 @@
     padding: 10px;
     font-size: 12px;
     position: fixed;
-    bottom: 27px;
-    right: 40px;
+    top: 30px;
+    left: 180px;
     background-color: rgba(32, 32, 32, 0.856);
     z-index: 155;
     color: rgba(255, 255, 255, 0.678);
@@ -326,8 +540,8 @@
     padding: 10px;
     font-size: 12px;
     position: fixed;
-    bottom: 27px;
-    right: 100px;
+    top: 30px;
+    left: 190px;
     background-color: rgba(32, 32, 32, 0.856);
     z-index: 155;
     color: rgba(255, 255, 255, 0.678);
@@ -424,6 +638,19 @@
     margin-left: 9px;
 }
 
+.mainMenu{
+    width: 100vw;
+    display: inline-flex;
+    z-index: 1000;
+    position: absolute;
+    left: 180px;
+    top: 2px;
+   
+}
+
+
+
+
 #bookField {
     cursor: default;
     padding: 15px;
@@ -432,9 +659,9 @@
     font-size: 13px;
     display: none;
     position: absolute;
-    top: 33px;
-    left: 530px;
-    background-color: rgba(32, 32, 32, 0.856);
+    top: 30px;
+    left: 440px;
+    background-color: rgba(32, 32, 32, 0.918);
     z-index: 155;
     color: rgba(255, 255, 255, 0.678);
 }
@@ -449,22 +676,7 @@
     position: absolute;
     top: 33px;
     left: 450px;
-    background-color: rgba(32, 32, 32, 0.856);
-    z-index: 155;
-    color: rgba(255, 255, 255, 0.678);
-}
-
-#exploreField {
-    cursor: default;
-    padding: 15px;
-    padding-top: 10px;
-    padding-bottom: 5px;
-    font-size: 13px;
-    display: none;
-    position: absolute;
-    top: 33px;
-    left: 160px;
-    background-color: rgba(32, 32, 32, 0.856);
+    background-color: rgba(32, 32, 32, 0.925);
     z-index: 155;
     color: rgba(255, 255, 255, 0.678);
 }
@@ -479,25 +691,18 @@
     font-size: 13px;
     display: none;
     position: absolute;
-    top: 33px;
-    left: 700px;
-    background-color: rgba(32, 32, 32, 0.856);
+    top: 47px;
+    left: 600px;
+    background-color: rgba(32, 32, 32, 0.918);
     z-index: 155;
     color: rgba(255, 255, 255, 0.678);
 }
 
 #screenField {
-    cursor: default;
-    padding: 15px;
-    padding-top: 10px;
-    padding-bottom: 5px;
-    font-size: 13px;
-    display: none;
-    position: absolute;
-    top: 33px;
-    background-color: rgba(32, 32, 32, 0.856);
-    z-index: 155;
-    color: rgba(255, 255, 255, 0.678);
+ 
+    top: 30px;
+    right: 50px;
+
 }
 
 #movieField {
@@ -508,11 +713,31 @@
     font-size: 13px;
     display: none;
     position: absolute;
-    top: 33px;
-    left: 330px;
+    top: 30px;
+    left: 350px;
+    background-color: rgba(32, 32, 32, 0.918);
+    z-index: 155;
+    color: rgba(255, 255, 255, 0.678);
+}
+
+#topSwitch:hover #topField {
+    display: block;
+} 
+
+#topField {
+    cursor: default;
+    padding: 15px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-size: 13px;
+    display: none;
+    position: absolute;
+    top: 30px;
+    left: 150px;
     background-color: rgba(32, 32, 32, 0.856);
     z-index: 155;
     color: rgba(255, 255, 255, 0.678);
+    text-align: center;
 }
 
 #radio {
@@ -523,11 +748,35 @@
     font-size: 13px;
     display: none;
     position: absolute;
-    top: 33px;
-    left: 230px;
-    background-color: rgba(32, 32, 32, 0.856);
+    top: 30px;
+    left: 250px;
+    background-color: rgba(32, 32, 32, 0.9);
     z-index: 155;
     color: rgba(255, 255, 255, 0.678);
+}
+
+#explFilterField {
+    cursor: default;
+    padding: 40px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 13px;
+    display: none;
+    position: absolute;
+    top: 27px;
+    left: -160px;
+    background-color: rgba(32, 32, 32, 0.952);
+    z-index: 700;
+    color: rgba(255, 255, 255, 0.678);
+}
+
+#explFilterField hr {
+    border: 0; border-top: 1px solid rgb(90, 90, 90);
+    
+}
+
+#explFilter:hover #explFilterField {
+    display: block;
 }
 
 
@@ -858,6 +1107,7 @@ button:focus {
     color: rgb(255, 255, 255);
     border: rgb(0, 0, 0) 1px solid;
     cursor: pointer;
+    transition: all 0.5s;
   }
 
   .titleButton:hover {
@@ -866,6 +1116,13 @@ button:focus {
     color: white;
   }
 
+  .explButton {
+      width: 120px;
+      height: 22px;
+      font-size: 13px;
+      margin-left: 10px;
+      margin-top: 7px;
+  }
 
   .popupButtton {
     width: 50px;
@@ -1020,3 +1277,98 @@ display: inline-block;
   #userNickEdit {
       display: none;
   }
+
+
+
+   #exploreT
+  {
+    
+    background-color: rgba(196, 196, 196, 0.089);
+    border-width: 0px;
+    color: rgba(223, 223, 223, 0.637);
+    text-align: left;
+    font-size: 12px;
+    height: 100%;
+    width: 100%;
+    font-family: 'Mandali', sans-serif;
+    padding-right: 20px;
+  } 
+
+
+  #exploreN
+  {
+    background-color: rgba(196, 196, 196, 0.089);
+    border-width: 0px;
+    color: rgba(223, 223, 223, 0.959);
+    text-align: center;
+    font-size: 14px;
+    height: 17px;
+    width: 40px;
+    border-radius: 5px;
+    pointer-events: none;
+  } 
+
+  #iconCount {
+    font-size: 18px;
+    padding: 0px;
+    background-color: rgba(255, 255, 255, 0);
+    color: rgba(223, 223, 223, 0.582);
+    border-width: 0px;
+  }
+
+  #iconCount:hover {
+    color: rgb(223, 223, 223);
+  
+    cursor: pointer;
+  }
+
+
+
+  .exploreDiv {
+      position: relative;
+    border-width: 1px; 
+    border-style: solid; 
+    margin-top: 7px;
+    margin-left: 13px;
+    width: 30vw;
+    height: 20px;
+    display: flex;
+    border: rgba(119, 119, 119, 0.582) solid 0.5px;
+  }
+
+  .addingDiv {
+      position: relative;
+    border-width: 1px; 
+    border-style: solid; 
+    margin-top: 7px;
+    margin-left: 13px;
+    width: 30vw;
+    height: 20px;
+    display: flex;
+  }
+
+  
+
+  #exploreMenu {
+    position: absolute;
+   
+    left: 200px;
+
+  }
+
+  #exploreMenu label input {
+    display: none;
+} 
+
+#exploreMenu label:hover {
+    cursor: pointer;
+    text-decoration: rgba(255, 255, 255, 0.527) underline; 
+    color: rgba(255, 255, 255, 0.651);
+}
+
+#exploreMenu label {
+    color: rgba(255, 255, 255, 0.479);
+    font-size: 13px;
+    margin-top: 11px;
+    margin-left: 20px;
+}

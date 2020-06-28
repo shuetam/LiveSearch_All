@@ -67,6 +67,20 @@ export const popup = (data, entity) => {
             };
             };
 
+
+        export const showLogin = () => {
+            return {
+                type: 'LOGIN_MANAGE',
+            };
+        };
+
+        export const showFirst = (data) => {
+            return {
+                data: data,
+                type: 'FIRST_SHOW',
+            };
+        };
+
         export const showServerPopup = (message) => {
                 return {
                     type: 'SHOW_SERVER_POPUP',

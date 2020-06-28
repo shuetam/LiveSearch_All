@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using AutoMapper;
 using Live.Core;
+using Live.DataBase.DatabaseModels;
 
 namespace Live.Mapper
 {
@@ -17,35 +18,39 @@ namespace Live.Mapper
         public static IMapper Initialize()
         => new MapperConfiguration(config => 
         {
-            config.CreateMap<RadioSong, RadioSongDto>()
-                .ForMember(d => d.title, s => s.MapFrom(x => x.Name))
-                .ForMember(d => d.videoId  , s => s.MapFrom(x => x.YouTubeId))
-                .ForMember(d => d.count  , s => s.MapFrom(x => x.Count))
-                .ForMember(d => d.top  , s => s.MapFrom(x => Regex.Replace(x.top_, @"\,+", "."))) 
-                .ForMember(d => d.left  , s => s.MapFrom(x => Regex.Replace(x.left_, @"\,+", ".")));
+            
 
-            config.CreateMap<ArchiveSong, SongDto>()
+   config.CreateMap<Song, IconDto>()
                 .ForMember(d => d.title, s => s.MapFrom(x => x.Name))
-                .ForMember(d => d.videoId  , s => s.MapFrom(x => x.YouTube.VideoID))
+                .ForMember(d => d.guidId, s => s.MapFrom(x => x.ID.ToString()))
+                .ForMember(d => d.id, s => s.MapFrom(x => x.YouTube.VideoID))
                 .ForMember(d => d.count  , opt => opt.MapFrom(src => "1"))
                 .ForMember(d => d.top  , s => s.MapFrom(x => x.YouTube.top_))
-                .ForMember(d => d.left  , s => s.MapFrom(x => x.YouTube.left_));
-
-
+                .ForMember(d => d.left  , s => s.MapFrom(x => x.YouTube.left_))
+                .ForMember(d => d.tags  , s => s.MapFrom(x => x.getTags()))
+                .ForMember(d => d.type  , s => s.MapFrom(x => "YT"));
 
             config.CreateMap<ArchiveSong, IconDto>()
                 .ForMember(d => d.title, s => s.MapFrom(x => x.Name))
+                .ForMember(d => d.guidId, s => s.MapFrom(x => x.ID.ToString()))
                 .ForMember(d => d.id, s => s.MapFrom(x => x.YouTube.VideoID))
                 .ForMember(d => d.count  , opt => opt.MapFrom(src => "1"))
                 .ForMember(d => d.top  , s => s.MapFrom(x => x.YouTube.top_))
-                .ForMember(d => d.left  , s => s.MapFrom(x => x.YouTube.left_));
+                .ForMember(d => d.left  , s => s.MapFrom(x => x.YouTube.left_))
+                .ForMember(d => d.tags  , s => s.MapFrom(x => x.getTags()))
+                .ForMember(d => d.type  , s => s.MapFrom(x => "YT"));
 
             config.CreateMap<ArchiveMovie, IconDto>()
                 .ForMember(d => d.title, s => s.MapFrom(x => x.Name))
+                .ForMember(d => d.guidId, s => s.MapFrom(x => x.ID.ToString()))
                 .ForMember(d => d.id, s => s.MapFrom(x => x.YouTube.VideoID))
                 .ForMember(d => d.count  , opt => opt.MapFrom(src => "1"))
                 .ForMember(d => d.top  , s => s.MapFrom(x => x.YouTube.top_))
-                .ForMember(d => d.left  , s => s.MapFrom(x => x.YouTube.left_));
+                .ForMember(d => d.left  , s => s.MapFrom(x => x.YouTube.left_))
+                .ForMember(d => d.tags  , s => s.MapFrom(x => x.getTags()))
+                .ForMember(d => d.type  , s => s.MapFrom(x => "YT"));
+
+                    
 
 
             config.CreateMap<User, UserDto>()
@@ -70,23 +75,28 @@ namespace Live.Mapper
                 .ForMember(d => d.top  , s => s.MapFrom(x => x.LocTop))
                 .ForMember(d => d.count  , s => s.MapFrom(x => "1"))
                 .ForMember(d => d.title  , s => s.MapFrom(x => x.Title))
+                .ForMember(d => d.tags  , s => s.MapFrom(x => Regex.Split(x.Tags, @"[|]{2}").ToList()))
                 .ForMember(d => d.type  , s => s.MapFrom(x => "YT"));
 
             config.CreateMap<UserImage, IconDto>()
                 .ForMember(d => d.id, s => s.MapFrom(x => x.UrlAddress))
+                .ForMember(d => d.guidId, s => s.MapFrom(x => x.ID.ToString()))
                 .ForMember(d => d.left  , s => s.MapFrom(x => x.LocLeft))
                 .ForMember(d => d.top  , s => s.MapFrom(x => x.LocTop))
                 .ForMember(d => d.count  , s => s.MapFrom(x => "1"))
                 .ForMember(d => d.title  , s => s.MapFrom(x => x.Title))
                 .ForMember(d => d.source  , s => s.MapFrom(x => x.Source))
+                .ForMember(d => d.tags  , s => s.MapFrom(x => Regex.Split(x.Tags, @"[|]{2}").ToList()))
                 .ForMember(d => d.type  , s => s.MapFrom(x => x.ImgType));
 
             config.CreateMap<UserSpotify, IconDto>()
                 .ForMember(d => d.id, s => s.MapFrom(x => x.SpotifyId))
+                .ForMember(d => d.guidId, s => s.MapFrom(x => x.ID.ToString()))
                 .ForMember(d => d.left  , s => s.MapFrom(x => x.LocLeft))
                 .ForMember(d => d.top  , s => s.MapFrom(x => x.LocTop))
                 .ForMember(d => d.count  , s => s.MapFrom(x => "1"))
                 .ForMember(d => d.title  , s => s.MapFrom(x => x.Title))
+                 .ForMember(d => d.tags  , s => s.MapFrom(x => Regex.Split(x.Tags, @"[|]{2}").ToList()))
                 .ForMember(d => d.source  , s => s.MapFrom(x => x.ImgSource))
                 .ForMember(d => d.type  , s => s.MapFrom(x => "SPOTIFY"));
               
@@ -94,12 +104,14 @@ namespace Live.Mapper
 
             config.CreateMap<FrontYouTube, IconDto>()
                 .ForMember(d => d.id, s => s.MapFrom(x => x.videoId))
+                .ForMember(d => d.guidId, s => s.MapFrom(x => x.guidId))
                 .ForMember(d => d.left  , s => s.MapFrom(x => x.left))
                 .ForMember(d => d.top  , s => s.MapFrom(x => x.top))
                 .ForMember(d => d.count  , s => s.MapFrom(x => x.count))
                 .ForMember(d => d.countValue  , s => s.MapFrom(x =>  x.countValue))
                 .ForMember(d => d.title  , s => s.MapFrom(x => x.title))
                 .ForMember(d => d.playAt  , s => s.MapFrom(x => x.playAt))
+                .ForMember(d => d.tags  , s => s.MapFrom(x => x.tags))
                 .ForMember(d => d.type  , s => s.MapFrom(x => "YT"));
 
 
@@ -121,8 +133,30 @@ namespace Live.Mapper
                 .ForMember(d => d.top  , s => s.MapFrom(x => x.LocTop))
                 .ForMember(d => d.title  , s => s.MapFrom(x => x.Title))
                 .ForMember(d => d.type  , s => s.MapFrom(x => "FOLDER"));
+
+            config.CreateMap<Bestseller, IconDto>()
+                .ForMember(d => d.id, s => s.MapFrom(x => x.ImageSrc))
+          
+                .ForMember(d => d.count  , s => s.MapFrom(x => "1"))
+                .ForMember(d => d.source  , s => s.MapFrom(x => x.Store))
+                .ForMember(d => d.tags  , s => s.MapFrom(x => x.getTags()))
+                .ForMember(d => d.title  , s => s.MapFrom(x => (x.Title + "||" + x.Author)))
+                .ForMember(d => d.type  , s => s.MapFrom(x => "BOOK"))
+                .ForMember(d => d.groupBook  , s => s.MapFrom(x => x.GroupNo)); 
         }
         ).CreateMapper();
 
     }
 }
+    /* public IconDto(Bestseller agent,  int count)
+        {
+            this.id = agent.ImageSrc;
+            this.type = "BOOK";
+            this.title = agent.Title + "||" + agent.Author;
+            this.setLocation(false);
+            this.count = count.ToString();
+            this.countValue = count;
+            this.source = agent.Store;
+            this.tags = agent.getTags();
+            this.playAt = agent.Added.HasValue? agent.Added.Value : DateTime.Now ;
+        } */

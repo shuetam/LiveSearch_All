@@ -10,8 +10,8 @@ namespace Live.Repositories
     public interface IBestsellersRepository
     {
         Task<List<IconDto>> GetActuallBestsellersAsync();
-        Task UpdateAsync();
-        Task UpdateStoreAsync(string store);
+       // Task UpdateAsync();
+        //Task UpdateStoreAsync(string store);
 
          Task ChangeBookTitle(string id, string title, string author);
 

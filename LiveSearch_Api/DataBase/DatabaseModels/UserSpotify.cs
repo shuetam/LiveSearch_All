@@ -4,12 +4,13 @@ public class UserSpotify : Live.Core.Entity
 {
     public Guid UserId {get; protected set;}
     public Guid? FolderId {get; protected set;}
-    public string SpotifyId {get; protected set;}
+    public string SpotifyId {get; protected set;}//this is id
     public string ImgSource {get; protected set;}
     public string LocLeft {get; protected set;}
     public string LocTop {get; protected set;}
     public string Title {get; protected set;}
     public DateTime CreatedAt {get; protected set;}
+    public string Tags {get; protected set;}
     public DateTime? AddedToFolder {get; protected set;}
     
 
@@ -17,7 +18,7 @@ public class UserSpotify : Live.Core.Entity
         {
         }
 
-        public UserSpotify(Guid userId, string spotifyId, string imgSrc, string title, string left, string top, string folderId) 
+        public UserSpotify(Guid userId, string spotifyId, string imgSrc, string title, string left, string top, string folderId, string tagsString) 
         {
             UserId = userId;
             Title = title;
@@ -36,6 +37,7 @@ public class UserSpotify : Live.Core.Entity
             LocLeft = left;
             LocTop = top;
             CreatedAt = DateTime.Now;
+            Tags = tagsString;
        
         }
 
@@ -57,6 +59,14 @@ public class UserSpotify : Live.Core.Entity
                 this.FolderId = null;
                 this.AddedToFolder = null;
             }
+        }
+
+
+        public void ChangeTags(string newTags)
+        {
+
+           
+            this.Tags = newTags;
         }
 
         public void ChangeLocation(string left, string top)

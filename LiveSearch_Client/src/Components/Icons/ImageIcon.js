@@ -10,7 +10,7 @@ import {popup, showServerPopup, addingIcon, removingIcon} from '../../Store/Acti
 import {URL} from '../../environment';
 import ReactDOM from 'react-dom';
 import IconEditor from './IconEditor';
-
+import {manageLogin, hideLogin} from '../../CommonManager';
 
 class ImageIcon extends Component {
 
@@ -153,25 +153,38 @@ console.log(event);
         
             const data = {
                         Id: ID,
-                        Type: "IMG",
+                        Type: this.props.type,
                         //UserId: this.props.userId,
-                        Source: this.props.url,
+                        Source: this.props.source,
                         Title: name,
                         Top: Top_,
                         Left: Left_,
-                        FolderId: this.props.folderId
+                        FolderId: this.props.folderId,
+                        Type: 'IMG'
                         }
 
     
              
         if(event.target.className == "addEntity")
         {
+            if(!this.props.isAuth) {
+                manageLogin();
+             }
+             else {
+
             axios.post(URL.api+URL.addIcon, data, this.state.authConfig)
-            .then(() => {
-               // debugger;
-                cross.className = 'removeEntity'; cross.title = "Usuń z pulpitu";})
+            .then((response) => {
+                if(response.data)
+                {
+                    cross.className = 'removeEntity'; cross.title = "Usuń z pulpitu";
+                }
+                else {
+                    this.Alert("Wybrana ikona znajduje się już w Twojej kolekcji.");
+                }
+            })
             .catch(error => {console.log(error); this.Alert("Nie udało się dodać ikony.")});
         }
+    }
 
         if(event.target.className == "addingEntity")
         {
@@ -298,8 +311,8 @@ console.log(event);
             iconTitle = "Usuń z pulpitu";
         }
        
-        var addIcon = this.props.isAuth?   <div id={this.props.id} onClick = {this.IconHandler}
-        title={iconTitle} style={{left: "83%"}}  class={classEntity}>&#43;</div> : "";
+        var addIcon =   <div id={this.props.id} onClick = {this.IconHandler}
+        title={iconTitle} style={{left: "83%"}}  class={classEntity}>&#43;</div> ;
 
 
         var imgPreview = this.state.showZoom?  
@@ -345,14 +358,17 @@ console.log(event);
         showTitleEditor={this.props.showTitleEditor}
         title={this.props.title}
         bottom={this.props.bottom}
-        iconType="IMG"></IconEditor>
-
-        var editIcon = (this.props.remover!==3 && this.props.fromDesk)? 
+        public={this.props.public}
+        tags={this.props.tags}
+        location={this.props.location}
+        iconType={this.props.type}></IconEditor>
+        
+        var editIcon =  this.props.newIcon? "" :
         <div id={this.props.id} 
           class="editEntity" style={{left: this.props.leftEdit}}><i id={this.props.id}
         title="" class="icon-dot-3"/>
         {editIconField}
-        </div> : "";
+        </div>;
         
           /* var editTitle = this.props.remover!==3? 
          <div id={this.props.id} class="titleDivEdit">
@@ -377,6 +393,8 @@ console.log(event);
                    id={this.props.id}
                    title={this.props.title} 
                    src={this.state.src}
+                   height={this.props.srcHeight}
+                   width={this.props.srcWidth}
                    onMouseLeave={this.outZoom}
                    onError={this.onError}>
                 </img> 

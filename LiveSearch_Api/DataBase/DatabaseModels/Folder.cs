@@ -95,8 +95,8 @@ public class Folder : Live.Core.Entity
         {
             UserId = userId;
             Title = title;
-            LocLeft = "90vw";
-            LocTop = "80vh";
+            LocLeft = "10vw";
+            LocTop = "10vh";
             CreatedAt = DateTime.Now;
             UserYouTubes = new List<UserYoutube>();
             UserImages = new List<UserImage>();

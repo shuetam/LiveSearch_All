@@ -1,14 +1,19 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 public class UserYoutube : Live.Core.Entity
 {
     public Guid UserId {get; protected set;}
 
     public Guid? FolderId {get; protected set;}
-    public string VideoId {get; protected set;}
+    public string VideoId {get; protected set;}//this is id
     public string LocLeft {get; protected set;}
     public string LocTop {get; protected set;}
     public string Title {get; protected set;}
+
+     public string Tags {get; protected set;}
     //public User User {get; protected set;}
     public DateTime CreatedAt {get; protected set;}
     public DateTime? AddedToFolder {get; protected set;}
@@ -18,25 +23,27 @@ public class UserYoutube : Live.Core.Entity
         {
         }
 
-        public UserYoutube(Guid userId, string videoId, string title, string left, string top, string folderId) 
+        public UserYoutube(Guid userId, string videoId, string title, string left, string top, string folderId, string tagsString) 
         {
             UserId = userId;
             Title = title;
 
-        if(string.IsNullOrEmpty(folderId))
-        {
-            FolderId = null;
-        }
-        else 
-        {
-            FolderId =  new Guid(folderId);
-        }
+            if(string.IsNullOrEmpty(folderId))
+            {
+                FolderId = null;
+            }
+            else 
+            {
+                FolderId =  new Guid(folderId);
+            }
 
             VideoId = videoId;
             LocLeft = left;
             LocTop = top;
             CreatedAt = DateTime.Now;
+            Tags = tagsString;
         }
+
 
           public UserYoutube( string videoId, string title, string left, string top) 
         {
@@ -83,5 +90,17 @@ public class UserYoutube : Live.Core.Entity
             this.Title = newTitle;
         }
 
-        
+
+        public void ChangeTags(string newTags)
+        {
+            this.Tags = newTags;
+        }
+
+        public List<string> GetTags()
+        {
+            if(string.IsNullOrEmpty(this.Tags))
+                return new List<string>();
+            return  Regex.Split(this.Tags, @"[|]{2}").ToList();
+        }
+   
 }

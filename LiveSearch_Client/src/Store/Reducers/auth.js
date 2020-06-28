@@ -13,7 +13,8 @@ const initialState = {
     serverMessage: "",
     addingIcon: null,
     removingIconId: null,
-    fullScreen: false
+    fullScreen: false,
+    firstField: 0
 };
 
 const  manageEsc = (state, action) => {
@@ -47,7 +48,7 @@ const manageScreen = (state, action) => {
         msExitFullscreen */
 
         return updateStore( state, { 
-            fullScreen: false
+           // fullScreen: false
         } ); 
     }
     else {
@@ -64,7 +65,7 @@ const manageScreen = (state, action) => {
             elem.msRequestFullscreen();
         }
         return updateStore( state, { 
-            fullScreen: true
+           // fullScreen: true
         } ); 
     }
 }
@@ -90,7 +91,21 @@ const iconAdding = (state, action) => {
      } ); 
  };
 
+ const showFirst = (state, action) => {
+     debugger;
+     return updateStore( state, { 
+        firstField: action.data,
+     } ); 
+ };
  
+
+ const hideLogin = (state, action) => {
+    // debugger;
+     return updateStore( state, { 
+        showLoginWindow: false,
+     } ); 
+ };
+
 
  const stopRemoving = (state, action) => {
     // debugger;
@@ -182,8 +197,8 @@ const reducer = ( state = initialState, action ) => {
         case ('STOP_REMOVING'): return stopRemoving(state, action);
         case ('SCREEN'): return manageScreen(state, action);
         case ('ESC_MANAGE'): return manageEsc(state, action);
-        
-        
+       // case ('LOGIN_MANAGE'): return showLogin(state, action);
+        case ('FIRST_SHOW'): return showFirst(state, action);
         
         default:
             return state;

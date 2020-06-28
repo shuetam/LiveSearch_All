@@ -81,8 +81,10 @@ class Field extends Component {
         this.setState({ showReflect: false });
         var randomFloat = require('random-float');
         this.state.reflectVideo.playVideo();
+        if(event.target) {
+            this.state.reflectVideo.seekTo(event.target.getCurrentTime() + randomFloat(0.1, 0.8));
+        }
 
-        this.state.reflectVideo.seekTo(event.target.getCurrentTime() + randomFloat(0.1, 0.8));
 
         this.setState({ interval: setInterval(this.syncVid, 1000) });
     }
@@ -123,6 +125,10 @@ class Field extends Component {
         Proszę spróbować ponownie za chwilę.
         </div>)
 
+        let  noIconsFound = (<div className="fieldAct"><br/>
+         Nie znaleziono żadnych ikon pasujacych do wpisanego wyrażenia.
+        </div>)
+
         let field = (
             <div>
 
@@ -155,6 +161,9 @@ class Field extends Component {
         if(this.props.show) {
 
             if(!this.props.fromDesktop && this.props.noIcons) {
+                if(this.props.headerType == "explore") {
+                    return noIconsFound;
+                }
                 return actualization;
             }
             return field;   
