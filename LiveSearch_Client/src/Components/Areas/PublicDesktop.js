@@ -391,8 +391,31 @@ class PublicDesktop extends Component {
     }
 
 
-
     nextSongHandler = () => {
+
+        var randomInt = require('random-int');
+
+        // here if icons/songs lenght==0 then take next song from databse
+        var vidID = this.state.icons[randomInt(this.state.icons.length - 1)].id;
+        this.setState({ entityID: vidID });
+        this.setState({entityTags: this.getIconTags(vidID)});
+        var note = document.getElementById(vidID);
+
+        note.style.boxShadow = this.state.playedShadow;
+
+        var played = document.getElementById(this.state.nowPlayed);
+        if (played !== null) {
+            var prevId = this.state.nowPlayed;
+            this.setState(prevState => ({
+                prevPlayed: [...prevState.prevPlayed, prevId]
+              }))
+        }
+        this.setState({ nowPlayed: vidID});
+    }
+
+
+
+    nextSongHandler1 = () => {
 
         var randomInt = require('random-int');
         var index = randomInt(this.state.icons.length - 1);

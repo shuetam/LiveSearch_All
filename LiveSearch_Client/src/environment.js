@@ -49,8 +49,8 @@ export const URL = {
 }
 
 export const PATHES = {
-    live: 'https://www.livesearch.pl',
-    //live: 'http://localhost:3000',
+   // live: 'https://livesearch.pl',
+    live: 'http://localhost:3000',
     songs: '/muzyka_radio',
     songsAdmin: '/songsadmin',
     movies: '/filmy_tv',
