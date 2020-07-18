@@ -25,6 +25,28 @@ CREATE TABLE Users
 ALTER TABLE Users
 ADD UserRole NVARCHAR (10) NULL;
 
+ALTER TABLE Users
+ADD Salt NVARCHAR (MAX) NULL;
+
+ALTER TABLE Users
+ADD PasswordHash NVARCHAR (MAX) NULL;
+
+ALTER TABLE Users
+ADD ResetId UNIQUEIDENTIFIER NULL;
+
+ALTER TABLE Users
+ADD NewSalt NVARCHAR (MAX) NULL;
+
+ALTER TABLE Users
+ADD NewPasswordHash NVARCHAR (MAX) NULL;
+
+ALTER TABLE Users
+ADD  ResetPassword DATETIME NULL;
+
+ public string NewPasswordHash {get; protected set;}
+     public string NewSalt {get; protected set;}
+     public DateTime? ResetPassword {get; protected set;}
+
 SELECT * FROM Users
 
 select * from TVMovies
@@ -49,6 +71,11 @@ WHERE AuthType like 'Facebook'
 UPDATE Users
 SET IsActive = 1
 WHERE AuthType like 'Facebook' 
+
+select * from Users
+
+delete from Users 
+WHERE AuthType like 'LiveSearch'
 
 delete from UserYoutubes
 WHERE FolderId is NULL
@@ -249,7 +276,7 @@ CREATE TABLE Bestsellers
 
 select * from Bestsellers where Title like '%�%'
 
-Po�o�na z Auschwitz
+
 
 select * from YouTubes where Name like '%Race%'
 

@@ -28,6 +28,15 @@
 .nextPrev {
     margin-top: 6px;
     margin-left: 15px;
+    pointer-events: none;
+}
+
+.nextPrevAct {
+    margin-top: 6px;
+    margin-left: 15px;
+    color: white;
+    pointer-events: auto;
+
 }
 
 .titleDiv {

@@ -1315,7 +1315,11 @@ class UserDesktop extends Component {
   
 
     stopAdding = () => {
-        document.getElementById("exploreT").value = "";
+        var expl = document.getElementById("exploreT");
+        if(expl)
+        {
+            expl.value = "";   
+        }
         this.setState({addingIcon: false});
         this.setState({wrongWWW: false});
         this.setState({noIconsFound: false});

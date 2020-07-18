@@ -3082,3 +3082,236 @@
 2020-06-28 12:26:26.984 +02:00 [Information] Finish radio songs update with 81 songs and 0 youtube errors
 2020-06-28 13:02:32.240 +02:00 [Information] Finish radio songs update with 89 songs and 0 youtube errors
 2020-06-28 14:08:26.874 +02:00 [Information] Finish radio songs update with 94 songs and 0 youtube errors
+2020-07-04 22:48:53.716 +02:00 [Information] Finish radio songs update with 86 songs and 1 youtube errors
+2020-07-04 23:00:41.925 +02:00 [Information] Finish radio songs update with 87 songs and 1 youtube errors
+2020-07-05 00:04:34.676 +02:00 [Information] Finish radio songs update with 99 songs and 1 youtube errors
+2020-07-05 10:04:11.252 +02:00 [Information] Finish radio songs update with 103 songs and 0 youtube errors
+2020-07-05 11:30:58.780 +02:00 [Information] Finish radio songs update with 96 songs and 0 youtube errors
+2020-07-05 12:01:28.676 +02:00 [Information] Finish radio songs update with 102 songs and 0 youtube errors
+2020-07-05 13:00:09.742 +02:00 [Information] Finish radio songs update with 100 songs and 0 youtube errors
+2020-07-05 15:15:20.718 +02:00 [Information] Finish radio songs update with 193 songs and 0 youtube errors
+2020-07-05 16:07:50.435 +02:00 [Information] Finish radio songs update with 94 songs and 0 youtube errors
+2020-07-05 18:28:19.595 +02:00 [Information] Finish radio songs update with 194 songs and 0 youtube errors
+2020-07-05 19:18:14.659 +02:00 [Information] Finish radio songs update with 100 songs and 0 youtube errors
+2020-07-05 21:44:08.237 +02:00 [Information] Finish radio songs update with 178 songs and 2 youtube errors
+2020-07-05 22:00:32.726 +02:00 [Information] Finish radio songs update with 97 songs and 0 youtube errors
+2020-07-05 23:15:31.851 +02:00 [Error] First error in Yuotube: The remote server returned an error: (403) Forbidden.
+2020-07-05 23:15:31.864 +02:00 [Error]    at System.Net.HttpWebRequest.GetResponse()
+   at Live.Core.YouTube.SetID(String name) in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/YouTube.cs:line 96
+2020-07-05 23:15:31.865 +02:00 [Warning] First ERROR from Song Update
+2020-07-05 23:15:33.212 +02:00 [Information] Finish radio songs update with 89 songs and 4 youtube errors
+2020-07-06 00:24:36.740 +02:00 [Information] Finish radio songs update with 98 songs and 1 youtube errors
+2020-07-06 01:06:04.757 +02:00 [Information] Finish radio songs update with 105 songs and 2 youtube errors
+2020-07-06 20:07:27.239 +02:00 [Information] Finish radio songs update with 73 songs and 0 youtube errors
+2020-07-07 01:40:29.778 +02:00 [Information] Finish radio songs update with 106 songs and 2 youtube errors
+2020-07-07 02:10:38.012 +02:00 [Information] Finish radio songs update with 100 songs and 0 youtube errors
+2020-07-07 03:03:37.992 +02:00 [Information] Finish radio songs update with 112 songs and 1 youtube errors
+2020-07-07 18:31:46.580 +02:00 [Information] Finish radio songs update with 457 songs and 2 youtube errors
+2020-07-07 19:06:19.372 +02:00 [Information] Finish radio songs update with 84 songs and 0 youtube errors
+2020-07-07 19:21:13.940 +02:00 [Error] Error in updating songs A transport-level error has occurred when receiving results from the server. (provider: TCP Provider, error: 35 - An internal exception was caught)
+2020-07-07 19:21:14.068 +02:00 [Error]    at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__108_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.<ExecuteAsync>d__17.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.<BufferlessMoveNext>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.EntityFrameworkCore.Storage.Internal.SqlServerExecutionStrategy.<ExecuteAsync>d__7`2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.<MoveNext>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at System.Linq.AsyncEnumerable.SelectEnumerableAsyncIterator`2.<MoveNextCore>d__7.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at System.Linq.AsyncEnumerable.AsyncIterator`1.<MoveNext>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.<MoveNext>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at System.Linq.AsyncEnumerable.<Aggregate_>d__6`3.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Live.Repositories.UpdatingRepository.<GetLastDate>d__6.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Repositories/UpdatingRepository.cs:line 220
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Live.Repositories.UpdatingRepository.<SongsUpdateAsync>d__5.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Repositories/UpdatingRepository.cs:line 59
+2020-07-07 19:22:36.799 +02:00 [Error] Error in updating songs A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: TCP Provider, error: 35 - An internal exception was caught)
+2020-07-07 19:22:36.860 +02:00 [Error]    at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.<OpenAsync>d__34.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.<BufferlessMoveNext>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.EntityFrameworkCore.Storage.Internal.SqlServerExecutionStrategy.<ExecuteAsync>d__7`2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.<MoveNext>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at System.Linq.AsyncEnumerable.SelectEnumerableAsyncIterator`2.<MoveNextCore>d__7.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at System.Linq.AsyncEnumerable.AsyncIterator`1.<MoveNext>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.<MoveNext>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at System.Linq.AsyncEnumerable.<Aggregate_>d__6`3.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Live.Repositories.UpdatingRepository.<GetLastDate>d__6.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Repositories/UpdatingRepository.cs:line 220
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Live.Repositories.UpdatingRepository.<SongsUpdateAsync>d__5.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Repositories/UpdatingRepository.cs:line 59
+2020-07-07 22:59:53.174 +02:00 [Error] Error in updating songs A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: TCP Provider, error: 40 - Could not open a connection to SQL Server)
+2020-07-07 22:59:53.366 +02:00 [Error]    at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.<OpenAsync>d__34.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.<BufferlessMoveNext>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.EntityFrameworkCore.Storage.Internal.SqlServerExecutionStrategy.<ExecuteAsync>d__7`2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.<MoveNext>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at System.Linq.AsyncEnumerable.SelectEnumerableAsyncIterator`2.<MoveNextCore>d__7.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at System.Linq.AsyncEnumerable.AsyncIterator`1.<MoveNext>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.<MoveNext>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at System.Linq.AsyncEnumerable.<Aggregate_>d__6`3.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Live.Repositories.UpdatingRepository.<GetLastDate>d__6.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Repositories/UpdatingRepository.cs:line 220
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Live.Repositories.UpdatingRepository.<SongsUpdateAsync>d__5.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Repositories/UpdatingRepository.cs:line 59
+2020-07-11 14:29:09.252 +02:00 [Information] Finish radio songs update with 1165 songs and 5 youtube errors
+2020-07-11 23:31:56.684 +02:00 [Information] Finish radio songs update with 174 songs and 4 youtube errors
+2020-07-12 00:02:33.167 +02:00 [Information] Finish radio songs update with 99 songs and 0 youtube errors
+2020-07-12 01:00:26.661 +02:00 [Information] Finish radio songs update with 112 songs and 2 youtube errors
+2020-07-12 02:02:48.467 +02:00 [Information] Finish radio songs update with 107 songs and 2 youtube errors
+2020-07-12 09:20:52.904 +02:00 [Information] Finish radio songs update with 734 songs and 4 youtube errors
+2020-07-12 10:01:30.269 +02:00 [Information] Finish radio songs update with 99 songs and 0 youtube errors
+2020-07-12 11:05:32.724 +02:00 [Information] Finish radio songs update with 91 songs and 0 youtube errors
+2020-07-12 20:34:44.833 +02:00 [Error] Google login Error: An exception occurred while reading a database value for property 'User.ResetId'. The expected type was 'System.Guid' but the actual value was null.
+2020-07-12 20:34:44.942 +02:00 [Error]    at Microsoft.EntityFrameworkCore.Metadata.Internal.EntityMaterializerSource.ThrowReadValueException[TValue](Exception exception, Object value, IPropertyBase property)
+   at Microsoft.EntityFrameworkCore.Metadata.Internal.EntityMaterializerSource.TryReadValue[TValue](ValueBuffer valueBuffer, Int32 index, IPropertyBase property)
+   at lambda_method(Closure , ValueBuffer )
+   at Microsoft.EntityFrameworkCore.Query.ExpressionVisitors.Internal.UnbufferedEntityShaper`1.Shape(QueryContext queryContext, ValueBuffer valueBuffer)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.BufferlessMoveNext(Boolean buffer)
+   at Microsoft.EntityFrameworkCore.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.MoveNext()
+   at System.Linq.Enumerable.TryGetFirst[TSource](IEnumerable`1 source, Boolean& found)
+   at lambda_method(Closure , QueryContext )
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.<>c__DisplayClass17_1`1.<CompileQueryCore>b__0(QueryContext qc)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.Execute[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Query.Internal.EntityQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source, Expression`1 predicate)
+   at Live.Repositories.UserRepository.<SocialLoginAsync>d__6.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Repositories/UserRepository.cs:line 38
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Live.Controllers.SocialUserController.<SocialLogin>d__3.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Controllers/SocialUserController.cs:line 76
+2020-07-13 00:11:24.791 +02:00 [Information] Finish radio songs update with 101 songs and 0 youtube errors
+2020-07-14 00:00:21.031 +02:00 [Information] Finish radio songs update with 1014 songs and 1 youtube errors
+2020-07-14 00:01:05.658 +02:00 [Information] Finish radio songs update with 98 songs and 3 youtube errors
+2020-07-14 23:37:08.242 +02:00 [Information] Finish radio songs update with 578 songs and 2 youtube errors
+2020-07-15 00:01:06.447 +02:00 [Information] Finish radio songs update with 98 songs and 0 youtube errors
+2020-07-15 01:00:36.478 +02:00 [Information] Finish radio songs update with 104 songs and 1 youtube errors
+2020-07-15 22:43:39.961 +02:00 [Information] Finish radio songs update with 649 songs and 3 youtube errors
+2020-07-17 01:10:16.437 +02:00 [Error] First error in Yuotube: The remote server returned an error: (403) Forbidden.
+2020-07-17 01:10:16.453 +02:00 [Error]    at System.Net.HttpWebRequest.GetResponse()
+   at Live.Core.YouTube.SetID(String name) in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Live.Core/YouTube.cs:line 96
+2020-07-17 01:10:16.453 +02:00 [Warning] First ERROR from Song Update
+2020-07-17 01:10:43.281 +02:00 [Information] Finish radio songs update with 1030 songs and 8 youtube errors
+2020-07-17 22:22:59.215 +02:00 [Information] Finish radio songs update with 92 songs and 1 youtube errors
+2020-07-17 23:09:01.164 +02:00 [Information] Finish radio songs update with 89 songs and 0 youtube errors
+2020-07-18 00:24:14.030 +02:00 [Information] Finish radio songs update with 102 songs and 0 youtube errors
+2020-07-18 01:03:39.740 +02:00 [Information] Finish radio songs update with 107 songs and 1 youtube errors
+2020-07-18 15:45:32.947 +02:00 [Information] Finish radio songs update with 236 songs and 2 youtube errors
+2020-07-18 16:00:44.433 +02:00 [Information] Finish radio songs update with 82 songs and 0 youtube errors
+2020-07-18 17:44:14.897 +02:00 [Information] Finish radio songs update with 88 songs and 0 youtube errors
+2020-07-18 18:01:55.517 +02:00 [Information] Finish radio songs update with 82 songs and 1 youtube errors
+2020-07-18 19:00:07.709 +02:00 [Information] Finish radio songs update with 83 songs and 1 youtube errors
+2020-07-18 19:04:26.144 +02:00 [Information] Finish TV movies update with 63 and 6 youtube errors
+2020-07-18 20:12:17.743 +02:00 [Information] Finish radio songs update with 68 songs and 0 youtube errors

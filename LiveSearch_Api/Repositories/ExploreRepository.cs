@@ -72,15 +72,16 @@ namespace Live.Repositories
             {FillFromSongs, FillFromArchSongs, FillFromUsersYouTubes, FillBestSellers, FillFromTvMoviesArchive};
           
           int deep = 0;
-if(query.Length>7 && !query.Contains(' '))
+if(query.Length>7)
 {
-    deep = 5;
+    //deep = 5;
+    deep = 2;
     await this.GoFindInDeepAsync(foundIcons, query, deep, counter, ListOfActions, skip); 
 }
 else
 {
 
-            for(int i = 1; i<6;i++) // 5 is max
+            for(int i = 1; i<3;i++) 
             {
                 
                 if(counter.count>0)
@@ -98,7 +99,7 @@ else
 
             foundIcons.Reverse();
 
-            var results = new ExploreResultsDto(foundIcons, deep);
+            var results = new ExploreResultsDto(foundIcons, deep, counter.count);
 
             return results;
         }

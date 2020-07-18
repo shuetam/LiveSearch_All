@@ -16,10 +16,12 @@ namespace Live.Controllers
     public class UserDesktopController : LiveController
     {
         private readonly  IUserDesktopRepository _desktopRepository;
+         private readonly  IUserRepository _userRepository;
         
-        public UserDesktopController (IUserDesktopRepository desktopRepository)
+        public UserDesktopController (IUserDesktopRepository desktopRepository, IUserRepository userRepository)
         {
             this._desktopRepository = desktopRepository;
+            this._userRepository = userRepository;
         }
 
 
@@ -73,6 +75,14 @@ namespace Live.Controllers
            // Console.Write(folder.Title);
             var newFolder = await _desktopRepository.CreateFolderAsync(this.UserId, folder.Title);
             return Json(newFolder);
+        }
+
+           [HttpPost("getuseremail")]
+        public async Task<IActionResult> GetUseremail([FromBody] EntitySetter folder)
+        {
+           // Console.Write(folder.Title);
+            var userEmail = await _userRepository.GetUserEmail(this.UserId);
+            return Json(userEmail);
         }
 
         [HttpPost("findiconsfromurl")]

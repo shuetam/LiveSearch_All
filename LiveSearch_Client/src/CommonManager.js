@@ -20,6 +20,39 @@ export const  manageLogin = () => {
     }
 }
 
+
+export const  manageLiveSearchLogin = () => {
+
+    
+   var login = document.getElementById("loginLivesearch");
+   if(login) {
+       login.className = "loginWindow";
+    }
+
+     var icons = document.querySelectorAll(".entity");
+
+    for(var i=0;i<icons.length;i++) {
+        icons[i].className = "entityDis";
+    }
+
+}
+
+export const hideLiveSearchLogin = () => {
+
+    var icons = document.querySelectorAll(".entityDis");
+
+    for(var i=0;i<icons.length;i++) {
+        icons[i].className = "entity";
+    }
+
+    var login = document.getElementById("loginLivesearch");
+    if(login) {
+        login.className = "disable";
+    }
+}
+
+
+
 export const  removeHiding = () => {
 
     var body = document.getElementById('allLive');
@@ -42,6 +75,7 @@ export const hideLogin = () => {
     if(login) {
         login.className = "disable";
     }
+    removeHiding();
 }
 
 

@@ -8,6 +8,7 @@ using System.Net;
 using System.IO;
 using System.Text.RegularExpressions;
 using Serilog;
+using Live.Services;
 
 namespace Live.Controllers
 {
@@ -56,7 +57,9 @@ namespace Live.Controllers
         string googlePattern = "^G_"; 
         string facebookPattern = "^F_";
         string error = "error";
-           
+
+       // var email = new SendEmailService();
+        //email.ResetPassword();
 
         var googleReg = new Regex(googlePattern);
         var facebookReg = new Regex(facebookPattern);

@@ -18,7 +18,7 @@ namespace Live.Mapper
         public static IMapper Initialize()
         => new MapperConfiguration(config => 
         {
-            
+            //string yt = "https://www.youtube.com/watch?v=";
 
    config.CreateMap<Song, IconDto>()
                 .ForMember(d => d.title, s => s.MapFrom(x => x.Name))
@@ -56,7 +56,8 @@ namespace Live.Mapper
             config.CreateMap<User, UserDto>()
                 .ForMember(d => d.UserId, s => s.MapFrom(x => x.ID.ToString()))
                 .ForMember(d => d.Email  , s => s.MapFrom(x => x.UserEmail))
-                 .ForMember(d => d.Role  , s => s.MapFrom(x => x.UserRole));
+                 .ForMember(d => d.Role  , s => s.MapFrom(x => x.UserRole))
+                .ForMember(d => d.UserName  , s => s.MapFrom(x => x.UserName));
 
             config.CreateMap<User, UserAdminDto>()
                 .ForMember(d => d.Name, s => s.MapFrom(x => x.UserName))
@@ -103,7 +104,7 @@ namespace Live.Mapper
 
 
             config.CreateMap<FrontYouTube, IconDto>()
-                .ForMember(d => d.id, s => s.MapFrom(x => x.videoId))
+                .ForMember(d => d.id, s => s.MapFrom(x =>  x.videoId))
                 .ForMember(d => d.guidId, s => s.MapFrom(x => x.guidId))
                 .ForMember(d => d.left  , s => s.MapFrom(x => x.left))
                 .ForMember(d => d.top  , s => s.MapFrom(x => x.top))

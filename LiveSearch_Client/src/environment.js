@@ -2,10 +2,10 @@
 
 export const URL = {
 
-   // api: "http://localhost:53072/api/", 
+    api: "http://localhost:53072/api/", 
     //api: "http://localhost:5000/api/", 
 
-    api: "https://www.fitize.pl/api/", 
+    //api: "https://www.fitize.pl/api/", 
 
     login: "SocialUser/user",
     radioSongs: "song/allradiosongs/",
@@ -44,13 +44,18 @@ export const URL = {
     update: "updating/updates",
     actuallTopIcons: "actuall/getactualltopicons",
     explore: "explore/geticons",
-    getIconByGuidId: "explore/getIconByGuidId"
+    getIconByGuidId: "explore/getIconByGuidId",
+    registerUser: "user/userregister",
+    loginUser: "user/userlogin",
+    resetPassword:  "user/resetpassword",
+    confirmPassword: "user/confirmpassword",
+    getuseremail: "UserDesktop/getuseremail"
     
 }
 
 export const PATHES = {
-   // live: 'https://livesearch.pl',
-    live: 'http://localhost:3000',
+    live: 'https://livesearch.pl',
+    //live: 'http://localhost:3000',
     songs: '/muzyka_radio',
     songsAdmin: '/songsadmin',
     movies: '/filmy_tv',

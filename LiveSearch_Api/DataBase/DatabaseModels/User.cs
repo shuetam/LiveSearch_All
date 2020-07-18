@@ -13,6 +13,14 @@ public class User : Entity
     public bool IsActive {get; protected set;}
     public string AuthType {get; protected set;}
     public string UserRole {get; protected set;}
+    public Guid? ResetId {get; protected set;}
+    
+
+    public string PasswordHash {get; protected set;}
+     public string Salt {get; protected set;}
+    public string NewPasswordHash {get; protected set;}
+     public string NewSalt {get; protected set;}
+     public DateTime? ResetPassword {get; protected set;}
    // public string UserNick {get; protected set;}
     
     public List<UserYoutube> UserYoutubes {get; set;}
@@ -23,7 +31,7 @@ public class User : Entity
     {
         
     }
-    public User(string userId, string userName, string userEmail, string auth, string role)
+    public User(string userId, string userName, string userEmail, string auth, string role, string hash="", string salt="")
     {
         UserSocialId = userId;
         UserName = userName;
@@ -35,12 +43,39 @@ public class User : Entity
         CreatedAt = DateTime.Now;
         LastLogin = DateTime.Now;
         UserRole = role;
+        Salt = salt;
+        PasswordHash = hash;
     }
 
     public void ChangeStatus()
     {
         this.IsActive = !this.IsActive;
     }
+
+    public void SetNewPassword(string hash, string salt, Guid resetId)
+    {
+        ResetPassword = DateTime.Now;
+        NewPasswordHash = hash;
+        NewSalt = salt;
+        ResetId = resetId;
+      
+    }
+
+    public bool ConfirmReset()
+    {
+
+        if(!string.IsNullOrEmpty(NewSalt) && !string.IsNullOrEmpty(NewPasswordHash) && ResetPassword.HasValue)
+        {
+            if(ResetPassword.Value.AddHours(24)>DateTime.Now && NewSalt != Salt &&  NewPasswordHash != PasswordHash)
+            {
+                    Salt = NewSalt;
+                    PasswordHash = NewPasswordHash;
+                    return true;
+            }
+        }
+        return false;
+    }
+    
 
     public void NextLogin()
     {

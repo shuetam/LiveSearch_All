@@ -103,7 +103,7 @@ export const login = (userName, imageUrl, token, userRole, userNick) => {
 
 
 export const authLogout = () => {
-
+debugger;
     //document.cookie = "user_Id" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     document.cookie = "JT1" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     document.cookie = "user_Name1=" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';

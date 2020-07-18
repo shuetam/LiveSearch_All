@@ -30,6 +30,7 @@ namespace Live.Controllers
             if(!string.IsNullOrEmpty(query))
             {
                 var explore = await _exploreRepository.ExploreIconsAsync(query, count, skip);
+                //Console.WriteLine($"{Query.query} --skip: {skip}---count: {explore.count}");
                 return Json(explore);
             }
             
@@ -38,7 +39,7 @@ namespace Live.Controllers
             var topImg = await _exploreRepository.GetAllActuallIMGAsync();
 
             top.AddRange(topImg);
-            var results = new ExploreResultsDto(top, 6);
+            var results = new ExploreResultsDto(top, 6, 1);
             return Json(results);
         }  
     }

@@ -12,13 +12,11 @@ namespace Live.Repositories
           Task <List<UserDto>> GetAllAsync();
           Task <UserDto> SocialLoginAsync(string userId, string name, string email, string authType);
           
-          // facebook: F_
-          // Goole: G_
-
-         // https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=
-
-         // https://graph.facebook.com/me?access_token=
-          
+         Task<UserDto> RegisterAsync(string email, string password);
+            Task<UserDto> LoginAsync(string email, string password);
+              Task<string> ResetPasswordAsync(string email, string password, string url);
+            Task<string> GetUserEmail(Guid userId);
+          Task<UserDto> ConfirmAsync(string email, string userId, string resetId);
      }
 
 }

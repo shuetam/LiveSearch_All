@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './Header.css';
 import {Update} from './Updates.js';
+import LiveRegister from './LiveRegister.js';
 
 //import "../../Fontello/css/fontello.css";
 //import "../../icon/css/fontello.css";
@@ -36,11 +37,12 @@ import UserDesktop from '../Areas/UserDesktop';
 import axios from 'axios';
 import {URL, PATHES} from '../../environment';
 import InputNumber from 'react-input-number';
-import {manageLogin, hideLogin} from '../../CommonManager'
+import {manageLogin, manageLiveSearchLogin, hideLiveSearchLogin} from '../../CommonManager'
 
 
 
 var fetchData = "";
+var register = true;
 
 class Header extends Component {
 
@@ -131,7 +133,8 @@ class Header extends Component {
 this.setState({fromFolder: this.props.match.params.fid? true : false });
 
 this.setHeaderType();
-        
+
+this.isConfirm(); 
     }
 
     componentWillUnmount() {
@@ -144,9 +147,25 @@ this.setHeaderType();
         //document.addEventListener('msfullscreenchange', this.manageFullScreenState, false);
 
         this.setHeaderType();
-
+       
       }
 
+
+      isConfirm = () => {
+        var query = this.props.location.search;
+        var search = new URLSearchParams(query);
+    
+        var confirmPassword= search.get("idr");
+        var confirmUser= search.get("idu");
+        var confirmEmail= search.get("for");
+        //alert(confirmEmail);
+       // http://localhost:3000//confirm?idu=123123&for=mat@ewe.pl&idr=123456qwe
+      
+        if(confirmPassword !== null && confirmUser !== null && confirmEmail !== null) {
+             this.confirmPassword(confirmEmail, confirmUser, confirmPassword );
+             //alert(confirmEmail);
+        }
+    }
 
 
       setHeaderType = () => {
@@ -222,7 +241,7 @@ this.setHeaderType();
      }
 
 
-    myDesktop = () => {
+  /*   myDesktop = () => {
         if(this.props.isAuthenticated)
         {
             this.props.history.push(PATHES.userPulpit);
@@ -230,8 +249,7 @@ this.setHeaderType();
         else {
             manageLogin();
         }
-
-    }
+    } */
 
  
     hideMusicArrow = () => {
@@ -334,6 +352,11 @@ else {
 
 }
 
+
+
+
+
+
 responseErrorGoogle = (response) => {
     this.Alert("Wystąpił błąd przy próbie zalogowania.");
 }
@@ -390,8 +413,7 @@ responseErrorGoogle = (response) => {
 
     }
 
-
-
+   
     clickCheckBox = () => {
 
         var stateCount = 0;
@@ -695,8 +717,65 @@ responseErrorGoogle = (response) => {
         }
 
       
+        manageLiveSearch = () => {
+            manageLiveSearchLogin();
+        }
 
 
+    checkLive = (event) => {
+        var id = event.target.id;
+        var checkBox = document.getElementById(id+"1");
+
+        if(checkBox) {
+
+            if(checkBox.checked) {
+                document.getElementById(id).style.color = 'rgba(231, 173, 64, 0.836)';
+            }
+            else {
+                document.getElementById(id).style.color = 'rgba(255, 255, 255, 0.842)';       
+            }
+        }
+
+        } 
+
+
+
+        confirmPassword = (email, Id, resetId) => {
+            const data = {
+                Email: email,
+                ID: Id,
+                resetID: resetId
+            };
+            var image = "";
+           //alert(email);
+            axios.post(URL.api+URL.confirmPassword, data)
+            .then(response => {
+             
+                if(response.data == "loginFalse")
+                { 
+                    this.Alert("LINK NIEAKTYWNY");
+                  return false;
+                }
+
+                if(this.props.isAuthenticated) {
+                    
+                    this.props.Logout();
+                }
+                    
+               
+                this.Alert("Twoje nowe hasło zostało zaktualizowane");
+
+                setTimeout(() => {
+                    this.props.SocialLog(response.data.userId, response.data.userName, image, response.data.jwtToken, response.data.role, response.data.userNick);
+                    window.location.replace("/pulpit");
+                }, 3500);
+               
+                
+            }).catch(error => { this.Alert("LINK NIEAKTYWNY");;
+          
+            //window.location.replace("/pulpit");
+        });
+        }
 
     
     render() {
@@ -790,9 +869,16 @@ let infoArrowBest = this.state.showBooksArrow? <div  class="infoArrowBestsellers
 
 
 
+
+
     let loginButtons = <div> 
         
         <table class="dna-table"> 
+        <tr>
+          <button onClick={this.manageLiveSearch}
+            class="loginBtn loginBtn--livesearch loginLive">Zaloguj przez LiveSearch</button>
+            </tr>
+            <p/>
 <tr>  
         <GoogleLogin
     clientId="117000838761-6dm3mpripvcovoqlsq00pbaoa207qbdl.apps.googleusercontent.com" 
@@ -805,7 +891,6 @@ let infoArrowBest = this.state.showBooksArrow? <div  class="infoArrowBestsellers
 <p/>
  </tr>
 <tr>
-
           <FacebookLogin
             appId="227659324986702"//"2395943984012670"
             autoLoad={false}
@@ -814,16 +899,24 @@ let infoArrowBest = this.state.showBooksArrow? <div  class="infoArrowBestsellers
             cssClass="loginBtn loginBtn--facebook"
             callback={this.responseFacebook}/>
             </tr>
+      
 </table> 
             
             </div>;
 
 
 let loginWindow = 
-
 <div id="loginWindow" class="disable">Zaloguj się aby przejść do swojego pulpitu i dodawać do niego nowe ikony
 <p/>
 {loginButtons}</div>;
+
+
+let loginLivesearch = 
+<div id="loginLivesearch" class="disable"> 
+<p/>
+<LiveRegister liveRegister={this.liveRegister}/>
+
+</div>;
         
             userDesktop = (<Route path={PATHES.userPulpit +'/:id1?/:id2?'} component={(props) => (
                 <UserDesktop searchTag={this.searchTag} {...props} showAddingIcon={this.state.showAddingIcon} />
@@ -863,10 +956,13 @@ let onlyErrorsCheck = this.props.isAdmin? <label class="switch">All<input  name=
 let adminCheck = this.props.isAdmin? <label class="switch">Editor<input name="adminB"
  type="checkbox" defaultChecked={true} id="adminBox" /></label> : "";
 
+ let userImg = this.props.imageUrl == ""? <img id="imageGoogle"></img> : <img  id="imageGoogle" src={this.props.imageUrl}></img>
+
+ let paReset = this.props.imageUrl == ""?  <div class="desktop" style={{fontSize: 13}}  onClick={this.manageLiveSearch}>Resetuj hasło</div> : "";
+
 let userPanel = (<div class="logIn" id="userP">
 
-
- <img  id="imageGoogle" src={this.props.imageUrl}></img> <span style={{position: 'relative', top: -3}}>{this.props.userName}</span>
+ {userImg} <span style={{position: 'relative', top: -3}}>{this.props.userName}</span>
 
 <div id="login"> 
 {/*<div style={{fontSize: 14}} class="desktop" onClick={this.myDesktop}>Mój pulpit</div>
@@ -879,6 +975,7 @@ let userPanel = (<div class="logIn" id="userP">
  <div id="userNick" title="Edytuj" style={{fontSize: 12}} class="desktop">
  {this.props.userName} <i id="userNickEdit" class="icon-edit"/> </div>
  <hr/>  */}
+ {paReset}
  <div class="desktop" style={{fontSize: 13}}  onClick={this.logOut}>Wyloguj się</div> 
  
  </div>
@@ -1258,7 +1355,7 @@ return (
                 {userHeader}
                 {cookieInfo}
                 {loginWindow}
-           
+             {loginLivesearch}
                
                 <Switch>
                     {/* <Route path={'/'} exact component={First} /> */}

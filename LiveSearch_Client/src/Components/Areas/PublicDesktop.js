@@ -252,9 +252,8 @@ class PublicDesktop extends Component {
         axios.post(fetchData, data, null)
         .then((result) => { 
             var deep = result.data.deep;
-
-            if(parseInt(deep)<5) {
-                this.setState({showNextPrev: true})
+            if(result.data.results.length == parseInt(this.state.explIconsCount)) {
+              this.setState({showNextPrev: true})
                 //this.Alert(deep);
             }
         this.setState({ icons:
@@ -385,6 +384,7 @@ class PublicDesktop extends Component {
             
         }
         else {
+            this.setState({ entityID:  "" });
             this.setState({ noIcons: true,  loadedIcons: true });
             this.setState({ytField: true});
         }
@@ -864,8 +864,10 @@ class PublicDesktop extends Component {
 
 
     showNext = () => {
+        if(this.state.showNextPrev) {
         var skip = this.state.exploreSkip + 1;
         this.props.history.push(PATHES.explore + "?q="+ this.state.explQuery + "&skip=" +skip );
+        }
     }
 
  
@@ -874,11 +876,11 @@ class PublicDesktop extends Component {
 
         let actuallMenu = "";
 
-let prevNext = (this.state.showNextPrev && this.state.explQuery!="")? <div class="nextPrev">
-<span  id="prev" class="clickElem nextPrev"  onClick = {this.showPrev}><i class="icon-left-open"/>
+let prevNext =  this.state.explQuery!=""? <div class="nextPrev">
+<span  id="prev" class= {this.state.exploreSkip > 0?   "clickElem nextPrevAct" : "clickElem nextPrev"}  onClick = {this.showPrev}><i class="icon-left-open"/>
 <div id="prevField" class="hoverInfo" >Poprzednie</div>
 </span>   
-<span id="next" class="clickElem nextPrev"  onClick = {this.showNext}><i class="icon-right-open"/>
+<span id="next" class= {this.state.showNextPrev?   "clickElem nextPrevAct" : "clickElem nextPrev"} onClick = {this.showNext}><i class="icon-right-open"/>
 <div id="nextField" class="hoverInfo" >Następne</div>
 </span>
 </div> : "";

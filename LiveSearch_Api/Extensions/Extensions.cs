@@ -52,7 +52,8 @@ public static void Shuffle<T>(this IList<T> list)
                 break;
 
                 case 2:
-                match = query.Length>3 && iconParametr.Contains(query);
+                //match = query.Length>3 && iconParametr.Contains(query);
+                match = iconParametr.Contains(query);
                 break;
 
                 case 3:

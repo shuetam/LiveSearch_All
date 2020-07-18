@@ -75,9 +75,11 @@ namespace Live
             services.AddScoped<IAdminRepository, AdminRepository>();
             services.AddScoped<IUpdatingRepository, UpdatingRepository>();
             services.AddScoped<IExploreRepository, ExploreRepository>();
-            
-            services.AddScoped<IJwtService, JwtService>();
             services.AddSingleton(Configuration.GetSection("Jwt").Get<TokenParameters>());
+            services.AddScoped<IJwtService, JwtService>();
+            services.AddSingleton<IConfiguration>(Configuration);
+            services.AddScoped<ISendEmailService, SendEmailService>();
+            services.AddSingleton(Configuration.GetSection("EmailCredensials").Get<EmailCredensials>());
             services.AddSingleton(AutoMapperConfig.Initialize());
             services.AddSingleton(sql_connection);
             services.AddAuthorization();

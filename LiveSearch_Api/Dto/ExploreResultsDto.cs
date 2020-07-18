@@ -12,11 +12,13 @@ namespace Live.Core
     {
    public List<IconDto> results {get; set;}
    public int deep {get; set;}
+   public int count {get; set;}
 
-    public ExploreResultsDto(List<IconDto> _results, int _deep )
+    public ExploreResultsDto(List<IconDto> _results, int _deep, int _count )
     {
       this.deep = _deep;
       this.results = _results;
+      this.count = _count;
     }
 
     }

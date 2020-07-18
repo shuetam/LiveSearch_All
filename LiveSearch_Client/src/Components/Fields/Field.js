@@ -58,7 +58,7 @@ class Field extends Component {
 
         if ((Math.abs(diff) > 0.07)) {
             try {
-                console.log('syncing....'+diff);
+               // console.log('syncing....'+diff);
                 this.state.reflectVideo.seekTo(this.state.mainVideo.getCurrentTime() + randomFloat(0.1, 0.8));
             }
             catch(error) {
@@ -69,10 +69,10 @@ class Field extends Component {
         }
 
         if ((Math.abs(diff) <= 0.06)) {
-            console.log("diff time ----->" + (this.state.mainVideo.getCurrentTime() - this.state.reflectVideo.getCurrentTime()));
+            //console.log("diff time ----->" + (this.state.mainVideo.getCurrentTime() - this.state.reflectVideo.getCurrentTime()));
             clearInterval(this.state.interval);
             this.setState({ interval: null });
-            console.log(this.state.interval);
+            //console.log(this.state.interval);
             this.setState({ showReflect: true });
         }
         //  clearInterval(interval);
@@ -85,7 +85,7 @@ class Field extends Component {
         this.setState({ playReflected: true });
         clearInterval(this.state.interval);
         this.setState({ interval: null });
-        console.log("PLAY!! ...  " + Date.now());
+       // console.log("PLAY!! ...  " + Date.now());
         this.setState({ showReflect: false });
         var randomFloat = require('random-float');
        // this.state.reflectVideo.playVideo();
@@ -100,7 +100,7 @@ class Field extends Component {
 
 
     pauseReflect = (event) => {
-        console.log("PAUSE!!");
+        //console.log("PAUSE!!");
         var randomFloat = require('random-float');
         this.state.reflectVideo.seekTo(this.state.mainVideo.getCurrentTime() + randomFloat(0.1, 0.8));
         // this.setState({interval: !this.state.interval});
@@ -116,7 +116,7 @@ class Field extends Component {
     }
 
     onChange = (event) => {
-        console.log("CHANGE STATUS!!!")
+        //console.log("CHANGE STATUS!!!")
     }
 
     render() {
@@ -142,7 +142,8 @@ class Field extends Component {
 
 //"https://i1.sndcdn.com/artworks-000117213722-45m4uv-t200x200.jpg"
 
-        let field = (
+
+        let field =  (
             <div>
 
                 <div className="field">
@@ -189,7 +190,11 @@ class Field extends Component {
           
             </div>
         );
+
+
+     
         if(this.props.show) {
+            
 
             if(!this.props.fromDesktop && this.props.noIcons) {
                 if(this.props.headerType == "explore") {

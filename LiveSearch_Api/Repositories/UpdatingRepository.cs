@@ -57,7 +57,7 @@ namespace Live.Repositories
             var stations = new Dictionary<int, string>()
             {{1,"zet"},{2,"rmf"},{3,"eska"},{4, "rmfmaxx"},{9, "zloteprzeboje"},{30, "vox"},{40, "chillizet"}};
            var dateLast = await GetLastDate();
-        Console.WriteLine("Context works  datelst -> " + dateLast);
+       // Console.WriteLine("Context works  datelst -> " + dateLast);
                 //Console.WriteLine(dateLast);
                 var dateNow = DateTime.Now;
                 int hourNow = dateNow.Hour;
