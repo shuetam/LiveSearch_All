@@ -240,6 +240,19 @@ select * from UserImages
 DELETE FROM Folders WHERE
 Title like '%www%'
 
+CREATE TABLE SharedFolders
+(
+    UserId UNIQUEIDENTIFIER NOT NULL,
+    FolderId UNIQUEIDENTIFIER NOT NULL,
+)
+
+ALTER TABLE SharedFolders ADD CONSTRAINT 
+FK_UserID FOREIGN KEY (UserId) 
+REFERENCES Users(ID)
+
+ALTER TABLE SharedFolders ADD CONSTRAINT 
+FK_FolderID FOREIGN KEY (FolderId) 
+REFERENCES Folders(ID)
 
 CREATE TABLE Folders
 (

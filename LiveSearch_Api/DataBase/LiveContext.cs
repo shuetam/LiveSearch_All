@@ -17,6 +17,7 @@ public class LiveContext : DbContext
     public DbSet<UserImage> UserImages {get; set;}
     public DbSet<UserSpotify> UserSpotify {get; set;}
     public DbSet<Folder> Folders {get; set;}
+    public DbSet<SharedFolder> SharedFolders {get; set;}
     public DbSet<RadioSong> RadioSongs {get; set;}
     public DbSet<Song> Songs {get; set;}
     public DbSet<ArchiveSong> ArchiveSongs {get; set;}

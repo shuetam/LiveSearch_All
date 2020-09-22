@@ -26,7 +26,7 @@ public class User : Entity
     public List<UserYoutube> UserYoutubes { get; set; }
     public List<UserImage> UserImages { get; set; }
     public List<UserSpotify> UserSpotify { get; set; }
-    public List<Folder> FollowedFolders { get; set; }
+    public List<SharedFolder> FollowedFolders { get; set; }
 
     protected User()
     {

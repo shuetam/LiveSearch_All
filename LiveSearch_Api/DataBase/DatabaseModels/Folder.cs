@@ -130,3 +130,18 @@ public class Folder : Live.Core.Entity
     }
 
 }
+
+public class SharedFolder 
+{
+    public Guid UserId { get; protected set; }
+    public Guid FolderId { get; protected set; }
+    public Folder Folder { get;  set; }
+    protected SharedFolder()
+    {
+    }
+    public SharedFolder(Guid userId, Guid folderId)
+    {
+        this.FolderId = userId;
+        this.UserId = folderId;
+    }
+}
