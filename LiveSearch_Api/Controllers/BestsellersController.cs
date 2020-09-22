@@ -24,19 +24,19 @@ namespace Live.Controllers
             return Json(books);
         }
 
-      /*   [HttpPost("update")]
-        public async Task UpdateBestsellser()
-        {
-           
-            await _bookRepository.UpdateAsync();
-        } */
+        /*   [HttpPost("update")]
+          public async Task UpdateBestsellser()
+          {
 
-     /*    [HttpPost("update/{store}")]
-        public async Task UpdateStoreBestsellser(string store)
-        {
-           
-            await _bookRepository.UpdateStoreAsync(store);
-        } */
+              await _bookRepository.UpdateAsync();
+          } */
+
+        /*    [HttpPost("update/{store}")]
+           public async Task UpdateStoreBestsellser(string store)
+           {
+
+               await _bookRepository.UpdateStoreAsync(store);
+           } */
 
 
     }

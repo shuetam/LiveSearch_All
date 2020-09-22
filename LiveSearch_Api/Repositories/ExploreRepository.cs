@@ -268,6 +268,26 @@ else
               }
         }
 
+
+        public async Task<List<FolderDto>> GetAllSharedFoldersAsync(string query, int count, int skip)
+        {
+            var folders = await _liveContext.Folders
+            .Include(x => x.UserYouTubes)
+            .Include(x => x.UserImages)
+            .Include(x => x.UserSpotify)
+            .Where(x => x.IsShared).ToListAsync(); // add filters and counts
+
+            // will be segereged by create date, populars, modyfy date
+
+            foreach (var folder in folders)
+            {
+                folder.SetFourIcons();
+            }
+            var icons = folders.Select(x => _autoMapper.Map<FolderDto>(x)).ToList();
+            return icons;
+        }
+
+
     }
 
     public class ExploreCounter

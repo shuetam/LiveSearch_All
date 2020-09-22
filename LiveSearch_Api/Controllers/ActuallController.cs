@@ -6,36 +6,48 @@ using System.Threading.Tasks;
 
 namespace Live.Controllers
 {
- 
+
     [Route("api/[controller]")]
     public class ActuallController : LiveController
     {
-        private readonly  IExploreRepository _actuallRepository;
-        
-        public ActuallController (IExploreRepository repository)
+        private readonly IExploreRepository _actuallRepository;
+
+        public ActuallController(IExploreRepository repository)
         {
             this._actuallRepository = repository;
         }
 
-        
+
         [HttpPost("getactualltopicons")]
         public async Task<IActionResult> TakeTopYT()
         {
-             var top = await _actuallRepository.GetAllActuallYTAsync();
-              var topImg = await _actuallRepository.GetAllActuallIMGAsync();
-               top.AddRange(topImg);
-                
-                top.Shuffle();
-             return Json(new ExploreResultsDto(top, 1, 1));
+            var top = await _actuallRepository.GetAllActuallYTAsync();
+            var topImg = await _actuallRepository.GetAllActuallIMGAsync();
+            top.AddRange(topImg);
+
+            top.Shuffle();
+            return Json(new ExploreResultsDto(top, 1, 1));
         }
 
-       /*  [HttpPost("getactualltopimg")]
-        public async Task<IActionResult> TakeTopIMG()
+
+        [HttpPost("getsharedfolders")]
+        public async Task<IActionResult> TakeSharedFolders()
         {
-           
-             var top = await _actuallRepository.GetAllActuallIMGAsync();
+            var top = await _actuallRepository.GetAllActuallYTAsync();
+            var topImg = await _actuallRepository.GetAllActuallIMGAsync();
+            top.AddRange(topImg);
+
             top.Shuffle();
-             return Json(top);
-        } */
+            return Json(new ExploreResultsDto(top, 1, 1));
+        }
+
+        /*  [HttpPost("getactualltopimg")]
+         public async Task<IActionResult> TakeTopIMG()
+         {
+
+              var top = await _actuallRepository.GetAllActuallIMGAsync();
+             top.Shuffle();
+              return Json(top);
+         } */
     }
 }
