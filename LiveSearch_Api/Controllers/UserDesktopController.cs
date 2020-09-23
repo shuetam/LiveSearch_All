@@ -150,6 +150,13 @@ namespace Live.Controllers
           //return Json(icons);
         }
 
+        [HttpPost("sharefolder")]
+        public async Task<IActionResult> ShareFolder([FromBody] EntitySetter entity)
+        {
+            var isShared = await _desktopRepository.ShareFolder(this.UserId, entity.FolderId);
+            return Json(isShared);
+        }
+
 
         [HttpPost("movefromfolder")]
         public async Task MoveEntityFromFolder([FromBody] EntitySetter entity)

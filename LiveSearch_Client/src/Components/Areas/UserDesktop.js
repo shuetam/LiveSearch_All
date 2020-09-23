@@ -1763,6 +1763,7 @@ setAddingIcon = () => {
                     topEdit = "95%"
                     bottom = {bottomIcon(song.id, song.top)}
                     public={false}
+                    shared = {song.shared}
                     
                     />
                      

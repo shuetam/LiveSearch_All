@@ -43,9 +43,10 @@ public class Folder : Live.Core.Entity
         return "https://i.ytimg.com/vi/" + videoId + "/hqdefault.jpg";
     }
 
-    public void ShareFolder()
+    public bool ShareFolder()
     {
-        IsShared = true;
+        IsShared = !this.IsShared;
+        return IsShared;
     }
 
     public void StopSharing()

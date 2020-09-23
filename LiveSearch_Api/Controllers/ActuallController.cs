@@ -30,16 +30,16 @@ namespace Live.Controllers
         }
 
 
-        [HttpPost("getsharedfolders")]
-        public async Task<IActionResult> TakeSharedFolders()
-        {
-            var top = await _actuallRepository.GetAllActuallYTAsync();
-            var topImg = await _actuallRepository.GetAllActuallIMGAsync();
-            top.AddRange(topImg);
+        //[HttpPost("getsharedfolders")]
+        //public async Task<IActionResult> TakeSharedFolders()
+        //{
+        //    var top = await _actuallRepository.GetAllActuallYTAsync();
+        //    var topImg = await _actuallRepository.GetAllActuallIMGAsync();
+        //    top.AddRange(topImg);
 
-            top.Shuffle();
-            return Json(new ExploreResultsDto(top, 1, 1));
-        }
+        //    top.Shuffle();
+        //    return Json(new ExploreResultsDto(top, 1, 1));
+        //}
 
         /*  [HttpPost("getactualltopimg")]
          public async Task<IActionResult> TakeTopIMG()

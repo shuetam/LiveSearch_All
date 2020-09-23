@@ -30,5 +30,6 @@ namespace Live.Core
         public string icon1 {get; set;}
         public string icon2 {get; set;}
         public string icon3 {get; set;}
+        public bool shared { get; set; }
     }
 }
