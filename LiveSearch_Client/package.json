@@ -23,7 +23,7 @@
     "react-redux": "^7.1.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.0.13",
+    "react-scripts": "^1.0.13",
     "react-scroll-wheel-handler": "^1.0.9",
     "react-spotify-player": "^1.0.4",
     "react-youtube": "^7.8.0",
