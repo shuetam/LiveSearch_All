@@ -22,6 +22,9 @@ CREATE TABLE Users
     AuthType NVARCHAR (10) NOT NULL
 )
 
+ALTER TABLE SharedFolders
+ADD  ID UNIQUEIDENTIFIER PRIMARY KEY;
+
 ALTER TABLE Users
 ADD UserRole NVARCHAR (10) NULL;
 
@@ -164,7 +167,7 @@ CREATE TABLE UserImages
     UrlAddress NVARCHAR (MAX) NOT  NULL
 )
 
-select * from UserImages
+select * from SharedFolders
 
 DROP TABLE UserImages
 
