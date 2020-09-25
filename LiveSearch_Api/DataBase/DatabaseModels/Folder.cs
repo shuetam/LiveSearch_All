@@ -17,7 +17,8 @@ public class Folder : Live.Core.Entity
     public List<UserYoutube> UserYouTubes { get; protected set; }
     public List<UserImage> UserImages { get; protected set; }
     public List<UserSpotify> UserSpotify { get; protected set; }
-  
+    public int Followers { get; protected set; }
+
 
     public string icon0 { get => four[0]; }
     public string icon1 { get => four[1]; }
@@ -54,10 +55,31 @@ public class Folder : Live.Core.Entity
             SharedAt = DateTime.Now;
 
         }
+        else
+        {
+            this.CleanFollowers();
+        }
         return IsShared;
     }
 
-  
+    public void AddFollower()
+    {
+        if(this.IsShared)
+            ++this.Followers;
+    }
+
+    public void RemoveFollower()
+    {
+        if(Followers>0 && this.IsShared)
+            --this.Followers;
+    }
+
+    private void CleanFollowers()
+    {
+        this.Followers = 0;
+    }
+
+
     public void SetFourIcons()
     {
         var listYT = this.UserYouTubes.OrderByDescending(x => x.AddedToFolder)

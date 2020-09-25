@@ -137,11 +137,11 @@ namespace Live.Repositories
             }
             var icons = folders.Select(x => _autoMapper.Map<FolderDto>(x)).ToList();
 
-            foreach (var icon in icons)
-            {
-                int followers = _liveContext.SharedFolders.Where(x => x.FolderId.ToString() == icon.id).Count();
-                icon.followers = followers;
-            }
+          //  foreach (var icon in icons)
+           // {
+               // int followers = _liveContext.SharedFolders.Where(x => x.FolderId.ToString() == icon.id).Count();
+               // icon.followers = followers;
+          //  }
 
             //icons.AddRange(folders.Select(x => _autoMapper.Map<IconDto>(x)).ToList());
             //Console.WriteLine("Getting folders");
@@ -166,9 +166,9 @@ namespace Live.Repositories
 
             foreach(var icon in icons)
             {
-                int followers = _liveContext.SharedFolders.Where(x => x.FolderId.ToString() == icon.id).Count();
+               // int followers = _liveContext.SharedFolders.Where(x => x.FolderId.ToString() == icon.id).Count();
                 var followFolder =_liveContext.SharedFolders.FirstOrDefault(x => x.UserId == userId);
-                icon.followers = followers;
+                //icon.followers = followers;
                 icon.left = followFolder.LocLeft;
                 icon.top = followFolder.LocTop;
             }
