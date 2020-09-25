@@ -132,11 +132,12 @@ public class Folder : Live.Core.Entity
 
 }
 
-public class SharedFolder 
+public class SharedFolder : Live.Core.Entity
 {
     public Guid UserId { get; protected set; }
     public Guid FolderId { get; protected set; }
     public Folder Folder { get;  set; }
+    public DateTime FallowedAt { get; protected set; }
     protected SharedFolder()
     {
     }
@@ -144,5 +145,6 @@ public class SharedFolder
     {
         this.FolderId = userId;
         this.UserId = folderId;
+        FallowedAt = DateTime.Now;
     }
 }
