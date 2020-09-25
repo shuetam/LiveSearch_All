@@ -84,6 +84,7 @@ class Folder extends Component {
         var removeIcon = this.props.hideEditors? "" : <div id={this.props.id} onClick = {this.deleteFolder}
         title="Usuń folder"  class={classEntity}>&#43;</div> ;
 
+        var shareIcon = this.props.shared? "" : <div id={this.props.id}  className="shareIcon">&#43;</div>;
 
         var editIconField = <IconEditor 
         onHover = {this.props.onHover}
@@ -104,6 +105,7 @@ class Folder extends Component {
         />
         {editIconField}
         </div> 
+      
 
        
 
@@ -137,7 +139,7 @@ class Folder extends Component {
             onMouseOver={this.props.onHover}
             onMouseLeave={this.props.onLeave}>
             {content}
-
+            {shareIcon}
                     {removeIcon}
 
             <div class="folderLabel"  id={this.props.id} >{this.props.title}</div>

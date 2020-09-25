@@ -35,6 +35,9 @@ class IconEditor extends Component {
         this.props.showTitleEditor(this.props.id, this.props.iconType);
     }
 
+    shareFolder = (event) => {
+        
+    }
 
  shareIconName = (event) => {
     var id =this.props.id;

@@ -531,7 +531,9 @@ namespace Live.Repositories
                 {
                     sharedFolder = new SharedFolder(UserId, FolderId);
                     _liveContext.SharedFolders.Add(sharedFolder);
-                    await _liveContext.SaveChangesAsync();
+                    folder.AddFollower();
+                     _liveContext.Update(folder);
+;                    await _liveContext.SaveChangesAsync();
                     return true;
                 }
             }
@@ -542,10 +544,13 @@ namespace Live.Repositories
         public async Task<bool> UnFollowFolder(Guid UserId, Guid FolderId)
         {
             var sharedFolder = _liveContext.SharedFolders.FirstOrDefault(x => x.UserId == UserId && x.FolderId == FolderId);
+
             var folder = _liveContext.Folders.FirstOrDefault(x => x.ID == FolderId);
             if (folder != null && sharedFolder != null)
             {
                 _liveContext.SharedFolders.Remove(sharedFolder);
+                folder.RemoveFollower();
+                _liveContext.Update(folder);
                 await _liveContext.SaveChangesAsync();
                 return true;
             }

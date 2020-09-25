@@ -17,7 +17,7 @@ public class Folder : Live.Core.Entity
     public List<UserYoutube> UserYouTubes { get; protected set; }
     public List<UserImage> UserImages { get; protected set; }
     public List<UserSpotify> UserSpotify { get; protected set; }
-    public int Followers { get; protected set; }
+    public int? Followers { get; protected set; }
 
 
     public string icon0 { get => four[0]; }
@@ -29,7 +29,7 @@ public class Folder : Live.Core.Entity
     {
 
         if (UserYouTubes.Count() > 5)
-        {
+        { 
             return this.UserYouTubes.OrderBy(x => x.AddedToFolder).Select(x => x.VideoId).ToList()
             .Skip(Math.Max(0, UserYouTubes.Count() - 4)).ToList();
         }

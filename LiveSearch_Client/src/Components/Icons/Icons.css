@@ -440,6 +440,16 @@ z-index: 600;
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 
+.shareIcon {
+    position: absolute;
+    top: -20px;
+    left: -10px;
+    color: rgba(202, 202, 202, 0.945);
+    font-family: Verdana, Geneva, sans-serif;
+    text-shadow: -9px 13px 15px -1px #000000;
+    font-size: 30px;
+}
+
 
 .disableEntity:hover {
    

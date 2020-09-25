@@ -38,7 +38,14 @@ ALTER TABLE Users
 ADD NewSalt NVARCHAR (MAX) NULL;
 
 ALTER TABLE Folders
-ADD IsShared BIT;
+ADD Followers INT;
+
+
+ALTER TABLE Folders
+ADD SharedAt DATETIME NULL;
+
+ALTER TABLE Folders
+ADD ShareDescription NVARCHAR (600) NULL;
 
 ALTER TABLE Users
 ADD NewPasswordHash NVARCHAR (MAX) NULL;

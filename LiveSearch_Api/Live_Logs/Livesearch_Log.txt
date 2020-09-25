@@ -3750,3 +3750,5 @@
    at Live.Repositories.UpdatingRepository.GetLastDate() in C:\Users\ATM PROJEKT\Dysk Google\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 220
    at Live.Repositories.UpdatingRepository.SongsUpdateAsync() in C:\Users\ATM PROJEKT\Dysk Google\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 59
 2020-09-25 00:16:41.545 +02:00 [Information] Finish radio songs update with 103 songs and 1 youtube errors
+2020-09-25 22:14:18.568 +02:00 [Information] Finish radio songs update with 135 songs and 0 youtube errors
+2020-09-25 23:01:11.682 +02:00 [Information] Finish radio songs update with 73 songs and 0 youtube errors
