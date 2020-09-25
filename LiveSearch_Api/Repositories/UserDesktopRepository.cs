@@ -309,6 +309,7 @@ namespace Live.Repositories
             .Include(x => x.UserYoutubes)
             .Include(x => x.UserImages)
             .Include(x => x.UserSpotify)
+            .Include(x => x.FollowedFolders)
             //.Include(x => x.FollowedFolders).ThenInclude(x => x.Folder)
             .FirstOrDefault(x => x.ID == userId);
 
@@ -339,6 +340,16 @@ namespace Live.Repositories
             foreach (var folder in icons.Where(x => x.Type == "FOLDER"))
             {
                 var fol = _liveContext.Folders.FirstOrDefault(x => x.ID.ToString() == folder.Id);
+
+                if (fol != null)
+                {
+                    fol.ChangeLocation(folder.Left, folder.Top);
+                }
+            }
+
+            foreach (var folder in icons.Where(x => x.Type == "FOLLOWED_FOLDER"))
+            {
+                var fol = _liveContext.SharedFolders.FirstOrDefault(x => x.ID.ToString() == folder.Id);
 
                 if (fol != null)
                 {
