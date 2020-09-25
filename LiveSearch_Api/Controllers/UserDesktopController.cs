@@ -124,6 +124,13 @@ namespace Live.Controllers
           return Json(icons);
         }
 
+        [HttpPost("getfollowedfolders")]
+        public async Task<IActionResult> GetFollowedFolders([FromBody] AuthUser user)
+        {
+            var icons = await _desktopRepository.GetFollowedFoldersForUserAsync(this.UserId);
+            return Json(icons);
+        }
+
         [HttpPost("geticonsid")]
         public async Task<IActionResult> GetIconsId([FromBody] AuthUser user)
         {
@@ -155,6 +162,22 @@ namespace Live.Controllers
         {
             var isShared = await _desktopRepository.ShareFolder(this.UserId, entity.FolderId);
             return Json(isShared);
+        }
+
+        [HttpPost("followfolder")]
+        public async Task<IActionResult> FollowFolder([FromBody] EntitySetter entity)
+        {
+            var folderId = new Guid(entity.FolderId);
+            var followed  = await _desktopRepository.FollowFolder(this.UserId, folderId);
+            return Json(followed);
+        }
+
+        [HttpPost("unfollowfolder")]
+        public async Task<IActionResult> UnFollowFolder([FromBody] EntitySetter entity)
+        {
+            var folderId = new Guid(entity.FolderId);
+            var unfollowed = await _desktopRepository.UnFollowFolder(this.UserId, folderId);
+            return Json(unfollowed);
         }
 
 

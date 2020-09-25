@@ -125,19 +125,56 @@ namespace Live.Repositories
 
             //var folers = await _liveContext.Folders.Where(x => x.UserId.ToString() == userId ).ToListAsync();
             var folders = await _liveContext.Folders
+            .Where(x => x.UserId == userId)
             .Include(x => x.UserYouTubes)
             .Include(x => x.UserImages)
             .Include(x => x.UserSpotify)
-            .Where(x => x.UserId == userId).ToListAsync();
+            .ToListAsync();
 
             foreach (var folder in folders)
             {
                 folder.SetFourIcons();
             }
             var icons = folders.Select(x => _autoMapper.Map<FolderDto>(x)).ToList();
+
+          //  foreach (var icon in icons)
+           // {
+               // int followers = _liveContext.SharedFolders.Where(x => x.FolderId.ToString() == icon.id).Count();
+               // icon.followers = followers;
+          //  }
+
             //icons.AddRange(folders.Select(x => _autoMapper.Map<IconDto>(x)).ToList());
             //Console.WriteLine("Getting folders");
             return icons;
+        }
+
+        public async Task<List<FolderDto>> GetFollowedFoldersForUserAsync(Guid userId)
+        {
+            var folders = await _liveContext.SharedFolders.Where(x => x.UserId == userId).Include(y => y.Folder)
+                .Select(z => z.Folder)
+                .Where(x => x.IsShared)
+                .Include(x => x.UserYouTubes)
+                .Include(x => x.UserImages)
+                .Include(x => x.UserSpotify)
+                .ToListAsync();
+
+            foreach (var folder in folders)
+            {
+                folder.SetFourIcons();
+            }
+            var icons = folders.Select(x => _autoMapper.Map<FolderDto>(x)).ToList();
+
+            foreach(var icon in icons)
+            {
+               // int followers = _liveContext.SharedFolders.Where(x => x.FolderId.ToString() == icon.id).Count();
+                var followFolder =_liveContext.SharedFolders.FirstOrDefault(x => x.UserId == userId);
+                //icon.followers = followers;
+                icon.left = followFolder.LocLeft;
+                icon.top = followFolder.LocTop;
+            }
+
+            return icons;
+
         }
 
         public async Task RemoveEntity(Guid userId, string entityId, string entityType)
@@ -272,6 +309,7 @@ namespace Live.Repositories
             .Include(x => x.UserYoutubes)
             .Include(x => x.UserImages)
             .Include(x => x.UserSpotify)
+            .Include(x => x.FollowedFolders)
             //.Include(x => x.FollowedFolders).ThenInclude(x => x.Folder)
             .FirstOrDefault(x => x.ID == userId);
 
@@ -302,6 +340,16 @@ namespace Live.Repositories
             foreach (var folder in icons.Where(x => x.Type == "FOLDER"))
             {
                 var fol = _liveContext.Folders.FirstOrDefault(x => x.ID.ToString() == folder.Id);
+
+                if (fol != null)
+                {
+                    fol.ChangeLocation(folder.Left, folder.Top);
+                }
+            }
+
+            foreach (var folder in icons.Where(x => x.Type == "FOLLOWED_FOLDER"))
+            {
+                var fol = _liveContext.SharedFolders.FirstOrDefault(x => x.ID.ToString() == folder.Id);
 
                 if (fol != null)
                 {
@@ -453,17 +501,56 @@ namespace Live.Repositories
 
         }
 
-        public async Task<bool> ShareFolder(Guid UserId, string FolderId)
+        public async Task<bool> ShareFolder(Guid UserId, string folderId)
         {
-            var folder = _liveContext.Folders.FirstOrDefault(x => x.UserId == UserId && x.ID.ToString() == FolderId);
+            var FolderId = new Guid(folderId);
+            var folder = _liveContext.Folders.FirstOrDefault(x => x.UserId == UserId && x.ID == FolderId);
             bool shared = false;
             if (folder != null)
             {
                 shared = folder.ShareFolder();
+                if (!shared)
+                {
+                    _liveContext.SharedFolders.RemoveRange(_liveContext.SharedFolders.Where(x => x.FolderId == FolderId));
+                }
+
                 _liveContext.Update(folder);
                 await _liveContext.SaveChangesAsync();
             }
             return shared;
+        }
+
+        public async Task<bool> FollowFolder(Guid UserId, Guid FolderId)
+        {
+
+            var sharedFolder = _liveContext.SharedFolders.FirstOrDefault(x => x.UserId == UserId && x.FolderId == FolderId);
+            var folder = _liveContext.Folders.FirstOrDefault(x => x.ID == FolderId);
+            if (folder != null)
+            {
+                if (sharedFolder == null && folder.IsShared)
+                {
+                    sharedFolder = new SharedFolder(UserId, FolderId);
+                    _liveContext.SharedFolders.Add(sharedFolder);
+                    await _liveContext.SaveChangesAsync();
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public async Task<bool> UnFollowFolder(Guid UserId, Guid FolderId)
+        {
+            var sharedFolder = _liveContext.SharedFolders.FirstOrDefault(x => x.UserId == UserId && x.FolderId == FolderId);
+            var folder = _liveContext.Folders.FirstOrDefault(x => x.ID == FolderId);
+            if (folder != null && sharedFolder != null)
+            {
+                _liveContext.SharedFolders.Remove(sharedFolder);
+                await _liveContext.SaveChangesAsync();
+                return true;
+            }
+
+            return false;
         }
 
     }

@@ -10,11 +10,15 @@ public class Folder : Live.Core.Entity
     public string LocLeft { get; protected set; }
     public string LocTop { get; protected set; }
     public string Title { get; protected set; }
+    public string ShareDescription { get; protected set; }
     public bool IsShared { get; protected set; }
     public DateTime CreatedAt { get; protected set; }
+    public DateTime? SharedAt { get; protected set; }
     public List<UserYoutube> UserYouTubes { get; protected set; }
     public List<UserImage> UserImages { get; protected set; }
     public List<UserSpotify> UserSpotify { get; protected set; }
+    public int Followers { get; protected set; }
+
 
     public string icon0 { get => four[0]; }
     public string icon1 { get => four[1]; }
@@ -46,13 +50,36 @@ public class Folder : Live.Core.Entity
     public bool ShareFolder()
     {
         IsShared = !this.IsShared;
+        if(IsShared)
+        {
+            SharedAt = DateTime.Now;
+
+        }
+        else
+        {
+            this.CleanFollowers();
+        }
         return IsShared;
     }
 
-    public void StopSharing()
+    public void AddFollower()
     {
-        IsShared = false;
+        if(this.IsShared)
+            ++this.Followers;
     }
+
+    public void RemoveFollower()
+    {
+        if(Followers>0 && this.IsShared)
+            --this.Followers;
+    }
+
+    private void CleanFollowers()
+    {
+        this.Followers = 0;
+    }
+
+
     public void SetFourIcons()
     {
         var listYT = this.UserYouTubes.OrderByDescending(x => x.AddedToFolder)
@@ -111,9 +138,9 @@ public class Folder : Live.Core.Entity
         UserYouTubes = new List<UserYoutube>();
         UserImages = new List<UserImage>();
         UserSpotify = new List<UserSpotify>();
-        IsShared = false;
-           
+
     }
+
 
     public void ChangeLocation(string left, string top)
     {
@@ -131,20 +158,15 @@ public class Folder : Live.Core.Entity
         this.Title = newTitle;
     }
 
+    public void ChangeDescription(string newDescription)
+    {
+
+        if (newDescription.Length > 150)
+        {
+            newDescription = newDescription.Substring(0, 150);
+        }
+        this.ShareDescription = newDescription;
+    }
+
 }
 
-public class SharedFolder 
-{
-    public Guid ID { get; protected set; }
-    public Guid UserId { get; protected set; }
-    public Guid FolderId { get; protected set; }
-    public Folder Folder { get;  set; }
-    protected SharedFolder()
-    {
-    }
-    public SharedFolder(Guid userId, Guid folderId)
-    {
-        this.FolderId = userId;
-        this.UserId = folderId;
-    }
-}

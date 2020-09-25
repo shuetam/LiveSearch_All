@@ -277,7 +277,7 @@ namespace Live.Repositories
             .Include(x => x.UserSpotify)
             .Where(x => x.IsShared)
             .Skip(skip).Take(count)
-            .ToListAsync(); // add filters and counts
+            .ToListAsync(); // add query
 
             // will be segereged by create date, populars, modyfy date
 
@@ -286,7 +286,12 @@ namespace Live.Repositories
                 folder.SetFourIcons();
             }
             var icons = folders.Select(x => _autoMapper.Map<FolderDto>(x)).ToList();
-        
+            foreach (var icon in icons)
+            {
+               // int followers = _liveContext.SharedFolders.Where(x => x.FolderId.ToString() == icon.id).Count();
+               // icon.followers = followers;
+                icon.setLocation(false);
+            }
             return icons;
         }
 
