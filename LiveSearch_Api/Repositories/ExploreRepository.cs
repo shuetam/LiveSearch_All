@@ -286,7 +286,11 @@ namespace Live.Repositories
                 folder.SetFourIcons();
             }
             var icons = folders.Select(x => _autoMapper.Map<FolderDto>(x)).ToList();
-        
+            foreach (var icon in icons)
+            {
+                int followers = _liveContext.SharedFolders.Where(x => x.FolderId.ToString() == icon.id).Count();
+                icon.followers = followers;
+            }
             return icons;
         }
 

@@ -17,6 +17,7 @@ public class Folder : Live.Core.Entity
     public List<UserYoutube> UserYouTubes { get; protected set; }
     public List<UserImage> UserImages { get; protected set; }
     public List<UserSpotify> UserSpotify { get; protected set; }
+  
 
     public string icon0 { get => four[0]; }
     public string icon1 { get => four[1]; }
@@ -56,10 +57,7 @@ public class Folder : Live.Core.Entity
         return IsShared;
     }
 
-    public void StopSharing()
-    {
-        IsShared = false;
-    }
+  
     public void SetFourIcons()
     {
         var listYT = this.UserYouTubes.OrderByDescending(x => x.AddedToFolder)
@@ -120,6 +118,7 @@ public class Folder : Live.Core.Entity
         UserSpotify = new List<UserSpotify>();
 
     }
+
 
     public void ChangeLocation(string left, string top)
     {

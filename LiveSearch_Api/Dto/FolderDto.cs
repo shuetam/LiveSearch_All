@@ -12,6 +12,7 @@ namespace Live.Core
     {
         public DateTime? DateCreated {get; set;}
         public string shareDescription { get; set; }
+        public int followers { get; set; }
         public FolderDto(string _id, string _type) : base(_id, "", _type)
         {
         }
