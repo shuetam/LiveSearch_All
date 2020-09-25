@@ -12,6 +12,7 @@ public class Folder : Live.Core.Entity
     public string Title { get; protected set; }
     public bool IsShared { get; protected set; }
     public DateTime CreatedAt { get; protected set; }
+    public DateTime? SharedAt { get; protected set; }
     public List<UserYoutube> UserYouTubes { get; protected set; }
     public List<UserImage> UserImages { get; protected set; }
     public List<UserSpotify> UserSpotify { get; protected set; }
@@ -46,6 +47,11 @@ public class Folder : Live.Core.Entity
     public bool ShareFolder()
     {
         IsShared = !this.IsShared;
+        if(IsShared)
+        {
+            SharedAt = DateTime.Now;
+
+        }
         return IsShared;
     }
 
@@ -132,19 +138,3 @@ public class Folder : Live.Core.Entity
 
 }
 
-public class SharedFolder : Live.Core.Entity
-{
-    public Guid UserId { get; protected set; }
-    public Guid FolderId { get; protected set; }
-    public Folder Folder { get;  set; }
-    public DateTime FallowedAt { get; protected set; }
-    protected SharedFolder()
-    {
-    }
-    public SharedFolder(Guid userId, Guid folderId)
-    {
-        this.FolderId = userId;
-        this.UserId = folderId;
-        FallowedAt = DateTime.Now;
-    }
-}

@@ -453,17 +453,56 @@ namespace Live.Repositories
 
         }
 
-        public async Task<bool> ShareFolder(Guid UserId, string FolderId)
+        public async Task<bool> ShareFolder(Guid UserId, string folderId)
         {
-            var folder = _liveContext.Folders.FirstOrDefault(x => x.UserId == UserId && x.ID.ToString() == FolderId);
+            var FolderId = new Guid(folderId);
+            var folder = _liveContext.Folders.FirstOrDefault(x => x.UserId == UserId && x.ID == FolderId);
             bool shared = false;
             if (folder != null)
             {
                 shared = folder.ShareFolder();
+                if(!shared)
+                {
+                    _liveContext.SharedFolders.RemoveRange(_liveContext.SharedFolders.Where(x => x.FolderId == FolderId));
+                }
+
                 _liveContext.Update(folder);
                 await _liveContext.SaveChangesAsync();
             }
             return shared;
+        }
+
+        public async Task<bool> FollowFolder(Guid UserId, Guid FolderId)
+        {
+           
+            var sharedFolder = _liveContext.SharedFolders.FirstOrDefault(x => x.UserId == UserId && x.FolderId == FolderId);
+            var folder = _liveContext.Folders.FirstOrDefault(x => x.ID == FolderId);
+            if (folder != null)
+            {
+                if (sharedFolder == null && folder.IsShared)
+                {
+                    sharedFolder = new SharedFolder(UserId, FolderId);
+                    _liveContext.SharedFolders.Add(sharedFolder);
+                    await _liveContext.SaveChangesAsync();
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public async Task<bool> UnFollowFolder(Guid UserId, Guid FolderId)
+        {
+            var sharedFolder = _liveContext.SharedFolders.FirstOrDefault(x => x.UserId == UserId && x.FolderId == FolderId);
+            var folder = _liveContext.Folders.FirstOrDefault(x => x.ID == FolderId);
+            if (folder != null && sharedFolder != null)
+            {
+                    _liveContext.SharedFolders.Remove(sharedFolder);
+                    await _liveContext.SaveChangesAsync();
+                    return true;
+            }
+
+            return false;
         }
 
     }

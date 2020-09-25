@@ -30,8 +30,8 @@ namespace Live.Repositories
         Task SaveIconsLocations(Guid userId, List<EntitySetter> icons);
         Task<List<IconDto>> GetNewIcons( Guid userId, string url);
         Task<bool> ShareFolder(Guid UserId, string FolderId);
-
-
+        Task<bool> FollowFolder(Guid UserId, Guid FolderId);
+        Task<bool> UnFollowFolder(Guid UserId, Guid FolderId);
     }
 
 }

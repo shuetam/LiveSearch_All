@@ -277,7 +277,7 @@ namespace Live.Repositories
             .Include(x => x.UserSpotify)
             .Where(x => x.IsShared)
             .Skip(skip).Take(count)
-            .ToListAsync(); // add filters and counts
+            .ToListAsync(); // add query
 
             // will be segereged by create date, populars, modyfy date
 
