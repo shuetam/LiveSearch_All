@@ -12,7 +12,7 @@ namespace Live.Repositories
         Task<List<IconDto>> GetAllActuallYTAsync();
         Task<List<IconDto>>  GetAllActuallIMGAsync();
         Task<ExploreResultsDto>  ExploreIconsAsync(string query, int count, int skip);
-         Task<List<FolderDto>> GetAllSharedFoldersAsync(string query, int count, int skip);
+         Task<List<FolderDto>> GetAllSharedFoldersAsync(string query, int skip, int count);
 
 
     }

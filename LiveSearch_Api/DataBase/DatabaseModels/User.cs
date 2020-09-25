@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Live.Core;
+using Live.DataBase.DatabaseModels;
 
 public class User : Entity
 {

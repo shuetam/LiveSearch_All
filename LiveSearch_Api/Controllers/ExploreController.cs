@@ -41,6 +41,18 @@ namespace Live.Controllers
             top.AddRange(topImg);
             var results = new ExploreResultsDto(top, 6, 1);
             return Json(results);
-        }  
+        }
+
+        [HttpPost("getsharedfolders")]
+        public async Task<IActionResult> SharedFolders([FromBody] ExploreQuery Query)
+        {
+            int count = Query.count;
+            int skip = count * Query.next;
+            string query = Query.query;
+            var folders = await _exploreRepository.GetAllSharedFoldersAsync(query, skip, count);
+           
+            var results = new ExploreResultsDto(folders, folders.Count);
+            return Json(results);
+        }
     }
 }

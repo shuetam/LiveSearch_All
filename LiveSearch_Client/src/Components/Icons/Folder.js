@@ -94,6 +94,7 @@ class Folder extends Component {
         showTitleEditor={this.props.showTitleEditor}
         title={this.props.title}
         bottom={this.props.bottom}
+        shared = {this.props.shared}
         iconType="FOLDER"></IconEditor>
 
         var editIcon = this.props.hideEditors? "" :
