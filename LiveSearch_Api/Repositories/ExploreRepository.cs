@@ -290,6 +290,7 @@ namespace Live.Repositories
             {
                 int followers = _liveContext.SharedFolders.Where(x => x.FolderId.ToString() == icon.id).Count();
                 icon.followers = followers;
+                icon.setLocation(false);
             }
             return icons;
         }

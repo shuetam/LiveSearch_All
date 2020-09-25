@@ -167,7 +167,10 @@ namespace Live.Repositories
             foreach(var icon in icons)
             {
                 int followers = _liveContext.SharedFolders.Where(x => x.FolderId.ToString() == icon.id).Count();
+                var followFolder =_liveContext.SharedFolders.FirstOrDefault(x => x.UserId == userId);
                 icon.followers = followers;
+                icon.left = followFolder.LocLeft;
+                icon.top = followFolder.LocTop;
             }
 
             return icons;

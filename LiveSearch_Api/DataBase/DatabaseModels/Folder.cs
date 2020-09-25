@@ -136,5 +136,15 @@ public class Folder : Live.Core.Entity
         this.Title = newTitle;
     }
 
+    public void ChangeDescription(string newDescription)
+    {
+
+        if (newDescription.Length > 150)
+        {
+            newDescription = newDescription.Substring(0, 150);
+        }
+        this.ShareDescription = newDescription;
+    }
+
 }
 
