@@ -10,6 +10,7 @@ public class Folder : Live.Core.Entity
     public string LocLeft { get; protected set; }
     public string LocTop { get; protected set; }
     public string Title { get; protected set; }
+    public string ShareDescription { get; protected set; }
     public bool IsShared { get; protected set; }
     public DateTime CreatedAt { get; protected set; }
     public DateTime? SharedAt { get; protected set; }

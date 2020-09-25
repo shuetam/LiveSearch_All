@@ -11,6 +11,7 @@ namespace Live.Core
     public class FolderDto: IconDto
     {
         public DateTime? DateCreated {get; set;}
+        public string shareDescription { get; set; }
         public FolderDto(string _id, string _type) : base(_id, "", _type)
         {
         }

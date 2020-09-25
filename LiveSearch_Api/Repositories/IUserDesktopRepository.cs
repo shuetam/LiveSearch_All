@@ -25,6 +25,7 @@ namespace Live.Repositories
         Task RemoveEntity(Guid userId, string entityId, string entityType);
         Task MoveEntityFromFolder(Guid userId, string entityId, string entityType);
         Task<List<FolderDto>> GetAllFoldersForUserAsync(Guid userId);
+        Task<List<FolderDto>> GetFollowedFoldersForUserAsync(Guid userId);
         Task<List<string>> GetAllIconsIdAsync(Guid userId);
 
         Task SaveIconsLocations(Guid userId, List<EntitySetter> icons);

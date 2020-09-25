@@ -124,6 +124,13 @@ namespace Live.Controllers
           return Json(icons);
         }
 
+        [HttpPost("getfollowedfolders")]
+        public async Task<IActionResult> GetFollowedFolders([FromBody] AuthUser user)
+        {
+            var icons = await _desktopRepository.GetFollowedFoldersForUserAsync(this.UserId);
+            return Json(icons);
+        }
+
         [HttpPost("geticonsid")]
         public async Task<IActionResult> GetIconsId([FromBody] AuthUser user)
         {

@@ -125,10 +125,11 @@ namespace Live.Repositories
 
             //var folers = await _liveContext.Folders.Where(x => x.UserId.ToString() == userId ).ToListAsync();
             var folders = await _liveContext.Folders
+            .Where(x => x.UserId == userId)
             .Include(x => x.UserYouTubes)
             .Include(x => x.UserImages)
             .Include(x => x.UserSpotify)
-            .Where(x => x.UserId == userId).ToListAsync();
+            .ToListAsync();
 
             foreach (var folder in folders)
             {
@@ -138,6 +139,25 @@ namespace Live.Repositories
             //icons.AddRange(folders.Select(x => _autoMapper.Map<IconDto>(x)).ToList());
             //Console.WriteLine("Getting folders");
             return icons;
+        }
+
+        public async Task<List<FolderDto>> GetFollowedFoldersForUserAsync(Guid userId)
+        {
+            var folders = await _liveContext.SharedFolders.Where(x => x.UserId == userId).Include(y => y.Folder)
+                .Select(z => z.Folder)
+                .Where(x => x.IsShared)
+                .Include(x => x.UserYouTubes)
+                .Include(x => x.UserImages)
+                .Include(x => x.UserSpotify)
+                .ToListAsync();
+
+            foreach (var folder in folders)
+            {
+                folder.SetFourIcons();
+            }
+            var icons = folders.Select(x => _autoMapper.Map<FolderDto>(x)).ToList();
+            return icons;
+
         }
 
         public async Task RemoveEntity(Guid userId, string entityId, string entityType)
@@ -461,7 +481,7 @@ namespace Live.Repositories
             if (folder != null)
             {
                 shared = folder.ShareFolder();
-                if(!shared)
+                if (!shared)
                 {
                     _liveContext.SharedFolders.RemoveRange(_liveContext.SharedFolders.Where(x => x.FolderId == FolderId));
                 }
@@ -474,7 +494,7 @@ namespace Live.Repositories
 
         public async Task<bool> FollowFolder(Guid UserId, Guid FolderId)
         {
-           
+
             var sharedFolder = _liveContext.SharedFolders.FirstOrDefault(x => x.UserId == UserId && x.FolderId == FolderId);
             var folder = _liveContext.Folders.FirstOrDefault(x => x.ID == FolderId);
             if (folder != null)
@@ -497,9 +517,9 @@ namespace Live.Repositories
             var folder = _liveContext.Folders.FirstOrDefault(x => x.ID == FolderId);
             if (folder != null && sharedFolder != null)
             {
-                    _liveContext.SharedFolders.Remove(sharedFolder);
-                    await _liveContext.SaveChangesAsync();
-                    return true;
+                _liveContext.SharedFolders.Remove(sharedFolder);
+                await _liveContext.SaveChangesAsync();
+                return true;
             }
 
             return false;

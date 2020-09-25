@@ -127,7 +127,8 @@ namespace Live.Mapper
                 .ForMember(d => d.icon3, s => s.MapFrom(x => x.icon3))
                 .ForMember(d => d.title, s => s.MapFrom(x => x.Title))
                 .ForMember(d => d.type, s => s.MapFrom(x => "FOLDER"))
-                .ForMember(d => d.shared, s => s.MapFrom(x => x.IsShared));
+                .ForMember(d => d.shared, s => s.MapFrom(x => x.IsShared))
+                .ForMember(d => d.shareDescription, s => s.MapFrom(x => x.ShareDescription));
 
             config.CreateMap<Folder, IconDto>()
                 .ForMember(d => d.id, s => s.MapFrom(x => x.ID.ToString()))
