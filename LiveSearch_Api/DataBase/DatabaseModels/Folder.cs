@@ -111,7 +111,8 @@ public class Folder : Live.Core.Entity
         UserYouTubes = new List<UserYoutube>();
         UserImages = new List<UserImage>();
         UserSpotify = new List<UserSpotify>();
-
+        IsShared = false;
+           
     }
 
     public void ChangeLocation(string left, string top)
@@ -134,6 +135,7 @@ public class Folder : Live.Core.Entity
 
 public class SharedFolder 
 {
+    public Guid ID { get; protected set; }
     public Guid UserId { get; protected set; }
     public Guid FolderId { get; protected set; }
     public Folder Folder { get;  set; }

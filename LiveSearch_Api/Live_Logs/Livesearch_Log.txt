@@ -3749,3 +3749,4 @@
    at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
    at Live.Repositories.UpdatingRepository.GetLastDate() in C:\Users\ATM PROJEKT\Dysk Google\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 220
    at Live.Repositories.UpdatingRepository.SongsUpdateAsync() in C:\Users\ATM PROJEKT\Dysk Google\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 59
+2020-09-25 00:16:41.545 +02:00 [Information] Finish radio songs update with 103 songs and 1 youtube errors
