@@ -18,7 +18,16 @@ class EditField extends Component {
             titleNum: false,
             descLength: 500,
             descNum: false,
-            shared: this.props.shared
+            shared: false
+        }
+    }
+
+    componentDidMount() {
+        var folder = this.props.folder;
+        if(folder) {
+            this.setState({editedTitle: folder.title});
+            this.setState({titleLength: 20-folder.title.length});
+            this.setState({shared: folder.shared});
         }
     }
 
@@ -48,6 +57,10 @@ class EditField extends Component {
     }
 
     shareHandler = () => {
+        var folder = this.props.folder;
+        debugger;
+        this.setState({editedDesc: ""});
+        this.setState({descLength: 500});
         this.setState({shared: !this.state.shared});
     }
 
@@ -85,19 +98,17 @@ let descNum = this.state.descNum?  this.state.descLength : "";
 
 var shareIcon = this.state.shared? <div id={this.props.id}   className="lockIconF openIconF"><i  class="icon-lock-open-alt"/>
 <span style={{fontSize: "15px"}}>Publiczny</span></div> 
-: <div className="lockIconF" ><i id={this.props.id} class="icon-lock"/>
+: <div className="lockIconF" ><i class="icon-lock"/>
  <span style={{fontSize: "15px"}}>Prywatny</span></div>;
 
- var shareButton = this.state.shared? <button class="titleButton privateButton" onClick={this.shareHandler} style={{fontSize: 12, width: "150px",  padding: "5px", marginLeft: "15px"}}>
- Ustaw jako prywatny</button> :<div><button class="titleButton" onClick={this.shareHandler} style={{fontSize: 14, width: "200px",  padding: "5px", marginLeft: "15px"}}>
- Udostępnij folder  </button> <div  className="lockIconF" style={{fontSize: "12px", padding: "5px", color: "rgba(255, 255, 255, 0.501)"}}>Udostępnij folder aby umożliwić innym użytkownikom jego przeglądanie,
+ var shareButton = this.state.shared? <button class="titleButton privateButton" onClick={this.shareHandler} style={{fontSize: 12, width: "150px",  padding: "5px"}}>
+ <i class="icon-lock"/>Ustaw jako prywatny</button> :<div><button class="titleButton" onClick={this.shareHandler} style={{fontSize: 14, width: "200px",  padding: "5px"}}>
+ <i  class="icon-lock-open-alt"/>Udostępnij folder  </button> <div  className="lockIconF" style={{fontSize: "12px", padding: "5px", color: "rgba(255, 255, 255, 0.501)"}}>Udostępnij folder aby umożliwić innym użytkownikom jego przeglądanie,
       obserwowanie i zapisywanie zawartych w nim ikon na swoich pulpitach. Użytkownicy nie będą mieli możliwości 
-      edytowania i usuwania ikon w tym folderze.</div></div>
+      edytowania i usuwania ikon w Twoim folderze.</div></div>
 
 var shareButton = <div>
-    {shareIcon} 
-    {shareButton}
-</div>
+    {shareButton}</div>
 
 var deleteButton = <button class="titleButton deleteButton" onClick={this.editFolderDelete} 
  style={{fontSize: 13, padding: "3px",  width: '90px'}}>Usuń folder</button>
@@ -110,14 +121,14 @@ var handlerButtons =  <div className="editHandler">
 </div>
 
         let editor = 
-    (<div class="fieldAct fieldEditor"><span style={{fontSize: "17px"}}>
-        Tytuł: {titleEditor}</span><span style={{fontSize: "12px", position: "absolute", top: "28px", left: "407px"}}>
+    (<div class="fieldAct fieldEditor"> {shareIcon} <span style={{fontSize: "17px"}}>
+        Tytuł: {titleEditor}</span><span style={{fontSize: "12px", position: "absolute", top: "52px", left: "407px"}}>
             {titleNum}</span><p/>
             <div className={!this.state.shared? "disable": ""}>
             Publiczny opis:
             {descriptionEditor}
             </div>
-            <span style={{fontSize: "12px", position: "absolute", top: "180px", left: "590px"}}>
+            <span style={{fontSize: "12px", position: "absolute", top: "203px", left: "590px"}}>
             {descNum}</span>
             {shareButton}
             {handlerButtons}

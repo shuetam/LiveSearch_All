@@ -341,7 +341,7 @@ class UserDesktop extends Component {
             this.setState({ entityID:  lastIcon.id });
             this.setState({entityTags: this.getIconTags(lastIcon.id)});
             //this.setState({ytField: false});
-debugger;
+
             this.setState({fieldType: type});
 
            /*   if(type == "YT") {
@@ -909,6 +909,9 @@ debugger;
 
 
         showFolderEditor= (id) => {
+            var folder = this.getIconById(id);
+            debugger;
+            this.setState({editedFolder: folder});
             this.setState({fieldType: "FOLDER_EDITOR"});
         }
 
@@ -1506,14 +1509,15 @@ debugger;
                 field = ""
                 break;
             case "FOLDER_EDITOR":
-                field = <EditField/>
+                field = <EditField folder={this.state.editedFolder}/>
                 break;
             case "":
                 field = <LoadingField/>
                 break;
           }
-            //return field;
-          return <EditField/>;
+       
+            return field;
+          //return <EditField/>;
 
     }
    
@@ -1892,21 +1896,14 @@ setAddingIcon = () => {
         </div>
         </div>; */
 
-
-
         let tagsField = this.state.loadedIcons? <TagsField noIcons = {!this.anyIcons()}  searchTag={this.props.searchTag} fromDesk={true} setTags={this.showTitleEditor}  id={this.state.entityID} tags = {this.state.entityTags} />  : "";
 
-
             let field = "";
-
-        
-
-
 
         if(this.props.isAuthenticated) {
 
             field = this.getField();
-            debugger;
+           
            /*  switch(this.state.fieldType) {
                 case "YT":
                     field = <Field play={this.state.entityID} show={this.state.loadedIcons} nextSong={this.nextSongHandler} loadText={this.props.fetchData} />
@@ -1959,7 +1956,7 @@ setAddingIcon = () => {
             field = <LoginField/>
  
         }
-debugger;
+
           let tagsEdit =  this.state.folderEditing?  ""
           : 
          
