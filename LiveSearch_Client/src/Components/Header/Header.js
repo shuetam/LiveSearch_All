@@ -8,7 +8,7 @@ import LiveRegister from './LiveRegister.js';
 //import "../../Fontello/css/fontello.css";
 //import "../../icon/css/fontello.css";
 //import "../../Icons/css/fontello.css";
-import "../../Icons/css/folder-add.css";
+import "../../Icons1/css/folder-add.css";
 //import "../../Fontello/css/folder-add.css";
 import { Link, Route, NavLink, BrowserRouter, Switch } from 'react-router-dom';
 import YTArea from '../Areas/YTArea';

@@ -3752,3 +3752,9 @@
 2020-09-25 00:16:41.545 +02:00 [Information] Finish radio songs update with 103 songs and 1 youtube errors
 2020-09-25 22:14:18.568 +02:00 [Information] Finish radio songs update with 135 songs and 0 youtube errors
 2020-09-25 23:01:11.682 +02:00 [Information] Finish radio songs update with 73 songs and 0 youtube errors
+2020-09-26 17:31:22.070 +02:00 [Information] Finish radio songs update with 548 songs and 3 youtube errors
+2020-09-26 19:00:34.071 +02:00 [Information] Finish radio songs update with 92 songs and 0 youtube errors
+2020-09-26 20:00:56.628 +02:00 [Information] Finish radio songs update with 86 songs and 1 youtube errors
+2020-09-26 21:00:37.450 +02:00 [Information] Finish radio songs update with 66 songs and 1 youtube errors
+2020-09-26 22:03:15.992 +02:00 [Information] Finish radio songs update with 69 songs and 0 youtube errors
+2020-09-26 23:08:39.872 +02:00 [Information] Finish radio songs update with 80 songs and 0 youtube errors

@@ -440,16 +440,21 @@ z-index: 600;
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 
-.shareIcon {
+.lockIcon {
     position: absolute;
-    top: -20px;
-    left: -10px;
-    color: rgba(202, 202, 202, 0.945);
+    top: -16px;
+    left: -13px;
+    color: rgba(221, 221, 221, 0.945);
     font-family: Verdana, Geneva, sans-serif;
-    text-shadow: -9px 13px 15px -1px #000000;
-    font-size: 30px;
+    text-shadow: rgba(29, 29, 29, 0.979) -3px 2px 1px, rgba(0, 0, 0, 0.911) 0px 0px 5px;
+    font-size: 17px;
 }
 
+.openIcon {
+
+    color: rgba(0, 201, 43, 0.945);
+
+}
 
 .disableEntity:hover {
    
