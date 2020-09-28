@@ -155,7 +155,7 @@ namespace Live.Controllers
           //return Json(icons);
         }
 
-        [HttpPost("sharefolder")]
+        [HttpPost("editfolder")]
         public async Task<IActionResult> ShareFolder([FromBody] EntitySetter entity)
         {
             var folder = await _desktopRepository.EditFolder(this.UserId, entity);

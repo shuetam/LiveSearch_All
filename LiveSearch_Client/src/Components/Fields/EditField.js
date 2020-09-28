@@ -71,6 +71,27 @@ class EditField extends Component {
         this.setState({shared: false});
     }
 
+    saveFolderHandler = () => {
+
+        const data = {
+            Id: folder.Id,
+            Type: "FOLDER",
+            Title: folder.title,
+            Description: folder.description,
+            Shared: folder.shared
+            }
+
+
+        var folder = {
+            Id: this.props.folder.Id,
+            title: this.state.editedTitle,
+            description: this.state.editedDesc,
+            shared: this.state.shared
+        }
+
+        this.props.saveFolder(folder);
+    }
+
     render() {
  
 

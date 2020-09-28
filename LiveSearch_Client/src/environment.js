@@ -49,8 +49,8 @@ export const URL = {
     loginUser: "user/userlogin",
     resetPassword:  "user/resetpassword",
     confirmPassword: "user/confirmpassword",
-    getuseremail: "UserDesktop/getuseremail"
-    
+    getuseremail: "UserDesktop/getuseremail",
+    editFolder: "UserDesktop/editfolder"   
 }
 
 export const PATHES = {

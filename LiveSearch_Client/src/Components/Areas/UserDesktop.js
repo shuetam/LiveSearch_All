@@ -1044,6 +1044,35 @@ class UserDesktop extends Component {
     }
 
 
+
+    editFolderHandler = (folder) => {
+       
+        const data = {
+            Id: folder.Id,
+            Type: "FOLDER",
+            Title: folder.title,
+            Description: folder.description,
+            Shared: folder.shared
+            }
+
+        axios.post(URL.api+URL.editFolder, data, this.state.authConfig)
+        .then((result) => {
+          
+           var icon = this.getIconById(this.state.entityID);
+           var iconType = icon.type;
+           var folder = this.getIconById(result.data.id);
+           folder.title = result.data.title;
+           folder.shared = result.data.shared;
+
+         this.setState({ fieldType: iconType});
+             
+            })
+        .catch(error => {this.Alert("Wystąpił błąd przy zapisie folderu. Spróbuj ponownie później.")}); 
+    }
+
+
+
+
     addIconHandlerPress = (event) => {
         debugger;
         if(event.key == "Enter") {
@@ -1509,7 +1538,7 @@ class UserDesktop extends Component {
                 field = ""
                 break;
             case "FOLDER_EDITOR":
-                field = <EditField folder={this.state.editedFolder}/>
+                field = <EditField folder={this.state.editedFolder} saveFolder={this.editFolderHandler}/>
                 break;
             case "":
                 field = <LoadingField/>
