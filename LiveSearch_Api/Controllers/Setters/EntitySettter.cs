@@ -17,11 +17,13 @@ namespace Live.Controllers
         public string Source {get; set;}
         //public string UserId {get; set;}
         public string Type {get; set;}
-         public string Title {get; set;}
+        public string Title {get; set;}
         public string Left {get; set;}
         public string Top {get; set;}
         public string FolderId {get; set;}
         public List<string> tags {get; set;}
+        public bool Shared { get; set; }
+        public string Description { get; set; }
     }
 
 }

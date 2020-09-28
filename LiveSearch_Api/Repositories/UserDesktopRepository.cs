@@ -295,9 +295,10 @@ namespace Live.Repositories
             return new { folder = _autoMapper.Map<FolderDto>(folder), entityId = entityId };
         }
 
-        public async Task<FolderDto> CreateFolderAsync(Guid userId, string Title)
+        public async Task<FolderDto> CreateFolderAsync(Guid userId, EntitySetter folderSetter)
         {
-            var folder = new Folder(userId, Title);
+            //var folder = new Folder(userId, Title);
+            var folder = new Folder(userId, folderSetter);
             await _liveContext.Folders.AddAsync(folder);
             await _liveContext.SaveChangesAsync();
             return _autoMapper.Map<FolderDto>(folder);
@@ -501,14 +502,16 @@ namespace Live.Repositories
 
         }
 
-        public async Task<bool> ShareFolder(Guid UserId, string folderId)
+        public async Task<FolderDto> EditFolder(Guid UserId, EntitySetter folderSetter)
         {
-            var FolderId = new Guid(folderId);
+            var FolderId = new Guid(folderSetter.Id);
             var folder = _liveContext.Folders.FirstOrDefault(x => x.UserId == UserId && x.ID == FolderId);
-            bool shared = false;
             if (folder != null)
             {
-                shared = folder.ShareFolder();
+                folder.ChangeDescription(folderSetter.Description);
+                folder.ChangeTitle(folderSetter.Title);
+
+                bool shared = folder.ShareFolder(folderSetter.Shared);
                 if (!shared)
                 {
                     _liveContext.SharedFolders.RemoveRange(_liveContext.SharedFolders.Where(x => x.FolderId == FolderId));
@@ -517,7 +520,7 @@ namespace Live.Repositories
                 _liveContext.Update(folder);
                 await _liveContext.SaveChangesAsync();
             }
-            return shared;
+            return _autoMapper.Map<FolderDto>(folder);
         }
 
         public async Task<bool> FollowFolder(Guid UserId, Guid FolderId)

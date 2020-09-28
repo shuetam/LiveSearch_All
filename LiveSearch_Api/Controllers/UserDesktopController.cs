@@ -48,8 +48,6 @@ namespace Live.Controllers
 
         }
   
-
-
            if(icon.Type == "YT")
            {
             var added = await _desktopRepository.AddYouTubeAsync(icon, this.UserId, tagsString);
@@ -73,7 +71,7 @@ namespace Live.Controllers
         public async Task<IActionResult> CreateFolder([FromBody] EntitySetter folder)
         {
            // Console.Write(folder.Title);
-            var newFolder = await _desktopRepository.CreateFolderAsync(this.UserId, folder.Title);
+            var newFolder = await _desktopRepository.CreateFolderAsync(this.UserId, folder);
             return Json(newFolder);
         }
 
@@ -160,8 +158,8 @@ namespace Live.Controllers
         [HttpPost("sharefolder")]
         public async Task<IActionResult> ShareFolder([FromBody] EntitySetter entity)
         {
-            var isShared = await _desktopRepository.ShareFolder(this.UserId, entity.FolderId);
-            return Json(isShared);
+            var folder = await _desktopRepository.EditFolder(this.UserId, entity);
+            return Json(folder);
         }
 
         [HttpPost("followfolder")]

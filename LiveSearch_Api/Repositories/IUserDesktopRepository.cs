@@ -19,7 +19,7 @@ namespace Live.Repositories
         Task<bool> AddYouTubeAsync(EntitySetter addYoutube, Guid userId, string tagsString);
         Task<bool> AddImageAsync(EntitySetter addYoutube, Guid userId, string tagsString);
        Task<bool> AddSpotifyAsync(EntitySetter addSpotify, Guid userId, string tagsString);
-        Task<FolderDto> CreateFolderAsync(Guid userId, string Title);
+        Task<FolderDto> CreateFolderAsync(Guid userId, EntitySetter Folder);
         Task<object> AddEntityToFolder(Guid userId, string folderId, string entityId, string entityType);
     
         Task RemoveEntity(Guid userId, string entityId, string entityType);
@@ -30,7 +30,7 @@ namespace Live.Repositories
 
         Task SaveIconsLocations(Guid userId, List<EntitySetter> icons);
         Task<List<IconDto>> GetNewIcons( Guid userId, string url);
-        Task<bool> ShareFolder(Guid UserId, string FolderId);
+        Task<FolderDto> EditFolder(Guid UserId, EntitySetter folderSetter);
         Task<bool> FollowFolder(Guid UserId, Guid FolderId);
         Task<bool> UnFollowFolder(Guid UserId, Guid FolderId);
     }

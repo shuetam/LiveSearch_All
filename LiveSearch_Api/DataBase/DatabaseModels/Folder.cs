@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Live.Controllers;
 using Live.Core;
 
 public class Folder : Live.Core.Entity
@@ -47,10 +48,10 @@ public class Folder : Live.Core.Entity
         return "https://i.ytimg.com/vi/" + videoId + "/hqdefault.jpg";
     }
 
-    public bool ShareFolder()
+    public bool ShareFolder(bool shared)
     {
-        IsShared = !this.IsShared;
-        if(IsShared)
+        IsShared = shared;
+        if (shared)
         {
             SharedAt = DateTime.Now;
 
@@ -64,13 +65,13 @@ public class Folder : Live.Core.Entity
 
     public void AddFollower()
     {
-        if(this.IsShared)
+        if (this.IsShared)
             ++this.Followers;
     }
 
     public void RemoveFollower()
     {
-        if(Followers>0 && this.IsShared)
+        if (Followers > 0 && this.IsShared)
             --this.Followers;
     }
 
@@ -142,6 +143,20 @@ public class Folder : Live.Core.Entity
     }
 
 
+    public Folder(Guid userId, EntitySetter folder)
+    {
+        UserId = userId;
+        Title = folder.Title;
+        IsShared = folder.Shared;
+        ShareDescription = folder.Description;
+        LocLeft = "10vw";
+        LocTop = "10vh";
+        CreatedAt = DateTime.Now;
+        UserYouTubes = new List<UserYoutube>();
+        UserImages = new List<UserImage>();
+        UserSpotify = new List<UserSpotify>();
+    }
+
     public void ChangeLocation(string left, string top)
     {
         this.LocLeft = left;
@@ -150,22 +165,26 @@ public class Folder : Live.Core.Entity
 
     public void ChangeTitle(string newTitle)
     {
-
-        if (newTitle.Length > 20)
+        if (newTitle != this.Title)
         {
-            newTitle = newTitle.Substring(0, 20);
+            if (newTitle.Length > 20)
+            {
+                newTitle = newTitle.Substring(0, 20);
+            }
+            this.Title = newTitle;
         }
-        this.Title = newTitle;
     }
 
     public void ChangeDescription(string newDescription)
     {
-
-        if (newDescription.Length > 150)
+        if (newDescription != this.ShareDescription)
         {
-            newDescription = newDescription.Substring(0, 150);
+            if (newDescription.Length > 150)
+            {
+                newDescription = newDescription.Substring(0, 150);
+            }
+            this.ShareDescription = newDescription;
         }
-        this.ShareDescription = newDescription;
     }
 
 }
