@@ -37,6 +37,16 @@ ADD ResetId UNIQUEIDENTIFIER NULL;
 ALTER TABLE Users
 ADD NewSalt NVARCHAR (MAX) NULL;
 
+ALTER TABLE Folders
+ADD Followers INT;
+
+
+ALTER TABLE Folders
+ADD SharedAt DATETIME NULL;
+
+ALTER TABLE Folders
+ADD ShareDescription NVARCHAR (600) NULL;
+
 ALTER TABLE Users
 ADD NewPasswordHash NVARCHAR (MAX) NULL;
 
@@ -70,9 +80,14 @@ WHERE AuthType like 'Facebook'
 
 UPDATE Users
 SET IsActive = 1
-WHERE AuthType like 'Facebook' 
+WHERE TRUE
 
-select * from Users
+
+UPDATE Folders
+SET IsShared = 0
+
+
+select * from Folders
 
 delete from Users 
 WHERE AuthType like 'LiveSearch'

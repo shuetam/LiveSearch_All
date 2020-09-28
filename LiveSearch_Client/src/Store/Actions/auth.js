@@ -155,7 +155,7 @@ export const authLogin = (userId, userName, imageUrl, token, userRole, userNick)
                     userName: userName,
                     imageUrl: imageUrl
                 };
-                var exdays = 2;
+                var exdays = 7; // sesion in days
                 var d = new Date();
                 //d.setTime(d.getTime() + (60 * 1000));
                 d.setTime(d.getTime() + (exdays*24*60*60*1000));

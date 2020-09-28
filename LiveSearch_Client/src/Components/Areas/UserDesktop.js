@@ -23,6 +23,7 @@ import { URL, PATHES } from '../../environment';
 import TagsField from '../Fields/TagsField';
 import { leftToVw, topToVh } from '../../Converters.js';
 import { bottomIcon, getQuarter, removeHiding } from '../../CommonManager.js';
+import EditField from '../Fields/EditField';
 
 
 
@@ -101,7 +102,9 @@ class UserDesktop extends Component {
             addPlaceholder: "Wklej link do filmu YouTube",
             entityTags: [],
             firstHover: false,
-            addingFolder: false
+            addingFolder: false,
+            fieldType: ""
+         
             
         }
     }
@@ -338,29 +341,32 @@ class UserDesktop extends Component {
             this.setState({ entityID:  lastIcon.id });
             this.setState({entityTags: this.getIconTags(lastIcon.id)});
             //this.setState({ytField: false});
-            if(type == "YT") {
+
+            this.setState({fieldType: type});
+
+           /*   if(type == "YT") {
                 
                 this.setState({ytField: true});
-            }
+            } 
             if(type == "IMG") {
                
                 this.setState({imgSource: lastIcon.source });
                
                 this.setState({imgField: true});
-            }
-            if(type == "BOOK") {
+            } */
+             if(type == "BOOK" || type == "IMG") {
                 
                 this.setState({imgSource: lastIcon.source });
                
-                this.setState({imgField: true});
+                //this.setState({imgField: true});
             }
-            if(type == "SPOTIFY") {
+         /*    if(type == "SPOTIFY") {
                
                 this.setState({spotifyField: true});
             }
              if(type == "FOLDER") {
                 this.setState({ytField: false});
-            } 
+            }  */
 
             setTimeout(() => {
                 this.setState({ loadedIcons: true});
@@ -369,7 +375,8 @@ class UserDesktop extends Component {
             }, 500);
         }
         else {
-            this.setState({infoField: true});
+            //this.setState({infoField: true});
+            this.setState({fieldType: "INFO"});
             this.setState({
                 loadedIcons: true
               });
@@ -450,10 +457,11 @@ class UserDesktop extends Component {
 
 
     onDbSpotifyClick = (event) => {
-        this.setState({imgField: false});
+   /*      this.setState({imgField: false});
         this.setState({ytField: false});
         this.setState({infoField: false});
-        this.setState({spotifyField: true});
+        this.setState({spotifyField: true}); */
+        this.setState({fieldType: "SPOTIFY"});
         var id = event.target.id;
         this.neonShadowHandler(id);
     }
@@ -463,21 +471,22 @@ class UserDesktop extends Component {
 
     onDbClick = (event) => {
 
-        this.setState({imgField: false});
+    /*     this.setState({imgField: false});
         this.setState({ytField: true});
         this.setState({infoField: false});
-        this.setState({spotifyField: false});
+        this.setState({spotifyField: false}); */
+        this.setState({fieldType: "YT"});
         var id = event.target.id;
         this.neonShadowHandler(id);
 
     }
 
     onDbImgClick = (event) => {
-        this.setState({imgField: true});
+/*         this.setState({imgField: true});
         this.setState({ytField: false});
         this.setState({infoField: false});
-        this.setState({spotifyField: false});
-
+        this.setState({spotifyField: false}); */
+        this.setState({fieldType: "IMG"});
         var id = event.target.id;
         this.neonShadowHandler(id);
         
@@ -899,16 +908,21 @@ class UserDesktop extends Component {
     }
 
 
-    showTitleEditor = (id, iconType) => {
-        
-   /*   var findField = document.getElementById('addingIconField');
+        showFolderEditor= (id) => {
+            var folder = this.getIconById(id);
+            debugger;
+            this.setState({editedFolder: folder});
+            this.setState({fieldType: "FOLDER_EDITOR"});
+        }
 
-     if(findField) {
-        findField.innerHTML = "";
-     } */
+
+
+    showTitleEditor = (id, iconType) => {
 
     if(iconType == "FOLDER") {
-        this.setState({folderEditing: true});
+        //this.setState({folderEditing: true});
+        this.showFolderEditor(id);
+        return;
     }
     else {
         this.setState({folderEditing: false});
@@ -1467,6 +1481,45 @@ class UserDesktop extends Component {
         }
     }
 
+
+    getField = () => {
+        var field = "";
+       
+        switch(this.state.fieldType) {
+            case "YT":
+                field = <Field play={this.state.entityID} show={this.state.loadedIcons} nextSong={this.nextSongHandler} loadText={this.props.fetchData} />
+           break;
+                case "IMG":
+                field = <ImageField src={this.state.entityID} sourceShow={this.getNiceHttp(this.state.imgSource)} 
+                source={this.state.imgSource}
+                show={this.state.loadedIcons}/>
+                break;
+            case "BOOK":
+                field = <ImageField src={this.state.entityID} sourceShow={this.getNiceHttp(this.state.imgSource)} 
+                source={this.state.imgSource}
+                show={this.state.loadedIcons}/>
+                break;
+            case "INFO":
+                field = <InfoField show = {!this.anyIcons()}  fromFolder={this.state.fromFolder}/>
+                break;
+            case "SPOTIFY":
+                field = <SpotifyField id={this.state.entityID} show={this.state.loadedIcons}/>
+                break;
+            case "FOLDER":
+                field = ""
+                break;
+            case "FOLDER_EDITOR":
+                field = <EditField folder={this.state.editedFolder}/>
+                break;
+            case "":
+                field = <LoadingField/>
+                break;
+          }
+       
+            return field;
+          //return <EditField/>;
+
+    }
    
 
    /*  switchAddIcon = (event) => {
@@ -1843,17 +1896,48 @@ setAddingIcon = () => {
         </div>
         </div>; */
 
-
-
         let tagsField = this.state.loadedIcons? <TagsField noIcons = {!this.anyIcons()}  searchTag={this.props.searchTag} fromDesk={true} setTags={this.showTitleEditor}  id={this.state.entityID} tags = {this.state.entityTags} />  : "";
-
 
             let field = "";
 
         if(this.props.isAuthenticated) {
-            if(this.state.ytField)
-                field = <Field play={this.state.entityID} show={this.state.loadedIcons} nextSong={this.nextSongHandler} loadText={this.props.fetchData} />
 
+            field = this.getField();
+           
+           /*  switch(this.state.fieldType) {
+                case "YT":
+                    field = <Field play={this.state.entityID} show={this.state.loadedIcons} nextSong={this.nextSongHandler} loadText={this.props.fetchData} />
+               return;
+                    case "IMG":
+                    field = <ImageField src={this.state.entityID} sourceShow={this.getNiceHttp(this.state.imgSource)} 
+                    source={this.state.imgSource}
+                    show={this.state.loadedIcons}/>
+                    break;
+                case "BOOK":
+                    field = <ImageField src={this.state.entityID} sourceShow={this.getNiceHttp(this.state.imgSource)} 
+                    source={this.state.imgSource}
+                    show={this.state.loadedIcons}/>
+                    break;
+                case "INFO":
+                    field = <InfoField show = {!this.anyIcons()}  fromFolder={this.state.fromFolder}/>
+                    break;
+                case "SPOTIFY":
+                    field = <SpotifyField id={this.state.entityID} show={this.state.loadedIcons}/>
+                    break;
+                case "FOLDER":
+                    field = ""
+                    break;
+                case "":
+                    field = <LoadingField/>
+                    break;
+              } */
+
+
+
+
+      /*       if(this.state.ytField)
+                field = <Field play={this.state.entityID} show={this.state.loadedIcons} nextSong={this.nextSongHandler} loadText={this.props.fetchData} />
+ *//* 
             if(this.state.imgField)
                 field = <ImageField src={this.state.entityID} sourceShow={this.getNiceHttp(this.state.imgSource)} 
                 source={this.state.imgSource}
@@ -1866,7 +1950,7 @@ setAddingIcon = () => {
 
             if(!this.state.spotifyField && !this.state.infoField && !this.state.ytField && !this.state.loadedIcons) {
                 field = <LoadingField/>
-            }
+            } */
         }
         else {
             field = <LoginField/>

@@ -1225,6 +1225,17 @@ button:focus {
     color: white;
   }
 
+  .privateButton {
+    background-color: rgb(47, 48, 49);
+  }
+
+  .deleteButton {
+    background-color: red;
+    position: absolute;
+    top: 15px;
+    right: 10px;
+  }
+
   .explButton {
       width: 120px;
       height: 22px;

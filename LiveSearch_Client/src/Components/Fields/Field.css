@@ -126,6 +126,76 @@
     color: rgba(255, 255, 255, 0.5);
 }
 
+.fieldEditor {
+  text-align: left;
+  top: 70px;
+  padding: 10px;
+  height: 280px;
+  -webkit-box-shadow: inset 0px 0px 5px 0px rgba(255, 255, 255, 0.445);
+  -moz-box-shadow: inset 0px 0px 5px 0px  rgba(255, 255, 255, 0.445);
+  box-shadow: inset 0px 0px 5px 0px  rgba(255, 255, 255, 0.445);
+  font-size: 15px;
+  color: rgba(226, 226, 226, 0.897);
+}
+
+
+.fieldEditorInput {
+  z-index: 700;
+  font-family: 'Mandali', sans-serif;
+  font-size: 25px;
+  font-weight: 100;
+  text-align: left;
+  color: rgba(241, 241, 241, 0.836);
+  opacity: 0.9;
+  padding: 1px;
+  z-index: 500;
+
+}
+
+
+.fieldEditorInput #editTitleFolder {
+  border-radius: 0px;
+  background-color: rgba(78, 78, 78, 0.404);
+  border-width: 0px;
+  height: 23px;
+  font-family: 'Mandali', sans-serif;
+  font-size: 15px;
+  font-weight: 100;
+  color: rgba(197, 197, 197, 0.815);
+  width: 340px;
+}
+.fieldEditorInput #editDescFolder {
+  border-radius: 0px;
+  background-color: rgba(78, 78, 78, 0.404);
+  border-width: 0px;
+  height: 100px;
+  font-family: 'Mandali', sans-serif;
+  font-size: 15px;
+  font-weight: 100;
+  color: rgba(197, 197, 197, 0.815);
+  width: 590px;
+}
+
+.editHandler {
+  align-items: center;
+  position: absolute;
+  bottom: 10px;
+}
+
+.lockIconF {
+  color: rgba(221, 221, 221, 0.945);
+  font-family: 'Mandali', sans-serif;
+  font-size: 20px;
+  
+}
+
+.openIconF {
+
+  color: rgba(0, 201, 43, 0.945);
+
+}
+
+
 .firstField {
   font-size: 14px;
   top: 40px;
@@ -278,6 +348,11 @@
     top: 380px;
     left: 0px;
     right: 0px;
+}
+
+.inputDis {
+    pointer-events: none;
+    opacity: 0.7;
 }
 
 .loader {
