@@ -48,6 +48,11 @@ public class Folder : Live.Core.Entity
         return "https://i.ytimg.com/vi/" + videoId + "/hqdefault.jpg";
     }
 
+    public bool HasIcons()
+    {
+        return this.UserYouTubes.Count == 0 && this.UserSpotify.Count == 0 && this.UserImages.Count == 0;
+    }
+
     public bool ShareFolder(bool shared)
     {
         IsShared = shared;
