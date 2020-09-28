@@ -18,21 +18,28 @@ class EditField extends Component {
             titleNum: false,
             descLength: 500,
             descNum: false,
-            shared: false
+            shared: false,
+            folderId: ""
         }
     }
 
     componentDidMount() {
         var folder = this.props.folder;
+        debugger;
         if(folder) {
-            this.setState({editedTitle: folder.title});
+            this.setState({editedTitle: folder.title}); 
+            this.setState({folderId: folder.id});
             this.setState({editedDesc: folder.shareDescription});
             this.setState({shared: folder.shared});
             this.setState({hasIcons: folder.hasIcons});
-            this.setState({titleLength: 20-folder.title.length});
-            this.setState({descLength: 500-folder.shareDescription.length});
+            if(folder.title)
+                this.setState({titleLength: 20-folder.title.length});
+            if(folder.shareDescription)
+                this.setState({descLength: 500-folder.shareDescription.length});
         }
     }
+
+ 
 
 
     editTitle = (value) => {
@@ -70,25 +77,20 @@ class EditField extends Component {
     privateHandler = () => {
         this.setState({shared: false});
     }
+    editFolderCancel = () => {
+        this.props.saveFolder(null);
+    }
 
     saveFolderHandler = () => {
 
-        const data = {
-            Id: folder.Id,
-            Type: "FOLDER",
-            Title: folder.title,
-            Description: folder.description,
-            Shared: folder.shared
-            }
-
-
+    
         var folder = {
-            Id: this.props.folder.Id,
+            Id: this.state.folderId,
             title: this.state.editedTitle,
             description: this.state.editedDesc,
             shared: this.state.shared
         }
-
+debugger;
         this.props.saveFolder(folder);
     }
 
@@ -125,7 +127,7 @@ Udostępnij folder aby umożliwić innym użytkownikom jego przeglądanie,
  obserwowanie i zapisywanie zawartych w nim ikon na swoich pulpitach. 
  Użytkownicy nie będą mieli możliwości 
  edytowania i usuwania ikon w Twoim folderze.</div> : 
- <div  className="lockIconF" style={{fontSize: "11px", padding: "5px", color: "rgba(255, 255, 255, 0.501)"}}>
+ <div  className="lockIconF" style={{fontSize: "12px", padding: "5px", color: "rgba(255, 255, 255, 0.501)"}}>
 Folder jest pusty. Dodaj do niego ikony aby móc udostępniać jego zawartość użytkownikom serwisu.</div>
 
 
@@ -137,8 +139,8 @@ var shareIcon = this.state.shared? <div id={this.props.id}   className="lockIcon
 : <div className="lockIconF" ><i class="icon-lock"/>
  <span style={{fontSize: "15px"}}>Prywatny</span></div>;
 
- var shareButton = this.state.shared? <button class="titleButton privateButton" onClick={this.shareHandler} style={{fontSize: 12, width: "150px",  padding: "5px"}}>
- <i class="icon-lock"/>Ustaw jako prywatny</button> :<div><button class= {this.state.hasIcons? "titleButton" : "titleButton enabled" } onClick={this.privateHandler} style={{fontSize: 14, width: "200px",  padding: "5px"}}>
+ var shareButton = this.state.shared? <button class="titleButton privateButton" onClick={this.privateHandler} style={{fontSize: 12, width: "150px",  padding: "5px"}}>
+ <i class="icon-lock"/>Ustaw jako prywatny</button> :<div><button class= {this.state.hasIcons? "titleButton" : "disable" } onClick={this.shareHandler} style={{fontSize: 14, width: "200px",  padding: "5px"}}>
     <i  class="icon-lock-open-alt"/>Udostępnij folder</button> {shareText}</div>
 
 var shareButton = <div>

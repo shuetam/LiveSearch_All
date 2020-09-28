@@ -63,7 +63,7 @@ class Folder extends Component {
     }
 
     editFolder = (event) => {  
-       // debugger;
+       this.props.showTitleEditor(this.props.id, "FOLDER");
     }
 
 
@@ -87,7 +87,11 @@ class Folder extends Component {
         var shareIcon = this.props.shared? <div id={this.props.id} title="Publiczny"  className="lockIcon openIcon"><i id={this.props.id}  class="icon-lock-open-alt"/></div> 
          : <div id={this.props.id} title="Prywatny" className="lockIcon"><i id={this.props.id} class="icon-lock"/></div>;
       
-        var editIconField = <IconEditor 
+
+
+         var editIconField = <i id={this.props.id} title="Edytuj/udostępnij" class="icon-edit" onClick={this.editFolder}/>
+
+        var editIconField_old = <IconEditor 
         onHover = {this.props.onHover}
         onLeave = {this.props.onLeave}
         //fromFolder={this.props.fromFolder}
@@ -100,10 +104,8 @@ class Folder extends Component {
         iconType="FOLDER"></IconEditor>
 
         var editIcon = this.props.hideEditors? "" :
-        <div id={this.props.id} 
-          class="editEntity" style={{left: this.props.leftEdit, top: this.props.topEdit}} ><i id={this.props.id}
-        title="" class="icon-dot-3"
-        />
+        <div id={this.props.id} onClick={this.editFolder}
+          class="editEntity" style={{left: this.props.leftEdit, top: this.props.topEdit}} >
         {editIconField}
         </div> 
       

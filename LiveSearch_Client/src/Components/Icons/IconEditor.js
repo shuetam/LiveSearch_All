@@ -104,7 +104,7 @@ class IconEditor extends Component {
     class="switcher"><i id={this.props.id} class="icon-resize-full-alt"/> 
     Podgląd zdjęcia <hr/></div> : "";
 
-    let editorText = this.props.iconType == 'FOLDER'? <span>Edytuj folder</span> : <span>Edytuj tytuł i tagi<hr/></span>;
+    let editorText = this.props.iconType == 'FOLDER'? <span>Edytuj/udostępnij folder</span> : <span>Edytuj tytuł i tagi<hr/></span>;
     
 let editTitle = this.props.public? "" : 
 <div id={this.props.id}  class="switcher"

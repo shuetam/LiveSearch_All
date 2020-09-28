@@ -4,8 +4,8 @@ export const URL = {
 
     //api: "http://localhost:53071/api/", 
     //api: "http://localhost:5000/api/", 
-    //api: "http://localhost:53071/api/", 
-    api: "https://www.fitize.pl/api/", 
+    api: "http://localhost:53071/api/", 
+    //api: "https://www.fitize.pl/api/", 
 
     login: "SocialUser/user",
     radioSongs: "song/allradiosongs/",

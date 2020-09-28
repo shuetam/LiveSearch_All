@@ -40,6 +40,7 @@ ADD NewSalt NVARCHAR (MAX) NULL;
 ALTER TABLE Folders
 ADD Followers INT;
 
+select * from Folders
 
 ALTER TABLE Folders
 ADD SharedAt DATETIME NULL;
@@ -143,7 +144,7 @@ add Station NVARCHAR (50) NULL
 select * from ArchiveMovies
 select * from ArchiveSongs
 
-select * from TVMovies
+select * from Folders
 
 select * from Bestsellers
 
@@ -233,7 +234,12 @@ drop table UserYoutubes
 
 UPDATE Folders
 SET LocLeft = '50vw'
-WHERE ParentId is NULL;  
+WHERE ParentId is NULL; 
+
+
+UPDATE Folders
+SET IsShared = 0
+WHERE IsShared is NULL;
 
 UPDATE UserYoutubes
 SET LocLeft = '50vw', LocTop = '10vh'
@@ -257,9 +263,17 @@ Title like '%www%'
 
 CREATE TABLE SharedFolders
 (
+	ID UNIQUEIDENTIFIER PRIMARY KEY,
     UserId UNIQUEIDENTIFIER NOT NULL,
     FolderId UNIQUEIDENTIFIER NOT NULL,
+	LocLeft NVARCHAR (50) NOT NULL,
+    LocTop NVARCHAR (50) NOT NULL,
+    FallowedAt DATETIME NOT NULL,
 )
+
+DROP TABLE SharedFolders
+
+select * from SharedFolders
 
 ALTER TABLE SharedFolders ADD CONSTRAINT 
 FK_UserID FOREIGN KEY (UserId) 

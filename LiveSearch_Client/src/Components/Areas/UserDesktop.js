@@ -909,6 +909,8 @@ class UserDesktop extends Component {
 
 
         showFolderEditor= (id) => {
+            this.setState({editingFolder: true});
+            this.setState({editedId: id});
             var folder = this.getIconById(id);
             debugger;
             this.setState({editedFolder: folder});
@@ -921,6 +923,7 @@ class UserDesktop extends Component {
 
     if(iconType == "FOLDER") {
         //this.setState({folderEditing: true});
+        
         this.showFolderEditor(id);
         return;
     }
@@ -1028,7 +1031,9 @@ class UserDesktop extends Component {
         const data = {
             Type: "FOLDER",
             //UserId: this.props.userId,
-            Title: name
+            Description: "",
+            Title: name,
+            Shared: false
             }
 
         axios.post(URL.api+URL.createFolder, data, this.state.authConfig)
@@ -1047,6 +1052,15 @@ class UserDesktop extends Component {
 
     editFolderHandler = (folder) => {
        
+        if(folder == null) {
+            
+            var icon = this.getIconById(this.state.entityID);
+            var iconType = icon.type;
+            this.setState({ fieldType: iconType});
+            this.setState({editingFolder: false});
+            return; 
+        }
+
         const data = {
             Id: folder.Id,
             Type: "FOLDER",
@@ -1065,6 +1079,7 @@ class UserDesktop extends Component {
            folder.shared = result.data.shared;
 
          this.setState({ fieldType: iconType});
+         this.setState({editingFolder: false});
              
             })
         .catch(error => {this.Alert("Wystąpił błąd przy zapisie folderu. Spróbuj ponownie później.")}); 
@@ -1464,18 +1479,25 @@ class UserDesktop extends Component {
     }
 
     getClass = (id) => {
-        if (id !== "dis" && !this.state.addingIcon && !this.state.addingFolder) {
+
+      
+        if (id !== "dis" && !this.state.addingIcon && !this.state.addingFolder &&  !this.state.editingFolder) {
             return "entity";
         }
         if (id == "dis") {
             return "disable";
         }
-        if ((this.state.addingIcon || this.state.addingFolder) && id !== "dis") {
+        if ((this.state.addingIcon || this.state.addingFolder || this.state.editingFolder) && id !== "dis") {
             return "entityDis";
         }
     }
 
     getFolderClass = (id) => {
+
+        if (this.state.editingFolder && id !== this.state.editedId) {
+            return "folderDis";
+        }
+
         if (id !== "dis" && !this.state.addingIcon && !this.state.addingFolder) {
             return "folder";
         }
@@ -1841,8 +1863,8 @@ setAddingIcon = () => {
                     icon2= {song.icon2}
                     icon3= {song.icon3}
                     showTitleEditor = {this.showTitleEditor}
-                    leftEdit = "92%"
-                    topEdit = "95%"
+                    leftEdit = "85%"
+                    topEdit = "85%"
                     bottom = {bottomIcon(song.id, song.top)}
                     public={false}
                     shared = {song.shared}

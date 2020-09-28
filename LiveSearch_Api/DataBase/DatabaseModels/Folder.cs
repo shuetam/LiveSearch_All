@@ -50,7 +50,7 @@ public class Folder : Live.Core.Entity
 
     public bool HasIcons()
     {
-        return this.UserYouTubes.Count == 0 && this.UserSpotify.Count == 0 && this.UserImages.Count == 0;
+        return !(this.UserYouTubes.Count == 0 && this.UserSpotify.Count == 0 && this.UserImages.Count == 0);
     }
 
     public bool ShareFolder(bool shared)

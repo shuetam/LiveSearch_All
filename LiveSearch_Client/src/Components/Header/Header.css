@@ -982,6 +982,7 @@
         background-color: rgba(0, 110, 255, 0.342);
     }
 
+  
     .bookButtton {
         width: 210px;
         height: 25px;
@@ -1218,6 +1219,8 @@ button:focus {
     cursor: pointer;
     transition: all 0.5s;
   }
+
+
 
   .titleButton:hover {
     border: rgba(187, 187, 187, 0.801) 1px solid;

@@ -322,54 +322,58 @@ namespace Live.Repositories
             .Include(x => x.UserYoutubes)
             .Include(x => x.UserImages)
             .Include(x => x.UserSpotify)
-            .Include(x => x.FollowedFolders)
+            //.Include(x => x.FollowedFolders)
             //.Include(x => x.FollowedFolders).ThenInclude(x => x.Folder)
             .FirstOrDefault(x => x.ID == userId);
 
-            foreach (var icon in icons.Where(x => x.Type == "ICON"))
+            if (user != null)
             {
 
-                var yt = user.UserYoutubes.FirstOrDefault(x => x.VideoId == icon.Id);
-                if (yt != null)
+
+                foreach (var icon in icons.Where(x => x.Type == "ICON"))
                 {
-                    yt.ChangeLocation(icon.Left, icon.Top);
+
+                    var yt = user.UserYoutubes.FirstOrDefault(x => x.VideoId == icon.Id);
+                    if (yt != null)
+                    {
+                        yt.ChangeLocation(icon.Left, icon.Top);
+                    }
+
+                    var im = user.UserImages.FirstOrDefault(x => x.UrlAddress == icon.Id);
+                    if (im != null)
+                    {
+                        im.ChangeLocation(icon.Left, icon.Top);
+                    }
+
+                    var sp = user.UserSpotify.FirstOrDefault(x => x.SpotifyId == icon.Id);
+                    if (sp != null)
+                    {
+                        sp.ChangeLocation(icon.Left, icon.Top);
+                    }
+
+                }
+                await _liveContext.SaveChangesAsync();
+
+                foreach (var folder in icons.Where(x => x.Type == "FOLDER"))
+                {
+                    var fol = _liveContext.Folders.FirstOrDefault(x => x.ID.ToString() == folder.Id);
+
+                    if (fol != null)
+                    {
+                        fol.ChangeLocation(folder.Left, folder.Top);
+                    }
                 }
 
-                var im = user.UserImages.FirstOrDefault(x => x.UrlAddress == icon.Id);
-                if (im != null)
+                foreach (var folder in icons.Where(x => x.Type == "FOLLOWED_FOLDER"))
                 {
-                    im.ChangeLocation(icon.Left, icon.Top);
-                }
+                    var fol = _liveContext.SharedFolders.FirstOrDefault(x => x.ID.ToString() == folder.Id && x.UserId == userId);
 
-                var sp = user.UserSpotify.FirstOrDefault(x => x.SpotifyId == icon.Id);
-                if (sp != null)
-                {
-                    sp.ChangeLocation(icon.Left, icon.Top);
+                    if (fol != null)
+                    {
+                        fol.ChangeLocation(folder.Left, folder.Top);
+                    }
                 }
-
             }
-            await _liveContext.SaveChangesAsync();
-
-            foreach (var folder in icons.Where(x => x.Type == "FOLDER"))
-            {
-                var fol = _liveContext.Folders.FirstOrDefault(x => x.ID.ToString() == folder.Id);
-
-                if (fol != null)
-                {
-                    fol.ChangeLocation(folder.Left, folder.Top);
-                }
-            }
-
-            foreach (var folder in icons.Where(x => x.Type == "FOLLOWED_FOLDER"))
-            {
-                var fol = _liveContext.SharedFolders.FirstOrDefault(x => x.ID.ToString() == folder.Id);
-
-                if (fol != null)
-                {
-                    fol.ChangeLocation(folder.Left, folder.Top);
-                }
-            }
-
             await _liveContext.SaveChangesAsync();
 
         }
@@ -517,7 +521,13 @@ namespace Live.Repositories
         public async Task<FolderDto> EditFolder(Guid UserId, EntitySetter folderSetter)
         {
             var FolderId = new Guid(folderSetter.Id);
-            var folder = _liveContext.Folders.FirstOrDefault(x => x.UserId == UserId && x.ID == FolderId);
+            var folder = _liveContext.Folders
+                .Where(x => x.UserId == UserId && x.ID == FolderId)
+                .Include(x => x.UserYouTubes)
+                .Include(x => x.UserImages)
+                .Include(x => x.UserSpotify)
+                .FirstOrDefault(x => x.UserId == UserId && x.ID == FolderId);
+
             if (folder != null)
             {
                 folder.ChangeDescription(folderSetter.Description);
