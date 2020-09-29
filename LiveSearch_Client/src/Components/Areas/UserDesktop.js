@@ -1077,6 +1077,7 @@ class UserDesktop extends Component {
            var folder = this.getIconById(result.data.id);
            folder.title = result.data.title;
            folder.shared = result.data.shared;
+           folder.shareDescription = result.data.shareDescription;
 
          this.setState({ fieldType: iconType});
          this.setState({editingFolder: false});

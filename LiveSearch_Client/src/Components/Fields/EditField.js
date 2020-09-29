@@ -19,6 +19,7 @@ class EditField extends Component {
             descLength: 500,
             descNum: false,
             shared: false,
+            privText: false,
             folderId: ""
         }
     }
@@ -130,6 +131,9 @@ Udostępnij folder aby umożliwić innym użytkownikom jego przeglądanie,
  <div  className="lockIconF" style={{fontSize: "12px", padding: "5px", color: "rgba(255, 255, 255, 0.501)"}}>
 Folder jest pusty. Dodaj do niego ikony aby móc udostępniać jego zawartość użytkownikom serwisu.</div>
 
+var privateText = this.state.privText?  <div  className="lockIconF" style={{fontSize: "12px", padding: "5px", color: "rgba(255, 27, 27, 0.73)"}}>
+Po zapisaniu folderu jako prywatny, wszystkie statystyki folderu zostaną wyzerowane.</div> : "";
+
 
 let titleNum = this.state.titleNum?  this.state.titleLength : "";
 let descNum = this.state.descNum?  this.state.descLength : "";
@@ -139,8 +143,8 @@ var shareIcon = this.state.shared? <div id={this.props.id}   className="lockIcon
 : <div className="lockIconF" ><i class="icon-lock"/>
  <span style={{fontSize: "15px"}}>Prywatny</span></div>;
 
- var shareButton = this.state.shared? <button class="titleButton privateButton" onClick={this.privateHandler} style={{fontSize: 12, width: "150px",  padding: "5px"}}>
- <i class="icon-lock"/>Ustaw jako prywatny</button> :<div><button class= {this.state.hasIcons? "titleButton" : "disable" } onClick={this.shareHandler} style={{fontSize: 14, width: "200px",  padding: "5px"}}>
+ var shareButton = this.state.shared?<div> <button  class="titleButton privateButton" onMouseLeave={() => this.setState({privText: false})}   onMouseOver={() => this.setState({privText: true})}   onClick={this.privateHandler} style={{fontSize: 12, width: "150px",  padding: "5px"}}>
+ <i class="icon-lock"/>Ustaw jako prywatny</button> {privateText} </div> :<div><button class= {this.state.hasIcons? "titleButton" : "disable" } onClick={this.shareHandler} style={{fontSize: 14, width: "200px",  padding: "5px"}}>
     <i  class="icon-lock-open-alt"/>Udostępnij folder</button> {shareText}</div>
 
 var shareButton = <div>
@@ -168,7 +172,7 @@ var handlerButtons =  <div className="editHandler">
             {descNum}</span>
             {shareButton}
             {handlerButtons}
-            {deleteButton}
+         
             </div>)
 
       

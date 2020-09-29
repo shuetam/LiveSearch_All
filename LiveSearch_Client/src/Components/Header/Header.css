@@ -1228,6 +1228,15 @@ button:focus {
     color: white;
   }
 
+  #privFolderText {
+      display: none;
+  }
+
+
+  #privateButtonB:hover #privFolderText {
+      display: block;
+  }
+
   .privateButton {
     background-color: rgb(47, 48, 49);
   }

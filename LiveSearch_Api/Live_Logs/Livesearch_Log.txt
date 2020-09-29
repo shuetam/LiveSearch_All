@@ -3808,3 +3808,5 @@
    at Live.Repositories.UpdatingRepository.SongsUpdateAsync() in C:\Users\ATM PROJEKT\Dysk Google\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 192
 2020-09-29 00:14:44.574 +02:00 [Information] Finish radio songs update with 99 songs and 1 youtube errors
 2020-09-29 01:01:52.293 +02:00 [Information] Finish radio songs update with 105 songs and 0 youtube errors
+2020-09-29 21:42:50.357 +02:00 [Information] Finish radio songs update with 454 songs and 1 youtube errors
+2020-09-29 22:05:52.869 +02:00 [Information] Finish radio songs update with 87 songs and 1 youtube errors
