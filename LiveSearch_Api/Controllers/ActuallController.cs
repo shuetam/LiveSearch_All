@@ -26,7 +26,7 @@ namespace Live.Controllers
             top.AddRange(topImg);
 
             top.Shuffle();
-            return Json(new ExploreResultsDto(top, 1, 1));
+            return Json(top);
         }
 
 

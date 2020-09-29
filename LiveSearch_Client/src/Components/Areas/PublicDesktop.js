@@ -26,6 +26,7 @@ import {parseBool} from '../../Converters.js';
 import { leftToVw, topToVh } from '../../Converters.js';
 import { bottomIcon, getQuarter, getIconFromUrl } from '../../CommonManager.js';
 import SpotifyIcon from '../Icons/SpotifyIcon';
+import Folder from '../Icons/Folder';
 
 class PublicDesktop extends Component {
 
@@ -60,7 +61,8 @@ class PublicDesktop extends Component {
             firstHover: false,
             firstField: false,
             exploreSkip: 0,
-            showNextPrev: false
+            showNextPrev: false,
+            sharedFolders: []
         }
       
     }
@@ -174,7 +176,7 @@ class PublicDesktop extends Component {
 
         var query = this.props.location.search;
         var search = new URLSearchParams(query);
-    if(this.props.headerType=="explore") {
+    if(this.props.headerType=="explore" || this.props.headerType=="folders") {
       
         var exploreQuery = search.get("q");
         var exploreSkip = search.get("skip");
@@ -229,6 +231,13 @@ class PublicDesktop extends Component {
 
         }
 
+        if(this.props.headerType=="folders") {
+       
+            debugger;
+            fetchData = URL.api + URL.sharedFolders;
+
+        }
+
 
         var iconId= search.get("iconId");
         var iconType= search.get("iconType");
@@ -251,20 +260,26 @@ class PublicDesktop extends Component {
 
         axios.post(fetchData, data, null)
         .then((result) => { 
-            var deep = result.data.deep;
-            if(result.data.results.length == parseInt(this.state.explIconsCount)) {
+            //var deep = result.data.deep;
+            if(result.data.length == parseInt(this.state.explIconsCount)) {
               this.setState({showNextPrev: true})
                 //this.Alert(deep);
             }
         this.setState({ icons:
-            Array.prototype.filter.call(result.data.results, function(icon) {
+            Array.prototype.filter.call(result.data, function(icon) {
                 return icon.type=="YT";
             })
         });
 
         this.setState({ images:
-            Array.prototype.filter.call(result.data.results, function(icon){
+            Array.prototype.filter.call(result.data, function(icon){
                 return (icon.type=="IMG" || icon.type=="BOOK");
+            })
+        });
+
+        this.setState({ sharedFolders:
+            Array.prototype.filter.call(result.data, function(icon) {
+                return icon.type=="FOLDER";
             })
         });
 
@@ -310,7 +325,7 @@ class PublicDesktop extends Component {
 
 
     getLastIcon = () => {
-        var allIcons = [ ...this.state.spotify, ...this.state.images, ...this.state.icons];
+        var allIcons = [ ...this.state.spotify, ...this.state.images, ...this.state.icons, ...this.state.sharedFolders];
         if(allIcons.length>0) {
            return allIcons[allIcons.length-1];
         }
@@ -1092,6 +1107,36 @@ style={{color: this.state.explHistory? 'white'
         })
 
 
+        let sharedFolders = this.state.sharedFolders.map(song => {
+       
+            return (
+                        
+                <Folder  title={song.title} yt={song.id} id={song.id}
+                    classname= "folder"
+                    linkTo={this.openFolder}         
+                    location={ this.state.loadedIcons? 
+                    {boxShadow: this.getShadow(parseInt(song.left), parseInt(song.top), song.id), 
+                        top: song.top, left: song.left, transition: 'top '+2+'s, left '+2+'s'}:
+                    {top: this.getHPosition(101,200)+'vh', left: this.getWPosition(-50,200)+'vw',}}
+                    onHover={this.onHoverFolder}
+                    onLeave={this.leaveFolder}
+                    count={song.count}
+                    icon0= {song.icon0}
+                    icon1= {song.icon1}
+                    icon2= {song.icon2}
+                    icon3= {song.icon3}
+                    showTitleEditor = {this.showTitleEditor}
+                    leftEdit = "85%"
+                    topEdit = "85%"
+                    bottom = {bottomIcon(song.id, song.top)}
+                    public={true}
+                    shared = {song.shared}
+                    />
+                     
+                )
+            })
+
+
             return (
                 
                 <div>
@@ -1120,6 +1165,7 @@ style={{color: this.state.explHistory? 'white'
                 {icons}
                 {images}
                 {spotifies}
+                {sharedFolders}
                
 
     <div class="containerIconsContainer">

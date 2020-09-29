@@ -60,7 +60,7 @@ namespace Live.Repositories
         }
 
 
-        public async Task<ExploreResultsDto> ExploreIconsAsync(string query, int count, int skip)
+        public async Task<List<IconDto>> ExploreIconsAsync(string query, int count, int skip)
         {
             query = query.ToLower().Trim();
             query = query.RemovePolish();
@@ -99,9 +99,9 @@ namespace Live.Repositories
 
             foundIcons.Reverse();
 
-            var results = new ExploreResultsDto(foundIcons, deep, counter.count);
+            //var results = new ExploreResultsDto(foundIcons, deep, counter.count);
 
-            return results;
+            return foundIcons;
         }
 
         private async Task GoFindInDeepAsync(List<IconDto> listToFill, string query, int deep, ExploreCounter count, List<Action<List<IconDto>, string, int, ExploreCounter, int>> ListOfActions, int skip)
@@ -272,11 +272,12 @@ namespace Live.Repositories
         public async Task<List<FolderDto>> GetAllSharedFoldersAsync(string query, int skip, int count)
         {
             var folders = await _liveContext.Folders
+            .Where(x => x.IsShared)
             .Include(x => x.UserYouTubes)
             .Include(x => x.UserImages)
             .Include(x => x.UserSpotify)
-            .Where(x => x.IsShared)
-            .Skip(skip).Take(count)
+            
+            //.Skip(skip).Take(count)
             .ToListAsync(); // add query
 
             // will be segereged by create date, populars, modyfy date
@@ -292,7 +293,11 @@ namespace Live.Repositories
                // icon.followers = followers;
                 icon.setLocation(false);
             }
+
+             //var results = new ExploreResultsDto(icons, count);
+
             return icons;
+           
         }
 
 

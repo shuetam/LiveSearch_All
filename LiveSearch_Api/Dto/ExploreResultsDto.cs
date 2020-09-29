@@ -10,21 +10,22 @@ namespace Live.Core
 {
     public class ExploreResultsDto
     {
-   public List<IconDto> results {get; set;}
-        public List<FolderDto> folders { get; set; }
+   public List<IDto> results {get; set;}
+        public List<IDto> folders { get; set; }
         public int deep {get; set;}
    public int count {get; set;}
 
-    public ExploreResultsDto(List<IconDto> _results, int _deep, int _count)
+    public ExploreResultsDto(List<IDto> _results, int _deep, int _count)
     {
       this.deep = _deep;
       this.results = _results;
       this.count = _count;
     }
 
-        public ExploreResultsDto(List<FolderDto> _results, int _count)
+
+        public ExploreResultsDto(List<IDto> _results, int _count)
         {
-            this.folders = _results;
+            this.results = _results;
             this.count = _count;
         }
 

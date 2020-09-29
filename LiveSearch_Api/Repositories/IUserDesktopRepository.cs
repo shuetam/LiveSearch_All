@@ -29,6 +29,7 @@ namespace Live.Repositories
         Task<List<string>> GetAllIconsIdAsync(Guid userId);
 
         Task SaveIconsLocations(Guid userId, List<EntitySetter> icons);
+        
         Task<List<IconDto>> GetNewIcons( Guid userId, string url);
         Task<FolderDto> EditFolder(Guid UserId, EntitySetter folderSetter);
         Task<bool> FollowFolder(Guid UserId, Guid FolderId);

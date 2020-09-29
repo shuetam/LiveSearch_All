@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace Live.Core
 {
-    public class IconDto
+    public class IconDto : IDto
     {
 
         protected IconDto()

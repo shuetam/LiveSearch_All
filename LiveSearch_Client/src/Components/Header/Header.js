@@ -620,10 +620,10 @@ responseErrorGoogle = (response) => {
        
     }
 
-    activeFallowedFolders = () => {
+    activeSharedFolders = () => {
         var paramsId = this.props.match.params.id;
         //if(paramsId !== "foldery") {
-            this.props.history.push(PATHES.folders);
+            this.props.history.push(PATHES.sharedFolders);
             this.setState({headerType: "folders"});
         //}
     }
@@ -810,8 +810,14 @@ let infoArrowBest = this.state.showBooksArrow? <div  class="infoArrowBestsellers
     )} />;
 
     let exploreArea =  <Route   path={PATHES.explore} exact component={(props) => (
-        <PublicDesktop {...props} searchTag={this.searchTag} headerType={this.state.headerType} 
+        <PublicDesktop {...props} searchTag={this.searchTag} 
         headerType="explore"
+        />
+    )} />;
+
+    let sharedFoldersArea =  <Route   path={PATHES.sharedFolders} exact component={(props) => (
+        <PublicDesktop {...props} searchTag={this.searchTag} 
+        headerType="folders"
         />
     )} />;
 
@@ -1018,16 +1024,16 @@ let userPulpit = <div onClick={this.activeDesk}   class= {this.state.headerType 
 "mainSwitch active" : "mainSwitch"} > <i class="icon-doc-landscape"/>Mój pulpit
 </div>
 
-/* let fallowedFolders = <div onClick={this.activeFallowedFolders}   class= {this.state.headerType == "folders"?
-"mainSwitch active" : "mainSwitch"} > <i class="icon-folder-open"/>Obserwowane foldery
-</div> */
+ let fallowedFolders = <div onClick={this.activeSharedFolders}   class= {this.state.headerType == "folders"?
+"mainSwitch active" : "mainSwitch"} > <i class="icon-folder-open"/> Foldery użytkowników
+</div> 
 
 
 let mainMenu = <div id="switchMenu" class="switchMenu">{activeHeader}<i class="icon-down-open"/>
                 <div id="switchMenuField">
                     {actuall}
                     {explore}
-                  
+                  {fallowedFolders}
                     {userPulpit}
                      
                 </div>
@@ -1363,6 +1369,7 @@ return (
                     
                             {first}
                             {exploreArea}
+                            {sharedFoldersArea}
                             {books}
                             {songs}
                             {movies}
