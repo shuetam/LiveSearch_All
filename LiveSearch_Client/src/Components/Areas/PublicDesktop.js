@@ -228,14 +228,11 @@ class PublicDesktop extends Component {
         if(this.props.headerType=="explore") {
        
             fetchData = URL.api + URL.explore;
-
         }
 
         if(this.props.headerType=="folders") {
        
-            debugger;
             fetchData = URL.api + URL.sharedFolders;
-
         }
 
 
@@ -416,7 +413,11 @@ class PublicDesktop extends Component {
         this.setState({entityTags: this.getIconTags(vidID)});
         var note = document.getElementById(vidID);
 
-        note.style.boxShadow = this.state.playedShadow;
+    
+    note.style.boxShadow = this.state.playedShadow;
+
+
+
 
         var played = document.getElementById(this.state.nowPlayed);
         if (played !== null) {
@@ -470,8 +471,10 @@ class PublicDesktop extends Component {
         }
         this.setState({ nowPlayed: id });
         this.setState({ entityID: id });
-        var note = document.getElementById(id)
+        var note = document.getElementById(id);
+        var icon = this.getIconById(id);
         if(note) {
+           
             note.style.boxShadow = this.state.playedShadow;
         }
     }
@@ -751,7 +754,7 @@ class PublicDesktop extends Component {
         }
     }
     getIconById = (Id) => {
-        var allIcons = [...this.state.icons, ...this.state.images, ...this.state.spotify ];
+        var allIcons = [...this.state.icons, ...this.state.images, ...this.state.spotify, this.state.sharedFolders ];
         var icon = allIcons.find( icon => icon.id === Id);
         return icon;
     }
@@ -765,16 +768,23 @@ class PublicDesktop extends Component {
 
     }
 
+    openFolder = (event) => {
+        this.props.history.push(PATHES.userFolder + event.target.id);
+        //this.getIcons( this.props.userId, event.target.id);
+    }
 
-    getShadow = (left, top, id) => {
 
-     
-        if(this.state.nowPlayed == id)
-        {
-            return this.state.playedShadow;
-        }
-        if(this.state.prevPlayed.includes(id)) {
-            return this.state.prevShadow;
+    getShadow = (left, top, id, isFolder) => {
+
+     if(!isFolder) {
+
+         if(this.state.nowPlayed == id)
+         {
+             return this.state.playedShadow;
+            }
+            if(this.state.prevPlayed.includes(id)) {
+                return this.state.prevShadow;
+            }
         }
 
         if(left<=50 && top<=50) {
@@ -884,6 +894,89 @@ class PublicDesktop extends Component {
         this.props.history.push(PATHES.explore + "?q="+ this.state.explQuery + "&skip=" +skip );
         }
     }
+
+
+    onHoverFolder = (event) => {
+
+        var entity = document.getElementById(event.target.id);
+        if(entity) {
+
+            var topp = entity.style.top;
+            
+            entity.style.transition = 'top 0s, left 0s';
+            
+            var opacity = entity.style.opacity;
+            
+            if(entity.id !==  this.state.hoveredId)
+            {
+                this.setState({ actuallOpacity: opacity })
+            }
+            this.setState({hoveredId: entity.id});
+            
+            document.getElementById(event.target.id).style.opacity = 1;
+            
+            dragElement(document.getElementById(event.target.id));
+        }
+        
+        
+        function dragElement(elmnt) {
+            
+            //localStorage.setItem('inMove', true);
+            
+            var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+            elmnt.onmousedown = dragMouseDown;
+            
+            function dragMouseDown(e) {
+                e = e || window.event;
+                e.preventDefault();
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                document.onmouseup = closeDragElement;
+                document.onmousemove = elementDrag;
+            }
+            
+            function elementDrag(e) {
+                e = e || window.event;
+                e.preventDefault();
+                pos1 = pos3 - e.clientX;
+                pos2 = pos4 - e.clientY;
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+                elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+                
+                //localStorage.setItem('inMove', true);
+            }
+            
+            function closeDragElement() {
+                //debugger;
+                //const inMove = localStorage.removeItem('inMove');
+            
+                document.onmouseup = null;
+                document.onmousemove = null;
+            }
+        }
+    
+}
+
+leaveFolder = (event) => {
+    var entity = document.getElementById(event.target.id);
+   
+    if(entity) {
+
+     var top = entity.style.top;
+     var left = entity.style.left;
+
+     var leftE = leftToVw(left);
+     var topE = topToVh(top);
+
+     entity.style.left = leftE;
+     entity.style.top = topE;
+     this.setStateIconLocation(entity.id, leftE, topE);
+//debugger;
+    document.getElementById(event.target.id).style.opacity = this.state.actuallOpacity;
+    }
+}
 
  
 
@@ -1020,7 +1113,7 @@ style={{color: this.state.explHistory? 'white'
                     linkTo={this.onDbClick}
                     size={ '40px' }
                     location={ this.state.loadedIcons? 
-                      {boxShadow: this.getShadow(parseInt(song.left), parseInt(song.top), song.id), 
+                      {boxShadow: this.getShadow(parseInt(song.left), parseInt(song.top), song.id, false), 
                         top: song.top, left: song.left, transition: 'top '+2+'s, left '+2+'s'}:
                       {top: this.getHPosition(101,200)+'vh', left: this.getWPosition(-50,200)+'vw',
                    }}
@@ -1047,7 +1140,7 @@ style={{color: this.state.explHistory? 'white'
                     linkTo={this.onDbImgClick}
                     /* size={this.state.loadedIcons? '40px' : '0px' } */
                     location={ this.state.loadedIcons? 
-                      {boxShadow: this.getShadow(parseInt(img.left), parseInt(img.top), img.id), top: img.top, 
+                      {boxShadow: this.getShadow(parseInt(img.left), parseInt(img.top), img.id, false), top: img.top, 
                         left: img.left, transition: 'top '+2+'s, left '+2+'s', 
                         width: this.getImgWidth(img.type), height: this.getImgHeight(img.type), 
                          borderRadius: this.getImgBorder(img.type)} :
@@ -1083,7 +1176,7 @@ style={{color: this.state.explHistory? 'white'
                     linkTo={this.onDbSpotifyClick}
                     
                     location={ this.state.loadedIcons? 
-                      {boxShadow: this.getShadow(parseInt(song.left), parseInt(song.top), song.id), 
+                      {boxShadow: this.getShadow(parseInt(song.left), parseInt(song.top), song.id, false), 
                         top: song.top, left: song.left, transition: 'top '+2+'s, left '+2+'s',
                         width: this.getImgWidth(song.type), height: this.getImgHeight(song.type), 
                         borderRadius: this.getImgBorder(song.type)
@@ -1115,7 +1208,7 @@ style={{color: this.state.explHistory? 'white'
                     classname= "folder"
                     linkTo={this.openFolder}         
                     location={ this.state.loadedIcons? 
-                    {boxShadow: this.getShadow(parseInt(song.left), parseInt(song.top), song.id), 
+                    {boxShadow: this.getShadow(parseInt(song.left), parseInt(song.top), song.id, true), 
                         top: song.top, left: song.left, transition: 'top '+2+'s, left '+2+'s'}:
                     {top: this.getHPosition(101,200)+'vh', left: this.getWPosition(-50,200)+'vw',}}
                     onHover={this.onHoverFolder}
@@ -1125,7 +1218,7 @@ style={{color: this.state.explHistory? 'white'
                     icon1= {song.icon1}
                     icon2= {song.icon2}
                     icon3= {song.icon3}
-                    showTitleEditor = {this.showTitleEditor}
+                    
                     leftEdit = "85%"
                     topEdit = "85%"
                     bottom = {bottomIcon(song.id, song.top)}

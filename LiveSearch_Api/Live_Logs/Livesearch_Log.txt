@@ -3813,3 +3813,6 @@
 2020-09-29 23:06:35.601 +02:00 [Information] Finish radio songs update with 100 songs and 0 youtube errors
 2020-09-30 00:02:18.191 +02:00 [Information] Finish radio songs update with 104 songs and 0 youtube errors
 2020-09-30 01:02:25.482 +02:00 [Information] Finish radio songs update with 106 songs and 1 youtube errors
+2020-10-04 00:25:18.934 +02:00 [Information] Finish radio songs update with 1077 songs and 5 youtube errors
+2020-10-04 01:04:14.942 +02:00 [Information] Finish radio songs update with 109 songs and 2 youtube errors
+2020-10-04 13:33:06.215 +02:00 [Information] Finish radio songs update with 1215 songs and 6 youtube errors

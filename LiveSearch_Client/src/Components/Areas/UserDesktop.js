@@ -1854,7 +1854,8 @@ setAddingIcon = () => {
                     classname= {this.getFolderClass(song.id)}
                     linkTo={this.openFolder}         
                     location={ this.state.loadedIcons? 
-                    {boxShadow: this.getShadow(parseInt(song.left), parseInt(song.top), song.id), top: song.top, left: song.left, transition: 'top '+2+'s, left '+2+'s'}:
+                    {boxShadow: this.getShadow(parseInt(song.left), 
+                        parseInt(song.top), song.id), top: song.top, left: song.left, transition: 'top '+2+'s, left '+2+'s'}:
                     {top: randomInt(101,200)+'vh', left: randomInt(-50,200)+'vw'}}
                     onHover={this.onHoverFolder}
                     onLeave={this.leaveFolder}

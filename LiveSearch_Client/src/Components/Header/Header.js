@@ -785,6 +785,8 @@ responseErrorGoogle = (response) => {
     
         let loginPanel = null;
 
+       
+
 
     let infoArrowMusic = this.state.showMusicArrow? <div  class="infoArrow"><i class="icon-left-bold" />
     <span style={{fontSize: "13px"}}>Zapoznaj się z info.</span></div> : "";
