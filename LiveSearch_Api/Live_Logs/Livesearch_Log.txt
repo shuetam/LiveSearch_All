@@ -3816,3 +3816,11 @@
 2020-10-04 00:25:18.934 +02:00 [Information] Finish radio songs update with 1077 songs and 5 youtube errors
 2020-10-04 01:04:14.942 +02:00 [Information] Finish radio songs update with 109 songs and 2 youtube errors
 2020-10-04 13:33:06.215 +02:00 [Information] Finish radio songs update with 1215 songs and 6 youtube errors
+2020-10-06 23:41:04.292 +02:00 [Information] Finish radio songs update with 1113 songs and 1 youtube errors
+2020-10-07 00:11:08.703 +02:00 [Information] Finish radio songs update with 101 songs and 1 youtube errors
+2020-10-07 23:16:30.866 +02:00 [Information] Finish radio songs update with 535 songs and 2 youtube errors
+2020-10-08 00:12:08.268 +02:00 [Information] Finish radio songs update with 103 songs and 0 youtube errors
+2020-10-08 22:29:39.518 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=3&date=08-10-2020&time_from=12&time_to=13
+2020-10-08 22:29:39.547 +02:00 [Error] An error occurred while sending the request. The server returned an invalid or unrecognized response.
+2020-10-08 22:31:13.699 +02:00 [Information] Finish radio songs update with 1084 songs and 1 youtube errors
+2020-10-08 23:04:59.801 +02:00 [Information] Finish radio songs update with 97 songs and 0 youtube errors

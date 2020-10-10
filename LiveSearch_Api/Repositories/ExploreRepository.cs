@@ -60,6 +60,29 @@ namespace Live.Repositories
         }
 
 
+        public async Task<List<IconDto>> GetIconsForFolder(string folderId)
+        {
+            var folder = await _liveContext.Folders.Where(x => x.IsShared)
+                .Include(x => x.UserImages)
+                .Include(x => x.UserSpotify)
+                .Include(x => x.UserYouTubes)
+                .FirstOrDefaultAsync(x => x.ID.ToString() == folderId);
+            var icons = new List<IconDto>();
+            if (folder != null)
+            {
+                var images = folder.UserImages.Select(x => _autoMapper.Map<IconDto>(x));
+                var spotify = folder.UserSpotify.Select(x => _autoMapper.Map<IconDto>(x));
+                var youtubes = folder.UserYouTubes.Select(x => _autoMapper.Map<IconDto>(x));
+            
+                icons.AddRange(images);
+                icons.AddRange(spotify);
+                icons.AddRange(youtubes);
+                return icons;
+            }
+            return icons;
+        }
+
+
         public async Task<List<IconDto>> ExploreIconsAsync(string query, int count, int skip)
         {
             query = query.ToLower().Trim();

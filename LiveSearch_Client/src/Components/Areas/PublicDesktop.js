@@ -6,7 +6,7 @@ import Field from '../Fields/Field';
 import ImageField from '../Fields/ImageField';
 import FirstField from '../Fields/FirstField';
 import SpotifyField from '../Fields/SpotifyField';
-import LoginField from '../Fields/LoginField';
+import FolderField from '../Fields/FolderField';
 import InfoField from '../Fields/InfoField';
 import { Link, Route, NavLink } from 'react-router-dom';
 import YTIcon from '../Icons/YTIcon';
@@ -51,7 +51,7 @@ class PublicDesktop extends Component {
             userIconsId: [],
             prevPlayed: [],
             noIcons: false,
-
+            foldersIcons: false,
             explPopCheck: true,
             explIconsCount: 10,
             explDesk: true,
@@ -62,7 +62,10 @@ class PublicDesktop extends Component {
             firstField: false,
             exploreSkip: 0,
             showNextPrev: false,
-            sharedFolders: []
+            sharedFolders: [],
+            openedFolder: "",
+            showFolderField: false,
+            hoveredFolder: null,
         }
       
     }
@@ -96,7 +99,7 @@ class PublicDesktop extends Component {
         var search = new URLSearchParams(query);
         var exploreQuery = search.get("q");
        
-        debugger;
+      
         if(exploreQuery !== null){
             this.setState({explQuery: exploreQuery})
         }
@@ -180,7 +183,9 @@ class PublicDesktop extends Component {
       
         var exploreQuery = search.get("q");
         var exploreSkip = search.get("skip");
-
+     
+        var folderId = this.props.match.params.folderId? this.props.match.params.folderId : "";
+debugger;
         if(exploreQuery !== null){
             this.setState({explQuery: exploreQuery});
         }
@@ -188,6 +193,20 @@ class PublicDesktop extends Component {
             exploreQuery = "";
         }
        
+
+        if(this.props.match.params.folderId){
+            this.setState({openedFolder: folderId});
+        }
+        else {
+            folderId = "";
+            
+        }
+       
+if(this.props.headerType=="folders" && !this.props.match.params.folderId) {
+    this.setState({foldersIcons: true});
+}
+
+
         
         if(exploreSkip !== null){
             this.setState({exploreSkip: parseInt(exploreSkip)});
@@ -220,6 +239,7 @@ class PublicDesktop extends Component {
 
         var fetchData = this.props.fetchData;
         var data = { 
+            folderId: folderId,
             query: exploreQuery,
             count: explIconsCount,
             next: exploreSkip       
@@ -754,8 +774,8 @@ class PublicDesktop extends Component {
         }
     }
     getIconById = (Id) => {
-        var allIcons = [...this.state.icons, ...this.state.images, ...this.state.spotify, this.state.sharedFolders ];
-        var icon = allIcons.find( icon => icon.id === Id);
+        var allIcons = [...this.state.icons, ...this.state.images, ...this.state.spotify, ...this.state.sharedFolders ];
+        var icon = allIcons.find( icon => icon.id == Id);
         return icon;
     }
 
@@ -769,7 +789,9 @@ class PublicDesktop extends Component {
     }
 
     openFolder = (event) => {
-        this.props.history.push(PATHES.userFolder + event.target.id);
+
+        this.props.history.push(PATHES.sharedFolders + event.target.id);
+       // this.props.history.push(PATHES.sharedFolders);
         //this.getIcons( this.props.userId, event.target.id);
     }
 
@@ -898,8 +920,16 @@ class PublicDesktop extends Component {
 
     onHoverFolder = (event) => {
 
+     
+
         var entity = document.getElementById(event.target.id);
         if(entity) {
+
+
+            var folder = this.getIconById(entity.id);
+            debugger;
+            this.setState({hoveredFolder: folder})
+            this.setState({showFolderField: true});
 
             var topp = entity.style.top;
             
@@ -960,6 +990,9 @@ class PublicDesktop extends Component {
 }
 
 leaveFolder = (event) => {
+
+    this.setState({showFolderField: false});
+
     var entity = document.getElementById(event.target.id);
    
     if(entity) {
@@ -973,7 +1006,7 @@ leaveFolder = (event) => {
      entity.style.left = leftE;
      entity.style.top = topE;
      this.setStateIconLocation(entity.id, leftE, topE);
-//debugger;
+
     document.getElementById(event.target.id).style.opacity = this.state.actuallOpacity;
     }
 }
@@ -996,63 +1029,25 @@ let prevNext =  this.state.explQuery!=""? <div class="nextPrev">
 let removingExplore = this.state.explQuery==""?  "" :
 <div  onClick = {this.cleanexplQuery}  class="removeExpl clickElem">&#43;</div>
    
- if(this.props.headerType == "explore") {
+ if(this.props.headerType == "explore" ||  this.props.headerType=="folders") {
  
-actuallMenu =  (<div id="exploreMenu" class="actuallMenu">
 
-{/*  <label id="najPopL" onClick={this.clickExploreCheckBox} >
-                        <input name="najpopularniejsze_" type="checkbox" id="najPop" />
-                        Najpopularniejsze<i class="icon-down-open"/>
-                        </label>
+var exploreButton = this.state.foldersIcons? <button onClick={this.exploreHandler} class='titleButton explButton'>Wyszukaj</button> :
+<button onClick={this.exploreHandler} class='titleButton explButton'>Eksploruj</button>
 
-                         <label id="najNowL" onClick={this.clickExploreCheckBox} >
-                        <input style={{marginLeft: "0px"}} name="najnowsze_" type="checkbox" id="najNow" />
-                        Ikony<i class="icon-down-open"/>
-                        </label> */}
+actuallMenu = this.state.openedFolder != ""? "" :  (<div id="exploreMenu" class="actuallMenu">
+
+
 
 <div id="explFilter" class="switch" style={{fontSize: "20px", marginTop: "3px", display: "inline"}}> 
 <i class="icon-sliders"/>
 <div id="explFilterField" >
 
-{/*Sortuj według:
- <span  id="infoLink">&#9432;info
-                <div id="info">
-               Wizualizacja piosenek granych <br/>w najpopularniejszych stacjach radiowych.
-               <br/>
-              </div>
-</span> 
-
-
-
- <label id="explPop" onClick={this.explCheck}
-style={{color: this.state.explPopCheck? 'white' 
-: 'rgba(255, 255, 255, 0.510)'  }}><i class="icon-fire"/>Popularność</label>
-<label id="explDate"
-style={{color: !this.state.explPopCheck? 'white' 
-: 'rgba(255, 255, 255, 0.510)'  }}
-onClick={this.explCheck}>
-                        <i class="icon-calendar-empty"/>Data utworzenia
-                        </label>
-                        <hr/> */}
 Maksymalna ilość ikon na stronie: 
 <button id="iconCount"  onClick={this.lessExplIconsCount} ><i class="icon-left-open"></i></button>
 <input id="exploreN" type="text" value={this.state.explIconsCount} /> 
 <button onClick={this.addExplIconsCount} id="iconCount"><i  class="icon-right-open"/> </button>
 
-{/* Wyszukuj spośród:
-<div style={{marginTop: "5px"}}>
-<label onClick = {this.setExplDesk}
-style={{color: this.state.explDesk? 'white' 
-: 'rgba(255, 255, 255, 0.510)', marginLeft: "0px" }}><i class="icon-doc-landscape"/>Pulpity użytkowników</label></div>
-
-<div style={{marginTop: "5px"}}><label onClick = {this.setExplActuall}
-style={{color: this.state.explActuall? 'white' 
-: 'rgba(255, 255, 255, 0.510)', marginLeft: "0px"  }}><i class="icon-fire"/>Dział aktualności</label></div>
-<div style={{marginTop: "5px"}}>
-<label  onClick = {this.setExplHistory}
-style={{color: this.state.explHistory? 'white' 
-: 'rgba(255, 255, 255, 0.510)', marginLeft: "0px"}}><i class="icon-history"/>Historia działu aktualności</label></div>
-<hr/>*/} 
 </div>
 </div>
 <div class="exploreDiv">
@@ -1060,26 +1055,32 @@ style={{color: this.state.explHistory? 'white'
     <input id="exploreT" type="text"
         autofocus="true"
         ref="textInput"
-        placeholder= "Wyszukaj - autorzy, tytuły, wykonawcy..."
+        placeholder= {this.state.foldersIcons? "Wyszukaj foldery..." :  "Wyszukaj - autorzy, tytuły, wykonawcy..."}
         onKeyPress = {this.onKeyExplore}
         onChange={e => this.editExplore(e.target.value)}
         value={this.state.explQuery}/>{removingExplore}</div> 
-<button onClick={this.exploreHandler} class='titleButton explButton'>Eksploruj</button>
+        {exploreButton}
 
     {prevNext}
- </div>); }
+ </div>) }
 
 
         var randomInt = require('random-int');
         let tagsField = this.state.loadedIcons? <TagsField  noIcons={this.state.noIcons} searchTag={this.props.searchTag}  tags = {this.getIconTags(this.state.entityID)} />  : "";
         
        
-        if(this.state.firstField) {
+        if(this.state.firstField || this.state.foldersIcons) {
             tagsField = "";
         }
 
 
         let field = "";
+
+        if(this.state.foldersIcons) {
+            field = <FolderField folder={this.state.hoveredFolder}  show={this.state.showFolderField}/>
+        }
+
+
         if(!this.state.loadedIcons) {
             field = <LoadingField/>
         }

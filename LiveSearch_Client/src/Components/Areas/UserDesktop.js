@@ -127,10 +127,7 @@ class UserDesktop extends Component {
                 this.setState({fromFolder: true});
             } 
       
-
-           // this.setState({fromFolder: this.props.match.params.id1? true : false });
             this.setState({folderId: folderId });
-            //debugger;
             this.getImages(this.props.userId, folderId);
             this.getSpotify(this.props.userId, folderId);
             this.getIcons(this.props.userId, folderId);

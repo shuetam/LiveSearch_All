@@ -26,13 +26,14 @@ namespace Live.Controllers
             string query = Query.query;
             int count = Query.count;
             int skip = count * Query.next;
+        
 
             if(!string.IsNullOrEmpty(query))
             {
                 var explore = await _exploreRepository.ExploreIconsAsync(query, count, skip);
-                //Console.WriteLine($"{Query.query} --skip: {skip}---count: {explore.count}");
                 return Json(explore);
             }
+          
             
 
             var top = await _exploreRepository.GetAllActuallYTAsync();
@@ -46,6 +47,15 @@ namespace Live.Controllers
         [HttpPost("getsharedfolders")]
         public async Task<IActionResult> SharedFolders([FromBody] ExploreQuery Query)
         {
+            string folderId = Query.folderId;
+
+            if (!string.IsNullOrEmpty(folderId))
+            {
+                var folderContent = await _exploreRepository.GetIconsForFolder(folderId);
+                return Json(folderContent);
+            }
+
+
             int count = Query.count;
             int skip = count * Query.next;
             string query = Query.query;

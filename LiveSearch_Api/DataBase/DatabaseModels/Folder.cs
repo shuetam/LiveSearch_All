@@ -184,9 +184,9 @@ public class Folder : Live.Core.Entity
     {
         if (newDescription != this.ShareDescription)
         {
-            if (newDescription.Length > 150)
+            if (newDescription.Length > 500)
             {
-                newDescription = newDescription.Substring(0, 150);
+                newDescription = newDescription.Substring(0, 500);
             }
             this.ShareDescription = newDescription;
         }

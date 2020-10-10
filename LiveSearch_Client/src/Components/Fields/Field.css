@@ -139,6 +139,23 @@
 }
 
 
+.folderInfo {
+  text-align: left;
+  top: 70px;
+  -webkit-box-shadow: inset 0px 0px 5px 0px rgba(255, 255, 255, 0.445);
+  -moz-box-shadow: inset 0px 0px 5px 0px  rgba(255, 255, 255, 0.445);
+  box-shadow: inset 0px 0px 5px 0px  rgba(255, 255, 255, 0.445);
+  width: 600px;
+  height: auto;
+  padding: 10px;
+
+}
+
+ .folderInfo hr {
+  border: 0; border-top: 1px solid rgb(90, 90, 90);
+} 
+
+
 .fieldEditorInput {
   z-index: 700;
   font-family: 'Mandali', sans-serif;

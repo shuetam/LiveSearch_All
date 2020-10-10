@@ -181,7 +181,7 @@ this.isConfirm();
                 this.setState({headerType: "explore"});
             }
 
-            if(paramsId == "foldery") {
+            if(paramsId == "udostepnione_foldery") {
                 this.setState({headerType: "folders"});
             }
            
@@ -817,7 +817,7 @@ let infoArrowBest = this.state.showBooksArrow? <div  class="infoArrowBestsellers
         />
     )} />;
 
-    let sharedFoldersArea =  <Route   path={PATHES.sharedFolders} exact component={(props) => (
+    let sharedFoldersArea =  <Route   path={PATHES.sharedFolders +':folderId?'} exact component={(props) => (
         <PublicDesktop {...props} searchTag={this.searchTag} 
         headerType="folders"
         />

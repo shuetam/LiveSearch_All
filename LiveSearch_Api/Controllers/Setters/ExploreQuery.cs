@@ -15,6 +15,7 @@ namespace Live.Controllers
         public string query {get; set;}
         public int count {get;set;}
         public int next {get; set;}
+        public string folderId { get; set; }
     }
 
 }

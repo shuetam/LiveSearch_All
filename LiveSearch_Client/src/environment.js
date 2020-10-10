@@ -4,7 +4,7 @@ export const URL = {
 
     //api: "http://localhost:53071/api/", 
     //api: "http://localhost:5000/api/", 
-    api: "http://localhost:53072/api/", 
+    api: "http://localhost:53071/api/", 
     //api: "https://www.fitize.pl/api/", 
 
     login: "SocialUser/user",
@@ -51,7 +51,8 @@ export const URL = {
     confirmPassword: "user/confirmpassword",
     getuseremail: "UserDesktop/getuseremail",
     editFolder: "UserDesktop/editfolder"  ,
-    sharedFolders: "explore/getsharedfolders" 
+    sharedFolders: "explore/getsharedfolders",
+  
 }
 
 export const PATHES = {
@@ -71,7 +72,7 @@ export const PATHES = {
     information: '/informacje',
     userFolder: 'pulpit/folder/',
     bestsellersAdmin: "/bestsellersadmin",
-    sharedFolders: "/udostepnione_foldery"
+    sharedFolders: "/udostepnione_foldery/"
 }
 
 
