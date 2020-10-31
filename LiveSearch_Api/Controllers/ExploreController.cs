@@ -40,6 +40,7 @@ namespace Live.Controllers
             var topImg = await _exploreRepository.GetAllActuallIMGAsync();
 
             top.AddRange(topImg);
+            top = top.Skip(skip).Take(count).ToList();
             //var results = new ExploreResultsDto(top, 6, 1);
             return Json(top);
         }
@@ -48,13 +49,12 @@ namespace Live.Controllers
         public async Task<IActionResult> SharedFolders([FromBody] ExploreQuery Query)
         {
             string folderId = Query.folderId;
-
+         
             if (!string.IsNullOrEmpty(folderId))
             {
                 var folderContent = await _exploreRepository.GetIconsForFolder(folderId);
                 return Json(folderContent);
             }
-
 
             int count = Query.count;
             int skip = count * Query.next;

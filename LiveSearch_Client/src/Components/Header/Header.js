@@ -184,6 +184,10 @@ this.isConfirm();
             if(paramsId == "udostepnione_foldery") {
                 this.setState({headerType: "folders"});
             }
+
+            if(paramsId == "obserwowane_foldery") {
+                this.setState({headerType: "followed"});
+            }
            
             if(paramsId == "pulpit")  {
                 this.setState({headerType: "desk"});
@@ -620,16 +624,29 @@ responseErrorGoogle = (response) => {
        
     }
 
+    activeFollowedFolders = () => {
+        if(this.props.isAuthenticated) {
+     
+            this.props.history.push(PATHES.followedFolders);
+            this.setState({headerType: "followed"});
+        }
+        else {
+            manageLogin();
+        }
+        
+    }
+
+
     activeSharedFolders = () => {
-        var paramsId = this.props.match.params.id;
+        //var paramsId = this.props.match.params.id;
         //if(paramsId !== "foldery") {
-            this.props.history.push(PATHES.sharedFolders);
+            this.props.history.push(PATHES.sharedFolders+ "?q="+ this.state.explQuery + "&skip=0");
             this.setState({headerType: "folders"});
         //}
     }
 
     activeActuall = () => {
-        var paramsId = this.props.match.params.id;
+        //var paramsId = this.props.match.params.id;
         //if(this.state.headerType !== "hot") {
             this.props.history.push('/');
             this.setState({headerType: "hot"});
@@ -817,9 +834,15 @@ let infoArrowBest = this.state.showBooksArrow? <div  class="infoArrowBestsellers
         />
     )} />;
 
-    let sharedFoldersArea =  <Route   path={PATHES.sharedFolders +':folderId?'} exact component={(props) => (
+    let sharedFoldersArea =  <Route   path={PATHES.sharedFolders +'/:folderId?'} exact component={(props) => (
         <PublicDesktop {...props} searchTag={this.searchTag} 
         headerType="folders"
+        />
+    )} />;
+
+    let followedFoldersArea =  <Route   path={PATHES.followedFolders +'/:folderId?'} exact component={(props) => (
+        <PublicDesktop {...props} searchTag={this.searchTag} 
+        headerType="followed"
         />
     )} />;
 
@@ -1009,6 +1032,11 @@ if(this.state.headerType == "explore") {
 if(this.state.headerType == "desk") {
     activeHeader = <i class="icon-doc-landscape"/>
 }
+if(this.state.headerType == "followed") {
+    activeHeader = <i class="icon-eye"/>
+}
+
+
 
 
 
@@ -1026,8 +1054,12 @@ let userPulpit = <div onClick={this.activeDesk}   class= {this.state.headerType 
 "mainSwitch active" : "mainSwitch"} > <i class="icon-doc-landscape"/>Mój pulpit
 </div>
 
- let fallowedFolders = <div onClick={this.activeSharedFolders}   class= {this.state.headerType == "folders"?
+ let sharedFolders = <div onClick={this.activeSharedFolders}   class= {this.state.headerType == "folders"?
 "mainSwitch active" : "mainSwitch"} > <i class="icon-folder-open"/> Foldery użytkowników
+</div> 
+
+let followedFolders = <div onClick={this.activeFollowedFolders}   class= {this.state.headerType == "followed"?
+"mainSwitch active" : "mainSwitch"} > <i class="icon-eye"/> Obserwowane foldery
 </div> 
 
 
@@ -1035,7 +1067,8 @@ let mainMenu = <div id="switchMenu" class="switchMenu">{activeHeader}<i class="i
                 <div id="switchMenuField">
                     {actuall}
                     {explore}
-                  {fallowedFolders}
+                    {followedFolders}
+                  {sharedFolders}
                     {userPulpit}
                      
                 </div>
@@ -1372,6 +1405,7 @@ return (
                             {first}
                             {exploreArea}
                             {sharedFoldersArea}
+                            {followedFoldersArea}
                             {books}
                             {songs}
                             {movies}

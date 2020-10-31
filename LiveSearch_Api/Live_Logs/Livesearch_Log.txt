@@ -3824,3 +3824,87 @@
 2020-10-08 22:29:39.547 +02:00 [Error] An error occurred while sending the request. The server returned an invalid or unrecognized response.
 2020-10-08 22:31:13.699 +02:00 [Information] Finish radio songs update with 1084 songs and 1 youtube errors
 2020-10-08 23:04:59.801 +02:00 [Information] Finish radio songs update with 97 songs and 0 youtube errors
+2020-10-10 16:21:09.261 +02:00 [Information] Finish radio songs update with 96 songs and 0 youtube errors
+2020-10-10 17:02:20.585 +02:00 [Information] Finish radio songs update with 100 songs and 1 youtube errors
+2020-10-10 20:42:01.398 +02:00 [Information] Finish radio songs update with 285 songs and 0 youtube errors
+2020-10-10 21:00:42.442 +02:00 [Information] Finish radio songs update with 71 songs and 0 youtube errors
+2020-10-10 23:35:28.803 +02:00 [Information] Finish radio songs update with 149 songs and 1 youtube errors
+2020-10-11 00:03:43.061 +02:00 [Information] Finish radio songs update with 79 songs and 0 youtube errors
+2020-10-11 01:03:31.338 +02:00 [Information] Finish radio songs update with 91 songs and 1 youtube errors
+2020-10-11 10:58:30.192 +02:00 [Information] Finish radio songs update with 935 songs and 2 youtube errors
+2020-10-11 11:00:53.763 +02:00 [Information] Finish radio songs update with 101 songs and 1 youtube errors
+2020-10-11 12:15:29.200 +02:00 [Information] Finish radio songs update with 106 songs and 0 youtube errors
+2020-10-11 13:13:07.011 +02:00 [Information] Finish radio songs update with 99 songs and 0 youtube errors
+2020-10-11 14:01:31.443 +02:00 [Information] Finish radio songs update with 100 songs and 0 youtube errors
+2020-10-11 15:01:39.525 +02:00 [Information] Finish radio songs update with 103 songs and 1 youtube errors
+2020-10-11 16:07:00.151 +02:00 [Information] Finish radio songs update with 97 songs and 0 youtube errors
+2020-10-11 17:07:12.107 +02:00 [Information] Finish radio songs update with 94 songs and 0 youtube errors
+2020-10-11 18:04:09.889 +02:00 [Information] Finish radio songs update with 94 songs and 0 youtube errors
+2020-10-16 18:44:43.463 +02:00 [Information] Finish radio songs update with 88 songs and 0 youtube errors
+2020-10-16 19:43:09.307 +02:00 [Information] Finish radio songs update with 97 songs and 1 youtube errors
+2020-10-16 20:29:46.362 +02:00 [Information] Finish radio songs update with 86 songs and 0 youtube errors
+2020-10-16 21:08:20.595 +02:00 [Information] Finish radio songs update with 69 songs and 0 youtube errors
+2020-10-16 22:10:44.043 +02:00 [Information] Finish radio songs update with 59 songs and 0 youtube errors
+2020-10-16 23:00:12.375 +02:00 [Information] Finish radio songs update with 67 songs and 1 youtube errors
+2020-10-16 23:12:48.459 +02:00 [Error] Error in updating songs Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+2020-10-16 23:12:57.130 +02:00 [Error]    at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__108_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.<ExecuteAsync>d__17.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.<BufferlessMoveNext>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.EntityFrameworkCore.Storage.Internal.SqlServerExecutionStrategy.<ExecuteAsync>d__7`2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.<MoveNext>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at System.Linq.AsyncEnumerable.SelectEnumerableAsyncIterator`2.<MoveNextCore>d__7.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at System.Linq.AsyncEnumerable.AsyncIterator`1.<MoveNext>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.<MoveNext>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at System.Linq.AsyncEnumerable.<Aggregate_>d__6`3.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Live.Repositories.UpdatingRepository.<GetLastDate>d__6.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Repositories/UpdatingRepository.cs:line 220
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Live.Repositories.UpdatingRepository.<SongsUpdateAsync>d__5.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Repositories/UpdatingRepository.cs:line 59
+2020-10-17 00:03:01.431 +02:00 [Information] Finish radio songs update with 101 songs and 0 youtube errors
+2020-10-17 15:05:56.916 +02:00 [Information] Finish radio songs update with 1111 songs and 4 youtube errors
+2020-10-17 16:06:45.710 +02:00 [Information] Finish radio songs update with 96 songs and 0 youtube errors
+2020-10-17 20:43:50.749 +02:00 [Information] Finish radio songs update with 386 songs and 3 youtube errors
+2020-10-17 21:01:32.297 +02:00 [Information] Finish radio songs update with 72 songs and 1 youtube errors
+2020-10-17 22:28:38.537 +02:00 [Information] Finish radio songs update with 71 songs and 0 youtube errors
+2020-10-17 23:40:13.547 +02:00 [Information] Finish radio songs update with 84 songs and 0 youtube errors
+2020-10-18 00:00:20.369 +02:00 [Information] Finish radio songs update with 78 songs and 0 youtube errors

@@ -38,12 +38,21 @@ ALTER TABLE Users
 ADD NewSalt NVARCHAR (MAX) NULL;
 
 ALTER TABLE Folders
-ADD Followers INT;
+DROP COLUMN Followers;
 
+ALTER TABLE Folders
+DROP COLUMN IconsCount;
+
+
+DELETE FROM SharedFolders WHERE ID IS NOT NULL
+select * from SharedFolders
 select * from Folders
 
 ALTER TABLE Folders
 ADD SharedAt DATETIME NULL;
+
+ALTER TABLE Folders
+ADD UpdatedAt DATETIME NULL;
 
 ALTER TABLE Folders
 ADD ShareDescription NVARCHAR (600) NULL;

@@ -31,8 +31,8 @@ public class LiveContext : DbContext
     {
         _sqlSettings = SqlSettings;
     } 
-public LiveContext() : this(new DbContextOptions<LiveContext>()) { }
-   public LiveContext(DbContextOptions<LiveContext> options) : base(options) {
+        public LiveContext() : this(new DbContextOptions<LiveContext>()) { }
+        public LiveContext(DbContextOptions<LiveContext> options) : base(options) {
            
         }   
 

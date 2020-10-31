@@ -26,16 +26,21 @@
 }
 
 .nextPrev {
-    margin-top: 6px;
+    margin-top: 10px;
     margin-left: 15px;
     pointer-events: none;
+    font-family: 'Mandali', sans-serif;
+    font-size: 13px;
 }
 
 .nextPrevAct {
-    margin-top: 6px;
+    margin-top: 10px;
     margin-left: 15px;
-    color: white;
+    color: rgba(248, 248, 248, 0.781);
     pointer-events: auto;
+    font-family: 'Mandali', sans-serif;
+    
+    text-decoration: underline white;
 
 }
 
@@ -233,6 +238,11 @@
     text-shadow: rgba(14, 14, 14, 0.979) -3px 2px 3px, rgba(0, 0, 0, 0.911) 0px 0px 15px
 }
 
+.fontAdd {
+    padding-right: 3px;
+   font-size: 20px;
+  
+}
 
 .stopAdding {
    

@@ -16,11 +16,13 @@ public class SharedFolder : Live.Core.Entity
     protected SharedFolder()
     {
     }
-    public SharedFolder(Guid userId, Guid folderId)
+    public SharedFolder(Guid userId, Guid folderId, string left, string top)
     {
-        this.FolderId = userId;
-        this.UserId = folderId;
+        this.FolderId = folderId;
+        this.UserId = userId;
         FallowedAt = DateTime.Now;
+        this.LocLeft = left;
+        this.LocTop = top;
     }
 
     public void ChangeLocation(string left, string top)

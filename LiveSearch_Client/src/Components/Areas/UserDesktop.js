@@ -334,9 +334,11 @@ class UserDesktop extends Component {
 
         if(lastIcon) {
             var type = lastIcon.type;
-            this.setState({ nowPlayed: lastIcon.id });
-            this.setState({ entityID:  lastIcon.id });
-            this.setState({entityTags: this.getIconTags(lastIcon.id)});
+            if(type != "FOLDER") {
+                this.setState({ nowPlayed: lastIcon.id });
+                this.setState({ entityID:  lastIcon.id });
+                this.setState({entityTags: this.getIconTags(lastIcon.id)});
+            }
             //this.setState({ytField: false});
 
             this.setState({fieldType: type});
@@ -799,6 +801,7 @@ class UserDesktop extends Component {
                item.icon1 = folder.icon1;
                item.icon2 = folder.icon2;
                item.icon3 = folder.icon3;
+               item.hasIcons = folder.hasIcons;
             }
           });
           return {
@@ -914,6 +917,15 @@ class UserDesktop extends Component {
             this.setState({fieldType: "FOLDER_EDITOR"});
         }
 
+        showFolderAdding= () => {
+            this.setState({editingFolder: true});
+            //this.setState({editedId: id});
+            //var folder = this.getIconById(id);
+            
+            this.setState({editedFolder: null});
+            this.setState({fieldType: "FOLDER_EDITOR"});
+        }
+
 
 
     showTitleEditor = (id, iconType) => {
@@ -1021,17 +1033,20 @@ class UserDesktop extends Component {
 
 
 
-    addFolderHandler = () => {
+    addFolderHandler = (folder) => {
        
-        document.getElementById("exploreT").readOnly = false; 
-        var name = document.getElementById("exploreT").value;
+        //document.getElementById("exploreT").readOnly = false; 
+        //var name = document.getElementById("exploreT").value;
+
         const data = {
+            Id: folder.Id,
             Type: "FOLDER",
-            //UserId: this.props.userId,
+            Title: folder.title,
             Description: "",
-            Title: name,
-            Shared: false
+            Shared: folder.shared
             }
+
+debugger;
 
         axios.post(URL.api+URL.createFolder, data, this.state.authConfig)
         .then((result) => {
@@ -1039,7 +1054,7 @@ class UserDesktop extends Component {
             this.setState(prevState => ({
                 newFolders: [...prevState.newFolders, result.data]
               }));
-              document.getElementById("exploreT").value = "";
+             // document.getElementById("exploreT").value = "";
             
             })
         .catch(error => {this.Alert("Wystąpił błąd przy próbie utworzenia folderu. Spróbuj ponownie później.")}); 
@@ -1052,6 +1067,7 @@ class UserDesktop extends Component {
         if(folder == null) {
             
             var icon = this.getIconById(this.state.entityID);
+            debugger;
             var iconType = icon.type;
             this.setState({ fieldType: iconType});
             this.setState({editingFolder: false});
@@ -1176,7 +1192,11 @@ class UserDesktop extends Component {
     }
 
         liveSearch = (event) => {  
-        var icons = document.getElementsByClassName("entity");
+        var iconsEntity = document.getElementsByClassName("entity");
+        var folders = document.getElementsByClassName("folder");
+        
+            var icons = [...folders,...iconsEntity];
+
         for (var i = 0; i < icons.length; i++) {
             if(icons[i].title.toString().toLowerCase().includes(event.target.value.toString().toLowerCase()))
             {
@@ -1224,19 +1244,10 @@ class UserDesktop extends Component {
 
     saveIcons = () => {
         
-
-       // var iconsClass = document.getElementsByClassName("entity");
         var folders = document.getElementsByClassName("folder");
-        //var iconsClass = [...this.state.icons];
+      
         var icons = document.getElementsByClassName("entity");
-        //var folders = [...this.state.folders];
-      /*   var icons = Array.prototype.filter.call(iconsClass, function(icon){
-            return (icon.style.top).includes("px");
-        }); */
- 
-
-        //icons.filter(checkPX);
-        //debugger;
+  
         var dataIcons = [];
         var toPX = require('to-px');
 
@@ -1246,20 +1257,6 @@ class UserDesktop extends Component {
 
             var top = topToVh(topEl);
             var left = leftToVw(leftEl);
-            /* var topFlo = (parseFloat(topEl) / document.documentElement.clientHeight) * 100;
-                if(topFlo>99) {
-                    topFlo = 90;
-                }
-    
-                var leftFlo = (parseFloat(leftEl) / document.documentElement.clientWidth) * 100;
-                if(leftFlo>99) {
-                    leftFlo = 90;
-                }
-                var top = topFlo +"vh";
-                var left = leftFlo + "vw"; */
-
-            //icons[i].style.top = top;
-            //icons[i].style.left = left;
 
             var Id = icons[i].id;
             var icon = {
@@ -1273,27 +1270,12 @@ class UserDesktop extends Component {
         }
 
         for (var i = 0; i < folders.length; i++) {
-            //var leftfolder = folders[i].left;
-
-/*             var topFlo = (parseFloat(folders[i].style.top) / document.documentElement.clientHeight) * 100;
-            if(topFlo>99) {
-                topFlo = 90;
-            }
-
-            var leftFlo = (parseFloat(folders[i].style.left) / document.documentElement.clientWidth) * 100;
-            if(leftFlo>99) {
-                leftFlo = 90;
-            } */
+           
 
             var topEl = folders[i].style.top;
             var leftEl = folders[i].style.left;
             var top = topToVh(topEl);
             var left = leftToVw(leftEl);
-
-         /*    var top = topFlo +"vh";
-            var left = leftFlo + "vw"; */
-
-
            // var top = ((parseFloat(folders[i].style.top) / document.documentElement.clientHeight) * 100)+"vh";
            // var left = ((parseFloat(folders[i].style.left) / document.documentElement.clientWidth) * 100)+"vw";
             var Id = folders[i].id;
@@ -1408,9 +1390,23 @@ class UserDesktop extends Component {
           }));
           this.setState({newFolders: []})
         this.setState({addingFolder: false});
-        document.getElementById("exploreT").value = "";
+        //document.getElementById("exploreT").value = "";
         this.setState({addingIcon: false});
         this.setState({explQuery: ""});
+
+        var icon = this.getIconById(this.state.entityID);
+        if(!icon) {
+            iconType = "INFO";  
+        }
+        else {
+            var iconType = icon.type;
+        }
+        debugger;
+        
+        this.setState({ fieldType: iconType});
+        this.setState({editingFolder: false});
+
+
     }
 
 
@@ -1492,7 +1488,7 @@ class UserDesktop extends Component {
 
     getFolderClass = (id) => {
 
-        if (this.state.editingFolder && id !== this.state.editedId) {
+        if (this.state.editingFolder && id !== this.state.editedId && id !== "dis") {
             return "folderDis";
         }
 
@@ -1558,7 +1554,7 @@ class UserDesktop extends Component {
                 field = ""
                 break;
             case "FOLDER_EDITOR":
-                field = <EditField folder={this.state.editedFolder} saveFolder={this.editFolderHandler}/>
+                field = <EditField folder={this.state.editedFolder} addFolder={this.addFolderHandler}  cancelAdding = {this.stopAddingFolder}   saveFolder={this.editFolderHandler}/>
                 break;
             case "":
                 field = <LoadingField/>
@@ -1628,6 +1624,9 @@ class UserDesktop extends Component {
             getIconById = (Id) => {
                 var allIcons = [...this.state.icons, ...this.state.images, ...this.state.spotify, ...this.state.folders, ...this.state.newFolders ];
                 var icon = allIcons.find( icon => icon.id === Id);
+                if(!icon) {
+                    icon = allIcons[allIcons.length-1];
+                }
                 return icon;
             }
         
@@ -1946,7 +1945,7 @@ setAddingIcon = () => {
         </div>
         </div>; */
 
-        let tagsField = this.state.loadedIcons? <TagsField noIcons = {!this.anyIcons()}  searchTag={this.props.searchTag} fromDesk={true} setTags={this.showTitleEditor}  id={this.state.entityID} tags = {this.state.entityTags} />  : "";
+        let tagsField = this.state.loadedIcons? <TagsField fieldType={this.state.fieldType} noIcons = {!this.anyIcons()}  searchTag={this.props.searchTag} fromDesk={true} setTags={this.showTitleEditor}  id={this.state.entityID} tags = {this.state.entityTags} />  : "";
 
             let field = "";
 
@@ -2052,7 +2051,7 @@ setAddingIcon = () => {
         </div>
         </div>
         :
-        <div id="plus" class= {this.state.addingFolder? "switchA" : "switchB" } onClick={this.showAddingFolder}  title="Dodaj nowy folder"> 
+        <div id="plus" class= {this.state.addingFolder? "switchA" : "switchB" } onClick={this.showFolderAdding}  title="Dodaj nowy folder"> 
         <i class="icon-folder-add" />
         <div id="plusField" class="hoverInfo" title="">
         Utwórz nowy folder

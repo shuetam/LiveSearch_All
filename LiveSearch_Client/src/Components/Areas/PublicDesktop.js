@@ -24,9 +24,10 @@ import TagsField from '../Fields/TagsField';
 import 'url-search-params-polyfill';
 import {parseBool} from '../../Converters.js';
 import { leftToVw, topToVh } from '../../Converters.js';
-import { bottomIcon, getQuarter, getIconFromUrl } from '../../CommonManager.js';
+import { bottomIcon, getQuarter, getIconFromUrl, manageLogin } from '../../CommonManager.js';
 import SpotifyIcon from '../Icons/SpotifyIcon';
 import Folder from '../Icons/Folder';
+import UnfollowPopup from '../Popup/UnfollowPopup';
 
 class PublicDesktop extends Component {
 
@@ -49,6 +50,7 @@ class PublicDesktop extends Component {
             images: [],
             spotify: [],
             userIconsId: [],
+            followedIds: [],
             prevPlayed: [],
             noIcons: false,
             foldersIcons: false,
@@ -66,6 +68,11 @@ class PublicDesktop extends Component {
             openedFolder: "",
             showFolderField: false,
             hoveredFolder: null,
+            followedIcons: false,
+            unFollowTitle: "",
+            showUnfollow: false,
+            unFollowId: ""
+           
         }
       
     }
@@ -142,9 +149,10 @@ class PublicDesktop extends Component {
         }
         axios.post(URL.api+URL.userIconsIds, null, config)
         .then((result) => {
-          
-            this.setState({ userIconsId: result.data })});
-        //.catch(error => {this.Alert()}); 
+          debugger;
+            this.setState({ userIconsId: result.data.userIds });
+            this.setState({ followedIds: result.data.followedIds })});
+        //.catch(error => {this.Alert("cos nie tak z ids")}); 
         }
     }
 
@@ -179,13 +187,13 @@ class PublicDesktop extends Component {
 
         var query = this.props.location.search;
         var search = new URLSearchParams(query);
-    if(this.props.headerType=="explore" || this.props.headerType=="folders") {
+    if(this.props.headerType=="explore" || this.props.headerType=="folders" || this.props.headerType=="followed") {
       
         var exploreQuery = search.get("q");
         var exploreSkip = search.get("skip");
      
         var folderId = this.props.match.params.folderId? this.props.match.params.folderId : "";
-debugger;
+
         if(exploreQuery !== null){
             this.setState({explQuery: exploreQuery});
         }
@@ -255,13 +263,25 @@ if(this.props.headerType=="folders" && !this.props.match.params.folderId) {
             fetchData = URL.api + URL.sharedFolders;
         }
 
+        var config = null;
+        if(this.props.headerType=="followed" && this.props.isAuthenticated) {
+
+       
+                config = {
+                    headers: {Authorization: "Bearer " + this.props.jwtToken}
+                }
+       
+            this.setState({followedIcons: true});
+            fetchData = URL.api + URL.followedFolders;
+        }
+
 
         var iconId= search.get("iconId");
-        var iconType= search.get("iconType");
+       // var iconType= search.get("iconType");
         var iconTitle= search.get("iconTitle");
         var iconTags= search.get("iconTags");
-        var iconLeft= search.get("iconLeft");
-        var iconTop= search.get("iconTop");
+       // var iconLeft= search.get("iconLeft");
+       // var iconTop= search.get("iconTop");
         this.setState({ loadedIcons: false });
 
         if(iconId !== null) {
@@ -275,12 +295,13 @@ if(this.props.headerType=="folders" && !this.props.match.params.folderId) {
 
         else {
 
-        axios.post(fetchData, data, null)
+        axios.post(fetchData, data, config)
         .then((result) => { 
+            debugger;
             //var deep = result.data.deep;
             if(result.data.length == parseInt(this.state.explIconsCount)) {
               this.setState({showNextPrev: true})
-                //this.Alert(deep);
+                //this.Alert("there is somwthing else");
             }
         this.setState({ icons:
             Array.prototype.filter.call(result.data, function(icon) {
@@ -560,6 +581,118 @@ if(this.props.headerType=="folders" && !this.props.match.params.folderId) {
         }
     }
 
+    followFolder = (folderId) => {
+
+        if(this.props.isAuthenticated) {
+            var config = {
+                headers: {Authorization: "Bearer " + this.props.jwtToken}
+            }
+
+        var entity = document.getElementById(folderId);
+            var Top_ = entity.style.top;
+            var Left_ = entity.style.left;
+    
+    
+            if((entity.style.top).includes("px")) {
+                var topFlo = (parseFloat(Top_) / document.documentElement.clientHeight) * 100;
+                if(topFlo>99) {
+                    topFlo = 80;
+                }
+    
+                var leftFlo = (parseFloat(Left_) / document.documentElement.clientWidth) * 100;
+                if(leftFlo>99) {
+                    leftFlo = 80;
+                }
+                Top_= topFlo +"vh";
+                Left_ = leftFlo + "vw";
+            }
+
+
+            var data = { 
+                FolderId: folderId,
+                Left: Left_,
+                Top:  Top_
+            }
+            axios.post(URL.api+URL.followFolder, data, config)
+            .then((result) => {
+              
+                if(result.data) {
+
+                    var folder = this.getIconById(result.data.id);
+                    folder.followers = result.data.followers;
+                    this.setState({ hoveredFolder: folder });
+                    this.setState(prevState => ({
+                        followedIds: [...prevState.followedIds, folder.id]
+                      }))
+                   
+                }
+                else {
+                    this.Alert("Nie znaleziono folderu, spróbuj ponownie za chwilę.");
+                }
+                }
+               
+            ).catch(error => {this.Alert("Wystąpił błąd, spróbuj ponownie za chwilę.")}); 
+            }
+            else {
+                manageLogin();
+            }
+
+    }
+
+
+    unFollowFolderPop = (folderId) => {
+        var folder = this.getIconById(folderId);
+        debugger;
+        if(folder) {
+            this.setState({unFollowTitle: folder.title});
+            this.setState({unFollowId: folder.id});
+            this.setState({showUnfollow: true});
+        }
+    }
+
+
+    unFollowFolder = (forSure, folderId) => {
+
+        if(!forSure) {
+            this.setState({showUnfollow: false});
+            return;
+        }
+
+        if(this.props.isAuthenticated) {
+            var config = {
+                headers: {Authorization: "Bearer " + this.props.jwtToken}
+            }
+            var data = { 
+                FolderId: folderId
+            }
+            axios.post(URL.api+URL.unfollowFolder, data, config)
+            .then((result) => {
+              
+                if(result.data) {
+
+                    for(var i=0;i<this.state.followedIds.length;i++) {
+                        if(this.state.followedIds[i] == result.data.id) {
+
+                            this.state.followedIds[i] = "";
+                            var folder = this.getIconById(result.data.id);
+                            folder.followers = result.data.followers;
+                            this.setState({ hoveredFolder: folder });
+                            if(this.props.headerType=="followed") {
+                                folder.id = "dis";
+                            }
+                        }
+                    }          
+                }
+                else {
+                    this.Alert("Nie znaleziono folderu, spróbuj ponownie za chwilę.");
+                }
+                }
+               
+            ).catch(error => {this.Alert("Wystąpił błąd, spróbuj ponownie za chwilę.")});
+
+    }
+}
+
 
     onHover = (event) => {
 
@@ -644,6 +777,13 @@ if(this.props.headerType=="folders" && !this.props.match.params.folderId) {
     userOwner = (id) => {
         return  this.state.userIconsId.includes(id);
     }
+    
+    userFollow = (id) => {
+        if(this.state.followedIds.includes(id)) {
+        }
+
+        return  this.state.followedIds.includes(id);
+    }
 
 
     cleanTitle = (event) => {
@@ -689,14 +829,23 @@ if(this.props.headerType=="folders" && !this.props.match.params.folderId) {
 
 
     rangeHandler = (event) => {
-        var icons = document.getElementsByClassName("entity");
+        //var icons = document.getElementsByClassName("entity");
+        var iconsEntity = document.getElementsByClassName("entity");
+        var folders = document.getElementsByClassName("folder");
+        
+            var icons = [...folders,...iconsEntity];
         for (var i = 0; i < icons.length; i++) {
             icons[i].style.opacity = event.target.value / 100;
         }
     }
 
     liveSearch = (event) => {  
-        var icons = document.getElementsByClassName("entity");
+        //var icons = document.getElementsByClassName("entity");
+        var iconsEntity = document.getElementsByClassName("entity");
+        var folders = document.getElementsByClassName("folder");
+        
+            var icons = [...folders,...iconsEntity];
+
         for (var i = 0; i < icons.length; i++) {
             if(icons[i].title.toString().toLowerCase().includes(event.target.value.toString().toLowerCase()))
             {
@@ -710,6 +859,13 @@ if(this.props.headerType=="folders" && !this.props.match.params.folderId) {
    
             }
         }
+    }
+
+    getFolderClass = (id) => {
+        if(id == "dis") {
+            return "disable";
+        }
+        return "folder";
     }
 
     getImgWidth = (type) => {
@@ -790,7 +946,7 @@ if(this.props.headerType=="folders" && !this.props.match.params.folderId) {
 
     openFolder = (event) => {
 
-        this.props.history.push(PATHES.sharedFolders + event.target.id);
+        this.props.history.push(PATHES.sharedFolders + "/" + event.target.id);
        // this.props.history.push(PATHES.sharedFolders);
         //this.getIcons( this.props.userId, event.target.id);
     }
@@ -861,7 +1017,12 @@ if(this.props.headerType=="folders" && !this.props.match.params.folderId) {
     onKeyExplore = (event) => {
   
         if(event.key == "Enter") {
-            this.exploreHandler();
+
+            if(this.props.headerType=="explore")
+                this.exploreHandler();
+
+            if(this.props.headerType=="folders")
+                this.foldersExplore();
         }
 
     }
@@ -869,6 +1030,13 @@ if(this.props.headerType=="folders" && !this.props.match.params.folderId) {
     exploreHandler = () => {
         
         this.props.history.push(PATHES.explore + "?q="+ this.state.explQuery + "&skip=0");
+        /* this.setState({headerType: "explore"});
+        this.setState({showNextPrev: false}); */
+    }
+
+    foldersExplore = () => {
+        
+        this.props.history.push(PATHES.sharedFolders + "?q="+ this.state.explQuery + "&skip=0");
         /* this.setState({headerType: "explore"});
         this.setState({showNextPrev: false}); */
     }
@@ -905,7 +1073,12 @@ if(this.props.headerType=="folders" && !this.props.match.params.folderId) {
     showPrev = () => {
         if(this.state.exploreSkip > 0) {
             var skip = this.state.exploreSkip - 1;
-            this.props.history.push(PATHES.explore + "?q="+ this.state.explQuery + "&skip="+skip);
+            if(this.props.headerType=="explore") {
+                this.props.history.push(PATHES.explore + "?q="+ this.state.explQuery + "&skip=" +skip );
+            }
+            if(this.props.headerType=="folders") {
+                this.props.history.push(PATHES.sharedFolders + "?q="+ this.state.explQuery + "&skip=" +skip );
+            }
         }
     }
 
@@ -913,9 +1086,67 @@ if(this.props.headerType=="folders" && !this.props.match.params.folderId) {
     showNext = () => {
         if(this.state.showNextPrev) {
         var skip = this.state.exploreSkip + 1;
-        this.props.history.push(PATHES.explore + "?q="+ this.state.explQuery + "&skip=" +skip );
+        if(this.props.headerType=="explore") {
+            this.props.history.push(PATHES.explore + "?q="+ this.state.explQuery + "&skip=" +skip );
+        }
+        if(this.props.headerType=="folders") {
+            this.props.history.push(PATHES.sharedFolders + "?q="+ this.state.explQuery + "&skip=" +skip );
+        }
+
         }
     }
+
+
+
+    saveIcons = () => {
+        
+        if(this.props.isAuthenticated) {
+            var config = {
+                headers: {Authorization: "Bearer " + this.props.jwtToken}
+            }
+        
+
+        var folders = document.getElementsByClassName("folder");
+      
+        var icons = document.getElementsByClassName("entity");
+  
+        var dataIcons = [];
+        var toPX = require('to-px');
+
+       
+
+        for (var i = 0; i < folders.length; i++) {
+            var topEl = folders[i].style.top;
+            var leftEl = folders[i].style.left;
+            var top = topToVh(topEl);
+            var left = leftToVw(leftEl);
+           var Id = folders[i].id;
+         
+            var folder = {
+            
+             Type: "FOLLOWED_FOLDER",
+             Id:  Id,
+             Left: left,
+             Top: top
+            }
+            dataIcons.push(folder);
+         }
+
+
+         if(dataIcons.length>0) {
+             
+        axios.post(URL.api+URL.saveLocations, dataIcons, config) 
+        .then((result) => {
+            document.getElementById("saveIcons").className = "switchDisable";
+            })
+        .catch((error) => {this.Alert("Nie udało się zachować lokalizacji.")}); 
+        }
+        else {
+            document.getElementById("saveIcons").className = "switchDisable";
+        }
+    } 
+} 
+
 
 
     onHoverFolder = (event) => {
@@ -927,7 +1158,7 @@ if(this.props.headerType=="folders" && !this.props.match.params.folderId) {
 
 
             var folder = this.getIconById(entity.id);
-            debugger;
+          
             this.setState({hoveredFolder: folder})
             this.setState({showFolderField: true});
 
@@ -974,7 +1205,7 @@ if(this.props.headerType=="folders" && !this.props.match.params.folderId) {
                 pos4 = e.clientY;
                 elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
                 elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-                
+                document.getElementById("saveIcons").className = "switchB";
                 //localStorage.setItem('inMove', true);
             }
             
@@ -1017,14 +1248,14 @@ leaveFolder = (event) => {
 
         let actuallMenu = "";
 
-let prevNext =  this.state.explQuery!=""? <div class="nextPrev">
+let prevNext = <div class="nextPrev">
 <span  id="prev" class= {this.state.exploreSkip > 0?   "clickElem nextPrevAct" : "clickElem nextPrev"}  onClick = {this.showPrev}><i class="icon-left-open"/>
-<div id="prevField" class="hoverInfo" >Poprzednie</div>
+Poprzednie<div id="prevField" class="hoverInfo" >Poprzednie</div>
 </span>   
-<span id="next" class= {this.state.showNextPrev?   "clickElem nextPrevAct" : "clickElem nextPrev"} onClick = {this.showNext}><i class="icon-right-open"/>
+<span id="next" class= {this.state.showNextPrev?   "clickElem nextPrevAct" : "clickElem nextPrev"} onClick = {this.showNext}>Następne<i class="icon-right-open"/>
 <div id="nextField" class="hoverInfo" >Następne</div>
 </span>
-</div> : "";
+</div> ;
 
 let removingExplore = this.state.explQuery==""?  "" :
 <div  onClick = {this.cleanexplQuery}  class="removeExpl clickElem">&#43;</div>
@@ -1032,7 +1263,8 @@ let removingExplore = this.state.explQuery==""?  "" :
  if(this.props.headerType == "explore" ||  this.props.headerType=="folders") {
  
 
-var exploreButton = this.state.foldersIcons? <button onClick={this.exploreHandler} class='titleButton explButton'>Wyszukaj</button> :
+var exploreButton = this.state.foldersIcons? <button onClick={this.foldersExplore} 
+class='titleButton explButton'>Wyszukaj</button> :
 <button onClick={this.exploreHandler} class='titleButton explButton'>Eksploruj</button>
 
 actuallMenu = this.state.openedFolder != ""? "" :  (<div id="exploreMenu" class="actuallMenu">
@@ -1069,17 +1301,24 @@ Maksymalna ilość ikon na stronie:
         let tagsField = this.state.loadedIcons? <TagsField  noIcons={this.state.noIcons} searchTag={this.props.searchTag}  tags = {this.getIconTags(this.state.entityID)} />  : "";
         
        
-        if(this.state.firstField || this.state.foldersIcons) {
+        if(this.state.firstField || this.state.foldersIcons || this.state.followedIcons) {
             tagsField = "";
         }
 
+        let saveIcons = this.props.headerType=="followed"? <div id="saveIcons" class="switchDisable" onClick={this.saveIcons} >
+        <i class="icon-floppy" />
+        <div id="saveIconsField" class="hoverInfo">
+            Zapamiętaj aktualne ulokowanie folderów  
+        </div>
+    </div> : "";
 
         let field = "";
 
-        if(this.state.foldersIcons) {
+        if(this.state.foldersIcons || this.state.followedIcons) {
             field = <FolderField folder={this.state.hoveredFolder}  show={this.state.showFolderField}/>
         }
 
+        let unfollowPopup = <UnfollowPopup unFollowFolder={this.unFollowFolder} showPopup={this.state.showUnfollow} folderId = {this.state.unFollowId} unFollowTitle={this.state.unFollowTitle}/>
 
         if(!this.state.loadedIcons) {
             field = <LoadingField/>
@@ -1189,6 +1428,7 @@ Maksymalna ilość ikon na stronie:
                     onLeave={this.cleanTitle}
                     count={song.count}
                     fromFolder = {this.state.fromFolder}
+              
                     showTitleEditor = {this.showTitleEditor}
                     tags={song.tags}
                     leftEdit = "70%"
@@ -1206,7 +1446,7 @@ Maksymalna ilość ikon na stronie:
             return (
                         
                 <Folder  title={song.title} yt={song.id} id={song.id}
-                    classname= "folder"
+                    classname= {this.getFolderClass(song.id)}
                     linkTo={this.openFolder}         
                     location={ this.state.loadedIcons? 
                     {boxShadow: this.getShadow(parseInt(song.left), parseInt(song.top), song.id, true), 
@@ -1219,12 +1459,15 @@ Maksymalna ilość ikon na stronie:
                     icon1= {song.icon1}
                     icon2= {song.icon2}
                     icon3= {song.icon3}
-                    
+                    followFolder = {this.followFolder}
+                    unFollowFolder = {this.unFollowFolderPop}
                     leftEdit = "85%"
                     topEdit = "85%"
                     bottom = {bottomIcon(song.id, song.top)}
                     public={true}
                     shared = {song.shared}
+                    owner = {this.userOwner(song.id)}
+                    followed = {this.userFollow(song.id)}
                     />
                      
                 )
@@ -1259,7 +1502,11 @@ Maksymalna ilość ikon na stronie:
                 {icons}
                 {images}
                 {spotifies}
+                {unfollowPopup}
                 {sharedFolders}
+                <div class="deskMenu">
+                    {saveIcons}
+                </div>
                
 
     <div class="containerIconsContainer">

@@ -92,7 +92,7 @@ class YTArea extends Component {
                 })});  */
 
         this.getUserIconsId();
-        console.log(this.state.icons);
+      //  console.log(this.state.icons);
         
 }
 
@@ -117,7 +117,7 @@ class YTArea extends Component {
         axios.post(URL.api+URL.userIconsIds, null, config)
         .then((result) => {
             debugger;
-            this.setState({ userIconsId: result.data })});
+            this.setState({ userIconsId: result.data.userIds })});
         //.catch(error => {this.Alert()}); 
         }
     }

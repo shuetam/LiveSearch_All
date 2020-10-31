@@ -75,7 +75,7 @@ if(this.props.tags) {
 
 let tags = "";
 
-if(!this.props.noIcons) {
+if(!this.props.noIcons && this.props.fieldType != "FOLDER") {
 
 
     tags =   <div div className="tagsField" id="tagsFieldId">  

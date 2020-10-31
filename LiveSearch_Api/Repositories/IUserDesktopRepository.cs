@@ -26,14 +26,14 @@ namespace Live.Repositories
         Task MoveEntityFromFolder(Guid userId, string entityId, string entityType);
         Task<List<FolderDto>> GetAllFoldersForUserAsync(Guid userId);
         Task<List<FolderDto>> GetFollowedFoldersForUserAsync(Guid userId);
-        Task<List<string>> GetAllIconsIdAsync(Guid userId);
+        Task<object> GetAllIconsIdAsync(Guid userId);
 
         Task SaveIconsLocations(Guid userId, List<EntitySetter> icons);
         
         Task<List<IconDto>> GetNewIcons( Guid userId, string url);
         Task<FolderDto> EditFolder(Guid UserId, EntitySetter folderSetter);
-        Task<bool> FollowFolder(Guid UserId, Guid FolderId);
-        Task<bool> UnFollowFolder(Guid UserId, Guid FolderId);
+        Task<FolderDto> FollowFolder(Guid UserId, Guid FolderId, string left, string top);
+        Task<FolderDto> UnFollowFolder(Guid UserId, Guid FolderId);
     }
 
 }

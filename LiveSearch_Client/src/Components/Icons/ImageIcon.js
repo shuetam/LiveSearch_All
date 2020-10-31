@@ -160,7 +160,7 @@ console.log(event);
                         Top: Top_,
                         Left: Left_,
                         FolderId: this.props.folderId,
-                        Type: 'IMG'
+                     
                         }
 
     

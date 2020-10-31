@@ -167,7 +167,7 @@ namespace Live.Controllers
         public async Task<IActionResult> FollowFolder([FromBody] EntitySetter entity)
         {
             var folderId = new Guid(entity.FolderId);
-            var followed  = await _desktopRepository.FollowFolder(this.UserId, folderId);
+            var followed  = await _desktopRepository.FollowFolder(this.UserId, folderId, entity.Left, entity.Top);
             return Json(followed);
         }
 

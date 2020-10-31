@@ -36,7 +36,28 @@ if(this.props.show && this.props.folder) {
             </div>
         <hr/>
         <div style={{fontSize: "15px"}}>
-       <span style={{color: " rgba(0, 201, 43, 0.945)"}}> <i class="icon-eye"/></span>Obserwujących: {3}
+
+    
+       <div style={{padding: "2px"}}>
+       <span style={{color: "white"}}> 
+      <i class="icon-doc"/></span> Ilość ikon: {this.props.folder.iconsCount}
+      </div>
+      <div style={{padding: "2px"}}>
+       <span style={{color: " rgba(0, 201, 43, 0.945)"}}> 
+       <i class="icon-eye"/></span> Obserwujących: {this.props.folder.followers}  
+       </div>
+{/*       <div style={{paddingLeft: "5px"}}>
+      <span class="addIconInfo fontAdd">&#43; 
+        </span>&nbsp;&nbsp;Ilość zapisów: {3}
+      </div> */}
+      <div style={{padding: "2px"}}>
+       <span style={{color: "rgba(231, 173, 64, 0.637)"}}> 
+      <i class="icon-link-ext"/></span> Udostępniono: {this.props.folder.sharedAt}
+      </div>
+      <div style={{padding: "2px"}}>
+       <span style={{color: "red"}}> 
+      <i class="icon-calendar-empty"/></span> Zaktualizowano: {this.props.folder.updatedAt}
+      </div>
 
         </div>
             </div>)

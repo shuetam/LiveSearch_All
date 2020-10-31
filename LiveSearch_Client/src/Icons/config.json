@@ -203,6 +203,12 @@
       "css": "folder-open-1",
       "code": 59415,
       "src": "fontawesome"
+    },
+    {
+      "uid": "1b5a5d7b7e3c71437f5a26befdd045ed",
+      "css": "doc",
+      "code": 59416,
+      "src": "fontawesome"
     }
   ]
 }

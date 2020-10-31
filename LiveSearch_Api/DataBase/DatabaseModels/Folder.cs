@@ -15,11 +15,12 @@ public class Folder : Live.Core.Entity
     public bool IsShared { get; protected set; }
     public DateTime CreatedAt { get; protected set; }
     public DateTime? SharedAt { get; protected set; }
+
+     public DateTime? UpdatedAt { get; protected set; }
     public List<UserYoutube> UserYouTubes { get; protected set; }
     public List<UserImage> UserImages { get; protected set; }
     public List<UserSpotify> UserSpotify { get; protected set; }
-    public int? Followers { get; protected set; }
-
+    //public int? Followers { get; protected set; }
 
     public string icon0 { get => four[0]; }
     public string icon1 { get => four[1]; }
@@ -61,14 +62,19 @@ public class Folder : Live.Core.Entity
             SharedAt = DateTime.Now;
 
         }
-        else
-        {
-            this.CleanFollowers();
-        }
         return IsShared;
     }
 
-    public void AddFollower()
+public int IconsCount()
+{
+    int count = 
+    this.UserImages.Count +
+    this.UserSpotify.Count +
+    this.UserYouTubes.Count;
+    return count;
+}
+
+/*     public void AddFollower()
     {
         if (this.IsShared)
             ++this.Followers;
@@ -83,8 +89,13 @@ public class Folder : Live.Core.Entity
     private void CleanFollowers()
     {
         this.Followers = 0;
-    }
+    } */
 
+
+        public void UpdateFolder() 
+        {
+            this.UpdatedAt = DateTime.Now;
+        }
 
     public void SetFourIcons()
     {
@@ -128,6 +139,7 @@ public class Folder : Live.Core.Entity
             }
 
         }
+        
 
     }
 
@@ -160,6 +172,7 @@ public class Folder : Live.Core.Entity
         UserYouTubes = new List<UserYoutube>();
         UserImages = new List<UserImage>();
         UserSpotify = new List<UserSpotify>();
+        this.UpdatedAt = DateTime.Now;
     }
 
     public void ChangeLocation(string left, string top)
@@ -177,6 +190,7 @@ public class Folder : Live.Core.Entity
                 newTitle = newTitle.Substring(0, 20);
             }
             this.Title = newTitle;
+            this.UpdatedAt = DateTime.Now;
         }
     }
 
@@ -189,6 +203,7 @@ public class Folder : Live.Core.Entity
                 newDescription = newDescription.Substring(0, 500);
             }
             this.ShareDescription = newDescription;
+              this.UpdatedAt = DateTime.Now;
         }
     }
 

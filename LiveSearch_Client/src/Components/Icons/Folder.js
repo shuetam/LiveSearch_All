@@ -29,7 +29,7 @@ class Folder extends Component {
         var cross = event.target;
         var entity = document.getElementById(ID);
         var name = entity.title;
-        debugger;
+    
             const data = {
                         Id: ID,
                         Type: "FOLDER",
@@ -65,6 +65,13 @@ class Folder extends Component {
     editFolder = (event) => {  
        this.props.showTitleEditor(this.props.id, "FOLDER");
     }
+    followFolder = (event) => {
+        this.props.followFolder(this.props.id);
+    }
+
+    unFollowFolder = (event) => {
+      this.props.unFollowFolder(this.props.id);
+    }
 
 
     render() {
@@ -84,6 +91,7 @@ class Folder extends Component {
         var removeIcon ="";
         var shareIcon = "";
         var editIconField =""; 
+        var followedIcon =""; 
 
         if(!this.props.public) {
 
@@ -95,6 +103,15 @@ class Folder extends Component {
             
             editIconField = <i id={this.props.id} title="Edytuj/udostępnij" class="icon-edit" onClick={this.editFolder}/>
         }
+        else{
+
+         if(!this.props.owner) {
+            followedIcon = this.props.followed?
+            <div onClick={this.unFollowFolder} id={this.props.id} title="Przestań obserwować"  className="editEntity followIcon" style={{fontSize: "17px"}}><i id={this.props.id}  class="icon-eye-off"/></div>  
+            : <div onClick={this.followFolder} id={this.props.id} title="Obserwuj" style={{color: "rgba(0, 201, 43, 0.945)"}}  className="editEntity followIcon"><i id={this.props.id}  class="icon-eye"/></div> 
+
+        }
+    }
 
         var editIconField_old = <IconEditor 
         onHover = {this.props.onHover}
@@ -112,6 +129,7 @@ class Folder extends Component {
         <div id={this.props.id} onClick={this.editFolder}
           class="editEntity" style={{left: this.props.leftEdit, top: this.props.topEdit}} >
         {editIconField}
+   
         </div> 
       
 
@@ -148,6 +166,7 @@ class Folder extends Component {
             onMouseLeave={this.props.onLeave}>
             {content}
             {shareIcon}
+            {followedIcon}
                     {removeIcon}
 
             <div class="folderLabel"  id={this.props.id} >{this.props.title}</div>

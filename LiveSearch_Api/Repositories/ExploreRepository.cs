@@ -296,12 +296,15 @@ namespace Live.Repositories
         {
             var folders = await _liveContext.Folders
             .Where(x => x.IsShared)
+            .Where(x => x.Title.Contains(query) || x.ShareDescription.Contains(query))
             .Include(x => x.UserYouTubes)
             .Include(x => x.UserImages)
-            .Include(x => x.UserSpotify)
-            
-            //.Skip(skip).Take(count)
-            .ToListAsync(); // add query
+            .Include(x => x.UserSpotify).ToListAsync();
+
+            folders =  folders
+            .Where(x => x.HasIcons())
+            .Skip(skip).Take(count)
+            .ToList(); 
 
             // will be segereged by create date, populars, modyfy date
 
@@ -312,8 +315,8 @@ namespace Live.Repositories
             var icons = folders.Select(x => _autoMapper.Map<FolderDto>(x)).ToList();
             foreach (var icon in icons)
             {
-               // int followers = _liveContext.SharedFolders.Where(x => x.FolderId.ToString() == icon.id).Count();
-               // icon.followers = followers;
+                int followers = _liveContext.SharedFolders.Where(x => x.FolderId.ToString() == icon.id).Count();
+                icon.followers = followers;
                 icon.setLocation(false);
             }
 

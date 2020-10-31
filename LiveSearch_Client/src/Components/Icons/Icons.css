@@ -36,6 +36,25 @@
     transition: all 1s ease-in-out;
 }
 
+.folderDis {
+    position: fixed;
+    /* color: rgb(0, 0, 0); */
+    color: rgb(255, 255, 255);
+    z-index: 155;
+    background-color: rgba(0, 0, 0, 0.61);
+    pointer-events: none;
+    text-align: center;
+    margin: 0px;
+    transition: opacity 0.2s;
+    opacity: 0.3;
+    filter: blur(2px);
+    -webkit-transition: all 1s ease-in-out;
+	-moz-transition: all 1s ease-in-out;
+	-o-transition: all 1s ease-in-out;
+	-ms-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+}
+
 .newEntity {
     position: fixed;
     /* color: rgb(0, 0, 0); */
@@ -340,6 +359,13 @@
     text-shadow: rgba(29, 29, 29, 0.979) -3px 2px 1px, rgba(0, 0, 0, 0.911) 0px 0px 5px
 }
 
+.followIcon {
+    display: block;
+    position: absolute;
+    top: -16px;
+    left: -13px;
+    text-shadow: rgba(29, 29, 29, 0.979) 3px 2px 3px, rgba(0, 0, 0, 0.911) 1px 0px 5px
+}
 
 
 .addingEntity:hover {
