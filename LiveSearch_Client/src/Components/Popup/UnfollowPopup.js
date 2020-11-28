@@ -27,7 +27,7 @@ class UnfollowPopup extends Component {
     
                Czy na pewno chcesz przestać obserwować folder <span style={{color: "white"}} ><br/>{title}</span>?
             <div style={{display: "flex", padding: "5px", marginLeft: "55px",marginRight: "55px"}}>
-                <div class="popupButtton" onClick={this.okClick}>Tak</div> <div class="popupButtton" onClick={this.noClick}>Nie</div>
+                <div class={"popupButtton " + this.props.waiting} onClick={this.okClick}>Tak</div> <div class="popupButtton" onClick={this.noClick}>Nie</div>
             </div>
                 
             </div>

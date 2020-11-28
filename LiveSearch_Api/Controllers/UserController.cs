@@ -19,53 +19,48 @@ namespace Live.Controllers
     [Route("api/[controller]")]
     public class UserController : LiveController
     {
-        private readonly  IUserRepository _userRepository;
-         public IConfiguration _configuration { get; }
-        
-        public UserController (IConfiguration Configuration, IUserRepository userRepository)
+        private readonly IUserRepository _userRepository;
+        public IConfiguration _configuration { get; }
+
+        public UserController(IConfiguration Configuration, IUserRepository userRepository)
         {
             this._userRepository = userRepository;
             _configuration = Configuration;
         }
 
 
-		[HttpPost("userlogin")]
+        [HttpPost("userlogin")]
         public async Task<IActionResult> Login([FromBody] Login socialLogin)
         {
             string error = "loginFalse";
 
-             
 
-            if(socialLogin.Password.Length>5 && IsMailValid(socialLogin.Email))
+
+            if (socialLogin.Password.Length > 5 && IsMailValid(socialLogin.Email))
             {
                 var user = await _userRepository.LoginAsync(socialLogin.Email, socialLogin.Password);
-                if(user != null)
+                if (user != null)
                 {
                     return Json(user);
                 }
 
             }
-             
+
             return Json(error);
         }
 
 
-		[HttpPost("confirmpassword")]
+        [HttpPost("confirmpassword")]
         public async Task<IActionResult> ConfirmPassword([FromBody] Login login)
         {
             string error = "loginFalse";
-            
-            
- 
-              
-              
-                var user = await _userRepository.ConfirmAsync(login.Email, login.ID, login.resetID);
-                if(user != null)
-                {
-                    return Json(user);
-                }
+            var user = await _userRepository.ConfirmAsync(login.Email, login.ID, login.resetID);
+            if (user != null)
+            {
+                return Json(user);
+            }
 
-            
+
             return Json(error);
         }
 
@@ -78,8 +73,8 @@ namespace Live.Controllers
             string passwordRegex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$";
             var reg = new Regex(passwordRegex);
             var pass = reg.IsMatch(socialLogin.Password);
-            
-            if(pass && IsMailValid(socialLogin.Email))
+
+            if (pass && IsMailValid(socialLogin.Email))
             {
                 var user = await _userRepository.RegisterAsync(socialLogin.Email, socialLogin.Password);
                 return Json(user);
@@ -87,7 +82,7 @@ namespace Live.Controllers
             return Json(error);
         }
 
-          [HttpPost("resetpassword")]
+        [HttpPost("resetpassword")]
         public async Task<IActionResult> ResetPasword([FromBody] Login socialLogin)
         {
             string error = "error";
@@ -96,8 +91,8 @@ namespace Live.Controllers
             var reg = new Regex(passwordRegex);
             var pass = reg.IsMatch(socialLogin.Password);
             var url = _configuration.GetSection("client");
-            
-            if(pass && IsMailValid(socialLogin.Email))
+
+            if (pass && IsMailValid(socialLogin.Email))
             {
                 var user = await _userRepository.ResetPasswordAsync(socialLogin.Email, socialLogin.Password, url.Value);
                 return Json(user);

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Live.Controllers;
 using Live.Core;
@@ -16,7 +17,7 @@ public class Folder : Live.Core.Entity
     public DateTime CreatedAt { get; protected set; }
     public DateTime? SharedAt { get; protected set; }
 
-     public DateTime? UpdatedAt { get; protected set; }
+    public DateTime? UpdatedAt { get; protected set; }
     public List<UserYoutube> UserYouTubes { get; protected set; }
     public List<UserImage> UserImages { get; protected set; }
     public List<UserSpotify> UserSpotify { get; protected set; }
@@ -31,7 +32,7 @@ public class Folder : Live.Core.Entity
     {
 
         if (UserYouTubes.Count() > 5)
-        { 
+        {
             return this.UserYouTubes.OrderBy(x => x.AddedToFolder).Select(x => x.VideoId).ToList()
             .Skip(Math.Max(0, UserYouTubes.Count() - 4)).ToList();
         }
@@ -65,37 +66,37 @@ public class Folder : Live.Core.Entity
         return IsShared;
     }
 
-public int IconsCount()
-{
-    int count = 
-    this.UserImages.Count +
-    this.UserSpotify.Count +
-    this.UserYouTubes.Count;
-    return count;
-}
-
-/*     public void AddFollower()
+    public int IconsCount()
     {
-        if (this.IsShared)
-            ++this.Followers;
+        int count =
+        this.UserImages.Count +
+        this.UserSpotify.Count +
+        this.UserYouTubes.Count;
+        return count;
     }
 
-    public void RemoveFollower()
-    {
-        if (Followers > 0 && this.IsShared)
-            --this.Followers;
-    }
-
-    private void CleanFollowers()
-    {
-        this.Followers = 0;
-    } */
-
-
-        public void UpdateFolder() 
+    /*     public void AddFollower()
         {
-            this.UpdatedAt = DateTime.Now;
+            if (this.IsShared)
+                ++this.Followers;
         }
+
+        public void RemoveFollower()
+        {
+            if (Followers > 0 && this.IsShared)
+                --this.Followers;
+        }
+
+        private void CleanFollowers()
+        {
+            this.Followers = 0;
+        } */
+
+
+    public void UpdateFolder()
+    {
+        this.UpdatedAt = DateTime.Now;
+    }
 
     public void SetFourIcons()
     {
@@ -139,7 +140,7 @@ public int IconsCount()
             }
 
         }
-        
+
 
     }
 
@@ -203,9 +204,21 @@ public int IconsCount()
                 newDescription = newDescription.Substring(0, 500);
             }
             this.ShareDescription = newDescription;
-              this.UpdatedAt = DateTime.Now;
+            this.UpdatedAt = DateTime.Now;
         }
     }
+
+    public string GetDate(DateTime? date)
+    { 
+        if (date.HasValue)
+        {
+            var dateTimeFormats = new CultureInfo("pl-PL").DateTimeFormat;
+            string day = date.Value.ToString("dd MMMM yyyy o HH:MM", dateTimeFormats);
+            return day;
+        }
+        return "";
+    }
+
 
 }
 

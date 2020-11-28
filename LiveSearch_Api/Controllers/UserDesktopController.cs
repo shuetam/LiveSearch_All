@@ -179,6 +179,14 @@ namespace Live.Controllers
             return Json(unfollowed);
         }
 
+        [HttpPost("getFolderInfo")]
+        public async Task<IActionResult> GetFolderInfo([FromBody] EntitySetter entity)
+        {
+            var folderId = new Guid(entity.FolderId);
+            var folderInfo = await _desktopRepository.GetFolderInfoAsync(this.UserId, folderId);
+            return Json(folderInfo);
+        }
+
 
         [HttpPost("movefromfolder")]
         public async Task MoveEntityFromFolder([FromBody] EntitySetter entity)

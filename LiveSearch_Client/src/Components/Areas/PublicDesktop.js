@@ -15,7 +15,6 @@ import { BrowserRouter } from 'react-router-dom';
 import ImageIcon from '../Icons/ImageIcon';
 import randoom from 'random-int';
 import axios from '../../axios-song';
-import ReactScrollWheelHandler from "react-scroll-wheel-handler";
 //import {scrollU, scrollD} from '../../Store/Actions/scroll';
 import { connect } from 'react-redux';
 import {showServerPopup, showFirst, manageScreen} from '../../Store/Actions/auth';
@@ -71,7 +70,12 @@ class PublicDesktop extends Component {
             followedIcons: false,
             unFollowTitle: "",
             showUnfollow: false,
-            unFollowId: ""
+            unFollowId: "",
+            folderInfo: {},
+            waiting: "",
+            waitingPopup: "",
+            showFolderInfo: false,
+            fromHeader: false
            
         }
       
@@ -149,7 +153,6 @@ class PublicDesktop extends Component {
         }
         axios.post(URL.api+URL.userIconsIds, null, config)
         .then((result) => {
-          debugger;
             this.setState({ userIconsId: result.data.userIds });
             this.setState({ followedIds: result.data.followedIds })});
         //.catch(error => {this.Alert("cos nie tak z ids")}); 
@@ -191,6 +194,7 @@ class PublicDesktop extends Component {
       
         var exploreQuery = search.get("q");
         var exploreSkip = search.get("skip");
+        var from = search.get("from");
      
         var folderId = this.props.match.params.folderId? this.props.match.params.folderId : "";
 
@@ -204,15 +208,39 @@ class PublicDesktop extends Component {
 
         if(this.props.match.params.folderId){
             this.setState({openedFolder: folderId});
+            
+            let fetchFolderInfo = this.props.isAuthenticated? URL.api + URL.folderInfoAuth : URL.api + URL.folderInfo;
+            var data = { 
+                folderId: folderId,     
+            }  
+
+            var config = this.props.isAuthenticated?
+                   {
+                        headers: {Authorization: "Bearer " + this.props.jwtToken}
+                    } : null;
+
+            axios.post(fetchFolderInfo, data, config)
+            .then((result) => { 
+                if(result.data) {
+                  this.setState({folderInfo: result.data})
+                  this.setState({showFolderInfo: true})
+                }
+        })
+        .then(() => {
+            this.prepareIcons()})
+            .catch(error => {console.log(error);
+            });
+ 
+
         }
         else {
             folderId = "";
             
         }
        
-if(this.props.headerType=="folders" && !this.props.match.params.folderId) {
-    this.setState({foldersIcons: true});
-}
+    if(this.props.headerType=="folders" && !this.props.match.params.folderId) {
+        this.setState({foldersIcons: true});
+        }
 
 
         
@@ -222,6 +250,14 @@ if(this.props.headerType=="folders" && !this.props.match.params.folderId) {
         else {
             exploreSkip = 0;
         }
+
+        if(from !== null){
+            this.setState({fromHeader: true});
+        }
+        else {
+            exploreSkip = 0;
+        }
+
 
         var explPopCheck = localStorage.getItem('explPopCheck');
         var explIconsCount =  localStorage.getItem('explIconsCount');
@@ -297,7 +333,6 @@ if(this.props.headerType=="folders" && !this.props.match.params.folderId) {
 
         axios.post(fetchData, data, config)
         .then((result) => { 
-            debugger;
             //var deep = result.data.deep;
             if(result.data.length == parseInt(this.state.explIconsCount)) {
               this.setState({showNextPrev: true})
@@ -582,15 +617,22 @@ if(this.props.headerType=="folders" && !this.props.match.params.folderId) {
     }
 
     followFolder = (folderId) => {
-
+        this.setState({waiting: "inputDis"});
         if(this.props.isAuthenticated) {
             var config = {
                 headers: {Authorization: "Bearer " + this.props.jwtToken}
             }
 
+            var Top_= 10 +"vh";
+           var  Left_ = 10 + "vw";
+
         var entity = document.getElementById(folderId);
-            var Top_ = entity.style.top;
-            var Left_ = entity.style.left;
+
+        if(entity) {
+
+        
+             Top_ = entity.style.top;
+             Left_ = entity.style.left;
     
     
             if((entity.style.top).includes("px")) {
@@ -606,7 +648,12 @@ if(this.props.headerType=="folders" && !this.props.match.params.folderId) {
                 Top_= topFlo +"vh";
                 Left_ = leftFlo + "vw";
             }
-
+        }
+        else if (this.state.folderInfo) {
+            folderId = this.state.folderInfo.id;
+            Top_= this.state.folderInfo.top;
+            Left_ = this.state.folderInfo.left;
+        }
 
             var data = { 
                 FolderId: folderId,
@@ -619,16 +666,23 @@ if(this.props.headerType=="folders" && !this.props.match.params.folderId) {
                 if(result.data) {
 
                     var folder = this.getIconById(result.data.id);
-                    folder.followers = result.data.followers;
-                    this.setState({ hoveredFolder: folder });
-                    this.setState(prevState => ({
-                        followedIds: [...prevState.followedIds, folder.id]
-                      }))
-                   
+                    if(folder) {
+                        folder.followers = result.data.followers;
+                        this.setState({ hoveredFolder: folder });
+                        this.setState(prevState => ({
+                            followedIds: [...prevState.followedIds, folder.id]
+                          }))
+
+                    }
+                    if(this.state.folderInfo) {
+                        this.setState({folderInfo: result.data});                  
+                    }
+
                 }
                 else {
                     this.Alert("Nie znaleziono folderu, spróbuj ponownie za chwilę.");
                 }
+                this.setState({waiting: ""});
                 }
                
             ).catch(error => {this.Alert("Wystąpił błąd, spróbuj ponownie za chwilę.")}); 
@@ -640,10 +694,11 @@ if(this.props.headerType=="folders" && !this.props.match.params.folderId) {
     }
 
 
-    unFollowFolderPop = (folderId) => {
-        var folder = this.getIconById(folderId);
+    unFollowFolderPop = () => {
+        var folder = this.state.folderInfo;
         debugger;
         if(folder) {
+            this.setState({waiting: "inputDis"});
             this.setState({unFollowTitle: folder.title});
             this.setState({unFollowId: folder.id});
             this.setState({showUnfollow: true});
@@ -652,13 +707,14 @@ if(this.props.headerType=="folders" && !this.props.match.params.folderId) {
 
 
     unFollowFolder = (forSure, folderId) => {
-
         if(!forSure) {
             this.setState({showUnfollow: false});
+            this.setState({waiting: ""});
             return;
         }
 
         if(this.props.isAuthenticated) {
+            this.setState({waitingPopup: "inputDis"});
             var config = {
                 headers: {Authorization: "Bearer " + this.props.jwtToken}
             }
@@ -669,30 +725,51 @@ if(this.props.headerType=="folders" && !this.props.match.params.folderId) {
             .then((result) => {
               
                 if(result.data) {
+                    debugger;
+                    this.setState({showUnfollow: false});
+                    this.setState({folderInfo: result.data});
+                
+                    // for(var i=0;i<this.state.followedIds.length;i++) {
+                    //     if(this.state.followedIds[i] == result.data.id) {
 
-                    for(var i=0;i<this.state.followedIds.length;i++) {
-                        if(this.state.followedIds[i] == result.data.id) {
-
-                            this.state.followedIds[i] = "";
-                            var folder = this.getIconById(result.data.id);
-                            folder.followers = result.data.followers;
-                            this.setState({ hoveredFolder: folder });
-                            if(this.props.headerType=="followed") {
-                                folder.id = "dis";
-                            }
-                        }
-                    }          
+                    //         this.state.followedIds[i] = "";
+                    //         var folder = this.getIconById(result.data.id);
+                        
+                    //         folder.followers = result.data.followers;
+                    //         this.setState({ hoveredFolder: folder });
+                    //         if(this.props.headerType=="followed") {
+                    //             folder.id = "dis";
+                    //         }
+                           
+                    //     }
+                    // }          
                 }
                 else {
                     this.Alert("Nie znaleziono folderu, spróbuj ponownie za chwilę.");
+                    this.setState({waiting: ""});
                 }
+                this.setState({waiting: ""});
+                this.setState({waitingPopup: ""});
+
                 }
                
-            ).catch(error => {this.Alert("Wystąpił błąd, spróbuj ponownie za chwilę.")});
+            ).catch(error => {this.Alert("Wystąpił błąd, spróbuj ponownie za chwilę."); 
+            this.setState({waiting: ""});
+            this.setState({waitingPopup: ""});});
 
     }
 }
 
+getHeaderPosition = (start, end) => {
+    if(this.state.fromHeader)
+    {
+       return !this.state.loadedIcons? start : end;
+    }
+    else {
+        return  end;
+    }
+
+}
 
     onHover = (event) => {
 
@@ -779,9 +856,6 @@ if(this.props.headerType=="folders" && !this.props.match.params.folderId) {
     }
     
     userFollow = (id) => {
-        if(this.state.followedIds.includes(id)) {
-        }
-
         return  this.state.followedIds.includes(id);
     }
 
@@ -1205,7 +1279,10 @@ if(this.props.headerType=="folders" && !this.props.match.params.folderId) {
                 pos4 = e.clientY;
                 elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
                 elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-                document.getElementById("saveIcons").className = "switchB";
+                var saveLoc = document.getElementById("saveIcons");
+                if(saveLoc)
+                saveLoc.className = "switchB";
+
                 //localStorage.setItem('inMove', true);
             }
             
@@ -1267,7 +1344,7 @@ var exploreButton = this.state.foldersIcons? <button onClick={this.foldersExplor
 class='titleButton explButton'>Wyszukaj</button> :
 <button onClick={this.exploreHandler} class='titleButton explButton'>Eksploruj</button>
 
-actuallMenu = this.state.openedFolder != ""? "" :  (<div id="exploreMenu" class="actuallMenu">
+actuallMenu = this.state.openedFolder != ""? "" :  (<div id="exploreMenu" class="actuallMenu" style={{left: this.getHeaderPosition("-500px", "300px") }} >
 
 
 
@@ -1297,10 +1374,24 @@ Maksymalna ilość ikon na stronie:
  </div>) }
 
 
-        var randomInt = require('random-int');
+let folderInfoHeader = "";
+
+if(this.props.match.params.folderId && this.state.showFolderInfo) {
+
+let followButton = !this.state.folderInfo.followed?   <button onClick={this.followFolder} id={this.props.id}   className= { "titleButton followButtton " + this.state.waiting}>Obserwuj
+</button> :
+<button onClick={this.unFollowFolderPop} id={this.props.id}   className= { "titleButton privateButton " + this.state.waiting}>Przestań obserwować</button> ;
+
+folderInfoHeader = <div class="folderInfoHeader">
+                       <label> {this.state.folderInfo.title}</label>
+                        {followButton}
+                        </div>
+} 
+
+
         let tagsField = this.state.loadedIcons? <TagsField  noIcons={this.state.noIcons} searchTag={this.props.searchTag}  tags = {this.getIconTags(this.state.entityID)} />  : "";
-        
-       
+    
+
         if(this.state.firstField || this.state.foldersIcons || this.state.followedIcons) {
             tagsField = "";
         }
@@ -1315,10 +1406,11 @@ Maksymalna ilość ikon na stronie:
         let field = "";
 
         if(this.state.foldersIcons || this.state.followedIcons) {
-            field = <FolderField folder={this.state.hoveredFolder}  show={this.state.showFolderField}/>
+            var folderId = this.state.showFolderField? this.state.hoveredFolder.id : 0;
+            field = <FolderField folder={this.state.hoveredFolder} followed={this.userFollow(folderId)}  show={this.state.showFolderField}/>
         }
 
-        let unfollowPopup = <UnfollowPopup unFollowFolder={this.unFollowFolder} showPopup={this.state.showUnfollow} folderId = {this.state.unFollowId} unFollowTitle={this.state.unFollowTitle}/>
+        let unfollowPopup = <UnfollowPopup waiting={this.state.waitingPopup} unFollowFolder={this.unFollowFolder} showPopup={this.state.showUnfollow} folderId = {this.state.unFollowId} unFollowTitle={this.state.unFollowTitle}/>
 
         if(!this.state.loadedIcons) {
             field = <LoadingField/>
@@ -1468,6 +1560,7 @@ Maksymalna ilość ikon na stronie:
                     shared = {song.shared}
                     owner = {this.userOwner(song.id)}
                     followed = {this.userFollow(song.id)}
+                    waiting = {this.state.waiting}
                     />
                      
                 )
@@ -1504,8 +1597,10 @@ Maksymalna ilość ikon na stronie:
                 {spotifies}
                 {unfollowPopup}
                 {sharedFolders}
-                <div class="deskMenu">
+              
+                <div class="deskMenu" style={{left: this.getHeaderPosition("-20px","200px") }}>
                     {saveIcons}
+                    {folderInfoHeader}
                 </div>
                
 

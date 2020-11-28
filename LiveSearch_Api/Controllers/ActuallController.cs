@@ -2,6 +2,7 @@ using Live.Core;
 using Live.Extensions;
 using Live.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace Live.Controllers
@@ -11,10 +12,12 @@ namespace Live.Controllers
     public class ActuallController : LiveController
     {
         private readonly IExploreRepository _actuallRepository;
+        private readonly IUserDesktopRepository _desktopRepository;
 
-        public ActuallController(IExploreRepository repository)
+        public ActuallController(IExploreRepository repository, IUserDesktopRepository desktopRepository)
         {
             this._actuallRepository = repository;
+            this._desktopRepository = desktopRepository;
         }
 
 
@@ -27,6 +30,14 @@ namespace Live.Controllers
 
             top.Shuffle();
             return Json(top);
+        }
+
+        [HttpPost("getFolderInfo")]
+        public async Task<IActionResult> GetFolderInfo([FromBody] EntitySetter entity)
+        {
+            var folderId = new Guid(entity.FolderId);
+            var folderInfo = await _desktopRepository.GetFolderInfoAsync(folderId, folderId);
+            return Json(folderInfo);
         }
 
 

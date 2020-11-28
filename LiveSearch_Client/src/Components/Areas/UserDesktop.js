@@ -1649,9 +1649,12 @@ setAddingIcon = () => {
 }
 
 
+
+
     render(props) {
 
         var randomInt = require('random-int');
+    
         //debugger;
         let icons = this.state.icons.map(song => {
             return (
@@ -2117,7 +2120,7 @@ let findNewIcons = (this.state.addingIcon ||  this.state.addingFolder)?
                   </div> : "";
 
         
-    let  deskMenu =  (<div class="deskMenu">
+    let  deskMenu =  (<div class= {"deskMenu"} style={{left: !this.state.loadedIcons? "-20px" : "110px"}}>
            {addOwn}
            {folderIcon}
         {saveIcons}

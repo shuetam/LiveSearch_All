@@ -2,9 +2,9 @@
 
 export const URL = {
 
-    //api: "http://localhost:53071/api/", 
+    api: "http://localhost:53071/api/", 
     //api: "http://localhost:5000/api/", 
-    api: "http://localhost:53072/api/", 
+    //api: "http://localhost:53072/api/", 
     //api: "https://www.fitize.pl/api/", 
 
     login: "SocialUser/user",
@@ -54,8 +54,9 @@ export const URL = {
     followFolder: "UserDesktop/followfolder" ,
     unfollowFolder: "UserDesktop/unfollowfolder",
     sharedFolders: "explore/getsharedfolders",
-    followedFolders: "UserDesktop/getfollowedfolders"
-  
+    followedFolders: "UserDesktop/getfollowedfolders",
+    folderInfoAuth: "UserDesktop/getFolderInfo",
+    folderInfo: "actuall/getFolderInfo"
 }
 
 export const PATHES = {

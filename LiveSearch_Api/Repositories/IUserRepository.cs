@@ -17,6 +17,7 @@ namespace Live.Repositories
               Task<string> ResetPasswordAsync(string email, string password, string url);
             Task<string> GetUserEmail(Guid userId);
           Task<UserDto> ConfirmAsync(string email, string userId, string resetId);
+         
      }
 
 }

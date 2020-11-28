@@ -130,8 +130,9 @@ namespace Live.Mapper
                 .ForMember(d => d.shared, s => s.MapFrom(x => x.IsShared))
                 .ForMember(d => d.DateCreated, s => s.MapFrom(x => x.CreatedAt))
                 .ForMember(d => d.hasIcons, s => s.MapFrom(x => x.HasIcons()))
-                .ForMember(d => d.sharedAt, s => s.MapFrom(x => x.SharedAt))
-                .ForMember(d => d.updatedAt, s => s.MapFrom(x => x.UpdatedAt))
+                .ForMember(d => d.sharedAt, s => s.MapFrom(x => x.GetDate(x.SharedAt)))
+                .ForMember(d => d.updatedAt, s => s.MapFrom(x => x.GetDate(x.UpdatedAt)))
+                .ForMember(d => d.hasDescription, s => s.MapFrom(x => !string.IsNullOrEmpty(x.ShareDescription)))
                   //.ForMember(d => d.followers, s => s.MapFrom(x => x.Followers))
                 .ForMember(d => d.iconsCount, s => s.MapFrom(x => x.IconsCount()))
                 .ForMember(d => d.shareDescription, s => s.MapFrom(x => x.ShareDescription));

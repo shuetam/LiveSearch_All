@@ -1,5 +1,5 @@
 .header {
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(20, 20, 20);
     position: fixed;
     width: 100vw;
     top: 0px;
@@ -11,12 +11,20 @@
     color: #3b3b3b;
     font-weight: 100;
     display: flex;
+    height: 33px;
 }
 
 .actuallMenu {
     display: flex;
-    
+    position: absolute;
     z-index: 200;
+    left: 320px;
+    transition: left 1s linear;
+}
+
+.hideHeader {
+    left: 0px;
+    transition: left 1s linear;
 }
 
 .loginWindow {
@@ -47,17 +55,15 @@
 
 .deskMenu {
     display: flex;
-
     z-index: 300;
    position: absolute;
    top: 0px;
-   left: 0px;
+   left: 110px;
    min-width: 20px;
-   
    margin-left: 210px;
    margin-right: 100px;
-   
    margin-right: 310px;
+   transition: left 0.5s linear;
 }
 
 .deskMenu label {
@@ -104,13 +110,14 @@
   }
 
 .main {
-    margin-left: 30px;
+    margin-left: 15px;
     margin-top: 3px;
     cursor: pointer;
     font-size: 18px;
     padding: 3px;
     z-index: 170;
     color: rgba(231, 173, 64, 0.637);
+    float: left;
 }
 
     .main:hover {
@@ -126,8 +133,7 @@
     padding: 3px;
     color: rgba(255, 255, 255, 0.5);
     transition: color 0.3s;
-    white-space: nowrap; 
-   
+    white-space: nowrap;   
 }
 
 .switch:hover {
@@ -159,18 +165,15 @@
 }
 
 .switchMenu {
-    margin-left: 15px;
-    margin-top: 4px;
-    cursor: pointer;
-    opacity: 0,3;
-    font-size: 18px;
-    padding: 3px;
-    color: rgba(255, 255, 255, 0.788);
-    transition: all 0.3s;
-    white-space: nowrap; 
+    -webkit-box-shadow: 16px 2px 13px -5px #000000; 
+    box-shadow: 16px 2px 13px -5px #000000;
     z-index: 1000;
-    
+    width: 315px;
+    height: 33px;
+    margin-top: 0px;
+    background-color: rgb(29, 29, 29);
 }
+
 .switchMenu:hover {
     color: rgba(255, 255, 255, 0.945);
 
@@ -284,6 +287,19 @@
     white-space: nowrap;
 }
 
+.folderInfoHeader {
+    margin-left: 10px;
+    margin-top: 5px;
+    font-size: 19px;
+}
+
+.folderInfoHeader label {
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.74);
+}
+
 .switchA {
     margin-left: 10px;
     margin-top: 5px;
@@ -377,25 +393,27 @@
 .mainSwitch {
     cursor: pointer;
     opacity: 0,3;
-    font-size: 15px;
+    font-size: 20px;
     padding: 3px;
-     color: rgba(255, 255, 255, 0.644);
+    color: rgb(255, 255, 255);
     transition: all 0.3s;
     white-space: nowrap;
-    margin-left: 0px;
-    margin-top: 3px;
+    margin-left: 5px;
+    margin-top: 2px;
+    float: left;
 }
 
-.active {
-    color: rgb(255, 255, 255);
-    text-decoration-line: underline;
+.active { 
+    color: rgb(250, 0, 0);
+    text-shadow: ;
+    margin-top: 0px;
 }
 
 
 
 .mainSwitch:hover {
-    color: rgba(255, 255, 255, 0.966);
-    text-decoration-line: underline;
+    margin-top: 0px;
+  
 }
 
 .desktop {
@@ -1450,14 +1468,13 @@ display: inline-block;
 
   #iconCount:hover {
     color: rgb(223, 223, 223);
-  
     cursor: pointer;
   }
 
 
 
   .exploreDiv {
-      position: relative;
+    position: relative;
     border-width: 1px; 
     border-style: solid; 
     margin-top: 7px;
@@ -1469,7 +1486,7 @@ display: inline-block;
   }
 
   .addingDiv {
-      position: relative;
+    position: relative;
     border-width: 1px; 
     border-style: solid; 
     margin-top: 7px;
@@ -1483,8 +1500,7 @@ display: inline-block;
 
   #exploreMenu {
     position: absolute;
-   
-    left: 200px;
+    left: 300px;
 
   }
 

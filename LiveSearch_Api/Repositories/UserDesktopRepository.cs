@@ -117,9 +117,9 @@ namespace Live.Repositories
 
             iconsIds.AddRange(imgIds);
             iconsIds.AddRange(spotifyIds);
-             iconsIds.AddRange(foldersIds);
+            iconsIds.AddRange(foldersIds);
 
-     var followedIds = await _liveContext.SharedFolders.Where(x => x.UserId == userId).Select(x => x.FolderId.ToString().ToLower()).ToListAsync();
+            var followedIds = await _liveContext.SharedFolders.Where(x => x.UserId == userId).Select(x => x.FolderId.ToString().ToLower()).ToListAsync();
 
             var iconsIDS = new { userIds = iconsIds, followedIds = followedIds };
             return iconsIDS;
@@ -158,10 +158,10 @@ namespace Live.Repositories
 
         public async Task<List<FolderDto>> GetFollowedFoldersForUserAsync(Guid userId)
         {
-            var foldersIds =  _liveContext.SharedFolders.Where(x => x.UserId == userId)
+            var foldersIds = _liveContext.SharedFolders.Where(x => x.UserId == userId)
             .Select(x => x.FolderId);
-                
-                
+
+
             var folders = await _liveContext.Folders.Where(x => x.IsShared && foldersIds.Contains(x.ID))
             .Include(x => x.UserYouTubes)
             .Include(x => x.UserSpotify)
@@ -176,8 +176,8 @@ namespace Live.Repositories
 
             foreach (var icon in icons)
             {
-                 int followers = _liveContext.SharedFolders.Where(x => x.FolderId.ToString() == icon.id).Count();
-                var followFolder = _liveContext.SharedFolders.FirstOrDefault(x => x.UserId == userId && x.FolderId.ToString()==icon.id);
+                int followers = _liveContext.SharedFolders.Where(x => x.FolderId.ToString() == icon.id).Count();
+                var followFolder = _liveContext.SharedFolders.FirstOrDefault(x => x.UserId == userId && x.FolderId.ToString() == icon.id);
                 icon.followers = followers;
                 icon.left = followFolder.LocLeft;
                 icon.top = followFolder.LocTop;
@@ -560,7 +560,10 @@ namespace Live.Repositories
         {
 
             var sharedFolder = _liveContext.SharedFolders.FirstOrDefault(x => x.UserId == UserId && x.FolderId == FolderId);
-            var folder = _liveContext.Folders.FirstOrDefault(x => x.ID == FolderId);
+            var folder = _liveContext.Folders.Include(x => x.UserYouTubes)
+                                            .Include(x => x.UserImages)
+                                            .Include(x => x.UserSpotify)
+                                            .FirstOrDefault(x => x.ID == FolderId);
             if (folder != null && sharedFolder == null)
             {
                 if (sharedFolder == null && folder.IsShared)
@@ -569,12 +572,13 @@ namespace Live.Repositories
                     _liveContext.SharedFolders.Add(sharedFolder);
                     //folder.AddFollower();
                     _liveContext.Update(folder);
-                     await _liveContext.SaveChangesAsync();
+                    await _liveContext.SaveChangesAsync();
                     //return _autoMapper.Map<FolderDto>(folder);
 
                     var folderDto = _autoMapper.Map<FolderDto>(folder);
                     var followers = _liveContext.SharedFolders.Where(x => x.FolderId == folder.ID).ToList().Count;
                     folderDto.followers = followers;
+                    folderDto.followed = true;
                     return folderDto;
                 }
             }
@@ -586,24 +590,48 @@ namespace Live.Repositories
         {
             var sharedFolder = _liveContext.SharedFolders.FirstOrDefault(x => x.UserId == UserId && x.FolderId == FolderId);
 
-            var folder = _liveContext.Folders.FirstOrDefault(x => x.ID == FolderId);
+            var folder = _liveContext.Folders.Include(x => x.UserYouTubes)
+                                  .Include(x => x.UserImages)
+                                  .Include(x => x.UserSpotify)
+                                  .FirstOrDefault(x => x.ID == FolderId);
+
             if (folder != null && sharedFolder != null)
             {
                 _liveContext.SharedFolders.Remove(sharedFolder);
                 //folder.RemoveFollower();
                 _liveContext.Update(folder);
                 await _liveContext.SaveChangesAsync();
-            
+
                 var folderDto = _autoMapper.Map<FolderDto>(folder);
                 var followers = _liveContext.SharedFolders.Where(x => x.FolderId == folder.ID).ToList().Count;
                 folderDto.followers = followers;
+                folderDto.followed = false;
                 return folderDto;
-             
+
             }
 
             return null;
         }
 
+        public async Task<FolderDto> GetFolderInfoAsync(Guid userId, Guid folderId)
+        {
+            var sharedFolder = await _liveContext.SharedFolders.FirstOrDefaultAsync(x => x.UserId == userId && x.FolderId == folderId);
+            var folder = _liveContext.Folders.Include(x => x.UserYouTubes)
+                                  .Include(x => x.UserImages)
+                                  .Include(x => x.UserSpotify)
+                .FirstOrDefault(x => x.ID == folderId);
+
+            if (folder != null )
+            {
+                var folderDto = _autoMapper.Map<FolderDto>(folder);
+                var followers = _liveContext.SharedFolders.Where(x => x.FolderId == folder.ID).ToList().Count;
+                folderDto.followers = followers;
+                folderDto.followed = sharedFolder != null;
+                return folderDto;
+            }
+
+            return null;
+        }
     }
 
 }

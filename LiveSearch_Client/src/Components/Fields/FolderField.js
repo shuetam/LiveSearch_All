@@ -27,10 +27,18 @@ class FolderField extends Component {
  
 if(this.props.show && this.props.folder) {
 
+    let youFollow = this.props.followed? <button class="titleButton followFiledIcon">Obserwujesz</button> : "";
+
+    let updateDate =  !this.props.folder.updatedAt ==""?   <div style={{padding: "2px"}}>
+    <span style={{color: "red"}}> 
+   <i class="icon-calendar-empty"/></span> Zaktualizowano: {this.props.folder.updatedAt}
+   </div>: ""
+    
 
     let editor = 
     (<div class="fieldAct folderInfo"> <div style={{fontSize: "19px", color: "white"}}>
-        {this.props.folder.title} </div>
+        {this.props.folder.title} {youFollow}</div>
+        {!this.props.folder.hasDescription? "": <hr/>}
             <div style={{fontSize: "14px"}}>
                 {this.props.folder.shareDescription}
             </div>
@@ -54,10 +62,8 @@ if(this.props.show && this.props.folder) {
        <span style={{color: "rgba(231, 173, 64, 0.637)"}}> 
       <i class="icon-link-ext"/></span> Udostępniono: {this.props.folder.sharedAt}
       </div>
-      <div style={{padding: "2px"}}>
-       <span style={{color: "red"}}> 
-      <i class="icon-calendar-empty"/></span> Zaktualizowano: {this.props.folder.updatedAt}
-      </div>
+
+    {updateDate}
 
         </div>
             </div>)

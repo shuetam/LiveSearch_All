@@ -18,7 +18,8 @@ class Folder extends Component {
         this.state = {
             authConfig: {
                 headers: {Authorization: "Bearer " + this.props.jwtToken}
-            }
+            },
+        
         }
 
     }
@@ -98,7 +99,7 @@ class Folder extends Component {
             removeIcon = this.props.hideEditors? "" : <div id={this.props.id} onClick = {this.deleteFolder}
             title="Usuń folder"  class={classEntity}>&#43;</div> ;
             
-            shareIcon = this.props.shared? <div id={this.props.id} title="Publiczny"  className="lockIcon openIcon"><i id={this.props.id}  class="icon-lock-open-alt"/></div> 
+        shareIcon = this.props.shared? <div id={this.props.id} title="Obserwujących"  className="lockIcon openIcon"><i id={this.props.id}  class="icon-lock-open-alt"/>{43242}</div> 
             : <div id={this.props.id} title="Prywatny" className="lockIcon"><i id={this.props.id} class="icon-lock"/></div>;
             
             editIconField = <i id={this.props.id} title="Edytuj/udostępnij" class="icon-edit" onClick={this.editFolder}/>
@@ -107,8 +108,11 @@ class Folder extends Component {
 
          if(!this.props.owner) {
             followedIcon = this.props.followed?
-            <div onClick={this.unFollowFolder} id={this.props.id} title="Przestań obserwować"  className="editEntity followIcon" style={{fontSize: "17px"}}><i id={this.props.id}  class="icon-eye-off"/></div>  
-            : <div onClick={this.followFolder} id={this.props.id} title="Obserwuj" style={{color: "rgba(0, 201, 43, 0.945)"}}  className="editEntity followIcon"><i id={this.props.id}  class="icon-eye"/></div> 
+            // <div onClick={this.unFollowFolder} id={this.props.id} title="Przestań obserwować"  className= {"editEntity followIcon" } style={{fontSize: "17px"}}><i id={this.props.id}  class="icon-eye-off"/></div>  
+            
+            ""
+            : <button onClick={this.followFolder} id={this.props.id} title="Obserwuj"  className= { "titleButton followIcon " + this.props.waiting}>Obserwuj</button> 
+
 
         }
     }

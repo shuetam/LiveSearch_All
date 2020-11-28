@@ -69,7 +69,7 @@ class Header extends Component {
             addingIcon: false,
 
             explQuery: "",
-            firstField: false,
+            firstField: false
    
         }
     }
@@ -640,7 +640,7 @@ responseErrorGoogle = (response) => {
     activeSharedFolders = () => {
         //var paramsId = this.props.match.params.id;
         //if(paramsId !== "foldery") {
-            this.props.history.push(PATHES.sharedFolders+ "?q="+ this.state.explQuery + "&skip=0");
+            this.props.history.push(PATHES.sharedFolders+ "?q="+ this.state.explQuery + "&skip=0"+"&from=1");
             this.setState({headerType: "folders"});
         //}
     }
@@ -656,14 +656,15 @@ responseErrorGoogle = (response) => {
 
     activeExplore = (query) => {
         this.props.showFirst(false);
-        this.props.history.push(PATHES.explore+ "?q="+ this.state.explQuery + "&skip=0");
+        this.props.history.push(PATHES.explore+ "?q="+ this.state.explQuery + "&skip=0"+"&from=1");
         this.setState({headerType: "explore"});
+    
     }
 
         
     searchTag = (query) => {
         this.props.showFirst(false);
-        this.props.history.push(PATHES.explore + "?q="+ query + "&skip=0");
+        this.props.history.push(PATHES.explore + "?q="+ query + "&skip=0"+"&from=1");
         this.setState({headerType: "explore"});
         
     }
@@ -788,7 +789,7 @@ responseErrorGoogle = (response) => {
                 }, 3500);
                
                 
-            }).catch(error => { this.Alert("LINK NIEAKTYWNY");;
+            }).catch(error => { this.Alert("LINK NIEAKTYWNY");
           
             //window.location.replace("/pulpit");
         });
@@ -801,8 +802,6 @@ responseErrorGoogle = (response) => {
         let userDesktop = null;
     
         let loginPanel = null;
-
-       
 
 
     let infoArrowMusic = this.state.showMusicArrow? <div  class="infoArrow"><i class="icon-left-bold" />
@@ -1038,41 +1037,40 @@ if(this.state.headerType == "followed") {
 
 
 
-
-
-let  explore =   <div  onClick={this.activeExplore}  class= {this.state.headerType == "explore"?
-"mainSwitch active" : "mainSwitch"}> 
-<i class="icon-search"/>Eksploruj
-</div>
-
 let actuall = <div onClick={this.activeActuall}  class= {this.state.headerType == "hot"?
-"mainSwitch active" : "mainSwitch"}> <i class="icon-fire"/>Aktualności
+"mainSwitch active" : "mainSwitch"}> <i class="icon-fire"/>{/* Aktualności */}
+</div>
+
+let  explore =   <div  onClick={this.activeExplore}   class= {this.state.headerType == "explore"?
+"mainSwitch active" : "mainSwitch"}> 
+<i class="icon-search"/>{/* Eksploruj */}
+</div>
+
+let followedFolders = <div onClick={this.activeFollowedFolders}    class= {this.state.headerType == "followed"?
+"mainSwitch active" : "mainSwitch"} > <i class="icon-eye"/> {/* Obserwowane foldery */}
+</div> 
+
+let sharedFolders = <div onClick={this.activeSharedFolders}   class= {this.state.headerType == "folders"?
+"mainSwitch active" : "mainSwitch"} > <i class="icon-folder-open"/> {/* Foldery użytkowników */}
+</div> 
+
+let userPulpit = <div onClick={this.activeDesk}  class= {this.state.headerType == "desk"?
+"mainSwitch active" : "mainSwitch"} > <i class="icon-doc-landscape"/>{/* Mój pulpit */}
 </div>
 
 
-let userPulpit = <div onClick={this.activeDesk}   class= {this.state.headerType == "desk"?
-"mainSwitch active" : "mainSwitch"} > <i class="icon-doc-landscape"/>Mój pulpit
-</div>
 
- let sharedFolders = <div onClick={this.activeSharedFolders}   class= {this.state.headerType == "folders"?
-"mainSwitch active" : "mainSwitch"} > <i class="icon-folder-open"/> Foldery użytkowników
-</div> 
-
-let followedFolders = <div onClick={this.activeFollowedFolders}   class= {this.state.headerType == "followed"?
-"mainSwitch active" : "mainSwitch"} > <i class="icon-eye"/> Obserwowane foldery
-</div> 
-
-
-let mainMenu = <div id="switchMenu" class="switchMenu">{activeHeader}<i class="icon-down-open"/>
-                <div id="switchMenuField">
+let mainMenu = <div class = "switchMenu">{/* {activeHeader}<i class="icon-down-open"/> */}
+                {/* <div id="switchMenuField"> */}
+                <div className="main" onClick={this.Main} >Live<span style={{ color: "rgba(255, 255, 255, 0.5)" }}>S</span>earch</div>
                     {actuall}
                     {explore}
                     {followedFolders}
-                  {sharedFolders}
+                    {sharedFolders}
                     {userPulpit}
                      
                 </div>
-            </div>
+           /*  </div> */
 
 /* let  mainMenu = <div   class="mainMenu"> 
        
@@ -1101,7 +1099,7 @@ let mainMenu = <div id="switchMenu" class="switchMenu">{activeHeader}<i class="i
 
 
 if(this.state.headerType == "hot") {
- actuallMenu =  (<div id="actuallMenu" class="actuallMenu"> 
+ actuallMenu =  (<div id="actuallMenu" class={"actuallMenu"}> 
 
 <div id="topSwitch"onClick={this.Main} class={this.inMain()? "activeSwitchTop": "switch"}>
 <i class="icon-fire"/>Top
@@ -1387,7 +1385,7 @@ return (
           <div className="container">
               
             <div id="allLive" className="header">
-                <div className="main" onClick={this.Main} >Live<span style={{ color: "rgba(255, 255, 255, 0.5)" }}>S</span>earch</div>
+            
 
                 {mainMenu}
                 {infoForSmall}

@@ -196,6 +196,10 @@
     display: block;
 }
 
+.folder:hover .followIcon  {
+    display: block;
+}
+
 .entity:hover .moveEntity  {
     display: block;
 }
@@ -360,7 +364,7 @@
 }
 
 .followIcon {
-    display: block;
+    display: none;
     position: absolute;
     top: -16px;
     left: -13px;

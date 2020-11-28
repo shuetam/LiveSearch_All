@@ -34,6 +34,7 @@ namespace Live.Repositories
         Task<FolderDto> EditFolder(Guid UserId, EntitySetter folderSetter);
         Task<FolderDto> FollowFolder(Guid UserId, Guid FolderId, string left, string top);
         Task<FolderDto> UnFollowFolder(Guid UserId, Guid FolderId);
+        Task<FolderDto> GetFolderInfoAsync(Guid userId, Guid folderId);
     }
 
 }
