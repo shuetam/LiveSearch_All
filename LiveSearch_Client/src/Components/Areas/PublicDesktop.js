@@ -17,7 +17,7 @@ import randoom from 'random-int';
 import axios from '../../axios-song';
 //import {scrollU, scrollD} from '../../Store/Actions/scroll';
 import { connect } from 'react-redux';
-import {showServerPopup, showFirst, manageScreen} from '../../Store/Actions/auth';
+import {showServerPopup, showFirst} from '../../Store/Actions/auth';
 import {URL, PATHES} from '../../environment'
 import TagsField from '../Fields/TagsField';
 import 'url-search-params-polyfill';
@@ -88,7 +88,6 @@ class PublicDesktop extends Component {
         var firstField = localStorage.getItem("firstField");
         
         this.setState({firstField: this.props.firstField});
-      //this.props.showFirst(false);
         this.startFetchingIcons();
         this.getUserIconsId();
     }
@@ -119,29 +118,10 @@ class PublicDesktop extends Component {
 
 
     ManageExplFilter = () => {
-      /*   var explPopCheck = localStorage.getItem('explPopCheck');
-        var explDesk = localStorage.getItem('explDesk');
-        var explActuall = localStorage.getItem('explActuall');
-        var explHistory = localStorage.getItem('explHistory');
-        if(explPopCheck !==null) {
-            this.setState({explPopCheck: parseBool(explPopCheck)});
-        }
-        if(explDesk !==null) {
-            this.setState({explDesk: parseBool(explDesk)});
-        }
-        if(explActuall !==null) {
-            this.setState({explActuall: parseBool(explActuall)});
-        }
-        if(explHistory !==null) {
-            this.setState({explHistory: parseBool(explHistory)});
-        } */
-
         var explIconsCount =  localStorage.getItem('explIconsCount');
         if(explIconsCount !==null) {
             this.setState({explIconsCount: parseInt(explIconsCount)});
-        }
-        
-     
+        }    
       }
 
 
@@ -207,6 +187,7 @@ class PublicDesktop extends Component {
        
 
         if(this.props.match.params.folderId){
+            debugger;
             this.setState({openedFolder: folderId});
             
             let fetchFolderInfo = this.props.isAuthenticated? URL.api + URL.folderInfoAuth : URL.api + URL.folderInfo;
@@ -226,8 +207,7 @@ class PublicDesktop extends Component {
                   this.setState({showFolderInfo: true})
                 }
         })
-        .then(() => {
-            this.prepareIcons()})
+        
             .catch(error => {console.log(error);
             });
  
@@ -261,9 +241,6 @@ class PublicDesktop extends Component {
 
         var explPopCheck = localStorage.getItem('explPopCheck');
         var explIconsCount =  localStorage.getItem('explIconsCount');
-        /* var explDesk = localStorage.getItem('explDesk');
-        var explActuall = localStorage.getItem('explActuall');
-        var explHistory = localStorage.getItem('explHistory'); */
         if(explPopCheck !==null) {
             this.setState({explPopCheck: parseBool(explPopCheck)});
         }
@@ -313,11 +290,8 @@ class PublicDesktop extends Component {
 
 
         var iconId= search.get("iconId");
-       // var iconType= search.get("iconType");
         var iconTitle= search.get("iconTitle");
         var iconTags= search.get("iconTags");
-       // var iconLeft= search.get("iconLeft");
-       // var iconTop= search.get("iconTop");
         this.setState({ loadedIcons: false });
 
         if(iconId !== null) {
@@ -333,6 +307,7 @@ class PublicDesktop extends Component {
 
         axios.post(fetchData, data, config)
         .then((result) => { 
+            debugger;
             //var deep = result.data.deep;
             if(result.data.length == parseInt(this.state.explIconsCount)) {
               this.setState({showNextPrev: true})
@@ -367,36 +342,6 @@ class PublicDesktop extends Component {
 }
 
 
-
-/*     getIcons = () => {
-        var youtubeUrl = this.props.fetchYoutube;
-        var data = null;
-        if(this.props.headerType=="explore") {
-            youtubeUrl = URL.api + URL.exploreYT;
-
-            data = {
-                    query: this.state.explQuery,
-                    sortByPopular: this.state.explPopCheck,
-                    iconsCount: this.state.explIconsCount,     
-            }
-            debugger;
-        }
-
-        this.setState({ loadedIcons: false });
-        axios.post(youtubeUrl, data, null)
-        .then((result) => {
-        this.setState({ icons: result.data })})
-        .then(() => {
-            this.prepareIcons()})
-        .catch(error => {console.log(error); 
-            this.Alert("Wystąpił błąd przy pobieraniu ikon. Spróbuj ponownie za chwilę.");
-            this.setState({ loadedIcons: true });
-        });
-
-    } */
-
-
-
     getLastIcon = () => {
         var allIcons = [ ...this.state.spotify, ...this.state.images, ...this.state.icons, ...this.state.sharedFolders];
         if(allIcons.length>0) {
@@ -419,17 +364,11 @@ class PublicDesktop extends Component {
         }
     
         var lastIcon = this.getLastIcon();
-
-        if (lastIcon) {
-           
-    
+        if (lastIcon) {  
             var type = lastIcon.type;
             this.setState({ nowPlayed: lastIcon.id });
             this.setState({ entityID:  lastIcon.id });
             this.setState({entityTags: this.getIconTags(lastIcon.id)});
-
-
-            //this.setState({ytField: false});
 
             if(type == "YT") {
                 
@@ -459,15 +398,9 @@ class PublicDesktop extends Component {
             }
         }
            
-       // var note = document.getElementById(lastIcon.id);
-       // if(note) {
-         //   note.style.boxShadow = this.state.playedShadow;
-       // }
-
 
             setTimeout(() => {
-              this.setState({ loadedIcons: true});
-              //var icons = document.getElementsByClassName("entity");
+              this.setState({ loadedIcons: true});          
           }, 0)
             
         }
@@ -475,6 +408,7 @@ class PublicDesktop extends Component {
             this.setState({ entityID:  "" });
             this.setState({ noIcons: true,  loadedIcons: true });
             this.setState({ytField: true});
+         
         }
     }
 
@@ -491,9 +425,6 @@ class PublicDesktop extends Component {
 
     
     note.style.boxShadow = this.state.playedShadow;
-
-
-
 
         var played = document.getElementById(this.state.nowPlayed);
         if (played !== null) {
@@ -617,8 +548,8 @@ class PublicDesktop extends Component {
     }
 
     followFolder = (folderId) => {
-        this.setState({waiting: "inputDis"});
         if(this.props.isAuthenticated) {
+            this.setState({waiting: "inputDis"});
             var config = {
                 headers: {Authorization: "Bearer " + this.props.jwtToken}
             }
@@ -696,7 +627,7 @@ class PublicDesktop extends Component {
 
     unFollowFolderPop = () => {
         var folder = this.state.folderInfo;
-        debugger;
+      
         if(folder) {
             this.setState({waiting: "inputDis"});
             this.setState({unFollowTitle: folder.title});
@@ -725,24 +656,9 @@ class PublicDesktop extends Component {
             .then((result) => {
               
                 if(result.data) {
-                    debugger;
+                  
                     this.setState({showUnfollow: false});
-                    this.setState({folderInfo: result.data});
-                
-                    // for(var i=0;i<this.state.followedIds.length;i++) {
-                    //     if(this.state.followedIds[i] == result.data.id) {
-
-                    //         this.state.followedIds[i] = "";
-                    //         var folder = this.getIconById(result.data.id);
-                        
-                    //         folder.followers = result.data.followers;
-                    //         this.setState({ hoveredFolder: folder });
-                    //         if(this.props.headerType=="followed") {
-                    //             folder.id = "dis";
-                    //         }
-                           
-                    //     }
-                    // }          
+                    this.setState({folderInfo: result.data});        
                 }
                 else {
                     this.Alert("Nie znaleziono folderu, spróbuj ponownie za chwilę.");
@@ -795,7 +711,7 @@ getHeaderPosition = (start, end) => {
         var iconTitle = document.getElementById("258");
         document.getElementById("258").innerHTML = titleMain;
         iconTitle.innerHTML = titleMain;
-        //debugger;
+    
         entity.style.transition = 'top 0s, left 0s';
         
 
@@ -903,7 +819,7 @@ getHeaderPosition = (start, end) => {
 
 
     rangeHandler = (event) => {
-        //var icons = document.getElementsByClassName("entity");
+      
         var iconsEntity = document.getElementsByClassName("entity");
         var folders = document.getElementsByClassName("folder");
         
@@ -914,7 +830,7 @@ getHeaderPosition = (start, end) => {
     }
 
     liveSearch = (event) => {  
-        //var icons = document.getElementsByClassName("entity");
+       
         var iconsEntity = document.getElementsByClassName("entity");
         var folders = document.getElementsByClassName("folder");
         
@@ -1019,10 +935,13 @@ getHeaderPosition = (start, end) => {
     }
 
     openFolder = (event) => {
-
-        this.props.history.push(PATHES.sharedFolders + "/" + event.target.id);
-       // this.props.history.push(PATHES.sharedFolders);
-        //this.getIcons( this.props.userId, event.target.id);
+       
+        if(this.props.headerType=="followed")
+            this.props.history.push(PATHES.followedFolders + "/" + event.target.id);
+           
+        if(this.props.headerType=="folders")
+            this.props.history.push(PATHES.sharedFolders + "/" + event.target.id);
+    
     }
 
 
@@ -1104,15 +1023,11 @@ getHeaderPosition = (start, end) => {
     exploreHandler = () => {
         
         this.props.history.push(PATHES.explore + "?q="+ this.state.explQuery + "&skip=0");
-        /* this.setState({headerType: "explore"});
-        this.setState({showNextPrev: false}); */
     }
 
     foldersExplore = () => {
         
         this.props.history.push(PATHES.sharedFolders + "?q="+ this.state.explQuery + "&skip=0");
-        /* this.setState({headerType: "explore"});
-        this.setState({showNextPrev: false}); */
     }
 
     addExplIconsCount = () => {
@@ -1170,6 +1085,16 @@ getHeaderPosition = (start, end) => {
         }
     }
 
+    backFromFolder = () => {
+        
+     debugger;
+        if(this.props.headerType=="followed")
+            this.props.history.push(PATHES.followedFolders + "?from=1");
+
+        if(this.props.headerType=="folders")
+            this.props.history.push(PATHES.sharedFolders+ "?q="+ this.state.explQuery + "&skip=0"+"&from=1");
+    }
+
 
 
     saveIcons = () => {
@@ -1180,14 +1105,11 @@ getHeaderPosition = (start, end) => {
             }
         
 
-        var folders = document.getElementsByClassName("folder");
-      
+        var folders = document.getElementsByClassName("folder");   
         var icons = document.getElementsByClassName("entity");
   
         var dataIcons = [];
         var toPX = require('to-px');
-
-       
 
         for (var i = 0; i < folders.length; i++) {
             var topEl = folders[i].style.top;
@@ -1221,16 +1143,10 @@ getHeaderPosition = (start, end) => {
     } 
 } 
 
-
-
     onHoverFolder = (event) => {
-
-     
 
         var entity = document.getElementById(event.target.id);
         if(entity) {
-
-
             var folder = this.getIconById(entity.id);
           
             this.setState({hoveredFolder: folder})
@@ -1256,8 +1172,6 @@ getHeaderPosition = (start, end) => {
         
         function dragElement(elmnt) {
             
-            //localStorage.setItem('inMove', true);
-            
             var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
             elmnt.onmousedown = dragMouseDown;
             
@@ -1282,13 +1196,9 @@ getHeaderPosition = (start, end) => {
                 var saveLoc = document.getElementById("saveIcons");
                 if(saveLoc)
                 saveLoc.className = "switchB";
-
-                //localStorage.setItem('inMove', true);
             }
             
             function closeDragElement() {
-                //debugger;
-                //const inMove = localStorage.removeItem('inMove');
             
                 document.onmouseup = null;
                 document.onmousemove = null;
@@ -1327,10 +1237,10 @@ leaveFolder = (event) => {
 
 let prevNext = <div class="nextPrev">
 <span  id="prev" class= {this.state.exploreSkip > 0?   "clickElem nextPrevAct" : "clickElem nextPrev"}  onClick = {this.showPrev}><i class="icon-left-open"/>
-Poprzednie<div id="prevField" class="hoverInfo" >Poprzednie</div>
+Poprzednie
 </span>   
 <span id="next" class= {this.state.showNextPrev?   "clickElem nextPrevAct" : "clickElem nextPrev"} onClick = {this.showNext}>Następne<i class="icon-right-open"/>
-<div id="nextField" class="hoverInfo" >Następne</div>
+
 </span>
 </div> ;
 
@@ -1345,7 +1255,6 @@ class='titleButton explButton'>Wyszukaj</button> :
 <button onClick={this.exploreHandler} class='titleButton explButton'>Eksploruj</button>
 
 actuallMenu = this.state.openedFolder != ""? "" :  (<div id="exploreMenu" class="actuallMenu" style={{left: this.getHeaderPosition("-500px", "300px") }} >
-
 
 
 <div id="explFilter" class="switch" style={{fontSize: "20px", marginTop: "3px", display: "inline"}}> 
@@ -1378,12 +1287,23 @@ let folderInfoHeader = "";
 
 if(this.props.match.params.folderId && this.state.showFolderInfo) {
 
-let followButton = !this.state.folderInfo.followed?   <button onClick={this.followFolder} id={this.props.id}   className= { "titleButton followButtton " + this.state.waiting}>Obserwuj
+let followButton = "";
+
+if(!this.userOwner(this.props.match.params.folderId)) {
+
+followButton = !this.state.folderInfo.followed?   <button onClick={this.followFolder} id={this.props.id}   className= { "titleButton followButtton " + this.state.waiting}>Obserwuj
 </button> :
 <button onClick={this.unFollowFolderPop} id={this.props.id}   className= { "titleButton privateButton " + this.state.waiting}>Przestań obserwować</button> ;
-
+}
 folderInfoHeader = <div class="folderInfoHeader">
-                       <label> {this.state.folderInfo.title}</label>
+
+<div id="backFolder" onClick={this.backFromFolder} class="switchB backFromFolder"> 
+        <i class="icon-left-bold" />
+        <div id="backFolderField" class="hoverInfo" >
+         Powrót 
+        </div>
+        </div>
+                       <div class="folderTitle"> {this.state.folderInfo.title}</div>
                         {followButton}
                         </div>
 } 
@@ -1396,7 +1316,7 @@ folderInfoHeader = <div class="folderInfoHeader">
             tagsField = "";
         }
 
-        let saveIcons = this.props.headerType=="followed"? <div id="saveIcons" class="switchDisable" onClick={this.saveIcons} >
+        let saveIcons = (this.props.headerType=="followed" && !this.props.match.params.folderId)? <div id="saveIcons" class="switchDisable" onClick={this.saveIcons} >
         <i class="icon-floppy" />
         <div id="saveIconsField" class="hoverInfo">
             Zapamiętaj aktualne ulokowanie folderów  
@@ -1464,7 +1384,7 @@ folderInfoHeader = <div class="folderInfoHeader">
         })
 
         let images = this.state.images.map(img => {
-            //debugger;
+           
             return (
                 <ImageIcon remover= {this.userOwner(img.id)? 1 : 0}  isAuth={this.props.isAuthenticated}  
                   yt={img.id} id={img.id}
@@ -1598,7 +1518,7 @@ folderInfoHeader = <div class="folderInfoHeader">
                 {unfollowPopup}
                 {sharedFolders}
               
-                <div class="deskMenu" style={{left: this.getHeaderPosition("-20px","200px") }}>
+                <div class="deskMenu" style={{left: this.getHeaderPosition("-50px","120px") }}>
                     {saveIcons}
                     {folderInfoHeader}
                 </div>
@@ -1623,6 +1543,7 @@ const mapDispatchToProps = dispatch => {
 
         serverAlert: (message) => dispatch(showServerPopup(message)),
         showFirst: (show) => dispatch(showFirst(show)),
+  
 
     };
 };
@@ -1633,7 +1554,6 @@ const mapStateToProps = state => {
         isAuthenticated: state.auth.jwttoken !== null,
         jwtToken: state.auth.jwttoken,
         firstField: state.auth.firstField
-        //fullScreen: state.auth.fullScreen
     };
 };
 

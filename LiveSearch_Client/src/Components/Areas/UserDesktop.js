@@ -2086,7 +2086,7 @@ setAddingIcon = () => {
 let findNewIcons = (this.state.addingIcon ||  this.state.addingFolder)?
              <div class="actuallMenu">
 
- <div style={{marginLeft: '10px', marginTop: '10px'}} id="infoLink">&#9432;info
+ <div style={{marginLeft: '140px', marginTop: '10px'}} id="infoLink">&#9432;info
                 <div id="info">
                            {infoAdding}
                         </div>

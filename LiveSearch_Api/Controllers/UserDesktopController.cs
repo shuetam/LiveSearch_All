@@ -17,11 +17,13 @@ namespace Live.Controllers
     {
         private readonly  IUserDesktopRepository _desktopRepository;
          private readonly  IUserRepository _userRepository;
+          private readonly  IExploreRepository _exploreRepository;
         
-        public UserDesktopController (IUserDesktopRepository desktopRepository, IUserRepository userRepository)
+        public UserDesktopController (IUserDesktopRepository desktopRepository, IUserRepository userRepository, IExploreRepository exploreRepository)
         {
             this._desktopRepository = desktopRepository;
             this._userRepository = userRepository;
+            this._exploreRepository = exploreRepository;
         }
 
 
@@ -124,8 +126,17 @@ namespace Live.Controllers
         }
 
         [HttpPost("getfollowedfolders")]
-        public async Task<IActionResult> GetFollowedFolders([FromBody] AuthUser user)
+        public async Task<IActionResult> GetFollowedFolders([FromBody] ExploreQuery Query)
         {
+
+          string folderId = Query.folderId;
+         
+            if (!string.IsNullOrEmpty(folderId))
+            {
+                var folderContent = await _exploreRepository.GetIconsForFolder(folderId);
+                return Json(folderContent);
+            }
+
             var icons = await _desktopRepository.GetFollowedFoldersForUserAsync(this.UserId);
             return Json(icons);
         }

@@ -16,8 +16,7 @@ class FolderField extends Component {
     }
 
     componentDidMount() {
-        var folder = this.props.folder;
-        debugger;
+        
         
     }
 

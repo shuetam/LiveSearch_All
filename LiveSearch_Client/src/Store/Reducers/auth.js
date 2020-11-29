@@ -199,7 +199,7 @@ const reducer = ( state = initialState, action ) => {
         case ('ESC_MANAGE'): return manageEsc(state, action);
        // case ('LOGIN_MANAGE'): return showLogin(state, action);
         case ('FIRST_SHOW'): return showFirst(state, action);
-        
+   
         default:
             return state;
     }

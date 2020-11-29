@@ -1,5 +1,5 @@
 .header {
-    background-color: rgb(20, 20, 20);
+    background-color: rgb(34, 34, 34);
     position: fixed;
     width: 100vw;
     top: 0px;
@@ -18,7 +18,7 @@
     display: flex;
     position: absolute;
     z-index: 200;
-    left: 320px;
+  
     transition: left 1s linear;
 }
 
@@ -171,7 +171,7 @@
     width: 315px;
     height: 33px;
     margin-top: 0px;
-    background-color: rgb(29, 29, 29);
+    background-color: rgb(39, 39, 39);
 }
 
 .switchMenu:hover {
@@ -287,17 +287,30 @@
     white-space: nowrap;
 }
 
+.backFromFolder {
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 2px;
+    padding: 0px;
+    font-size: 17px;
+    float: left;
+  }
+
 .folderInfoHeader {
-    margin-left: 10px;
-    margin-top: 5px;
-    font-size: 19px;
+    margin-left: 0px;
+    margin-top: 4px;
+    font-size: 20px;
 }
 
-.folderInfoHeader label {
-    margin-left: 20px;
+.folderTitle  {
+    margin-left: 10px;
     margin-right: 20px;
     font-size: 15px;
     color: rgba(255, 255, 255, 0.74);
+    float: left;
+    margin-top: 3px;
+    border-left: solid 0.5px rgba(255, 255, 255, 0.705);
+    padding-left: 10px;
 }
 
 .switchA {
@@ -325,7 +338,7 @@
 
 #plusField {
     top: 30px;
-    left: 200px;
+    left: 320px;
 }
 
 #plus:hover #plusField {
@@ -339,7 +352,7 @@
     font-family: 'Mandali', sans-serif;
     font-size: 12px;
     position: fixed;
-    background-color: rgba(32, 32, 32, 0.932);
+    background-color: rgb(32, 32, 32);
     z-index: 155;
     color: rgba(255, 255, 255, 0.678);
     text-shadow: none;
@@ -347,8 +360,9 @@
 
 #addText {
     top: 30px;
-    left: 180px;
+    left: 280px;
 }
+
 
 
 
@@ -395,17 +409,18 @@
     opacity: 0,3;
     font-size: 20px;
     padding: 3px;
-    color: rgb(255, 255, 255);
+   
     transition: all 0.3s;
     white-space: nowrap;
     margin-left: 5px;
     margin-top: 2px;
     float: left;
+    color: #FFFFFF;
+    
 }
 
 .active { 
-    color: rgb(250, 0, 0);
-    text-shadow: ;
+    text-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, #ff1e1e 0px 0px 20px, 2px 2px 2px rgba(206,93,93,0);
     margin-top: 0px;
 }
 
@@ -563,8 +578,8 @@
     font-size: 12px;
     position: fixed;
     top: 30px;
-    left: 180px;
-    background-color: rgba(32, 32, 32, 0.856);
+    left: 320px;
+    background-color: rgb(32, 32, 32);
     z-index: 155;
     color: rgba(255, 255, 255, 0.678);
 }
@@ -577,11 +592,11 @@
     cursor: default;
     display: none;
     padding: 10px;
-    font-size: 12px;
+  
     position: fixed;
     top: 30px;
-    left: 190px;
-    background-color: rgba(32, 32, 32, 0.856);
+    left: 310px;
+    background-color: rgb(32, 32, 32);
     z-index: 155;
     color: rgba(255, 255, 255, 0.678);
 }
@@ -644,6 +659,38 @@
 }
 
 
+#actuall:hover #actuallField {
+    left: 90px;
+    display: block;
+    font-size: 14px;
+}
+
+#explore:hover #exploreField {
+    left: 250px;
+    display: block;
+    font-size: 14px;
+}
+
+#followedFolders:hover #followedFoldersField {
+    left: 150px;
+    display: block;
+    font-size: 14px;
+}
+
+#sharedFolders:hover #sharedFoldersField {
+    left: 180px;
+    display: block;
+    font-size: 14px;
+}
+
+#userPulpit:hover #userPulpitField {
+    left: 120px;
+    display: block;
+    font-size: 14px;
+}
+
+
+
 #music label input {
     display: none;
 } 
@@ -699,7 +746,7 @@
     display: none;
     position: absolute;
     top: 30px;
-    left: 440px;
+    left: 230px;
     background-color: rgba(32, 32, 32, 0.918);
     z-index: 155;
     color: rgba(255, 255, 255, 0.678);
@@ -753,7 +800,7 @@
     display: none;
     position: absolute;
     top: 30px;
-    left: 350px;
+    left: 130px;
     background-color: rgba(32, 32, 32, 0.918);
     z-index: 155;
     color: rgba(255, 255, 255, 0.678);
@@ -772,7 +819,7 @@
     display: none;
     position: absolute;
     top: 30px;
-    left: 150px;
+    left: -70px;
     background-color: rgba(32, 32, 32, 0.856);
     z-index: 155;
     color: rgba(255, 255, 255, 0.678);
@@ -788,7 +835,7 @@
     display: none;
     position: absolute;
     top: 30px;
-    left: 250px;
+    left: 50px;
     background-color: rgba(32, 32, 32, 0.9);
     z-index: 155;
     color: rgba(255, 255, 255, 0.678);
@@ -1479,7 +1526,7 @@ display: inline-block;
     border-style: solid; 
     margin-top: 7px;
     margin-left: 13px;
-    width: 30vw;
+    width: 20vw;
     height: 20px;
     display: flex;
     border: rgba(119, 119, 119, 0.582) solid 0.5px;
@@ -1491,7 +1538,7 @@ display: inline-block;
     border-style: solid; 
     margin-top: 7px;
     margin-left: 13px;
-    width: 30vw;
+    width: 25vw;
     height: 20px;
     display: flex;
   }

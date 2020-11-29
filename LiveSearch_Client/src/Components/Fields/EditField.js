@@ -146,8 +146,8 @@ placeholder =  "Opisz czego dotyczy ten folder i poinformuj użytkowników o jeg
  </div>
 
 var shareText = /* this.state.hasIcons? */ <div  className="lockIconF" style={{fontSize: "14px", padding: "5px", color: "rgba(255, 255, 255, 0.501)"}}>
-Udostępnij folder aby umożliwić innym użytkownikom jego przeglądanie,
- obserwowanie i zapisywanie zawartych w nim ikon na swoich pulpitach. 
+Ustaw folder jako publiczny aby go udostępnić i umożliwić innym użytkownikom jego przeglądanie,
+ obserwowanie oraz zapisywanie zawartych w nim ikon na swoich pulpitach. 
  Użytkownicy nie będą mieli możliwości 
  edytowania i usuwania ikon w Twoim folderze.</div>
 /*   : 
@@ -174,7 +174,7 @@ var shareIcon = this.state.shared? <div id={this.props.id}   className="lockIcon
 
  var shareButton = this.state.shared?<div> <button  class="titleButton privateButton" onMouseLeave={() => this.setState({privText: false})}   onMouseOver={() => this.setState({privText: true})}   onClick={this.privateHandler} style={{fontSize: 12, width: "150px",  padding: "5px"}}>
  <i class="icon-lock"/>Ustaw jako prywatny</button> {privateText} </div> :<div><button class= "titleButton"   onClick={this.shareHandler} style={{fontSize: 14, width: "200px",  padding: "5px"}}>
-    <i  class="icon-lock-open-alt"/>Udostępnij folder</button> {shareText}</div>
+    <i  class="icon-lock-open-alt"/>Ustaw jako publiczny</button> {shareText}</div>
 
 var shareButton = <div>
     {shareButton}</div>

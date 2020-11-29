@@ -67,7 +67,7 @@ class Header extends Component {
             },
             fromFolder: false,
             addingIcon: false,
-
+            showActuallHeader: false,
             explQuery: "",
             firstField: false
    
@@ -76,9 +76,7 @@ class Header extends Component {
 
 
     
-    componentDidMount() {
-       
-       
+    componentDidMount() {    
         Update();
 
         var firstField = localStorage.getItem("firstField");
@@ -177,23 +175,30 @@ this.isConfirm();
 
             var paramsId = this.props.match.params.id;
 
+            this.setState({showActuallHeader: this.isActuall(paramsId)});
+
             if(paramsId == "eksploruj") {
+               
                 this.setState({headerType: "explore"});
             }
 
             if(paramsId == "udostepnione_foldery") {
+            
                 this.setState({headerType: "folders"});
             }
 
             if(paramsId == "obserwowane_foldery") {
+                
                 this.setState({headerType: "followed"});
             }
            
             if(paramsId == "pulpit")  {
+              
                 this.setState({headerType: "desk"});
             }
         } 
         else {
+            this.setState({showActuallHeader: true});
             this.setState({headerType: "hot"});
         } 
       }
@@ -216,7 +221,8 @@ this.isConfirm();
  
 
     Main = () => {
-     //window.location.replace("/");
+
+    this.setState({showActuallHeader: true});
      this.props.showFirst(false);
      this.props.history.push('/');
 
@@ -346,6 +352,7 @@ if(email !== undefined) {
             this.props.SocialLog(response.data.userId, name, image, response.data.jwtToken, response.data.role, response.data.userNick);
 
             this.setState({headerType: "desk"});
+            this.setState({showActuallHeader: false});
             this.props.history.push(PATHES.userPulpit);
         }
     }).catch(error => { this.Alert("Wystąpił błąd przy próbie zalogowania.")});
@@ -357,7 +364,9 @@ else {
 }
 
 
-
+isActuall = (paramsId) => {
+   return (paramsId.includes("muzyka") || paramsId.includes("filmy") || paramsId.includes("literatura"));
+}
 
 
 
@@ -613,6 +622,7 @@ responseErrorGoogle = (response) => {
     activeDesk = () => {
 
         if(this.props.isAuthenticated) {
+            this.setState({showActuallHeader: false});
             var paramsId = this.props.match.params.id;
             this.props.history.push(PATHES.userPulpit);
             this.setState({headerType: "desk"});
@@ -626,8 +636,8 @@ responseErrorGoogle = (response) => {
 
     activeFollowedFolders = () => {
         if(this.props.isAuthenticated) {
-     
-            this.props.history.push(PATHES.followedFolders);
+            this.setState({showActuallHeader: false});
+            this.props.history.push(PATHES.followedFolders + "?from=1");
             this.setState({headerType: "followed"});
         }
         else {
@@ -640,21 +650,24 @@ responseErrorGoogle = (response) => {
     activeSharedFolders = () => {
         //var paramsId = this.props.match.params.id;
         //if(paramsId !== "foldery") {
+            this.setState({showActuallHeader: false});
             this.props.history.push(PATHES.sharedFolders+ "?q="+ this.state.explQuery + "&skip=0"+"&from=1");
             this.setState({headerType: "folders"});
         //}
     }
 
     activeActuall = () => {
-        //var paramsId = this.props.match.params.id;
-        //if(this.state.headerType !== "hot") {
+
+        //setTimeout(() => {
+            this.setState({showActuallHeader: true});
             this.props.history.push('/');
             this.setState({headerType: "hot"});
-        //}
+       // }, 1500);         
     }
 
 
     activeExplore = (query) => {
+        this.setState({showActuallHeader: false});
         this.props.showFirst(false);
         this.props.history.push(PATHES.explore+ "?q="+ this.state.explQuery + "&skip=0"+"&from=1");
         this.setState({headerType: "explore"});
@@ -663,15 +676,12 @@ responseErrorGoogle = (response) => {
 
         
     searchTag = (query) => {
+        this.setState({showActuallHeader: false});
         this.props.showFirst(false);
         this.props.history.push(PATHES.explore + "?q="+ query + "&skip=0"+"&from=1");
         this.setState({headerType: "explore"});
         
     }
-
- 
-
-
 
 
     getMovedIcons = () => {
@@ -1019,7 +1029,7 @@ let infoForSmall = <div class="menuForSmall"> Wersja mobilna strony jest w przyg
   
 
 
-let activeHeader = <i class="icon-fire"/>;
+/* let activeHeader = <i class="icon-fire"/>;
 
 if(this.state.headerType == "folders") {
     activeHeader = <i class="icon-folder-open"/>
@@ -1033,29 +1043,34 @@ if(this.state.headerType == "desk") {
 }
 if(this.state.headerType == "followed") {
     activeHeader = <i class="icon-eye"/>
-}
+} */
 
 
 
-let actuall = <div onClick={this.activeActuall}  class= {this.state.headerType == "hot"?
+let actuall = <div id="actuall" onClick={this.activeActuall}  class= {this.state.headerType == "hot"?
 "mainSwitch active" : "mainSwitch"}> <i class="icon-fire"/>{/* Aktualności */}
+ <div id="actuallField" class="hoverInfo" > Aktualności</div>
 </div>
 
-let  explore =   <div  onClick={this.activeExplore}   class= {this.state.headerType == "explore"?
+let  explore =   <div id="explore"   onClick={this.activeExplore}   class= {this.state.headerType == "explore"?
 "mainSwitch active" : "mainSwitch"}> 
 <i class="icon-search"/>{/* Eksploruj */}
+<div id="exploreField" class="hoverInfo"> Eksploruj ikony</div>
 </div>
 
-let followedFolders = <div onClick={this.activeFollowedFolders}    class= {this.state.headerType == "followed"?
-"mainSwitch active" : "mainSwitch"} > <i class="icon-eye"/> {/* Obserwowane foldery */}
+let followedFolders = <div id="followedFolders"  onClick={this.activeFollowedFolders}    class= {this.state.headerType == "followed"?
+"mainSwitch active" : "mainSwitch"} > <i class="icon-folder-open"/> {/* Obserwowane foldery */}
+<div id="followedFoldersField" class="hoverInfo"> Obserwowane foldery</div>
 </div> 
 
-let sharedFolders = <div onClick={this.activeSharedFolders}   class= {this.state.headerType == "folders"?
+let sharedFolders = <div id="sharedFolders"  onClick={this.activeSharedFolders}   class= {this.state.headerType == "folders"?
 "mainSwitch active" : "mainSwitch"} > <i class="icon-folder-open"/> {/* Foldery użytkowników */}
+<div id="sharedFoldersField" class="hoverInfo"> Foldery użytkowników</div>
 </div> 
 
-let userPulpit = <div onClick={this.activeDesk}  class= {this.state.headerType == "desk"?
+let userPulpit = <div id="userPulpit"  onClick={this.activeDesk}  class= {this.state.headerType == "desk"?
 "mainSwitch active" : "mainSwitch"} > <i class="icon-doc-landscape"/>{/* Mój pulpit */}
+<div id="userPulpitField" class="hoverInfo"> Mój pulpit</div>
 </div>
 
 
@@ -1064,42 +1079,17 @@ let mainMenu = <div class = "switchMenu">{/* {activeHeader}<i class="icon-down-o
                 {/* <div id="switchMenuField"> */}
                 <div className="main" onClick={this.Main} >Live<span style={{ color: "rgba(255, 255, 255, 0.5)" }}>S</span>earch</div>
                     {actuall}
-                    {explore}
+                    {userPulpit}
                     {followedFolders}
                     {sharedFolders}
-                    {userPulpit}
+                    {explore}
                      
                 </div>
-           /*  </div> */
 
-/* let  mainMenu = <div   class="mainMenu"> 
-       
-        {explore}
-        {actuall}
-        {usersFolders}
-          
- </div> */
+ //let actuallMenu = "";
 
- let actuallMenu = "";
-
-/*  if(this.state.headerType == "folders") {
-
-    actuallMenu =  (<div id="exploreMenu" class="actuallMenu">
-   
-    <div class="exploreDiv">
-        <input id="exploreT" type="text"
-            autofocus="true"
-           placeholder=  " Wyszukaj foldery..."
-            onKeyPress = {this.onKeyTitle}
-             onChange={e => this.editExplore(e.target.value)} 
-             value={this.state.editedExplore} /></div> 
-            
-            
-     </div>); } */
-
-
-if(this.state.headerType == "hot") {
- actuallMenu =  (<div id="actuallMenu" class={"actuallMenu"}> 
+//if(this.state.headerType == "hot") {
+ let actuallMenu =  (<div id="actuallMenu" class={"actuallMenu"} style={{left: !this.state.showActuallHeader? "-200px" : "320px" }}> 
 
 <div id="topSwitch"onClick={this.Main} class={this.inMain()? "activeSwitchTop": "switch"}>
 <i class="icon-fire"/>Top
@@ -1379,7 +1369,7 @@ Bestsellery
              {adminHeader}
            
         </div>
-        ) }
+        ) 
 
 return (
           <div className="container">
