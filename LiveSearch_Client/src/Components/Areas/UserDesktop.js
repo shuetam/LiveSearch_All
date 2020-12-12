@@ -103,7 +103,8 @@ class UserDesktop extends Component {
             entityTags: [],
             firstHover: false,
             addingFolder: false,
-            fieldType: ""
+            fieldType: "",
+            iconWidth: 1
          
             
         }
@@ -115,6 +116,7 @@ class UserDesktop extends Component {
     componentDidMount() {
 
         document.addEventListener("keydown", this.keyManager, false);
+        //document.addEventListener('scroll', this.handleScroll);
 
         if(this.props.isAuthenticated)
         {
@@ -189,6 +191,20 @@ class UserDesktop extends Component {
 
 
       }
+
+      handleScroll = (event) => {
+          debugger;
+          if (event.deltaY < 0)
+          {
+            this.setState( {iconWidth: this.state.iconWidth + 0.1});
+          }
+          else if (event.deltaY > 0)
+          {
+            this.setState( {iconWidth: this.state.iconWidth - 0.1});
+          }
+        }
+
+ 
 
     getIcons = (Id, folderId) => {
         this.setState({loadedIcons: false});
@@ -1658,10 +1674,13 @@ setAddingIcon = () => {
         //debugger;
         let icons = this.state.icons.map(song => {
             return (
-                <YTIcon  remover={2}  isAuth={this.props.isAuthenticated}   title={song.title} yt={song.id} id={song.id}
+                <YTIcon  remover={2}  isAuth={this.props.isAuthenticated} 
+               
+                  title={song.title} 
+                  yt={song.id} id={song.id}
                 classname= {this.getClass(song.id)}
                     linkTo={this.onDbClick}
-                    size={ '40px' }
+                    size={ 40 * this.state.iconWidth + 'px' }
                     location={ this.state.loadedIcons? 
                       {boxShadow: this.getShadow(parseInt(song.left), parseInt(song.top), song.id), 
                         top: song.top, left: song.left, transition: 'top '+2+'s, left '+2+'s'}:
@@ -1956,53 +1975,6 @@ setAddingIcon = () => {
 
             field = this.getField();
            
-           /*  switch(this.state.fieldType) {
-                case "YT":
-                    field = <Field play={this.state.entityID} show={this.state.loadedIcons} nextSong={this.nextSongHandler} loadText={this.props.fetchData} />
-               return;
-                    case "IMG":
-                    field = <ImageField src={this.state.entityID} sourceShow={this.getNiceHttp(this.state.imgSource)} 
-                    source={this.state.imgSource}
-                    show={this.state.loadedIcons}/>
-                    break;
-                case "BOOK":
-                    field = <ImageField src={this.state.entityID} sourceShow={this.getNiceHttp(this.state.imgSource)} 
-                    source={this.state.imgSource}
-                    show={this.state.loadedIcons}/>
-                    break;
-                case "INFO":
-                    field = <InfoField show = {!this.anyIcons()}  fromFolder={this.state.fromFolder}/>
-                    break;
-                case "SPOTIFY":
-                    field = <SpotifyField id={this.state.entityID} show={this.state.loadedIcons}/>
-                    break;
-                case "FOLDER":
-                    field = ""
-                    break;
-                case "":
-                    field = <LoadingField/>
-                    break;
-              } */
-
-
-
-
-      /*       if(this.state.ytField)
-                field = <Field play={this.state.entityID} show={this.state.loadedIcons} nextSong={this.nextSongHandler} loadText={this.props.fetchData} />
- *//* 
-            if(this.state.imgField)
-                field = <ImageField src={this.state.entityID} sourceShow={this.getNiceHttp(this.state.imgSource)} 
-                source={this.state.imgSource}
-                show={this.state.loadedIcons}/>
-            if(this.state.infoField)
-                field = <InfoField show = {!this.anyIcons()}  fromFolder={this.state.fromFolder}/>
-
-            if(this.state.spotifyField)
-                field = <SpotifyField id={this.state.entityID} show={this.state.loadedIcons}/>
-
-            if(!this.state.spotifyField && !this.state.infoField && !this.state.ytField && !this.state.loadedIcons) {
-                field = <LoadingField/>
-            } */
         }
         else {
             field = <LoginField/>
@@ -2129,7 +2101,7 @@ let findNewIcons = (this.state.addingIcon ||  this.state.addingFolder)?
 
 
             return  (
-                <div className="area">
+                <div className="area" onWheel ={this.handleScroll}>
                 {deskMenu}
         
             <div> <input id="ls" onChange={this.liveSearch} placeholder="Wyszukaj..." class="switchSearch" type="text"/></div>

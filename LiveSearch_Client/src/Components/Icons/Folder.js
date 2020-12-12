@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
 import './Icons.css';
-import Header from '../Header/Header';
-import Field from '../Fields/Field';
-import { Link, Route, NavLink, withRouter } from 'react-router-dom';
-import { BrowserRouter } from 'react-router-dom';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import {popup, showServerPopup, removingIcon} from '../../Store/Actions/auth';
-import {URL} from '../../environment'
-import ReactDOM from 'react-dom';
+
 import IconEditor from './IconEditor';
 
 class Folder extends Component {
@@ -99,7 +93,7 @@ class Folder extends Component {
             removeIcon = this.props.hideEditors? "" : <div id={this.props.id} onClick = {this.deleteFolder}
             title="Usuń folder"  class={classEntity}>&#43;</div> ;
             
-        shareIcon = this.props.shared? <div id={this.props.id} title="Obserwujących"  className="lockIcon openIcon"><i id={this.props.id}  class="icon-lock-open-alt"/>{43242}</div> 
+        shareIcon = this.props.shared? <div id={this.props.id} title="Obserwujących"  className="lockIcon openIcon"><i id={this.props.id}  class="icon-lock-open-alt"/></div> 
             : <div id={this.props.id} title="Prywatny" className="lockIcon"><i id={this.props.id} class="icon-lock"/></div>;
             
             editIconField = <i id={this.props.id} title="Edytuj/udostępnij" class="icon-edit" onClick={this.editFolder}/>

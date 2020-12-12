@@ -234,9 +234,7 @@ class PublicDesktop extends Component {
         if(from !== null){
             this.setState({fromHeader: true});
         }
-        else {
-            exploreSkip = 0;
-        }
+
 
 
         var explPopCheck = localStorage.getItem('explPopCheck');

@@ -678,8 +678,14 @@ responseErrorGoogle = (response) => {
     searchTag = (query) => {
         this.setState({showActuallHeader: false});
         this.props.showFirst(false);
+    if(this.state.headerType == "explore") {
+        this.props.history.push(PATHES.explore + "?q="+ query + "&skip=0");
+    }
+    else {
         this.props.history.push(PATHES.explore + "?q="+ query + "&skip=0"+"&from=1");
         this.setState({headerType: "explore"});
+    }
+
         
     }
 
