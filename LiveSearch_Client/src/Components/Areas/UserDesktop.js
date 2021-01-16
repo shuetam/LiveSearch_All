@@ -18,7 +18,7 @@ import { BrowserRouter } from 'react-router-dom';
 import randoom from 'random-int';
 import axios from '../../axios-song';
 import { connect } from 'react-redux';
-import { showServerPopup, addingIcon, stopAddingIcon, stopRemovingIcon, manageScreen} from '../../Store/Actions/auth';
+import { showServerPopup, addingIcon, stopAddingIcon, stopRemovingIcon} from '../../Store/Actions/auth';
 import { URL, PATHES } from '../../environment';
 import TagsField from '../Fields/TagsField';
 import { leftToVw, topToVh } from '../../Converters.js';
@@ -104,7 +104,7 @@ class UserDesktop extends Component {
             firstHover: false,
             addingFolder: false,
             fieldType: "",
-            iconWidth: 1
+            smallFolder: true
          
             
         }
@@ -133,6 +133,7 @@ class UserDesktop extends Component {
             this.getImages(this.props.userId, folderId);
             this.getSpotify(this.props.userId, folderId);
             this.getIcons(this.props.userId, folderId);
+            this.setState({smallFolder: this.props.sizeFactor < 0.8});
         }
     }
 
@@ -192,17 +193,20 @@ class UserDesktop extends Component {
 
       }
 
-      handleScroll = (event) => {
-          debugger;
-          if (event.deltaY < 0)
-          {
-            this.setState( {iconWidth: this.state.iconWidth + 0.1});
-          }
-          else if (event.deltaY > 0)
-          {
-            this.setState( {iconWidth: this.state.iconWidth - 0.1});
-          }
-        }
+    //   handleScroll = (event) => {
+    
+    //       if (event.deltaY < 0 && this.props.sizeFactor<2)
+    //       {
+    //         this.props.setFactor(this.props.sizeFactor + 0.1)
+    //         this.setState({smallFolder: this.props.sizeFactor + 0.1 < 0.8});
+    //       }
+    //        if (event.deltaY > 0 && this.props.sizeFactor>0.6)
+    //       {
+    //         this.props.setFactor(this.props.sizeFactor - 0.1)
+    //         this.setState({smallFolder: this.props.sizeFactor - 0.1 < 0.8});
+    //       }
+         
+    //     }
 
  
 
@@ -1600,27 +1604,27 @@ debugger;
 
     getImgWidth = (type) => {
                
-        var width = "60px";
+        var width = 60;
         if(type=="BOOK") {
-            width="45px";
+            width=45;
         }
         if(type=="SPOTIFY") {
-            width="45px";
+            width=45;
         }
-            return width;
+            return width * this.props.sizeFactor + "px";
         }
 
         getImgHeight = (type) => {
 
-            var height = "50px";
+            var height = 50;
             if(type=="BOOK") {
-                height="60px";
+                height=60;
             }
             if(type=="SPOTIFY") {
-                height="45px";
+                height=45;
             }
 
-        return height;
+        return height * this.props.sizeFactor + "px";
 
         }
 
@@ -1680,7 +1684,7 @@ setAddingIcon = () => {
                   yt={song.id} id={song.id}
                 classname= {this.getClass(song.id)}
                     linkTo={this.onDbClick}
-                    size={ 40 * this.state.iconWidth + 'px' }
+                    size={ 40 * this.props.sizeFactor + 'px' }
                     location={ this.state.loadedIcons? 
                       {boxShadow: this.getShadow(parseInt(song.left), parseInt(song.top), song.id), 
                         top: song.top, left: song.left, transition: 'top '+2+'s, left '+2+'s'}:
@@ -1847,7 +1851,7 @@ setAddingIcon = () => {
                 <YTIcon  remover={3} isAuth={this.props.isAuthenticated}  title={song.title} yt={song.id} id={song.id}
                 classname= { (song.id == "dis")? "disable":"entity"} 
                     linkTo={this.onDbClick}
-                    size={ '40px'  }
+                    size={ 40 * this.props.sizeFactor + 'px' }
                     location={ this.state.iconsFound? 
                       {boxShadow: this.getShadow(parseInt(song.left), parseInt(song.top), song.id), top: song.top, left: song.left, transition: 'top '+2+'s, left '+2+'s'}:
                       {top: this.getHPosition(101,200)+'vh', left: this.getWPosition(-50,200)+'vw'}}
@@ -1873,7 +1877,10 @@ setAddingIcon = () => {
                     linkTo={this.openFolder}         
                     location={ this.state.loadedIcons? 
                     {boxShadow: this.getShadow(parseInt(song.left), 
-                        parseInt(song.top), song.id), top: song.top, left: song.left, transition: 'top '+2+'s, left '+2+'s'}:
+                        parseInt(song.top), song.id), top: song.top, left: song.left, 
+                        height: 80 * this.props.sizeFactor + "px",
+                        width: 80 * this.props.sizeFactor + "px",
+                        transition: 'top '+2+'s, left '+2+'s'}:
                     {top: randomInt(101,200)+'vh', left: randomInt(-50,200)+'vw'}}
                     onHover={this.onHoverFolder}
                     onLeave={this.leaveFolder}
@@ -1888,7 +1895,8 @@ setAddingIcon = () => {
                     bottom = {bottomIcon(song.id, song.top)}
                     public={false}
                     shared = {song.shared}
-                    
+                    factor = {this.props.sizeFactor}
+                    smallFolder = {this.state.smallFolder}
                     />
                      
                 )
@@ -1908,6 +1916,7 @@ setAddingIcon = () => {
                         onHover={this.onHoverFolder}
                         onLeave={this.leaveFolder}
                         hideEditors={true}
+                        factor = {this.props.sizeFactor}
                         
                         />
                          
@@ -2101,7 +2110,7 @@ let findNewIcons = (this.state.addingIcon ||  this.state.addingFolder)?
 
 
             return  (
-                <div className="area" onWheel ={this.handleScroll}>
+                <div className="area" >
                 {deskMenu}
         
             <div> <input id="ls" onChange={this.liveSearch} placeholder="Wyszukaj..." class="switchSearch" type="text"/></div>
@@ -2149,10 +2158,10 @@ let findNewIcons = (this.state.addingIcon ||  this.state.addingFolder)?
                 {newFolders}
                 
 
-               <div class="containerIconsContainer">
+               {/* <div class="containerIconsContainer">
                <div class="iconsContainer">
                 </div>
-                </div>
+                </div> */}
             
             </div>
         );
@@ -2166,6 +2175,7 @@ const mapStateToProps = state => {
       jwtToken: state.auth.jwttoken,
       addingIcon: state.auth.addingIcon,
       removedId: state.auth.removingIconId,
+      sizeFactor: state.auth.sizeFactor
       //fullScreen: state.auth.fullScreen,
   };
 };
@@ -2175,6 +2185,7 @@ const mapDispatchToProps = dispatch => {
         serverAlert: (message) => dispatch(showServerPopup(message)),
         stopAdding: () => dispatch(stopAddingIcon()),
         stopRemoving: () => dispatch(stopRemovingIcon()),
+
         
     };
 };

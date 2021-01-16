@@ -554,8 +554,7 @@ z-index: 600;
 
 .entImg {
     object-fit: cover;
-    width: 60px;
-    height: 50px;
+
     border-radius: 6px;
 }
 
@@ -573,7 +572,7 @@ z-index: 600;
 
 .folderTd {
   
-    width: 35px;
+  
     margin: 0;
 
 }

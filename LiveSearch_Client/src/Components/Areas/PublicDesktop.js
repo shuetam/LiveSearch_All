@@ -17,7 +17,7 @@ import randoom from 'random-int';
 import axios from '../../axios-song';
 //import {scrollU, scrollD} from '../../Store/Actions/scroll';
 import { connect } from 'react-redux';
-import {showServerPopup, showFirst} from '../../Store/Actions/auth';
+import {showServerPopup, showFirst, setSizeFactor} from '../../Store/Actions/auth';
 import {URL, PATHES} from '../../environment'
 import TagsField from '../Fields/TagsField';
 import 'url-search-params-polyfill';
@@ -75,7 +75,8 @@ class PublicDesktop extends Component {
             waiting: "",
             waitingPopup: "",
             showFolderInfo: false,
-            fromHeader: false
+            fromHeader: false,
+            smallFolder: true
            
         }
       
@@ -86,7 +87,7 @@ class PublicDesktop extends Component {
     componentDidMount() {
         
         var firstField = localStorage.getItem("firstField");
-        
+        this.setState({smallFolder: this.props.sizeFactor < 0.8});
         this.setState({firstField: this.props.firstField});
         this.startFetchingIcons();
         this.getUserIconsId();
@@ -164,6 +165,21 @@ class PublicDesktop extends Component {
 
     })
 }
+
+// handleScroll = (event) => {
+    
+//     if (event.deltaY < 0 && this.props.sizeFactor<2)
+//     {
+//       this.props.setFactor(this.props.sizeFactor + 0.1)
+//       this.setState({smallFolder: this.props.sizeFactor + 0.1 < 0.8});
+//     }
+//      if (event.deltaY > 0 && this.props.sizeFactor>0.6)
+//     {
+//       this.props.setFactor(this.props.sizeFactor - 0.1)
+//       this.setState({smallFolder: this.props.sizeFactor - 0.1 < 0.8});
+//     }
+   
+//   }
 
 
     startFetchingIcons = () => {
@@ -858,27 +874,27 @@ getHeaderPosition = (start, end) => {
 
     getImgWidth = (type) => {
                
-        var width = "60px";
+        var width = 60;
         if(type=="BOOK") {
-            width="45px";
+            width=45;
         }
         if(type=="SPOTIFY") {
-            width="45px";
+            width=45;
         }
-            return width;
+            return width * this.props.sizeFactor + "px";
         }
 
         getImgHeight = (type) => {
 
-            var height = "50px";
+            var height = 50;
             if(type=="BOOK") {
-                height="60px";
+                height=60;
             }
             if(type=="SPOTIFY") {
-                height="45px";
+                height=45;
             }
 
-        return height;
+        return height * this.props.sizeFactor + "px";
 
         }
 
@@ -1361,7 +1377,7 @@ folderInfoHeader = <div class="folderInfoHeader">
                 <YTIcon  remover={this.userOwner(song.id)? 1 : 0}  isAuth={this.props.isAuthenticated}   title={song.title} yt={song.id} id={song.id}
                     classname="entity"
                     linkTo={this.onDbClick}
-                    size={ '40px' }
+                    size={ 40 * this.props.sizeFactor + 'px' }
                     location={ this.state.loadedIcons? 
                       {boxShadow: this.getShadow(parseInt(song.left), parseInt(song.top), song.id, false), 
                         top: song.top, left: song.left, transition: 'top '+2+'s, left '+2+'s'}:
@@ -1460,7 +1476,10 @@ folderInfoHeader = <div class="folderInfoHeader">
                     linkTo={this.openFolder}         
                     location={ this.state.loadedIcons? 
                     {boxShadow: this.getShadow(parseInt(song.left), parseInt(song.top), song.id, true), 
-                        top: song.top, left: song.left, transition: 'top '+2+'s, left '+2+'s'}:
+                        top: song.top, left: song.left,
+                        height: 80 * this.props.sizeFactor + "px",
+                        width: 80 * this.props.sizeFactor + "px",
+                         transition: 'top '+2+'s, left '+2+'s'}:
                     {top: this.getHPosition(101,200)+'vh', left: this.getWPosition(-50,200)+'vw',}}
                     onHover={this.onHoverFolder}
                     onLeave={this.leaveFolder}
@@ -1479,6 +1498,8 @@ folderInfoHeader = <div class="folderInfoHeader">
                     owner = {this.userOwner(song.id)}
                     followed = {this.userFollow(song.id)}
                     waiting = {this.state.waiting}
+                    factor = {this.props.sizeFactor}
+                    smallFolder = {this.state.smallFolder}
                     />
                      
                 )
@@ -1487,7 +1508,7 @@ folderInfoHeader = <div class="folderInfoHeader">
 
             return (
                 
-                <div>
+                <div className="area" >
 
      
             <div> <input id="ls"  onChange={this.liveSearch} placeholder="Wyszukaj..." class="switchSearch" type="text"/></div>
@@ -1522,11 +1543,11 @@ folderInfoHeader = <div class="folderInfoHeader">
                 </div>
                
 
-    <div class="containerIconsContainer">
+    {/* <div class="containerIconsContainer">
                <div class="iconsContainer">
                
                 </div>
-                </div>
+                </div> */}
 
 
 
@@ -1541,7 +1562,7 @@ const mapDispatchToProps = dispatch => {
 
         serverAlert: (message) => dispatch(showServerPopup(message)),
         showFirst: (show) => dispatch(showFirst(show)),
-  
+        setFactor: (factor) => dispatch(setSizeFactor(factor))
 
     };
 };
@@ -1551,7 +1572,8 @@ const mapStateToProps = state => {
     return {
         isAuthenticated: state.auth.jwttoken !== null,
         jwtToken: state.auth.jwttoken,
-        firstField: state.auth.firstField
+        firstField: state.auth.firstField,
+        sizeFactor: state.auth.sizeFactor
     };
 };
 

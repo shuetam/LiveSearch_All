@@ -17,27 +17,23 @@ import YTAreaAdmin from '../Admin/YTAreaAdmin';
 import BestSellersAdmin from '../Admin/BestSellersAdmin';
 import AdminPanel from '../Admin/AdminPanel';
 import BestSellers from '../Areas/BestSellers';
-import Field from '../Fields/Field';
+
 import Policy from '../Informations/Policy';
 import Contact from '../Informations/Contact';
 import Information from '../Informations/Information';
-import Popup from '../Popup/Popup';
-import First from '../../First';
-import LoginWindow from '../Login/LoginWindow';
-import {GoogleLogout} from 'react-google-login';
 
-import ServerPopup from '../Popup/ServerPopup';
-import {authLogin, authLogout, showServerPopup, escManage, manageScreen, showFirst} from '../../Store/Actions/auth';
+
+
+import {authLogin, authLogout, showServerPopup, escManage, manageScreen, showFirst, setSizeFactor} from '../../Store/Actions/auth';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 
-import ReactScrollWheelHandler from "react-scroll-wheel-handler";
-//import {scrollU, scrollD} from '../../Store/Actions/scroll';
+
 import UserDesktop from '../Areas/UserDesktop';
 import axios from 'axios';
 import {URL, PATHES} from '../../environment';
 import InputNumber from 'react-input-number';
-import {manageLogin, manageLiveSearchLogin, hideLiveSearchLogin} from '../../CommonManager'
+import {manageLogin, manageLiveSearchLogin} from '../../CommonManager'
 
 
 
@@ -773,6 +769,21 @@ responseErrorGoogle = (response) => {
         } 
 
 
+        handleScroll = (event) => {
+    
+            if (event.deltaY < 0 && this.props.sizeFactor<2)
+            {
+              this.props.setFactor(this.props.sizeFactor + 0.1)
+              //this.setState({smallFolder: this.props.sizeFactor + 0.1 < 0.8});
+            }
+             if (event.deltaY > 0 && this.props.sizeFactor>0.6)
+            {
+              this.props.setFactor(this.props.sizeFactor - 0.1)
+              //this.setState({smallFolder: this.props.sizeFactor - 0.1 < 0.8});
+            }
+           
+          }
+
 
         confirmPassword = (email, Id, resetId) => {
             const data = {
@@ -1378,7 +1389,7 @@ Bestsellery
         ) 
 
 return (
-          <div className="container">
+          <div className="container"  onWheel ={this.handleScroll}>
               
             <div id="allLive" className="header">
             
@@ -1455,7 +1466,8 @@ return (
         isAdmin: state.auth.userRole == "ADMIN",
         //userId: state.auth.userId,
         imageUrl: state.auth.imageUrl,
-        firstField: state.auth.firstField
+        firstField: state.auth.firstField,
+        sizeFactor: state.auth.sizeFactor
     };
 };
 
@@ -1469,6 +1481,7 @@ const mapDispatchToProps = dispatch => {
         serverAlert: (message) => dispatch(showServerPopup(message)),
         screenManage: () => dispatch(manageScreen()),
         showFirst: (show) => dispatch(showFirst(show)),
+        setFactor: (factor) => dispatch(setSizeFactor(factor))
     };
 };
 

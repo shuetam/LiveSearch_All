@@ -77,10 +77,10 @@ class Folder extends Component {
         
 
         var src0 = this.props.icon0? this.props.icon0 : "";
-        var src1 = this.props.icon1?   this.props.icon1 : "";
-        var src2 = this.props.icon2?   this.props.icon2 : "";
-        var src3 = this.props.icon3?   this.props.icon3 : "";
-        
+        var src1 = (this.props.icon1 && !this.props.smallFolder)?   this.props.icon1 : "";
+        var src2 = (this.props.icon2 && !this.props.smallFolder)?  this.props.icon2 : "";
+        var src3 = (this.props.icon3 && !this.props.smallFolder)?   this.props.icon3 : "";
+        debugger;
         var classEntity = "disableEntity";
       
         var removeIcon ="";
@@ -135,22 +135,24 @@ class Folder extends Component {
 
         var content = this.props.icon0?
 
-        <table id={this.props.id} style={{marginTop: "8px"}}>
+        <table id={this.props.id} style={{marginTop: this.props.smallFolder? "2px" : "8px", width: "100%", height: "100%"}}>
         <tbody>
         <tr  id={this.props.id}>
         <td  id={this.props.id}>
-        <img class={src0!==""? "folderTd" : ""} id={this.props.id}  src={src0} height="25px"></img> 
+        <img class={src0!==""? "folderTd" : "disable"} id={this.props.id}  src={src0} width={this.props.factor * 35+"px"}  height= {this.props.factor * 25+"px"}></img> 
         </td>
-        <td  id={this.props.id}> <img class={src1!==""? "folderTd" : ""}  id={this.props.id} src={src1} height="25px"></img> </td>
+        <td  id={this.props.id}> <img class={src1!==""? "folderTd" : "disable"}  id={this.props.id} src={src1} width={this.props.factor * 35+"px"}  height= {this.props.factor * 25+"px"}></img> </td>
         </tr>
         <tr  id={this.props.id}>
-        <td  id={this.props.id}> <img class={src2!==""? "folderTd" : ""}  id={this.props.id}  src={src2} height="25px"></img> </td>
-        <td  id={this.props.id}> <img class={src3!==""? "folderTd" : ""} id={this.props.id}  src={src3} height="25px"></img> </td>
+        <td  id={this.props.id}> <img class={src2!==""? "folderTd" : "disable"}  id={this.props.id}  src={src2} width={this.props.factor * 35+"px"}  height= {this.props.factor * 25+"px"}></img> </td>
+        <td  id={this.props.id}> <img class={src3!==""? "folderTd" : "disable"} id={this.props.id}  src={src3} width={this.props.factor * 35+"px"}  height= {this.props.factor * 25+"px"}></img> </td>
         </tr>
         </tbody>
         </table>
         :
         <div id={this.props.id} style={{fontSize: '11px', marginTop: "8px"}}>Upuść tutaj wybraną ikonę aby dodać ją do tego folderu.</div>
+
+     
 
         
         return (
@@ -170,11 +172,9 @@ class Folder extends Component {
             <div class="folderLabel"  id={this.props.id} >{this.props.title}</div>
                     {editIcon}
             </div>
-            
-           
-
                   
         )
+    
     }
 }
 
