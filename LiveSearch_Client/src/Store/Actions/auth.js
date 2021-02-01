@@ -235,7 +235,7 @@ export const authCheckState = () => {
     export const checkSizeFactor = () => {
         return dispatch => {
             var sizeFactor = localStorage.getItem("size_Factor");
-  debugger;
+
             if (sizeFactor == 'undefined' || sizeFactor == null || sizeFactor == 'null' ) {
                 sizeFactor = 1;
             } 

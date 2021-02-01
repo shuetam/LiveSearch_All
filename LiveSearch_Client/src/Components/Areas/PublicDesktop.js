@@ -76,7 +76,8 @@ class PublicDesktop extends Component {
             waitingPopup: "",
             showFolderInfo: false,
             fromHeader: false,
-            smallFolder: true
+            smallFolder: true,
+            userFolders: ""
            
         }
       
@@ -166,20 +167,20 @@ class PublicDesktop extends Component {
     })
 }
 
-// handleScroll = (event) => {
-    
-//     if (event.deltaY < 0 && this.props.sizeFactor<2)
-//     {
-//       this.props.setFactor(this.props.sizeFactor + 0.1)
-//       this.setState({smallFolder: this.props.sizeFactor + 0.1 < 0.8});
-//     }
-//      if (event.deltaY > 0 && this.props.sizeFactor>0.6)
-//     {
-//       this.props.setFactor(this.props.sizeFactor - 0.1)
-//       this.setState({smallFolder: this.props.sizeFactor - 0.1 < 0.8});
-//     }
+handleScroll = (event) => {
    
-//   }
+    if (event.deltaY < 0 && this.props.sizeFactor<2)
+    {
+      this.props.setFactor(this.props.sizeFactor + 0.1)
+      this.setState({smallFolder: this.props.sizeFactor + 0.1 < 0.8});
+    }
+     if (event.deltaY > 0 && this.props.sizeFactor>0.6)
+    {
+      this.props.setFactor(this.props.sizeFactor - 0.1)
+      this.setState({smallFolder: this.props.sizeFactor - 0.1 < 0.8});
+    }
+   
+  }
 
 
     startFetchingIcons = () => {
@@ -191,7 +192,8 @@ class PublicDesktop extends Component {
         var exploreQuery = search.get("q");
         var exploreSkip = search.get("skip");
         var from = search.get("from");
-     
+        var folder = search.get("folder");
+        
         var folderId = this.props.match.params.folderId? this.props.match.params.folderId : "";
 
         if(exploreQuery !== null){
@@ -201,9 +203,13 @@ class PublicDesktop extends Component {
             exploreQuery = "";
         }
        
+        if(folder !== null) {
+            this.setState({userFolders: folder});
+        }
+        
 
         if(this.props.match.params.folderId){
-            debugger;
+            
             this.setState({openedFolder: folderId});
             
             let fetchFolderInfo = this.props.isAuthenticated? URL.api + URL.folderInfoAuth : URL.api + URL.folderInfo;
@@ -277,7 +283,8 @@ class PublicDesktop extends Component {
             folderId: folderId,
             query: exploreQuery,
             count: explIconsCount,
-            next: exploreSkip       
+            next: exploreSkip,
+            userFolder: folder
         }
         
         if(this.props.headerType=="explore") {
@@ -1077,10 +1084,16 @@ getHeaderPosition = (start, end) => {
         if(this.state.exploreSkip > 0) {
             var skip = this.state.exploreSkip - 1;
             if(this.props.headerType=="explore") {
-                this.props.history.push(PATHES.explore + "?q="+ this.state.explQuery + "&skip=" +skip );
+                this.props.history.push(PATHES.explore + "?q="+ this.state.explQuery + "&skip=" +skip  );
             }
             if(this.props.headerType=="folders") {
-                this.props.history.push(PATHES.sharedFolders + "?q="+ this.state.explQuery + "&skip=" +skip );
+                if(this.state.userFolders !== "") {
+                    this.props.history.push(PATHES.sharedFolders + "?q="+ this.state.explQuery + "&skip=" +skip + "&folder="+ this.state.userFolders );
+                }
+                else {
+                    this.props.history.push(PATHES.sharedFolders + "?q="+ this.state.explQuery + "&skip=" +skip  );
+                }
+
             }
         }
     }
@@ -1093,15 +1106,19 @@ getHeaderPosition = (start, end) => {
             this.props.history.push(PATHES.explore + "?q="+ this.state.explQuery + "&skip=" +skip );
         }
         if(this.props.headerType=="folders") {
-            this.props.history.push(PATHES.sharedFolders + "?q="+ this.state.explQuery + "&skip=" +skip );
+            if(this.state.userFolders !== "") {
+            this.props.history.push(PATHES.sharedFolders + "?q="+ this.state.explQuery + "&skip=" +skip + "&folder="+ this.state.userFolders  );
         }
+        else {
+            this.props.history.push(PATHES.sharedFolders + "?q="+ this.state.explQuery + "&skip=" +skip)
+        }
+    }
 
         }
     }
 
     backFromFolder = () => {
-        
-     debugger;
+
         if(this.props.headerType=="followed")
             this.props.history.push(PATHES.followedFolders + "?from=1");
 
@@ -1109,6 +1126,9 @@ getHeaderPosition = (start, end) => {
             this.props.history.push(PATHES.sharedFolders+ "?q="+ this.state.explQuery + "&skip=0"+"&from=1");
     }
 
+    activeSharedFoldersFromUser = () => {     
+            this.props.history.push(PATHES.sharedFolders+ "?q="+ this.state.explQuery + "&skip=0"+"&from=1"+"&folder="+this.state.folderInfo.id);
+    }
 
 
     saveIcons = () => {
@@ -1317,8 +1337,14 @@ folderInfoHeader = <div class="folderInfoHeader">
          Powrót 
         </div>
         </div>
-                       <div class="folderTitle"> {this.state.folderInfo.title}</div>
+        
+                       <div onClick={this.activeSharedFoldersFromUser} id="folderTitle"> {this.state.folderInfo.title}
+                       <div id="folderTitleField" class="hoverInfo" >
+                        Kliknij aby wyświetlić inne publiczne foldery osoby udostępniającej ten folder
+                        </div>
+                       </div>
                         {followButton}
+                       
                         </div>
 } 
 
@@ -1342,6 +1368,8 @@ folderInfoHeader = <div class="folderInfoHeader">
         if(this.state.foldersIcons || this.state.followedIcons) {
             var folderId = this.state.showFolderField? this.state.hoveredFolder.id : 0;
             field = <FolderField folder={this.state.hoveredFolder} followed={this.userFollow(folderId)}  show={this.state.showFolderField}/>
+        
+
         }
 
         let unfollowPopup = <UnfollowPopup waiting={this.state.waitingPopup} unFollowFolder={this.unFollowFolder} showPopup={this.state.showUnfollow} folderId = {this.state.unFollowId} unFollowTitle={this.state.unFollowTitle}/>
@@ -1351,7 +1379,7 @@ folderInfoHeader = <div class="folderInfoHeader">
         }
         else {
                 if(this.state.ytField)
-                    field = <Field play={this.state.entityID} noIcons={this.state.noIcons}
+                    field = <Field play={this.state.entityID} folders={this.state.foldersIcons} noIcons={this.state.noIcons}
                     headerType={this.props.headerType}
                     show={this.state.loadedIcons} nextSong={this.nextSongHandler} loadText={this.props.fetchData} />
     
@@ -1508,7 +1536,7 @@ folderInfoHeader = <div class="folderInfoHeader">
 
             return (
                 
-                <div className="area" >
+                <div  className="area" onWheel ={this.handleScroll}>
 
      
             <div> <input id="ls"  onChange={this.liveSearch} placeholder="Wyszukaj..." class="switchSearch" type="text"/></div>
@@ -1531,11 +1559,11 @@ folderInfoHeader = <div class="folderInfoHeader">
                     {field}
                 <div id = "258" class= "titleDiv"> </div>
                
+                {sharedFolders}
                 {icons}
                 {images}
                 {spotifies}
                 {unfollowPopup}
-                {sharedFolders}
               
                 <div class="deskMenu" style={{left: this.getHeaderPosition("-50px","120px") }}>
                     {saveIcons}

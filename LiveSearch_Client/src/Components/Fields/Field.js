@@ -140,6 +140,10 @@ class Field extends Component {
          Nie znaleziono żadnych ikon pasujacych do wpisanego wyrażenia.
         </div>)
 
+        let  noFoldersFound = (<div className="fieldAct"><br/>
+        Nie znaleziono żadnych folderów.
+        </div>)
+
         let  noFollowedFolders = (<div className="fieldAct"><br/>
         Nie obserwujesz żadnych folderów. Naciśnij w <i style={{color: "rgba(0, 201, 43, 0.945)"}} class="icon-eye"/> przy wybranym 
         folderze w dziale 'Foldery użytkowników', aby zacząć go obserwować.
@@ -202,7 +206,11 @@ class Field extends Component {
             
 
             if(!this.props.fromDesktop && this.props.noIcons) {
+                if(this.props.folders) {
+                    return noFoldersFound;
+            }
                 if(this.props.headerType == "explore") {
+                    
                     return noIconsFound;
                 }
 

@@ -571,8 +571,10 @@ z-index: 600;
   
 
 .folderTd {
-  
-  
     margin: 0;
+}
 
+.folderFollowers {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.61);
 }

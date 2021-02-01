@@ -252,7 +252,7 @@ class LiveRegister extends Component {
         const emailValid = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         var email = emailValid.test(String(login).toLowerCase());
 
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,20}$/;
         var passwordLen = passwordRegex.test(password);
         var theSame = password === password1;
 
@@ -328,7 +328,7 @@ class LiveRegister extends Component {
 
     render() {
  let wrongEmail = this.state.wrongEmail? <div class="wrongRegister"> Wpisz prowidłowy adres email </div>  : "";
- let wrongPassword = this.state.wrongPassword? <div class="wrongRegister"> Hasło powinno zawierać min 6 znaków<br/> w tym conajmniej jedną wielką literę oraz jedną cyfrę. </div>  : "";
+ let wrongPassword = this.state.wrongPassword? <div class="wrongRegister"> Hasło powinno zawierać od 6 do 20 znaków<br/> w tym conajmniej jedną wielką literę oraz jedną cyfrę. </div>  : "";
  let wrongPassword1 = this.state.wrongPassword1? <div class="wrongRegister"> Niezgodność haseł </div>  : "";
  let wrongLogin = this.state.wrongLogin? <div class="wrongRegister"> Nieprawidłowy adres email lub hasło </div>  : "";
 let emailInfo = this.state.emailSended? <div class="wrongRegister" style={{color: 'green'}}> Na podany adres email został wysłany link resetujący <br/>hasło, będzie on aktywny przez 24 godziny. </div>  : "";

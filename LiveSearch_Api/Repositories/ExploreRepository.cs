@@ -292,7 +292,7 @@ namespace Live.Repositories
         }
 
 
-        public async Task<List<FolderDto>> GetAllSharedFoldersAsync(string query, int skip, int count)
+        public async Task<List<FolderDto>> GetAllSharedFoldersAsync(string query, int skip, int count, string userFolder)
         {
             var folders = await _liveContext.Folders
             .Where(x => x.IsShared)
@@ -300,6 +300,15 @@ namespace Live.Repositories
             .Include(x => x.UserYouTubes)
             .Include(x => x.UserImages)
             .Include(x => x.UserSpotify).ToListAsync();
+
+            if(!string.IsNullOrEmpty(userFolder))
+            {
+                var userFold = folders.FirstOrDefault(x => x.ID.ToString() == userFolder);
+                if(userFold != null)
+                {
+                   folders = folders.Where(x => x.UserId == userFold.UserId).ToList();
+                }
+            }
 
             folders =  folders
             .Where(x => x.HasIcons())

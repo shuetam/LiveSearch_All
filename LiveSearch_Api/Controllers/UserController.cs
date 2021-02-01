@@ -70,7 +70,7 @@ namespace Live.Controllers
         {
             string error = "error";
 
-            string passwordRegex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$";
+            string passwordRegex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,20}$";
             var reg = new Regex(passwordRegex);
             var pass = reg.IsMatch(socialLogin.Password);
 
@@ -87,7 +87,7 @@ namespace Live.Controllers
         {
             string error = "error";
 
-            string passwordRegex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$";
+            string passwordRegex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,20}$";
             var reg = new Regex(passwordRegex);
             var pass = reg.IsMatch(socialLogin.Password);
             var url = _configuration.GetSection("client");

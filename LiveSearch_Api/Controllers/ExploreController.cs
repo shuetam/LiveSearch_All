@@ -49,6 +49,7 @@ namespace Live.Controllers
         public async Task<IActionResult> SharedFolders([FromBody] ExploreQuery Query)
         {
             string folderId = Query.folderId;
+            string userFolder = Query.userFolder;
          
             if (!string.IsNullOrEmpty(folderId))
             {
@@ -59,7 +60,7 @@ namespace Live.Controllers
             int count = Query.count;
             int skip = count * Query.next;
             string query = Query.query;
-            var folders = await _exploreRepository.GetAllSharedFoldersAsync(query, skip, count);
+            var folders = await _exploreRepository.GetAllSharedFoldersAsync(query, skip, count, userFolder);
            
             //var results = new ExploreResultsDto(folders, folders.Count);
             return Json(folders);

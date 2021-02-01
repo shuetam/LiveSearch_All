@@ -80,7 +80,7 @@ class Folder extends Component {
         var src1 = (this.props.icon1 && !this.props.smallFolder)?   this.props.icon1 : "";
         var src2 = (this.props.icon2 && !this.props.smallFolder)?  this.props.icon2 : "";
         var src3 = (this.props.icon3 && !this.props.smallFolder)?   this.props.icon3 : "";
-        debugger;
+ 
         var classEntity = "disableEntity";
       
         var removeIcon ="";

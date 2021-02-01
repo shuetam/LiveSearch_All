@@ -16,6 +16,7 @@ namespace Live.Controllers
         public int count {get;set;}
         public int next {get; set;}
         public string folderId { get; set; }
+        public string userFolder {get; set;}
     }
 
 }

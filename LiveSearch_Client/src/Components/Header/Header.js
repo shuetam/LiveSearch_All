@@ -7,9 +7,9 @@ import LiveRegister from './LiveRegister.js';
 
 //import "../../Fontello/css/fontello.css";
 //import "../../icon/css/fontello.css";
-//import "../../Icons/css/fontello.css";
-import "../../Icons/css/folder-add.css";
-//import "../../Fontello/css/folder-add.css";
+//import "../../Icons1/css/fontello.css";
+//import "../../Icons/css/folder-add.css";
+import "../../Fontello/css/fontello.css";
 import { Link, Route, NavLink, BrowserRouter, Switch } from 'react-router-dom';
 import YTArea from '../Areas/YTArea';
 import PublicDesktop from '../Areas/PublicDesktop';
@@ -24,7 +24,7 @@ import Information from '../Informations/Information';
 
 
 
-import {authLogin, authLogout, showServerPopup, escManage, manageScreen, showFirst, setSizeFactor} from '../../Store/Actions/auth';
+import {authLogin, authLogout, showServerPopup, escManage, manageScreen, showFirst} from '../../Store/Actions/auth';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 
@@ -769,20 +769,7 @@ responseErrorGoogle = (response) => {
         } 
 
 
-        handleScroll = (event) => {
-    
-            if (event.deltaY < 0 && this.props.sizeFactor<2)
-            {
-              this.props.setFactor(this.props.sizeFactor + 0.1)
-              //this.setState({smallFolder: this.props.sizeFactor + 0.1 < 0.8});
-            }
-             if (event.deltaY > 0 && this.props.sizeFactor>0.6)
-            {
-              this.props.setFactor(this.props.sizeFactor - 0.1)
-              //this.setState({smallFolder: this.props.sizeFactor - 0.1 < 0.8});
-            }
-           
-          }
+       
 
 
         confirmPassword = (email, Id, resetId) => {
@@ -1001,7 +988,7 @@ let authenticate = (<div class="logIn" style={{marginTop: "6px"}} id="userP"> Za
 
 //let letsLogin = this.props.isAuthenticated? "": <p style={{color: "rgba(231, 173, 64, 0.937)"}}>Zaloguj się aby zapisywać ikony z tej wizualizacji na własnym pulpicie</p>; 
 
-let screenSwitch = <div id="screenS" style={{fontSize: '14px'}}  class="screenSwitch" onClick={this.screenManage}><i class="icon-resize-small"/>
+let screenSwitch = <div id="screenS" style={{fontSize: '18px'}}  class="screenSwitch" onClick={this.screenManage}><i class="icon-resize-small"/>
   <i class="icon-resize-full"/>
    <div id="screenField" class="hoverInfo" > Aktywuj / zamknij pełny ekran</div>
 </div>
@@ -1076,12 +1063,12 @@ let  explore =   <div id="explore"   onClick={this.activeExplore}   class= {this
 </div>
 
 let followedFolders = <div id="followedFolders"  onClick={this.activeFollowedFolders}    class= {this.state.headerType == "followed"?
-"mainSwitch active" : "mainSwitch"} > <i class="icon-folder-open"/> {/* Obserwowane foldery */}
+"mainSwitch active" : "mainSwitch"} > <i class="icon-folder-open"/>  {/* Obserwowane foldery */}
 <div id="followedFoldersField" class="hoverInfo"> Obserwowane foldery</div>
 </div> 
 
 let sharedFolders = <div id="sharedFolders"  onClick={this.activeSharedFolders}   class= {this.state.headerType == "folders"?
-"mainSwitch active" : "mainSwitch"} > <i class="icon-folder-open"/> {/* Foldery użytkowników */}
+"mainSwitch active" : "mainSwitch"} > <i class="icon-group"/> {/* Foldery użytkowników */}
 <div id="sharedFoldersField" class="hoverInfo"> Foldery użytkowników</div>
 </div> 
 
@@ -1389,7 +1376,7 @@ Bestsellery
         ) 
 
 return (
-          <div className="container"  onWheel ={this.handleScroll}>
+          <div className="container"  >
               
             <div id="allLive" className="header">
             
@@ -1467,7 +1454,7 @@ return (
         //userId: state.auth.userId,
         imageUrl: state.auth.imageUrl,
         firstField: state.auth.firstField,
-        sizeFactor: state.auth.sizeFactor
+       
     };
 };
 
@@ -1481,7 +1468,7 @@ const mapDispatchToProps = dispatch => {
         serverAlert: (message) => dispatch(showServerPopup(message)),
         screenManage: () => dispatch(manageScreen()),
         showFirst: (show) => dispatch(showFirst(show)),
-        setFactor: (factor) => dispatch(setSizeFactor(factor))
+        
     };
 };
 

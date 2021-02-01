@@ -102,10 +102,21 @@ const iconAdding = (state, action) => {
  
  const setSizeFactor = (state, action) => {
 
-    localStorage.setItem('size_Factor', action.sizeFactor);
+     var sizeFactor = Number(action.sizeFactor);
+     if (sizeFactor == 'undefined' || sizeFactor == null || sizeFactor == 'null' ) {
+        sizeFactor = 1;
+    } 
+
+    if(sizeFactor > 2)
+        sizeFactor = 2
+
+    if(sizeFactor < 0.6)
+        sizeFactor = 0.6
+ 
+    localStorage.setItem('size_Factor', sizeFactor);
 
     return updateStore( state, { 
-       sizeFactor: action.sizeFactor,
+       sizeFactor: sizeFactor,
     } ); 
 };
 

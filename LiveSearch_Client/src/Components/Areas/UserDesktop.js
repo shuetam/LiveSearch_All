@@ -18,12 +18,13 @@ import { BrowserRouter } from 'react-router-dom';
 import randoom from 'random-int';
 import axios from '../../axios-song';
 import { connect } from 'react-redux';
-import { showServerPopup, addingIcon, stopAddingIcon, stopRemovingIcon} from '../../Store/Actions/auth';
+import { showServerPopup, addingIcon, stopAddingIcon, stopRemovingIcon, setSizeFactor} from '../../Store/Actions/auth';
 import { URL, PATHES } from '../../environment';
 import TagsField from '../Fields/TagsField';
 import { leftToVw, topToVh } from '../../Converters.js';
 import { bottomIcon, getQuarter, removeHiding } from '../../CommonManager.js';
 import EditField from '../Fields/EditField';
+import AddingField from '../Fields/AddingField';
 
 
 
@@ -193,20 +194,20 @@ class UserDesktop extends Component {
 
       }
 
-    //   handleScroll = (event) => {
+       handleScroll = (event) => {
     
-    //       if (event.deltaY < 0 && this.props.sizeFactor<2)
-    //       {
-    //         this.props.setFactor(this.props.sizeFactor + 0.1)
-    //         this.setState({smallFolder: this.props.sizeFactor + 0.1 < 0.8});
-    //       }
-    //        if (event.deltaY > 0 && this.props.sizeFactor>0.6)
-    //       {
-    //         this.props.setFactor(this.props.sizeFactor - 0.1)
-    //         this.setState({smallFolder: this.props.sizeFactor - 0.1 < 0.8});
-    //       }
+           if (event.deltaY < 0 && this.props.sizeFactor<2)
+         {
+            this.props.setFactor(this.props.sizeFactor + 0.1)
+            this.setState({smallFolder: this.props.sizeFactor + 0.1 < 0.8});
+          }
+           if (event.deltaY > 0 && this.props.sizeFactor>0.6)
+          {
+            this.props.setFactor(this.props.sizeFactor - 0.1)
+            this.setState({smallFolder: this.props.sizeFactor - 0.1 < 0.8});
+          }
          
-    //     }
+        }
 
  
 
@@ -631,8 +632,16 @@ class UserDesktop extends Component {
             this.setState({hoveredId: entity.id});
             
             document.getElementById(event.target.id).style.opacity = 1;
-            
+
+            var folder = this.getIconById(entity.id);
+        
+            //folder.followers?
+            var folderState = folder.shared? "<span  className='lockIcon openIcon'><i class='icon-lock-open-alt'/></span>Publiczny, obserwujących: <span class='openIconF'>" + folder.followers + "</span>" : "<i class='icon-lock'/>Prywatny";
+            var titleMain =  folder.title + "<br/>" + "<span class=folderFollowers>"+folderState+"</span>";
             dragElement(document.getElementById(event.target.id));
+            var iconTitle = document.getElementById("258");
+            document.getElementById("258").innerHTML = titleMain;
+            iconTitle.innerHTML = titleMain;
         }
         
         
@@ -845,7 +854,7 @@ class UserDesktop extends Component {
          entity.style.left = leftE;
          entity.style.top = topE;
          this.setStateIconLocation(entity.id, leftE, topE);
-//debugger;
+         document.getElementById("258").innerHTML = "";
         document.getElementById(event.target.id).style.opacity = this.state.actuallOpacity;
         }
     }
@@ -1066,7 +1075,7 @@ class UserDesktop extends Component {
             Shared: folder.shared
             }
 
-debugger;
+
 
         axios.post(URL.api+URL.createFolder, data, this.state.authConfig)
         .then((result) => {
@@ -1132,7 +1141,7 @@ debugger;
         }
     }
 
-    addIconHandler = () => {
+    addIconHandler = (url) => {
 
         this.setState({iconsFound: false});
         this.setState({noIconsFound: false});
@@ -1144,7 +1153,7 @@ debugger;
         var exprwww = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
         var regex = new RegExp(exprwww);
        
-        var url = document.getElementById("exploreT").value;
+        //var url = document.getElementById("exploreT").value;
         this.setState({explQuery: url});
         const data = {
            // UserId: this.props.userId,
@@ -1239,6 +1248,7 @@ debugger;
 
     showAddingIcon = () => {
         removeHiding();
+        this.setState({fieldType: "ICON_ADDING"});
         this.setState({addingFolder: false});
         if(this.state.addingIcon) {
             this.stopAdding()
@@ -1373,11 +1383,14 @@ debugger;
   
 
     stopAdding = () => {
-        var expl = document.getElementById("exploreT");
-        if(expl)
-        {
-            expl.value = "";   
+        var icon = this.getIconById(this.state.entityID);
+        if(!icon) {
+            iconType = "INFO";  
         }
+        else {
+            var iconType = icon.type;
+        }
+        this.setState({ fieldType: iconType});
         this.setState({addingIcon: false});
         this.setState({wrongWWW: false});
         this.setState({noIconsFound: false});
@@ -1421,7 +1434,7 @@ debugger;
         else {
             var iconType = icon.type;
         }
-        debugger;
+     
         
         this.setState({ fieldType: iconType});
         this.setState({editingFolder: false});
@@ -1576,6 +1589,9 @@ debugger;
             case "FOLDER_EDITOR":
                 field = <EditField folder={this.state.editedFolder} addFolder={this.addFolderHandler}  cancelAdding = {this.stopAddingFolder}   saveFolder={this.editFolderHandler}/>
                 break;
+                case "ICON_ADDING":
+                    field =<AddingField findIcon={this.addIconHandler} stopAdding={this.stopAdding} />
+                    break;
             case "":
                 field = <LoadingField/>
                 break;
@@ -1820,7 +1836,8 @@ setAddingIcon = () => {
                     linkTo={this.onDbImgClick}
                     /* size={this.state.loadedIcons? '40px' : '0px' } */
                     location={ this.state.iconsFound? 
-                      {boxShadow: this.getShadow(parseInt(img.left), parseInt(img.top), img.id), top: img.top, left: img.left, transition: 'top '+2+'s, left '+2+'s' , width: "60px", height: "50px", borderRadius: '6px'} :
+                      {boxShadow: this.getShadow(parseInt(img.left), parseInt(img.top), img.id), top: img.top, left: img.left, transition: 'top '+2+'s, left '+2+'s' ,
+                      width: this.getImgWidth(img.type), height: this.getImgHeight(img.type), borderRadius: '6px'} :
                       {top: this.getHPosition(101,200)+'vh', left: this.getWPosition(-50,200)+'vw',
                      }}
                       //{top: 20+'vh', left: 20+'vw'}}
@@ -1897,6 +1914,7 @@ setAddingIcon = () => {
                     shared = {song.shared}
                     factor = {this.props.sizeFactor}
                     smallFolder = {this.state.smallFolder}
+                    followers = {song.followers}
                     />
                      
                 )
@@ -2087,7 +2105,7 @@ let findNewIcons = (this.state.addingIcon ||  this.state.addingFolder)?
                        style={{fontSize: 12, padding: "2px", height: '25px',  width: '85px', marginTop: '5px', marginLeft: "10px"}}  
         onClick={this.state.addingFolder? this.addFolderHandler : this.addIconHandler} > {this.state.addingFolder? "Dodaj folder":  "Znajdź ikony"}</button>
 
-         <button class= { "popupButtton" } style={{fontSize: 12, padding: "2px", height: '25px',  width: '85px', marginTop: '5px', marginLeft: "10px"}}  
+         <button class= { "popupButtton popupAnother" } style={{fontSize: 12, padding: "2px", height: '20px',  width: '75px', marginTop: '8px', marginLeft: "10px"}}  
         onClick={this.state.addingFolder? this.stopAddingFolder : this.stopAdding} >Zakończ</button>
 
    <div id='addingIconField' class='addingIconTitle'>
@@ -2110,7 +2128,7 @@ let findNewIcons = (this.state.addingIcon ||  this.state.addingFolder)?
 
 
             return  (
-                <div className="area" >
+                <div className="area" onWheel ={this.handleScroll}>
                 {deskMenu}
         
             <div> <input id="ls" onChange={this.liveSearch} placeholder="Wyszukaj..." class="switchSearch" type="text"/></div>
@@ -2185,7 +2203,7 @@ const mapDispatchToProps = dispatch => {
         serverAlert: (message) => dispatch(showServerPopup(message)),
         stopAdding: () => dispatch(stopAddingIcon()),
         stopRemoving: () => dispatch(stopRemovingIcon()),
-
+        setFactor: (factor) => dispatch(setSizeFactor(factor))
         
     };
 };

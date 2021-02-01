@@ -169,6 +169,17 @@
 
 }
 
+.fieldEditorInput #addingIconLink {
+  border-radius: 0px;
+  background-color: rgba(78, 78, 78, 0.404);
+  border-width: 0px;
+  height: 23px;
+  font-family: 'Mandali', sans-serif;
+  font-size: 15px;
+  font-weight: 100;
+  color: rgba(197, 197, 197, 0.815);
+  width: 590px;
+}
 
 .fieldEditorInput #editTitleFolder {
   border-radius: 0px;
