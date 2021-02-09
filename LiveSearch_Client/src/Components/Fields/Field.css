@@ -254,7 +254,39 @@
   height: 315px;
   width: 560px;
   text-align: center;
- 
+  transition: margin-left 0.7s;
+}
+
+.addingIconImg {
+  height: 155px;
+  width: 280px;
+  top: 220px;
+  margin-left: -140px;
+  transition: margin-left 0.7s;
+}
+
+
+.imgGlass {
+
+  -webkit-transform: scaleY(-1);
+  transform: scaleY(-1);
+  position: fixed;
+  top: 385px;
+  left: 50%;
+  margin-left: -280px;
+  z-index: 90;
+  height: 315px;
+  width: 560px;
+  text-align: center;
+  transition: margin-left 0.7s;
+}
+
+.addingIconImgGlass {
+  transition: margin-left 0.7s;
+  height: 155px;
+  width: 280px;
+  margin-left: -140px;
+  transition: margin-left 0.7s;
 }
 
 
@@ -333,20 +365,7 @@
 
 
 
-.imgGlass {
 
-  -webkit-transform: scaleY(-1);
-  transform: scaleY(-1);
-  position: fixed;
-  top: 385px;
-  left: 50%;
-  margin-left: -280px;
-  z-index: 90;
-  height: 315px;
-  width: 560px;
-  text-align: center;
-
-}
 
 .blur1 {
     background: rgba(255,255,255,0.02);

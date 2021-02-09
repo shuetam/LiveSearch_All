@@ -1585,20 +1585,20 @@ class UserDesktop extends Component {
                 field = <Field addingIcon={this.state.addingIcon} play={this.state.entityID} show={this.state.loadedIcons} nextSong={this.nextSongHandler} loadText={this.props.fetchData} />
            break;
                 case "IMG":
-                field = <ImageField src={this.state.entityID} sourceShow={this.getNiceHttp(this.state.imgSource)} 
+                field = <ImageField addingIcon={this.state.addingIcon} src={this.state.entityID} sourceShow={this.getNiceHttp(this.state.imgSource)} 
                 source={this.state.imgSource}
                 show={this.state.loadedIcons}/>
                 break;
             case "BOOK":
-                field = <ImageField src={this.state.entityID} sourceShow={this.getNiceHttp(this.state.imgSource)} 
+                field = <ImageField addingIcon={this.state.addingIcon} src={this.state.entityID} sourceShow={this.getNiceHttp(this.state.imgSource)} 
                 source={this.state.imgSource}
                 show={this.state.loadedIcons}/>
                 break;
             case "INFO":
-                field = <InfoField show = {!this.anyIcons()}  fromFolder={this.state.fromFolder}/>
+                field = <InfoField addingIcon={this.state.addingIcon} show = {!this.anyIcons()}  fromFolder={this.state.fromFolder}/>
                 break;
             case "SPOTIFY":
-                field = <SpotifyField id={this.state.entityID} show={this.state.loadedIcons}/>
+                field = <SpotifyField addingIcon={this.state.addingIcon} id={this.state.entityID} show={this.state.loadedIcons}/>
                 break;
             case "FOLDER":
                 field = ""
@@ -1612,7 +1612,7 @@ class UserDesktop extends Component {
                 //       findIcon={this.addIconHandler} stopAdding={this.stopAdding} />
                 //     break;
             case "":
-                field = <LoadingField/>
+                field = <LoadingField addingIcon={this.state.addingIcon}/>
                 break;
           }
        

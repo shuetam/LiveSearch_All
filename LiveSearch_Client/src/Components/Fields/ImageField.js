@@ -52,7 +52,7 @@ class ImageField extends Component {
     let field = (
             <div>
 
-                <div className="imageField" onClick = {this.showBig}>
+                <div className= {!this.props.addingIcon? "imageField" : "imageField addingIconImg"} onClick = {this.showBig}>
                 <div id="imgSource"  onClick={this.openSourceSmall}>{this.props.sourceShow}</div>
                 
                 <img 
@@ -61,7 +61,7 @@ class ImageField extends Component {
                   src={this.props.src}></img> 
                   
                 </div>
-                <div className="imgGlass" style={{ opacity: 0.5 , filter: 'blur(2px)' }} id={this.props.player}>
+                <div className= {!this.props.addingIcon? "imgGlass" : "imgGlass addingIconImgGlass"} style={this.props.addingIcon? { opacity: 0.7 , filter: 'blur(4px)' } : { opacity: 0.5 , filter: 'blur(2px)' }} id={this.props.player}>
                <img 
                    class="imgField"
                   title={this.props.title} 
