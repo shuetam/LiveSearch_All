@@ -105,8 +105,9 @@ class UserDesktop extends Component {
             firstHover: false,
             addingFolder: false,
             fieldType: "",
-            smallFolder: true
-         
+            smallFolder: true,
+            addingType: "",
+            addingID: ""
             
         }
     }
@@ -458,17 +459,21 @@ class UserDesktop extends Component {
 
     neonShadowHandler = (id) => {
 
+    //if(!this.state.addingIcon) {
         var played = document.getElementById(this.state.nowPlayed);
         if (played !== null) {
             var prevId = this.state.nowPlayed;
             this.setState(prevState => ({
                 prevPlayed: [...prevState.prevPlayed, prevId]
               }))
-
         }
+        
         this.setState({ nowPlayed: id });
         this.setState({ entityID: id });
-       this.setState({entityTags: this.getIconTags(id)});
+    //}
+    this.setState({entityTags: this.getIconTags(id)});
+
+
         var note = document.getElementById(id)
         if(note) {
             note.style.boxShadow = this.state.playedShadow;
@@ -477,12 +482,14 @@ class UserDesktop extends Component {
 
 
     onDbSpotifyClick = (event) => {
-   /*      this.setState({imgField: false});
-        this.setState({ytField: false});
-        this.setState({infoField: false});
-        this.setState({spotifyField: true}); */
-        this.setState({fieldType: "SPOTIFY"});
         var id = event.target.id;
+        //if(this.state.addingIcon) {
+          //  this.setState({addingType: "ADDING_SPOTIFY"});
+           // this.setState({addingID: id});
+       // }
+       // else {
+            this.setState({fieldType: "SPOTIFY"});
+       // }
         this.neonShadowHandler(id);
     }
 
@@ -490,24 +497,31 @@ class UserDesktop extends Component {
 
 
     onDbClick = (event) => {
-
-    /*     this.setState({imgField: false});
-        this.setState({ytField: true});
-        this.setState({infoField: false});
-        this.setState({spotifyField: false}); */
-        this.setState({fieldType: "YT"});
+    
         var id = event.target.id;
+        
+        //if(this.state.addingIcon) {
+           // this.setState({addingType: "YT"});
+           // this.setState({addingID: id});
+        //}
+        //else {
+            this.setState({fieldType: "YT"});
+        //}
         this.neonShadowHandler(id);
 
     }
 
     onDbImgClick = (event) => {
-/*         this.setState({imgField: true});
-        this.setState({ytField: false});
-        this.setState({infoField: false});
-        this.setState({spotifyField: false}); */
-        this.setState({fieldType: "IMG"});
+
         var id = event.target.id;
+        //if(this.state.addingIcon) {
+          //  this.setState({addingType: "IMG"});
+           // this.setState({addingID: id});
+        //}
+        //else {
+            this.setState({fieldType: "IMG"});
+        //}
+
         this.neonShadowHandler(id);
         
        // var allIcons = [...this.state.icons, ...this.state.folders, ...this.state.images];
@@ -532,8 +546,6 @@ class UserDesktop extends Component {
           this.manageTrans();
         }
           
-     
-
         this.setState({idInMove: event.target.id});
 
         var entity = document.getElementById(event.target.id);
@@ -557,7 +569,7 @@ class UserDesktop extends Component {
         this.setState({ mainTitle: titleMain });
         var iconTitle = document.getElementById("258");
 
-        if(titleMain == "" ){
+        if(titleMain == "" && !this.state.addingIcon){
             titleMain = "brak tytułu";
         }
         document.getElementById("258").innerHTML = titleMain;
@@ -693,7 +705,7 @@ class UserDesktop extends Component {
         document.getElementById("258").innerHTML = "";
         var entity = document.getElementById(event.target.id);
 
-    if(entity) {
+    if(entity && !this.state.addingIcon) {
         document.getElementById(event.target.id).style.opacity = this.state.actuallOpacity;
 
         var elTop = parseInt(entity.style.top, 10);
@@ -941,13 +953,14 @@ class UserDesktop extends Component {
             this.setState({editingFolder: true});
             this.setState({editedId: id});
             var folder = this.getIconById(id);
-            debugger;
+          
             this.setState({editedFolder: folder});
             this.setState({fieldType: "FOLDER_EDITOR"});
         }
 
         showFolderAdding= () => {
             this.setState({editingFolder: true});
+            this.setState({addingIcon: false});
             //this.setState({editedId: id});
             //var folder = this.getIconById(id);
             
@@ -1247,9 +1260,11 @@ class UserDesktop extends Component {
     }
 
     showAddingIcon = () => {
+        this.stopAddingFolder();
         removeHiding();
-        this.setState({fieldType: "ICON_ADDING"});
-        this.setState({addingFolder: false});
+        //this.setState({fieldType: "ICON_ADDING"});
+        this.setState({editingFolder: false});
+        //this.setState({ entityID: "" });
         if(this.state.addingIcon) {
             this.stopAdding()
         }
@@ -1384,20 +1399,22 @@ class UserDesktop extends Component {
 
     stopAdding = () => {
         var icon = this.getIconById(this.state.entityID);
+        this.setState({ addingID: ""});
+        this.setState({ addingType: ""});
+
         if(!icon) {
-            iconType = "INFO";  
+            var iconType = "INFO";  
+            this.setState({ fieldType: iconType});
         }
         else {
             var iconType = icon.type;
+            this.setState({ fieldType: iconType});
         }
-        this.setState({ fieldType: iconType});
         this.setState({addingIcon: false});
         this.setState({wrongWWW: false});
         this.setState({noIconsFound: false});
         this.setState({searchingIcons: false});
-        this.setState({
-            iconsFound: false
-          });
+        this.setState({iconsFound: false});
         this.setState({newIcons: []});
         this.setState({newImages: []});
         this.setState({newSpotify: []});
@@ -1565,7 +1582,7 @@ class UserDesktop extends Component {
        
         switch(this.state.fieldType) {
             case "YT":
-                field = <Field play={this.state.entityID} show={this.state.loadedIcons} nextSong={this.nextSongHandler} loadText={this.props.fetchData} />
+                field = <Field addingIcon={this.state.addingIcon} play={this.state.entityID} show={this.state.loadedIcons} nextSong={this.nextSongHandler} loadText={this.props.fetchData} />
            break;
                 case "IMG":
                 field = <ImageField src={this.state.entityID} sourceShow={this.getNiceHttp(this.state.imgSource)} 
@@ -1589,9 +1606,11 @@ class UserDesktop extends Component {
             case "FOLDER_EDITOR":
                 field = <EditField folder={this.state.editedFolder} addFolder={this.addFolderHandler}  cancelAdding = {this.stopAddingFolder}   saveFolder={this.editFolderHandler}/>
                 break;
-                case "ICON_ADDING":
-                    field =<AddingField findIcon={this.addIconHandler} stopAdding={this.stopAdding} />
-                    break;
+                // case "ICON_ADDING":
+                //     field =<AddingField fieldType={this.state.addingType} imgSource={this.state.imgSource}
+                //     id={this.state.addingID}
+                //       findIcon={this.addIconHandler} stopAdding={this.stopAdding} />
+                //     break;
             case "":
                 field = <LoadingField/>
                 break;
@@ -1994,7 +2013,11 @@ setAddingIcon = () => {
         </div>
         </div>; */
 
-        let tagsField = this.state.loadedIcons? <TagsField fieldType={this.state.fieldType} noIcons = {!this.anyIcons()}  searchTag={this.props.searchTag} fromDesk={true} setTags={this.showTitleEditor}  id={this.state.entityID} tags = {this.state.entityTags} />  : "";
+        let tagsField = "";
+
+        if(!this.state.addingIcon) {
+            tagsField = this.state.loadedIcons? <TagsField fieldType={this.state.fieldType} noIcons = {!this.anyIcons()}  searchTag={this.props.searchTag} fromDesk={true} setTags={this.showTitleEditor}  id={this.state.entityID} tags = {this.state.entityTags} />  : "";
+        }
 
             let field = "";
 
@@ -2008,9 +2031,14 @@ setAddingIcon = () => {
  
         }
 
+        let addingField = this.state.addingIcon? 
+        <AddingField fieldType={this.state.addingType} imgSource={this.state.imgSource}
+                     id={this.state.addingID}
+                       findIcon={this.addIconHandler} stopAdding={this.stopAdding} />
+          : "";
+         
           let tagsEdit =  this.state.folderEditing?  ""
           : 
-         
           <input id="editTags" type="text"
           autofocus="true"
          placeholder = "Wpisz tagi oddzielając je przecinkami"
@@ -2053,9 +2081,9 @@ setAddingIcon = () => {
         </div>
         </div>
         :
-        <div id="plus" class= {this.state.addingFolder? "switchA" : "switchB" } onClick={this.showFolderAdding}  title="Dodaj nowy folder"> 
+        <div id="plus" className= {this.state.editingFolder? "switchA" : "switchB" } onClick={this.showFolderAdding}  title="Dodaj nowy folder"> 
         <i class="icon-folder-add" />
-        <div id="plusField" class="hoverInfo" title="">
+        <div id="plusField" className="hoverInfo" title="">
         Utwórz nowy folder
         {/* <p>Utwórz nowy folder o nazwie:</p>
         <div style={{display: "flex"}}>
@@ -2068,30 +2096,30 @@ setAddingIcon = () => {
         let addOwn =
         <div id="addOwn" class= {this.state.addingIcon? "addOwn activePlus" : "addOwn" }  onClick={this.showAddingIcon}> 
         &#43;
-        <div id="addText" class="hoverInfo" >
+        <div id="addText" className="hoverInfo" >
         Dodaj własne ikony  
         </div>
         </div>
-  let infoAdding = this.state.addingFolder?
+ /*  let infoAdding = this.state.addingFolder?
   <span>Utwórz foldery i dodawaj do nich wybrane ikony, aby uporządkować i segregować
       swoją kolekcję. Nazwa folderu może składać sie z maksymalnie 20 znaków.</span>
   :
   <span>Aby odszukać i dodać ikony reprezentujące film YouTube lub zdjęcia,
   wklej link do filmu, strony www lub postu na Instagramie.
   W celu dodania ikony z serwisu Spotify skopiuj i wklej osadzony kod, który znajduje się
-  w zakładce "Udostępnij" w opcjach utworu, albumu, artysty lub playlisty.</span>
+  w zakładce "Udostępnij" w opcjach utworu, albumu, artysty lub playlisty.</span> */
 
 
-let findNewIcons = (this.state.addingIcon ||  this.state.addingFolder)?
+ let findNewIcons = (this.state.addingIcon ||  this.state.addingFolder)?
              <div class="actuallMenu">
 
- <div style={{marginLeft: '140px', marginTop: '10px'}} id="infoLink">&#9432;info
+{/* <div style={{marginLeft: '140px', marginTop: '10px'}} id="infoLink">&#9432;info
                 <div id="info">
-                           {infoAdding}
+                          
                         </div>
-                </div>
-     {/*    <label>Dodaj nowe ikony z: </label> */}
-         <div class="addingDiv">
+                </div> 
+    
+          <div class="addingDiv">
         
              <input id="exploreT" type="text"
 
@@ -2106,9 +2134,9 @@ let findNewIcons = (this.state.addingIcon ||  this.state.addingFolder)?
         onClick={this.state.addingFolder? this.addFolderHandler : this.addIconHandler} > {this.state.addingFolder? "Dodaj folder":  "Znajdź ikony"}</button>
 
          <button class= { "popupButtton popupAnother" } style={{fontSize: 12, padding: "2px", height: '20px',  width: '75px', marginTop: '8px', marginLeft: "10px"}}  
-        onClick={this.state.addingFolder? this.stopAddingFolder : this.stopAdding} >Zakończ</button>
-
-   <div id='addingIconField' class='addingIconTitle'>
+        onClick={this.state.addingFolder? this.stopAddingFolder : this.stopAdding} >Zakończ</button>*/}
+ 
+    <div id='addingIconField' class='addingIconTitle'>
            {addingInfo}
            {noIcons}
            {iconsInfo}
@@ -2116,14 +2144,14 @@ let findNewIcons = (this.state.addingIcon ||  this.state.addingFolder)?
         </div>
 
 
-                  </div> : "";
+                  </div> : ""; 
 
         
     let  deskMenu =  (<div class= {"deskMenu"} style={{left: !this.state.loadedIcons? "-20px" : "110px"}}>
            {addOwn}
            {folderIcon}
         {saveIcons}
-          {findNewIcons}
+        {findNewIcons}
             </div>); 
 
 
@@ -2157,6 +2185,7 @@ let findNewIcons = (this.state.addingIcon ||  this.state.addingFolder)?
             </div>
            
            {tagsField}
+           {addingField}
               {field}
 
                 <div id = "258" class="titleDiv" > </div>

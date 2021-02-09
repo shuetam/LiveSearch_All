@@ -71,7 +71,7 @@
 .icon-resize-small:before { content: '\e80d'; } /* '' */
 .icon-eye:before { content: '\e80e'; } /* '' */
 .icon-eye-off:before { content: '\e80f'; } /* '' */
-.icon-lock-1:before { content: '\e810'; } /* '' */
+.icon-lock:before { content: '\e810'; } /* '' */
 .icon-doc:before { content: '\e811'; } /* '' */
 .icon-group:before { content: '\e812'; } /* '' */
 .icon-user:before { content: '\e813'; } /* '' */

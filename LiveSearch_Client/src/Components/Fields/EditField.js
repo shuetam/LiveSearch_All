@@ -191,7 +191,7 @@ var handlerButtons =  <div className="editHandler">
 
 if(this.state.newFolder) {
     var handlerButtons =  <div className="editHandler">
-    <button class="titleButton" onClick={this.addFolderHandler} style={{fontSize: 15, padding: "3px",  width: '100px'}}>Utwórz folder</button>
+    <button class="titleButton" onClick={this.addFolderHandler}  style={{fontSize: 14, width: "200px",  padding: "5px"}}><i class="icon-folder-add"/>Utwórz folder</button>
     &nbsp;
     <button class="titleButton privateButton" onClick={this.cancelAdding}  style={{fontSize: 13, padding: "3px",  width: '80px'}}>Zakończ</button>
     </div>  
@@ -199,14 +199,14 @@ if(this.state.newFolder) {
 
 
     let editor = 
-    (<div class="fieldAct fieldEditor"> {shareIcon} <span style={{fontSize: "17px"}}>
+    (<div class="fieldAct fieldEditor folderEditField"> {shareIcon} <span style={{fontSize: "17px"}}>
         Tytuł: {titleEditor}</span><span style={{fontSize: "12px", position: "absolute", top: "52px", left: "407px"}}>
             {titleNum}</span><p/>
             <div className={!this.state.shared? "disable": ""}>
             Publiczny opis:
             {descriptionEditor}
             </div>
-            <span style={{fontSize: "12px", position: "absolute", top: "203px", left: "590px"}}>
+            <span style={{fontSize: "12px", position: "absolute", top: "203px", left: "540px"}}>
             {descNum}</span>
             {shareButton}
             {handlerButtons}

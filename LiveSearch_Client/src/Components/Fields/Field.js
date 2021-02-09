@@ -33,6 +33,20 @@ class Field extends Component {
     };
 
 
+   /*  componentWillReceiveProps(nextProps) {
+        
+
+         if(!nextProps.addingIcon) {
+             var glass = document.getElementById("glassId");
+                glass.style.display = "block"; 
+             
+            setTimeout(() => {
+            }, 600); 
+        }
+             
+        } */
+
+
     reflectVideoOnReady = (event) => {
         this.setState({ reflectVideo: event });
         this.setState({ playReflected: true });
@@ -82,6 +96,7 @@ class Field extends Component {
 
 
     playReflect = (event) => {
+
         this.setState({ playReflected: true });
         clearInterval(this.state.interval);
         this.setState({ interval: null });
@@ -155,11 +170,12 @@ class Field extends Component {
         let field =  (
             <div>
 
-                <div className="field">
+                <div className={!this.props.addingIcon? "field" : "field previewField"}>
                 <ReactPlayer
+              //url = "https://www.instagram.com/p/CK-b7KIBa1x/?utm_source=ig_web_copy_link"
                 url={this.props.play.includes("www.")? this.props.play : "https://www.youtube.com/watch?v=" + this.props.play}
-                height= '315px'
-                width= '560px'
+                height= {!this.props.addingIcon? '315px': '155px' }
+                width= { !this.props.addingIcon? '560px': '360px'}
                 playing ={this.state.playMain} 
                 controls = {true}
                 onReady={this.mainVideoOnReady}
@@ -168,6 +184,7 @@ class Field extends Component {
                 /* onSeek={this.onChange} */
                 onEnded={this.props.nextSong}
                 />
+
                     {/* <YouTube id="main"
                         videoId={this.props.play}
                         opts={opts}
@@ -178,13 +195,14 @@ class Field extends Component {
                         onEnd={this.props.nextSong}
                     /> */}
                 </div>
-                <div className="glass" style={{ opacity: this.state.showReflect ? 0.7 : 0.4, filter: this.state.showReflect ? 'blur(3px)' : 'blur(12px)' }} id={this.props.player}>
+                <div className={!this.props.addingIcon? "glass" : "previewGlass"} style={{ opacity: this.state.showReflect ? 0.7 : 0.4, filter: (this.state.showReflect && !this.props.addingIcon) ? 'blur(3px)' : 'blur(12px)' }} id="glassId">
                     <ReactPlayer 
                     id="reflect"
+                  
                     url={this.props.play.includes("www")? this.props.play : "https://www.youtube.com/watch?v=" + this.props.play}
                         playing ={this.state.playReflected}
-                        height= '315px'
-                        width= '560px'
+                        height= {!this.props.addingIcon? '315px': '155px' }
+                        width= { !this.props.addingIcon? '560px': '360px'}
                        
                         opts={opts}
                         onReady={this.reflectVideoOnReady}

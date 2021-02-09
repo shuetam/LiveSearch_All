@@ -34,34 +34,6 @@ class AddingField extends Component {
 
     render() {
 
-let spotify = <div className="imageField">              
-<iframe src={this.props.id}  width="300" height="315" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-</div>
-
-let video =    <div className="field">
-<ReactPlayer
-url={this.props.play.includes("www.")? this.props.play : "https://www.youtube.com/watch?v=" + this.props.play}
-height= '315px'
-width= '560px'
-playing ={this.state.playMain} 
-controls = {true}
-onReady={this.mainVideoOnReady}
-onPlay={this.playReflect}
-onPause={this.pauseReflect}
-/* onSeek={this.onChange} */
-onEnded={this.props.nextSong}
-/>  
-</div>
-
-let image =  <div className="imageField" >
-<img 
-   class="imgField"
-  src={this.props.src}></img>  
-</div>
-
-
-
- 
         let iconIcons = <div style={{fontSize: "17px"}}><i class="icon-youtube"/>
         <i class="icon-spotify"/>
         <i class="icon-picture"/></div>
@@ -70,11 +42,11 @@ let inputPaste =
 <span   class="fieldEditorInput">
 <input id="addingIconLink" type="text"
 autofocus="true"
-placeholder =  "Wpisz tytuł dla folderu"/> 
+placeholder =  "Wklej link lub kod osadzenia"/> 
  </span>
 
 
-var infoText =  <div  className="lockIconF" style={{fontSize: "14px", padding: "5px", color: "rgba(255, 255, 255, 0.501)"}}>
+var infoText =  <div  className="lockIconF" style={{fontSize: "13px", padding: "5px", color: "rgba(255, 255, 255, 0.701)"}}>
   Aby odszukać i dodać ikony reprezentujące film YouTube lub zdjęcia,
   wklej link do filmu, strony www lub postu na Instagramie.
   W celu dodania ikony z serwisu Spotify skopiuj i wklej osadzony kod, który znajduje się
@@ -82,23 +54,25 @@ var infoText =  <div  className="lockIconF" style={{fontSize: "14px", padding: "
 
 
 
- var findButton = <div><button class= "titleButton"   onClick={this.findHandler} style={{fontSize: 14, width: "200px",  padding: "5px"}}>
-    Znajdź ikony</button></div>
+ var findButton = <button class= "titleButton"   onClick={this.findHandler} style={{marginLeft: "10px",  fontSize: 14, width: "140px",  padding: "5px"}}>
+    Znajdź ikony</button>
 
-var handlerButtons =  <div className="editHandler">
-<button class="titleButton privateButton" onClick={this.stopAdding}  style={{fontSize: 13, padding: "3px",  width: '80px'}}>Zakończ</button>
+var endButton =  <div className="editHandler">
+<button class="titleButton privateButton" onClick={this.stopAdding}  style={{fontSize: 13, padding: "3px",  width: '120px'}}>Zakończ</button>
 </div>
+
+    
 
     let editor = 
     (<div class="fieldAct fieldEditor">  <span style={{fontSize: "17px"}}>
         {iconIcons}
-        {inputPaste}
         {infoText}
-        
-        </span>
-        <p/>
+        {inputPaste}
             {findButton}
-            {handlerButtons}       
+        </span>
+        
+      
+            {endButton}       
             </div>)
     
             return editor;
