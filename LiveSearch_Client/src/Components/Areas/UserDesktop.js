@@ -107,7 +107,7 @@ class UserDesktop extends Component {
             fieldType: "",
             smallFolder: true,
             addingType: "",
-            addingID: ""
+           
             
         }
     }
@@ -1145,9 +1145,9 @@ class UserDesktop extends Component {
 
 
     addIconHandlerPress = (event) => {
-        debugger;
+        var url = document.getElementById("addingIconLink").value;
         if(event.key == "Enter") {
-            this.addIconHandler();
+            this.addIconHandler(url);
         }
         if(event.key === "Escape") {
             this.stopAdding();
@@ -1398,7 +1398,7 @@ class UserDesktop extends Component {
   
 
     stopAdding = () => {
-        var icon = this.getIconById(this.state.entityID);
+        /* var icon = this.getIconById(this.state.entityID);
         this.setState({ addingID: ""});
         this.setState({ addingType: ""});
 
@@ -1409,7 +1409,7 @@ class UserDesktop extends Component {
         else {
             var iconType = icon.type;
             this.setState({ fieldType: iconType});
-        }
+        } */
         this.setState({addingIcon: false});
         this.setState({wrongWWW: false});
         this.setState({noIconsFound: false});
@@ -1873,6 +1873,7 @@ setAddingIcon = () => {
                     newimage = {true}
                     newIcon={true}
                     public={false}
+                    type="IMG"
                 />
             )
         })
@@ -1972,7 +1973,7 @@ setAddingIcon = () => {
         <div>Naciśnij <span class="addIconInfo">&#43;</span> przy wybranej ikonie aby dodać ją do pulpitu.</div> : "";
 
         let loading = (this.state.searchingIcons && !this.state.wrongWWW && !this.state.noIconsFound && !this.state.iconsFound)?
-        (<div style={{color: 'white'}} class="lds-ellipsiss"><div></div><div></div><div></div></div>) : "";
+        (<div className="lds-ellipsiss"><div></div><div></div><div></div></div>) : "";
 
 
 /*         let addingIcon = <div id="ownField" style={{display: this.state.addingIcon? 'block' : 'none'}} >
@@ -2032,9 +2033,7 @@ setAddingIcon = () => {
         }
 
         let addingField = this.state.addingIcon? 
-        <AddingField fieldType={this.state.addingType} imgSource={this.state.imgSource}
-                     id={this.state.addingID}
-                       findIcon={this.addIconHandler} stopAdding={this.stopAdding} />
+        <AddingField  onKeyPress={this.addIconHandlerPress} findIcon={this.addIconHandler} stopAdding={this.stopAdding} />
           : "";
          
           let tagsEdit =  this.state.folderEditing?  ""
@@ -2111,7 +2110,7 @@ setAddingIcon = () => {
 
 
  let findNewIcons = (this.state.addingIcon ||  this.state.addingFolder)?
-             <div class="actuallMenu">
+             <div>
 
 {/* <div style={{marginLeft: '140px', marginTop: '10px'}} id="infoLink">&#9432;info
                 <div id="info">

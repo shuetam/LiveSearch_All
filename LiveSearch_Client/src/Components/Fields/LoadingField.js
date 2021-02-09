@@ -17,7 +17,7 @@ class LoadingField extends Component {
 
     render() {
  
-        let loading = (<div className="field"><div class="lds-ellipsis"><div></div><div></div><div></div></div></div>);
+        let loading = (<div><div class="lds-ellipsis"><div></div><div></div><div></div></div></div>);
 
       
             return loading;

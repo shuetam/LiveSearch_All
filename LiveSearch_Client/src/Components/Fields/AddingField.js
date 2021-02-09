@@ -42,6 +42,7 @@ let inputPaste =
 <span   class="fieldEditorInput">
 <input id="addingIconLink" type="text"
 autofocus="true"
+onKeyPress = {this.props.onKeyPress}
 placeholder =  "Wklej link lub kod osadzenia"/> 
  </span>
 
