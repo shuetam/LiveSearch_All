@@ -5,6 +5,10 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System;
+using SpotifyAPI.Web;
+using System.Collections.Specialized;
+using System.Text;
+using System.Net;
 
 namespace Live.Controllers
 {
@@ -31,6 +35,7 @@ namespace Live.Controllers
         public async Task<IActionResult> AddIcon([FromBody] EntitySetter icon)
         {
           string tagsString =  "";
+
 
       
         if(icon.tags != null )
@@ -97,6 +102,31 @@ namespace Live.Controllers
         [HttpPost("geticons")]
         public async Task<IActionResult> GetIcons([FromBody] AuthUser user)
         {
+
+var spotifyClient = "5ca4b9df9184443fa0b5508fbdc75851";
+    var spotifySecret = "0d37b30c98ac47ddab613a583e94a258";
+    
+    var webClient = new WebClient();
+    
+    var postparams = new NameValueCollection();
+    postparams.Add("grant_type", "client_credentials");
+    
+    var authHeader = Convert.ToBase64String(Encoding.Default.GetBytes($"{spotifyClient}:{spotifySecret}"));
+    webClient.Headers.Add(HttpRequestHeader.Authorization, "Basic " + authHeader);
+    
+    var tokenResponse = webClient.UploadValues("https://accounts.spotify.com/api/token", postparams);
+    
+    var textResponse = Encoding.UTF8.GetString(tokenResponse);
+
+
+
+
+
+          var spotify = new SpotifyClient(textResponse);
+
+          var track = await spotify.Tracks.Get("1s6ux0lNiTziSrd7iUAADH");
+          Console.WriteLine(track.Name);
+
           var icons = await _desktopRepository.GetAllIconsForUserAsync(this.UserId, user.folderId);
           //Log.Information("Getting icons for user");
           return Json(icons);
