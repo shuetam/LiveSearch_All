@@ -110,6 +110,9 @@ namespace Live.Repositories
 
         public async Task<object> GetAllIconsIdAsync(Guid userId)
         {
+
+          
+
             var iconsIds = await _liveContext.UserYoutubes.Where(x => x.UserId == userId).Select(x => x.VideoId).ToListAsync();
             var imgIds = await _liveContext.UserImages.Where(x => x.UserId == userId).Select(x => x.UrlAddress).ToListAsync();
             var spotifyIds = await _liveContext.UserSpotify.Where(x => x.UserId == userId).Select(x => x.SpotifyId).ToListAsync();

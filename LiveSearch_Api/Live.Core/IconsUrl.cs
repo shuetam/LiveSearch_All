@@ -8,6 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using HtmlAgilityPack;
 using Serilog;
+using System.Collections.Specialized;
+using System.Text;
+using Newtonsoft.Json;
+using SpotifyAPI.Web;
+using static SpotifyAPI.Web.SearchRequest;
 
 namespace Live.Core
 {
@@ -97,71 +102,67 @@ namespace Live.Core
                     spotifyId = spotReg.Replace(spotifyId, "");
                     var imgAddress = spotifyId.Replace("embed/", "");
 
-                    var spotIcon = new IconDto(spotifyId, "", "SPOTIFY");
-                spotIcon.source = "https://developer.spotify.com/assets/branding-guidelines/icon4@2x.png";
-                    string htmlCode = "";
+                    var spotIcon = await GetSpotifyIconDto(spotifyId);
 
-
-
-          try
-          {
-            using( WebClient client = new WebClient(){ Encoding = System.Text.Encoding.UTF8 })
-            {
-                     await Task.Run(() =>
-                    {
-                        htmlCode = client.DownloadString(imgAddress);
-                    }); 
-            }
-                   // Console.WriteLine(htmlCode);
+          //try
+          //{
+          //  using( WebClient client = new WebClient(){ Encoding = System.Text.Encoding.UTF8 })
+          //  {
+          //           await Task.Run(() =>
+          //          {
+          //              htmlCode = client.DownloadString(imgAddress);
+          //          }); 
+          //  }
+          //         // Console.WriteLine(htmlCode);
 
 
                  
-                var imgHTML = new HtmlDocument();
-                imgHTML.LoadHtml(htmlCode);
-                var imgNode = imgHTML.DocumentNode.SelectSingleNode("//div[@class='cover-art-image']");
+          //      var imgHTML = new HtmlDocument();
+          //      imgHTML.LoadHtml(htmlCode);
+          //      var imgNode = imgHTML.DocumentNode.SelectSingleNode("//div[@class='cover-art-image']");
 
-                if(imgNode == null)
-                {
-                    imgNode = imgHTML.DocumentNode.SelectSingleNode("//div[@class='bg lazy-image']");
-                }
+          //      if(imgNode == null)
+          //      {
+          //          imgNode = imgHTML.DocumentNode.SelectSingleNode("//div[@class='bg lazy-image']");
+          //      }
 
-            if(imgNode != null)
-            {
-                var imgSrcAttribute = imgNode.Attributes["style"];
-                var imgDataAttribute = imgNode.Attributes["data-src"];
+          //  if(imgNode != null)
+          //  {
+          //      var imgSrcAttribute = imgNode.Attributes["style"];
+          //      var imgDataAttribute = imgNode.Attributes["data-src"];
 
-                if(imgSrcAttribute != null)
-                {
-                    var imgSrcPattern =  new Regex("url[(]{1}([^)]+)[)]{1}");
-                    //Console.WriteLine(imgSrcAttribute);
+          //      if(imgSrcAttribute != null)
+          //      {
+          //          var imgSrcPattern =  new Regex("url[(]{1}([^)]+)[)]{1}");
+          //          //Console.WriteLine(imgSrcAttribute);
 
-                    if(imgSrcPattern.IsMatch(imgSrcAttribute.Value)) 
-                    {
-                        var imgSrc =  imgSrcPattern.Matches(imgSrcAttribute.Value).Select(s => s.Groups[1].Value.Trim()).ToList();
-                        if(imgSrc.Count>0)
-                        {
-                            spotIcon.source = "https:"+imgSrc[0];
-                        }
-                        //Console.WriteLine(imgSrc[0]);
-                    }
-                }
-                 if(imgDataAttribute != null) 
-                {
-                    var imgSrcAttributeValue = imgDataAttribute.Value;
-                    if(!string.IsNullOrEmpty(imgSrcAttributeValue))
-                    {
-                    spotIcon.source = "https:" + imgSrcAttributeValue;
-                    }
+          //          if(imgSrcPattern.IsMatch(imgSrcAttribute.Value)) 
+          //          {
+          //              var imgSrc =  imgSrcPattern.Matches(imgSrcAttribute.Value).Select(s => s.Groups[1].Value.Trim()).ToList();
+          //              if(imgSrc.Count>0)
+          //              {
+          //                  spotIcon.source = "https:"+imgSrc[0];
+          //              }
+          //              //Console.WriteLine(imgSrc[0]);
+          //          }
+          //      }
+          //       if(imgDataAttribute != null) 
+          //      {
+          //          var imgSrcAttributeValue = imgDataAttribute.Value;
+          //          if(!string.IsNullOrEmpty(imgSrcAttributeValue))
+          //          {
+          //          spotIcon.source = "https:" + imgSrcAttributeValue;
+          //          }
 
-                }
+          //      }
 
-            }
-          }
-          catch(Exception ex)
-          {
-            Log.Error($"Error in adding spotify: {ex.Message}");
-            Log.Error(ex.StackTrace);
-          }
+          //  }
+          //}
+          //catch(Exception ex)
+          //{
+          //  Log.Error($"Error in adding spotify: {ex.Message}");
+          //  Log.Error(ex.StackTrace);
+          //}
          
             //Console.WriteLine(spotIcon.source);
                  icons.Add(spotIcon);
@@ -242,6 +243,83 @@ namespace Live.Core
         }
             return icons;
 
+        }
+
+
+
+        public  static async Task<IconDto> GetSpotifyIconDto(string spotifyFrame)
+        {
+            var spotIcon = new IconDto(spotifyFrame, "", "SPOTIFY");
+            spotIcon.source = "https://developer.spotify.com/assets/branding-guidelines/icon4@2x.png";
+            spotIcon.title = "";
+
+            using (var webClient = new WebClient())
+            {
+                var keys = new GoogleKey();
+                var spotifyClient = keys.spotifyClient;
+                var spotifySecret = keys.spotifySecret;
+
+                var urlRegex = new Regex(@"^http(s)?://([\w-]+.)+[\w-]+(/[\w- ./?%&=])?$");
+
+                if (urlRegex.IsMatch(spotifyFrame))
+                {
+                    try
+                    {
+                        string urlValue = urlRegex.Match(spotifyFrame).Value;
+                        var spotProp = urlValue.Split('/').ToList();
+                        var spotifyId = spotProp.LastOrDefault();
+                        var spotifyType = "";//spotProp[spotProp.Count - 2];
+
+                        var postparams = new NameValueCollection();
+                        postparams.Add("grant_type", "client_credentials");
+                        var authHeader = Convert.ToBase64String(Encoding.Default.GetBytes($"{spotifyClient}:{spotifySecret}"));
+                        webClient.Headers.Add(HttpRequestHeader.Authorization, "Basic " + authHeader);
+                        var tokenResponse = webClient.UploadValues("https://accounts.spotify.com/api/token", postparams);
+                        var textJson = Encoding.UTF8.GetString(tokenResponse);
+                        var tokenObject = JsonConvert.DeserializeObject<GoogleKey>(textJson);
+                        string token = tokenObject.access_token;
+                        var spotify = new SpotifyClient(token);
+
+                        var deluna = await spotify.Search.Item( new SearchRequest(Types.Track, "Deluna"));
+
+                        switch (spotifyType.ToLower())
+                        {
+
+                            case "artist":
+                                var artist = await spotify.Artists.Get(spotifyId);
+                                spotIcon.source = artist.Images.FirstOrDefault().Url;
+                                spotIcon.title = artist.Name;
+                                break;
+
+                            case "album":
+                                var album = await spotify.Albums.Get(spotifyId);
+                                spotIcon.source = album.Images.FirstOrDefault().Url;
+                                spotIcon.title = album.Name;
+                                break;
+
+                            case "playlist":
+                                var playlist = await spotify.Playlists.Get(spotifyId);
+                                spotIcon.source = playlist.Images.FirstOrDefault().Url;
+                                spotIcon.title = playlist.Name;
+                                break;
+
+                            case "track":
+                                var track = await spotify.Tracks.Get(spotifyId);
+                                spotIcon.source = track.Album.Images.FirstOrDefault().Url;
+                                spotIcon.title = track.Name;
+                                break;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error($"Error in adding spotify: {ex.Message}");
+                        Log.Error(ex.StackTrace);
+                        return spotIcon;
+                    }
+                }
+            }
+
+            return spotIcon;
         }
 
     }

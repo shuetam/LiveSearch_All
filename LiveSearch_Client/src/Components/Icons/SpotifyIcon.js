@@ -17,7 +17,7 @@ class SpotifyIcon extends Component {
     constructor(props) {
         super(props);
     this.state = {
-       src: "https://developer.spotify.com/assets/branding-guidelines/icon4@2x.png",
+      
        authConfig: {
         headers: {Authorization: "Bearer " + this.props.jwtToken}
     },
@@ -81,7 +81,7 @@ class SpotifyIcon extends Component {
     }
 
     onError = () => {
-        //alert('The image could not be loaded.');
+        alert('The image could not be loaded.');
         const logo = require('./149932.png');
         this.setState({src: logo });
       }
@@ -274,7 +274,9 @@ class SpotifyIcon extends Component {
              
                   id={this.props.id}
                   title={this.props.title} 
-                  src={this.state.src} style={this.props.location} 
+                  src={this.props.src}
+                  
+                  style={this.props.location} 
                   onError={this.onError}>
                   </img> 
 

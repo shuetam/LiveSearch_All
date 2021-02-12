@@ -169,15 +169,15 @@ class PublicDesktop extends Component {
 
 handleScroll = (event) => {
    
-    if (event.deltaY < 0 && this.props.sizeFactor<2)
+    if (event.deltaY > 0 && this.props.sizeFactor<2)
     {
-      this.props.setFactor(this.props.sizeFactor + 0.1)
-      this.setState({smallFolder: this.props.sizeFactor + 0.1 < 0.8});
+        this.props.setFactor(this.props.sizeFactor + 0.1);
+        this.setState({smallFolder: this.props.sizeFactor + 0.1 < 0.8});
     }
-     if (event.deltaY > 0 && this.props.sizeFactor>0.6)
+     if (event.deltaY < 0 && this.props.sizeFactor>0.6)
     {
-      this.props.setFactor(this.props.sizeFactor - 0.1)
-      this.setState({smallFolder: this.props.sizeFactor - 0.1 < 0.8});
+        this.props.setFactor(this.props.sizeFactor - 0.1);
+        this.setState({smallFolder: this.props.sizeFactor - 0.1 < 0.8});
     }
    
   }

@@ -9,21 +9,22 @@ using SpotifyAPI.Web;
 using System.Collections.Specialized;
 using System.Text;
 using System.Net;
+using Newtonsoft.Json;
 
 namespace Live.Controllers
 {
 
     //[EnableCors(origins: "http://localhost:3000", headers: "*", methods: "*")]
     [Route("api/[controller]")]
-   [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]  
-   [Authorize(Roles = "USER,ADMIN")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize(Roles = "USER,ADMIN")]
     public class UserDesktopController : LiveController
     {
-        private readonly  IUserDesktopRepository _desktopRepository;
-         private readonly  IUserRepository _userRepository;
-          private readonly  IExploreRepository _exploreRepository;
-        
-        public UserDesktopController (IUserDesktopRepository desktopRepository, IUserRepository userRepository, IExploreRepository exploreRepository)
+        private readonly IUserDesktopRepository _desktopRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly IExploreRepository _exploreRepository;
+
+        public UserDesktopController(IUserDesktopRepository desktopRepository, IUserRepository userRepository, IExploreRepository exploreRepository)
         {
             this._desktopRepository = desktopRepository;
             this._userRepository = userRepository;
@@ -34,59 +35,59 @@ namespace Live.Controllers
         [HttpPost("addicon")]
         public async Task<IActionResult> AddIcon([FromBody] EntitySetter icon)
         {
-          string tagsString =  "";
+            string tagsString = "";
 
 
-      
-        if(icon.tags != null )
-        {
-            foreach(var tag in icon.tags)
+
+            if (icon.tags != null)
             {
-                  string tagT = tag.Trim();
-                  if(!string.IsNullOrEmpty(tagT))
-                  {
-                    tagsString += $"{tagT}||";
-                  }
-            }
-            if(tagsString.Length>2)
-            {
-              tagsString = tagsString.Substring(0, tagsString.Length-2);
+                foreach (var tag in icon.tags)
+                {
+                    string tagT = tag.Trim();
+                    if (!string.IsNullOrEmpty(tagT))
+                    {
+                        tagsString += $"{tagT}||";
+                    }
+                }
+                if (tagsString.Length > 2)
+                {
+                    tagsString = tagsString.Substring(0, tagsString.Length - 2);
+                }
+
             }
 
-        }
-  
-           if(icon.Type == "YT")
-           {
-            var added = await _desktopRepository.AddYouTubeAsync(icon, this.UserId, tagsString);
-             return Json(added);
-           }
-          if(icon.Type == "SPOTIFY")
-           {
-            var added = await _desktopRepository.AddSpotifyAsync(icon, this.UserId, tagsString);
-             return Json(added);
-           }
-           if(icon.Type == "IMG" || icon.Type == "BOOK")
-           {
-            var added = await _desktopRepository.AddImageAsync(icon, this.UserId, tagsString);
-            return Json(added);
-           }
-           return (Json(false));
+            if (icon.Type == "YT")
+            {
+                var added = await _desktopRepository.AddYouTubeAsync(icon, this.UserId, tagsString);
+                return Json(added);
+            }
+            if (icon.Type == "SPOTIFY")
+            {
+                var added = await _desktopRepository.AddSpotifyAsync(icon, this.UserId, tagsString);
+                return Json(added);
+            }
+            if (icon.Type == "IMG" || icon.Type == "BOOK")
+            {
+                var added = await _desktopRepository.AddImageAsync(icon, this.UserId, tagsString);
+                return Json(added);
+            }
+            return (Json(false));
         }
 
 
         [HttpPost("createfolder")]
         public async Task<IActionResult> CreateFolder([FromBody] EntitySetter folder)
         {
-           // Console.Write(folder.Title);
+            // Console.Write(folder.Title);
             var newFolder = await _desktopRepository.CreateFolderAsync(this.UserId, folder);
             return Json(newFolder);
         }
-        
 
-           [HttpPost("getuseremail")]
+
+        [HttpPost("getuseremail")]
         public async Task<IActionResult> GetUseremail([FromBody] EntitySetter folder)
         {
-           // Console.Write(folder.Title);
+            // Console.Write(folder.Title);
             var userEmail = await _userRepository.GetUserEmail(this.UserId);
             return Json(userEmail);
         }
@@ -102,65 +103,41 @@ namespace Live.Controllers
         [HttpPost("geticons")]
         public async Task<IActionResult> GetIcons([FromBody] AuthUser user)
         {
-
-var spotifyClient = "5ca4b9df9184443fa0b5508fbdc75851";
-    var spotifySecret = "0d37b30c98ac47ddab613a583e94a258";
-    
-    var webClient = new WebClient();
-    
-    var postparams = new NameValueCollection();
-    postparams.Add("grant_type", "client_credentials");
-    
-    var authHeader = Convert.ToBase64String(Encoding.Default.GetBytes($"{spotifyClient}:{spotifySecret}"));
-    webClient.Headers.Add(HttpRequestHeader.Authorization, "Basic " + authHeader);
-    
-    var tokenResponse = webClient.UploadValues("https://accounts.spotify.com/api/token", postparams);
-    
-    var textResponse = Encoding.UTF8.GetString(tokenResponse);
-
-
-
-
-
-          var spotify = new SpotifyClient(textResponse);
-
-          var track = await spotify.Tracks.Get("1s6ux0lNiTziSrd7iUAADH");
-          Console.WriteLine(track.Name);
-
-          var icons = await _desktopRepository.GetAllIconsForUserAsync(this.UserId, user.folderId);
-          //Log.Information("Getting icons for user");
-          return Json(icons);
+           
+            var icons = await _desktopRepository.GetAllIconsForUserAsync(this.UserId, user.folderId);
+            //Log.Information("Getting icons for user");
+            return Json(icons);
         }
 
         [HttpPost("getimages")]
         public async Task<IActionResult> GetImages([FromBody] AuthUser user)
         {
-          var icons = await _desktopRepository.GetAllImagesForUserAsync(this.UserId, user.folderId);
-             //Log.Information("Getting images for user");
-          return Json(icons);
+            var icons = await _desktopRepository.GetAllImagesForUserAsync(this.UserId, user.folderId);
+            //Log.Information("Getting images for user");
+            return Json(icons);
         }
 
         [HttpPost("getspotify")]
         public async Task<IActionResult> GetSpotify([FromBody] AuthUser user)
         {
-          var icons = await _desktopRepository.GetAllSpotifyForUserAsync(this.UserId, user.folderId);
+            var icons = await _desktopRepository.GetAllSpotifyForUserAsync(this.UserId, user.folderId);
             //Log.Information("Getting spotify for user");
-          return Json(icons);
+            return Json(icons);
         }
 
         [HttpPost("getfolders")]
         public async Task<IActionResult> GetFolders([FromBody] AuthUser user)
         {
-          var icons = await _desktopRepository.GetAllFoldersForUserAsync(this.UserId);
-          return Json(icons);
+            var icons = await _desktopRepository.GetAllFoldersForUserAsync(this.UserId);
+            return Json(icons);
         }
 
         [HttpPost("getfollowedfolders")]
         public async Task<IActionResult> GetFollowedFolders([FromBody] ExploreQuery Query)
         {
 
-          string folderId = Query.folderId;
-         
+            string folderId = Query.folderId;
+
             if (!string.IsNullOrEmpty(folderId))
             {
                 var folderContent = await _exploreRepository.GetIconsForFolder(folderId);
@@ -174,16 +151,16 @@ var spotifyClient = "5ca4b9df9184443fa0b5508fbdc75851";
         [HttpPost("geticonsid")]
         public async Task<IActionResult> GetIconsId([FromBody] AuthUser user)
         {
-          var iconsIds = await _desktopRepository.GetAllIconsIdAsync(this.UserId);
-          return Json(iconsIds);
+            var iconsIds = await _desktopRepository.GetAllIconsIdAsync(this.UserId);
+            return Json(iconsIds);
         }
 
 
         [HttpPost("addtofolder")]
         public async Task<IActionResult> AddToFolder([FromBody] EntitySetter en)
         {
-          var data = await _desktopRepository.AddEntityToFolder(this.UserId, en.ParentId, en.Id, en.Type);
-          return Json(data);
+            var data = await _desktopRepository.AddEntityToFolder(this.UserId, en.ParentId, en.Id, en.Type);
+            return Json(data);
         }
 
 
@@ -191,10 +168,10 @@ var spotifyClient = "5ca4b9df9184443fa0b5508fbdc75851";
         [HttpPost("removeentity")]
         public async Task RemoveEntity([FromBody] EntitySetter entity)
         {
-           // Console.WriteLine("REMOVING  "+ entity.Id);
-           await _desktopRepository.RemoveEntity(this.UserId, entity.Id, entity.Type);
-           
-          //return Json(icons);
+            // Console.WriteLine("REMOVING  "+ entity.Id);
+            await _desktopRepository.RemoveEntity(this.UserId, entity.Id, entity.Type);
+
+            //return Json(icons);
         }
 
         [HttpPost("editfolder")]
@@ -208,7 +185,7 @@ var spotifyClient = "5ca4b9df9184443fa0b5508fbdc75851";
         public async Task<IActionResult> FollowFolder([FromBody] EntitySetter entity)
         {
             var folderId = new Guid(entity.FolderId);
-            var followed  = await _desktopRepository.FollowFolder(this.UserId, folderId, entity.Left, entity.Top);
+            var followed = await _desktopRepository.FollowFolder(this.UserId, folderId, entity.Left, entity.Top);
             return Json(followed);
         }
 
@@ -232,55 +209,55 @@ var spotifyClient = "5ca4b9df9184443fa0b5508fbdc75851";
         [HttpPost("movefromfolder")]
         public async Task MoveEntityFromFolder([FromBody] EntitySetter entity)
         {
-           await _desktopRepository.MoveEntityFromFolder(this.UserId, entity.Id, entity.Type);
+            await _desktopRepository.MoveEntityFromFolder(this.UserId, entity.Id, entity.Type);
         }
 
         [HttpPost("savelocations")]
         public async Task SaveLocations([FromBody] List<EntitySetter> entities)
         {
             //Console.WriteLine("I am in savelocations");
-            
+
             //Console.WriteLine(entities[0].Top);
-           await _desktopRepository.SaveIconsLocations(this.UserId, entities);
-           
-          //return Json(icons);
+            await _desktopRepository.SaveIconsLocations(this.UserId, entities);
+
+            //return Json(icons);
         }
 
         [HttpPost("changetitle")]
         public async Task<IActionResult> ChangeTitle([FromBody] EntitySetter entity)
         {
-          string tagsString =  null;
-            if(entity.tags != null )
+            string tagsString = null;
+            if (entity.tags != null)
             {
-                foreach(var tag in entity.tags)
+                foreach (var tag in entity.tags)
                 {
-                  string tagT = tag.Trim();
-                  if(!string.IsNullOrEmpty(tagT))
-                  {
-                    tagsString += $"{tagT}||";
-                  }
+                    string tagT = tag.Trim();
+                    if (!string.IsNullOrEmpty(tagT))
+                    {
+                        tagsString += $"{tagT}||";
+                    }
                 }
-                if(tagsString != null)
+                if (tagsString != null)
                 {
-                  if(tagsString.Length>2)
-                  {
-                    tagsString = tagsString.Substring(0, tagsString.Length-2);
-                     if(tagsString.Length > 200)
+                    if (tagsString.Length > 2)
+                    {
+                        tagsString = tagsString.Substring(0, tagsString.Length - 2);
+                        if (tagsString.Length > 200)
                         {
                             tagsString = tagsString.Substring(0, 200);
                         }
-                  }
+                    }
                 }
 
             }
-         
 
-           var icon = await _desktopRepository.ChangeEntityTitleAsync(entity, this.UserId,tagsString );
-           return Json(icon);
-          
+
+            var icon = await _desktopRepository.ChangeEntityTitleAsync(entity, this.UserId, tagsString);
+            return Json(icon);
+
         }
 
-       
+
     }
 
 }

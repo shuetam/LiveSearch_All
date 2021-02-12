@@ -3938,3 +3938,24 @@
 2020-11-29 22:07:04.256 +01:00 [Information] Finish radio songs update with 95 songs and 0 youtube errors
 2020-11-29 23:40:03.528 +01:00 [Information] Finish radio songs update with 117 songs and 0 youtube errors
 2020-11-30 00:01:00.454 +01:00 [Information] Finish radio songs update with 113 songs and 1 youtube errors
+2021-02-11 00:22:21.078 +01:00 [Information] Finish radio songs update with 263 songs and 1 youtube errors
+2021-02-11 01:35:02.873 +01:00 [Information] Finish radio songs update with 69 songs and 3 youtube errors
+2021-02-11 17:34:11.662 +01:00 [Information] Finish radio songs update with 1089 songs and 5 youtube errors
+2021-02-11 17:34:15.274 +01:00 [Error] Error in adding spotify: The remote server returned an error: (400) Bad Request.
+2021-02-11 17:34:15.457 +01:00 [Error]    at System.Net.HttpWebRequest.GetResponse()
+   at System.Net.WebClient.GetWebResponse(WebRequest request)
+   at System.Net.WebClient.DownloadBits(WebRequest request, Stream writeStream)
+   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   at System.Net.WebClient.DownloadString(Uri address)
+   at System.Net.WebClient.DownloadString(String address)
+   at Live.Core.IconsUrl.<>c__DisplayClass2_2.<GetIdsFromUrl>b__2() in C:\Users\ATM PROJEKT\Documents\livesearch\LiveSearch_All\LiveSearch_Api\Live.Core\IconsUrl.cs:line 112
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at Live.Core.IconsUrl.GetIdsFromUrl(String url) in C:\Users\ATM PROJEKT\Documents\livesearch\LiveSearch_All\LiveSearch_Api\Live.Core\IconsUrl.cs:line 110
+2021-02-11 18:03:32.837 +01:00 [Information] Finish radio songs update with 90 songs and 0 youtube errors
+2021-02-11 21:48:46.716 +01:00 [Information] Finish radio songs update with 263 songs and 0 youtube errors
+2021-02-11 22:22:46.775 +01:00 [Information] Finish radio songs update with 79 songs and 0 youtube errors
+2021-02-11 23:01:03.395 +01:00 [Information] Finish radio songs update with 91 songs and 0 youtube errors
+2021-02-11 23:07:23.221 +01:00 [Information] Finish TV movies update with 151 and 13 youtube errors
