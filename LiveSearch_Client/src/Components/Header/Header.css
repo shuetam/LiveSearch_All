@@ -238,12 +238,12 @@
 }
 
 .addOwn {
-    color: rgb(67, 149, 255);
+    color: rgba(238, 238, 238, 0.658);
     font-family: Verdana, Geneva, sans-serif;
     cursor: pointer;
-    font-size: 33px;
-    margin-left: 20px;
-    margin-top: -5px;
+    font-size: 22px;
+    margin-left: 19px;
+    margin-top: 3px;
     font-weight: 200;
 }
 
@@ -258,7 +258,7 @@
 
 .activePlus {
     
-    color: white;
+    color:  rgba(255, 255, 255, 0.986);
 }
 
 

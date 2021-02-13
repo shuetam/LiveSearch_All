@@ -1260,22 +1260,25 @@ class UserDesktop extends Component {
         this.props.history.push(PATHES.userPulpit);
     }
 
-    showAddingIcon = () => {
+    showAddingIcon = (iconType) => {
+        this.setState({addingType: iconType});
         this.stopAddingFolder();
         removeHiding();
         //this.setState({fieldType: "ICON_ADDING"});
         this.setState({editingFolder: false});
         //this.setState({ entityID: "" });
+        this.setState({addingIcon: true});
+        
         if(this.state.addingIcon) {
-            this.stopAdding()
+           // this.stopAdding()
         }
         else {
-            this.setState({addingIcon: true});
         }
     }
 
     showAddingFolder = () => {
         this.setState({addingIcon: false});
+        this.setState({addingType: ""});
         removeHiding();
         if(this.state.addingFolder) {
             this.stopAddingFolder()
@@ -1411,6 +1414,7 @@ class UserDesktop extends Component {
             var iconType = icon.type;
             this.setState({ fieldType: iconType});
         } */
+        this.setState({addingType: ""});
         this.setState({addingIcon: false});
         this.setState({wrongWWW: false});
         this.setState({noIconsFound: false});
@@ -2067,7 +2071,7 @@ setAddingIcon = () => {
 
             let saveIcons = <div id="saveIcons" class="switchDisable" onClick={this.saveIcons} >
             <i class="icon-floppy" />
-            <div id="saveIconsField" class="hoverInfo"  >
+            <div id="saveIconsField" class="hoverInfo" style={{left: "450px"}} >
                 Zapamiętaj aktualne ulokowanie ikon  
             </div>
         </div>
@@ -2076,14 +2080,14 @@ setAddingIcon = () => {
         (this.props.match.params.id1=="folder")? 
         <div id="backFolder" onClick={this.backToDesktop} class="switchB"> 
         <i class="icon-left-bold" />
-        <div id="backFolderField" class="hoverInfo" >
+        <div id="backFolderField" class="hoverInfo" style={{left: "420px"}}>
         Wróć do głównego pulpitu 
         </div>
         </div>
         :
         <div id="plus" className= {this.state.editingFolder? "switchA" : "switchB" } onClick={this.showFolderAdding}  title="Dodaj nowy folder"> 
         <i class="icon-folder-add" />
-        <div id="plusField" className="hoverInfo" title="">
+        <div id="plusField" className="hoverInfo" title="" class="hoverInfo" style={{left: "420px"}}>
         Utwórz nowy folder
         {/* <p>Utwórz nowy folder o nazwie:</p>
         <div style={{display: "flex"}}>
@@ -2092,14 +2096,40 @@ setAddingIcon = () => {
         </div> */}
         </div>
         </div>;
+
+let iconIcons = <div style={{fontSize: "17px"}}><i class="icon-youtube"/>
+<i class="icon-spotify"/>
+<i class="icon-picture"/></div>
+
         
-        let addOwn =
-        <div id="addOwn" class= {this.state.addingIcon? "addOwn activePlus" : "addOwn" }  onClick={this.showAddingIcon}> 
-        &#43;
-        <div id="addText" className="hoverInfo" >
-        Dodaj własne ikony  
+        let addOwnYT =
+        <div id="addOwn" class= {(this.state.addingIcon && this.state.addingType == "YT")? "addOwn activePlus" : "addOwn" }  onClick={()=>{this.showAddingIcon("YT")}}> 
+        {/* &#43; */}<i class="icon-video"/>
+        <div id="addText" className="hoverInfo" style={{left: "300px"}}>
+        Dodaj ikony wideo  
         </div>
         </div>
+
+        let addOwnSPOTIFY =
+        <div id="addOwn" class= {(this.state.addingIcon && this.state.addingType == "SPOTIFY")? "addOwn activePlus" : "addOwn" }  onClick={()=>{this.showAddingIcon("SPOTIFY")}}> 
+        {/* &#43; */}<i class="icon-spotify"/>
+        <div id="addText" className="hoverInfo" style={{left: "380px"}}>
+        Dodaj ikony Spotify  
+        </div>
+        </div>
+
+        let addOwnIMG =
+        <div id="addOwn" class= {(this.state.addingIcon && this.state.addingType == "IMG")? "addOwn activePlus" : "addOwn" } onClick={()=>{this.showAddingIcon("IMG")}}> 
+        {/* &#43; */}<i class="icon-picture"/>
+        <div id="addText" className="hoverInfo" style={{left: "350px"}}>
+        Dodaj zdjęcia
+        </div>
+        </div>
+
+
+
+
+
  /*  let infoAdding = this.state.addingFolder?
   <span>Utwórz foldery i dodawaj do nich wybrane ikony, aby uporządkować i segregować
       swoją kolekcję. Nazwa folderu może składać sie z maksymalnie 20 znaków.</span>
@@ -2147,8 +2177,8 @@ setAddingIcon = () => {
                   </div> : ""; 
 
         
-    let  deskMenu =  (<div class= {"deskMenu"} style={{left: !this.state.loadedIcons? "-20px" : "110px"}}>
-           {addOwn}
+    let  deskMenu =  (<div class= {"deskMenu"} style={{left: !this.state.loadedIcons? "-110px" : "110px"}}>
+           {addOwnYT}         {addOwnIMG}         {addOwnSPOTIFY}        
            {folderIcon}
         {saveIcons}
         {findNewIcons}

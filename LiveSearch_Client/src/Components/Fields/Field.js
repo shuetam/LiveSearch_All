@@ -173,7 +173,7 @@ class Field extends Component {
                 <div className={!this.props.addingIcon? "field" : "field previewField"}>
                 <ReactPlayer
               //url = "https://www.instagram.com/p/CK-b7KIBa1x/?utm_source=ig_web_copy_link"
-                url={this.props.play.includes("www.")? this.props.play : "https://www.youtube.com/watch?v=" + this.props.play}
+                url=   {this.props.play.includes("www.")? this.props.play : "https://www.youtube.com/watch?v=" + this.props.play}
                 height= {!this.props.addingIcon? '315px': '155px' }
                 width= { !this.props.addingIcon? '560px': '360px'}
                 playing ={this.state.playMain} 

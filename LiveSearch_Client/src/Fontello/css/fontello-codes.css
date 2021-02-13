@@ -20,6 +20,7 @@
 .icon-group:before { content: '\e812'; } /* '' */
 .icon-user:before { content: '\e813'; } /* '' */
 .icon-picture:before { content: '\e814'; } /* '' */
+.icon-video:before { content: '\e815'; } /* '' */
 .icon-right-open:before { content: '\f006'; } /* '' */
 .icon-left-open:before { content: '\f007'; } /* '' */
 .icon-folder-open:before { content: '\f068'; } /* '' */
