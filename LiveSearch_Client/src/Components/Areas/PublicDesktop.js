@@ -148,7 +148,7 @@ class PublicDesktop extends Component {
 
         this.setState({ icons:
             Array.prototype.filter.call(icons, function(icon) {
-                return icon.type=="YT";
+                return (icon.type=="YT" || icon.type=="MOVIE") ;
             })
         });
 
@@ -336,7 +336,7 @@ handleScroll = (event) => {
             }
         this.setState({ icons:
             Array.prototype.filter.call(result.data, function(icon) {
-                return icon.type=="YT";
+                return (icon.type=="YT" || icon.type=="MOVIE");
             })
         });
 
@@ -391,7 +391,7 @@ handleScroll = (event) => {
             this.setState({ entityID:  lastIcon.id });
             this.setState({entityTags: this.getIconTags(lastIcon.id)});
 
-            if(type == "YT") {
+            if(type == "YT" || type == "MOVIE" ) {
                 
                 this.setState({ytField: true});
             }
@@ -411,7 +411,7 @@ handleScroll = (event) => {
                
                 this.setState({spotifyField: true});
             }
-
+            this.setState({fieldType: type});
         
         if(this.state.icons.length>0) {
             if(lastIcon.id.includes("Error") || lastIcon.id.includes("!!ID")) {
@@ -429,6 +429,7 @@ handleScroll = (event) => {
             this.setState({ entityID:  "" });
             this.setState({ noIcons: true,  loadedIcons: true });
             this.setState({ytField: true});
+            this.setState({fieldType: "YT"});
          
         }
     }
@@ -439,7 +440,8 @@ handleScroll = (event) => {
         var randomInt = require('random-int');
 
         // here if icons/songs lenght==0 then take next song from databse
-        var vidID = this.state.icons[randomInt(this.state.icons.length - 1)].id;
+        var icon = this.state.icons[randomInt(this.state.icons.length - 1)];
+        var vidID = icon.id;
         this.setState({ entityID: vidID });
         this.setState({entityTags: this.getIconTags(vidID)});
         var note = document.getElementById(vidID);
@@ -455,6 +457,7 @@ handleScroll = (event) => {
               }))
         }
         this.setState({ nowPlayed: vidID});
+        this.setState({ fieldType: icon.Type});
     }
 
 
@@ -501,6 +504,7 @@ handleScroll = (event) => {
         this.setState({ entityID: id });
         var note = document.getElementById(id);
         var icon = this.getIconById(id);
+
         if(note) {
            
             note.style.boxShadow = this.state.playedShadow;
@@ -1118,12 +1122,12 @@ getHeaderPosition = (start, end) => {
     }
 
     backFromFolder = () => {
-
-        if(this.props.headerType=="followed")
+        this.props.history.goBack();
+      /*   if(this.props.headerType=="followed")
             this.props.history.push(PATHES.followedFolders + "?from=1");
 
         if(this.props.headerType=="folders")
-            this.props.history.push(PATHES.sharedFolders+ "?q="+ this.state.explQuery + "&skip=0"+"&from=1");
+            this.props.history.push(PATHES.sharedFolders+ "?q="+ this.state.explQuery + "&skip=0"+"&from=1"); */
     }
 
     activeSharedFoldersFromUser = () => {     
@@ -1378,7 +1382,7 @@ folderInfoHeader = <div class="folderInfoHeader">
             field = <LoadingField/>
         }
         else {
-                if(this.state.ytField)
+/*                 if(this.state.ytField)
                     field = <Field play={this.state.entityID} folders={this.state.foldersIcons} noIcons={this.state.noIcons}
                     headerType={this.props.headerType}
                     show={this.state.loadedIcons} nextSong={this.nextSongHandler} loadText={this.props.fetchData} />
@@ -1393,9 +1397,28 @@ folderInfoHeader = <div class="folderInfoHeader">
                     field = <SpotifyField id={this.state.entityID}  noIcons={this.state.noIcons}  show={this.state.loadedIcons}/>
    
                     if(this.state.firstField)
-                        field = <FirstField />
+                        field = <FirstField /> */
 
+                        switch(this.state.fieldType) {
+                            case "YT":
+                            case "MOVIE":
+                                field = <Field showReflect={this.state.fieldType == "YT"} play={this.state.entityID} folders={this.state.foldersIcons} noIcons={this.state.noIcons}
+                                headerType={this.props.headerType}
+                                show={this.state.loadedIcons} nextSong={this.nextSongHandler} loadText={this.props.fetchData} />
+                           break;
+                                case "IMG":
+                                    case "BOOK":
+                                    field = <ImageField src={this.state.entityID} sourceShow={this.getNiceHttp(this.state.imgSource)} 
+                                    source={this.state.imgSource}  noIcons={this.state.noIcons}
+                                    show={this.state.loadedIcons}/>
+                                break;
+                            case "SPOTIFY":
+                                field = <SpotifyField id={this.state.entityID}  noIcons={this.state.noIcons}  show={this.state.loadedIcons}/>
+                                break;
+                          }
 
+                          if(this.state.firstField)
+                            field = <FirstField />
         }
 
 
@@ -1421,6 +1444,9 @@ folderInfoHeader = <div class="folderInfoHeader">
                     tags={song.tags}
                     public={true}
                     guidId={song.guidId}
+                    src = {song.source}
+                    type={song.type}
+                    type={song.type}
                 />
             )
         })

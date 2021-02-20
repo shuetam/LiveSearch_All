@@ -149,6 +149,13 @@ add Station NVARCHAR (50) NULL
 
 alter table ArchiveSongs
 add Station NVARCHAR (50) NULL
+
+alter table UserYoutubes
+add ImgSource NVARCHAR (MAX)  NULL
+
+alter table UserYoutubes
+add MovieType NVARCHAR (20)  NULL
+
 ---------------------------------
 select * from ArchiveMovies
 select * from ArchiveSongs

@@ -30,7 +30,7 @@ namespace Live.Repositories
 
         Task SaveIconsLocations(Guid userId, List<EntitySetter> icons);
         
-        Task<List<IconDto>> GetNewIcons( Guid userId, string url);
+        Task<List<IconDto>> GetNewIcons( Guid userId, EntitySetter data);
         Task<FolderDto> EditFolder(Guid UserId, EntitySetter folderSetter);
         Task<FolderDto> FollowFolder(Guid UserId, Guid FolderId, string left, string top);
         Task<FolderDto> UnFollowFolder(Guid UserId, Guid FolderId);

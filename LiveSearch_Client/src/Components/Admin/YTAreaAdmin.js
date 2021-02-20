@@ -699,6 +699,8 @@ var i = 0;
                     onHover={this.onHover}
                     onLeave={this.cleanTitle}
                     count={1}
+                    src = {song.source}
+                    type={song.type}
                 />
             ) 
         })

@@ -501,6 +501,7 @@ let field = "";
                     quarter = {getQuarter(song.id, song.left, song.top)}
                     public={true}
                     guidId={song.guidId}
+                    src = {song.source}
                 />
             )
         })

@@ -37,8 +37,6 @@ namespace Live.Controllers
         {
             string tagsString = "";
 
-
-
             if (icon.tags != null)
             {
                 foreach (var tag in icon.tags)
@@ -56,7 +54,7 @@ namespace Live.Controllers
 
             }
 
-            if (icon.Type == "YT")
+            if (icon.Type == "YT" || icon.Type == "MOVIE")
             {
                 var added = await _desktopRepository.AddYouTubeAsync(icon, this.UserId, tagsString);
                 return Json(added);
@@ -96,7 +94,7 @@ namespace Live.Controllers
         public async Task<IActionResult> FindIconsFromUrl([FromBody] EntitySetter data)
         {
             //Console.Write(data.Title);
-            var newIcons = await _desktopRepository.GetNewIcons(this.UserId, data.Title);
+            var newIcons = await _desktopRepository.GetNewIcons(this.UserId, data);
             return Json(newIcons);
         }
 

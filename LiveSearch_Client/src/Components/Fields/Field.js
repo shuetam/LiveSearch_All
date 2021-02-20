@@ -96,7 +96,7 @@ class Field extends Component {
 
 
     playReflect = (event) => {
-
+        if(this.props.showReflect) {
         this.setState({ playReflected: true });
         clearInterval(this.state.interval);
         this.setState({ interval: null });
@@ -104,20 +104,23 @@ class Field extends Component {
         this.setState({ showReflect: false });
         var randomFloat = require('random-float');
        // this.state.reflectVideo.playVideo();
-        if(event) {
+        if(event && this.state.reflectVideo) {
             this.state.reflectVideo.seekTo(event.getCurrentTime() + randomFloat(0.1, 0.8));
         }
-
-
         this.setState({ interval: setInterval(this.syncVid, 1000) });
+    }
+
     }
 
 
 
     pauseReflect = (event) => {
-        //console.log("PAUSE!!");
+        if(this.props.showReflect) {
         var randomFloat = require('random-float');
-        this.state.reflectVideo.seekTo(this.state.mainVideo.getCurrentTime() + randomFloat(0.1, 0.8));
+        if(this.state.reflectVideo) {
+            this.state.reflectVideo.seekTo(this.state.mainVideo.getCurrentTime() + randomFloat(0.1, 0.8));
+        }
+
         // this.setState({interval: !this.state.interval});
         //  this.state.reflectVideo.seekTo(event.target.getCurrentTime());
         this.setState({ showReflect: false });
@@ -125,9 +128,8 @@ class Field extends Component {
         this.setState({ interval: null });
         // this.intervalN = null;
         //this.state.reflectVideo.pauseVideo();
-       
-        
         this.setState({ playReflected: false });
+    }
     }
 
     onChange = (event) => {
@@ -167,13 +169,29 @@ class Field extends Component {
 //"https://i1.sndcdn.com/artworks-000117213722-45m4uv-t200x200.jpg"
 
 
+let reflectedVideo = this.props.showReflect?  ( <div className={!this.props.addingIcon? "glass" : "previewGlass"} style={{ opacity: this.state.showReflect ? 0.7 : 0.4, filter: (this.state.showReflect && !this.props.addingIcon) ? 'blur(3px)' : 'blur(12px)' }} id="glassId">
+<ReactPlayer 
+id="reflect"
+
+url= {(this.props.play.includes("http") || this.props.play.includes("www."))? this.props.play : "https://www.youtube.com/watch?v=" + this.props.play}
+    playing ={this.state.playReflected}
+    height= {!this.props.addingIcon? '315px': '155px' }
+    width= { !this.props.addingIcon? '560px': '360px'}
+   
+    opts={opts}
+    onReady={this.reflectVideoOnReady}
+    volume = {0}
+    muted={true}
+/>
+</div>) : "";
+
         let field =  (
             <div>
 
                 <div className={!this.props.addingIcon? "field" : "field previewField"}>
                 <ReactPlayer
               //url = "https://www.instagram.com/p/CK-b7KIBa1x/?utm_source=ig_web_copy_link"
-                url=   {this.props.play.includes("www.")? this.props.play : "https://www.youtube.com/watch?v=" + this.props.play}
+                url= {(this.props.play.includes("http") || this.props.play.includes("www."))? this.props.play : "https://www.youtube.com/watch?v=" + this.props.play}
                 height= {!this.props.addingIcon? '315px': '155px' }
                 width= { !this.props.addingIcon? '560px': '360px'}
                 playing ={this.state.playMain} 
@@ -195,21 +213,7 @@ class Field extends Component {
                         onEnd={this.props.nextSong}
                     /> */}
                 </div>
-                <div className={!this.props.addingIcon? "glass" : "previewGlass"} style={{ opacity: this.state.showReflect ? 0.7 : 0.4, filter: (this.state.showReflect && !this.props.addingIcon) ? 'blur(3px)' : 'blur(12px)' }} id="glassId">
-                    <ReactPlayer 
-                    id="reflect"
-                  
-                    url={this.props.play.includes("www")? this.props.play : "https://www.youtube.com/watch?v=" + this.props.play}
-                        playing ={this.state.playReflected}
-                        height= {!this.props.addingIcon? '315px': '155px' }
-                        width= { !this.props.addingIcon? '560px': '360px'}
-                       
-                        opts={opts}
-                        onReady={this.reflectVideoOnReady}
-                        volume = {0}
-                        muted={true}
-                    />
-                </div>
+                {reflectedVideo}
                 <div className="background">
                 </div>
                 <div className="blur">

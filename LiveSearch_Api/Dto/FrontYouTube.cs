@@ -20,23 +20,22 @@ namespace Live.Core
     public string  top {get; set;}
     public string left {get; set;}
     public string  count {get; set;}
-    public int countValue {get; set;}
+        public string source { get; set; }
+        public int countValue {get; set;}
      public List<string>  tags {get; set;}
     public DateTime  playAt {get; set;}
 
     public FrontYouTube(Song song, int count)
     {
         this.title = song.Name;
-        this.videoId = song.YouTube.VideoID;
+        this.videoId =  song.YouTube.VideoID;
         this.top = song.YouTube.top_;
         this.left = song.YouTube.left_;
         this.count = count.ToString();
         this.playAt = song.PlayAt;
         this.countValue = count;
         this.guidId = song.ID.ToString();
-
         this.tags = new HashSet<string>(song.getTags()).ToList();
-
     }
 
 //for admin
@@ -62,7 +61,8 @@ namespace Live.Core
         }
 
         this.playAt = movie.PlayAt;
-    }
+       
+        }
 
     public FrontYouTube(TVMovie movie,  List<DateTime> dates)
     {
@@ -125,7 +125,8 @@ namespace Live.Core
         this.top = movie.YouTube.top_;
         this.left = movie.YouTube.left_;
         this.count = (rating == "0")? "60" : rating;
-        try {
+        
+            try {
         this.countValue = Int32.Parse(rating);
         }
         catch(Exception ex)

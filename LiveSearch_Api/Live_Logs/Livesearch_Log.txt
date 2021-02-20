@@ -3959,3 +3959,19 @@
 2021-02-11 22:22:46.775 +01:00 [Information] Finish radio songs update with 79 songs and 0 youtube errors
 2021-02-11 23:01:03.395 +01:00 [Information] Finish radio songs update with 91 songs and 0 youtube errors
 2021-02-11 23:07:23.221 +01:00 [Information] Finish TV movies update with 151 and 13 youtube errors
+2021-02-14 11:26:51.971 +01:00 [Information] Finish radio songs update with 968 songs and 3 youtube errors
+2021-02-14 18:48:54.064 +01:00 [Information] Finish radio songs update with 661 songs and 1 youtube errors
+2021-02-14 19:20:03.481 +01:00 [Information] Finish radio songs update with 95 songs and 0 youtube errors
+2021-02-14 23:29:18.183 +01:00 [Information] Finish radio songs update with 415 songs and 1 youtube errors
+2021-02-15 00:20:17.412 +01:00 [Information] Finish radio songs update with 104 songs and 1 youtube errors
+2021-02-15 01:09:10.258 +01:00 [Information] Finish radio songs update with 105 songs and 3 youtube errors
+2021-02-15 22:45:47.894 +01:00 [Information] Finish radio songs update with 506 songs and 2 youtube errors
+2021-02-15 23:09:36.924 +01:00 [Information] Finish radio songs update with 95 songs and 0 youtube errors
+2021-02-16 00:05:55.869 +01:00 [Information] Finish radio songs update with 104 songs and 0 youtube errors
+2021-02-16 14:30:30.860 +01:00 [Information] Finish radio songs update with 1162 songs and 7 youtube errors
+2021-02-16 15:23:23.157 +01:00 [Information] Finish radio songs update with 91 songs and 0 youtube errors
+2021-02-16 19:53:29.878 +01:00 [Information] Finish radio songs update with 348 songs and 1 youtube errors
+2021-02-16 20:06:51.702 +01:00 [Information] Finish radio songs update with 89 songs and 0 youtube errors
+2021-02-16 21:04:14.433 +01:00 [Information] Finish radio songs update with 92 songs and 0 youtube errors
+2021-02-16 23:14:03.119 +01:00 [Information] Finish radio songs update with 178 songs and 0 youtube errors
+2021-02-17 00:02:47.639 +01:00 [Information] Finish radio songs update with 101 songs and 0 youtube errors

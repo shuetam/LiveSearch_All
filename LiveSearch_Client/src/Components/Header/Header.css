@@ -242,9 +242,10 @@
     font-family: Verdana, Geneva, sans-serif;
     cursor: pointer;
     font-size: 22px;
-    margin-left: 19px;
     margin-top: 3px;
+    margin-left: 19px;
     font-weight: 200;
+    transition: all 0.7s;
 }
 
 .addOwnInfo {
@@ -257,8 +258,11 @@
 
 
 .activePlus {
-    
+    transition: all 0.7s;
     color:  rgba(255, 255, 255, 0.986);
+    text-shadow: 16px 2px 13px -5px #000000;
+  
+    margin-top: 2px;
 }
 
 

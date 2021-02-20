@@ -28,8 +28,14 @@ class YTIcon extends Component {
 }
 
     componentDidMount() {
-        var src = 'https://i.ytimg.com/vi/' + this.props.id + '/hqdefault.jpg';
-        this.setState({src: src });
+        if(this.props.type == "YT") {
+            var src = 'https://i.ytimg.com/vi/' + this.props.id + '/hqdefault.jpg';
+            this.setState({src: src });
+        }
+        else {
+            this.setState({src: this.props.src });
+        }
+
     }
 
     removeIcon = (data, cross) => {
@@ -64,7 +70,8 @@ class YTIcon extends Component {
 
             const data = {
                         Id: ID,
-                        Type: "YT",
+                        Type: this.props.type,
+                        Source: this.props.type == "MOVIE"? this.props.src : this.props.type
                         //UserId: this.props.userId,
                         //Title: name
                         }
@@ -123,8 +130,8 @@ class YTIcon extends Component {
         
             const data = {
                         Id: ID,
-                        Type: "YT",
-                        //UserId: this.props.userId,
+                        Type: this.props.type,
+                        Source: this.props.type == "MOVIE"? this.props.src : this.props.type,
                         Title: name,
                         Top: Top_,
                         Left: Left_,
@@ -166,7 +173,8 @@ class YTIcon extends Component {
                 title: "",
                 top: entity.style.top,
                 left: entity.style.left,
-                type: "YT"
+                type: this.props.type,
+                source: this.props.type == "MOVIE"? this.props.src : this.props.type
             }
 
             axios.post(URL.api+URL.addIcon, data, this.state.authConfig)

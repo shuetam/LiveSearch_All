@@ -14,6 +14,7 @@ class InfoField extends Component {
     }
 
     render() {
+
  
     let field = this.props.fromFolder?
     (<div class="fieldAct"><span style={{fontSize: "20px", color: "rgba(255, 255, 255, 0.801)"}}>Nie posiadasz jeszcze ikon w tym folderze.</span><p/>
@@ -37,7 +38,7 @@ class InfoField extends Component {
         </div>)
         ;
 
-        if(this.props.show) {
+        if(this.props.show && !this.props.addingIcon) {
             return field;   
         }
         else {

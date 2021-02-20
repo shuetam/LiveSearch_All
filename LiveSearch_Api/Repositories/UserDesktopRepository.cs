@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Live.Controllers;
 using Live.Core;
+using Live.Live.Core;
 using Microsoft.EntityFrameworkCore;
 
 namespace Live.Repositories
@@ -33,9 +34,8 @@ namespace Live.Repositories
                 var titles = addYoutube.Title.Split("||").ToList();
                 string title = titles.Count > 0 ? titles[0] : addYoutube.Title;
 
-
-                var newYoutube = new UserYoutube(userId, addYoutube.Id, title, addYoutube.Left, addYoutube.Top, addYoutube.FolderId, tagsString);
-
+                var newYoutube = new UserYoutube(userId, addYoutube.Id, title, addYoutube.Left, addYoutube.Top, addYoutube.FolderId, tagsString, addYoutube.Source);
+              
                 _liveContext.UserYoutubes.Add(newYoutube);
                 await _liveContext.SaveChangesAsync();
                 return true;
@@ -110,9 +110,6 @@ namespace Live.Repositories
 
         public async Task<object> GetAllIconsIdAsync(Guid userId)
         {
-
-          
-
             var iconsIds = await _liveContext.UserYoutubes.Where(x => x.UserId == userId).Select(x => x.VideoId).ToListAsync();
             var imgIds = await _liveContext.UserImages.Where(x => x.UserId == userId).Select(x => x.UrlAddress).ToListAsync();
             var spotifyIds = await _liveContext.UserSpotify.Where(x => x.UserId == userId).Select(x => x.SpotifyId).ToListAsync();
@@ -193,7 +190,7 @@ namespace Live.Repositories
         public async Task RemoveEntity(Guid userId, string entityId, string entityType)
         {
             //Console.WriteLine(entityType);
-            if (entityType == "YT")
+            if (entityType == "YT" || entityType == "MOVIE")
             {
                 //Console.WriteLine("i am removing entity");
                 var entity = _liveContext.UserYoutubes.FirstOrDefault(x => x.UserId == userId && x.VideoId == entityId);
@@ -252,7 +249,7 @@ namespace Live.Repositories
         public async Task MoveEntityFromFolder(Guid userId, string entityId, string entityType)
         {
             //Console.WriteLine(entityType);
-            if (entityType == "YT")
+            if (entityType == "YT" || entityType == "MOVIE")
             {
                 //Console.WriteLine("i am removing entity");
                 var entity = _liveContext.UserYoutubes.FirstOrDefault(x => x.UserId == userId && x.VideoId == entityId);
@@ -282,7 +279,7 @@ namespace Live.Repositories
 
             Folder folder = null;
 
-            if (entityType == "YT")
+            if (entityType == "YT" || entityType == "MOVIE")
             {
                 var entity = _liveContext.UserYoutubes.FirstOrDefault(x => x.UserId == userId && x.VideoId == entityId);
                 if (entity != null)
@@ -393,12 +390,13 @@ namespace Live.Repositories
         }
 
 
-        public async Task<List<IconDto>> GetNewIcons(Guid userId, string url)
+        public async Task<List<IconDto>> GetNewIcons(Guid userId, EntitySetter data)
         {
 
             var user = await _liveContext.Users.FirstOrDefaultAsync(x => x.ID == userId);
-
+            var url = data.Title;
             var icons = new List<IconDto>();
+            bool isMovie = data.Type == "MOVIE";
 
             if (user != null)
             {
@@ -408,12 +406,13 @@ namespace Live.Repositories
                     url = "http://" + url;
                 }
 
-                var getIcons = await IconsUrl.GetIdsFromUrl(url);
+                var getIcons = await IconsUrl.GetIdsFromUrl(url, isMovie);
 
                 //icons.AddRange(iconsFromUrl.IDS);
                 icons.AddRange(getIcons);
 
             }
+
 
             if (icons.Count == 0)
             {
@@ -483,6 +482,7 @@ namespace Live.Repositories
                     break;
 
                 case "YT":
+                case "MOVIE":
                     var yt = _liveContext.UserYoutubes.FirstOrDefault(x => x.VideoId == newTitle.Id && x.UserId == userId);
                     if (yt != null)
                     {

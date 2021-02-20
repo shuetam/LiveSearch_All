@@ -27,10 +27,7 @@ namespace Live.Core
         public IconDto(string _id, string source, string _type)
         {
             this.id = _id;
-            //if(_type == "YT")
-           // {
-               // this.id = "https://www.youtube.com/watch?v="+ _id;
-            //}
+            
             this.type = _type;
             //this.title = source;
             this.setLocation(true);
@@ -65,6 +62,7 @@ namespace Live.Core
         public DateTime  playAt {get; set;}
         public int countValue;
         public int groupBook {get; set;}
+      
 
         private void setAddingLocation () 
         {

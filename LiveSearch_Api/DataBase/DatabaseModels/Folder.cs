@@ -45,9 +45,14 @@ public class Folder : Live.Core.Entity
     string[] four = { "", "", "", "" };
 
 
-    private string getImgSrc(string videoId)
+    private string getImgSrc(string videoId, string imgSource)
     {
-        return "https://i.ytimg.com/vi/" + videoId + "/hqdefault.jpg";
+        
+        if(string.IsNullOrEmpty(imgSource) || imgSource=="YT")
+        {
+            return "https://i.ytimg.com/vi/" + videoId + "/hqdefault.jpg";
+        }
+        return imgSource;
     }
 
     public bool HasIcons()
@@ -101,7 +106,7 @@ public class Folder : Live.Core.Entity
     public void SetFourIcons()
     {
         var listYT = this.UserYouTubes.OrderByDescending(x => x.AddedToFolder)
-        .Select(x => new FolderDto(x.AddedToFolder, getImgSrc(x.VideoId)))
+        .Select(x => new FolderDto(x.AddedToFolder, getImgSrc(x.VideoId, x.ImgSource)))
         .ToList()
         .Take(4);
 
