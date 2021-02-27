@@ -93,7 +93,7 @@ class Folder extends Component {
             removeIcon = this.props.hideEditors? "" : <div id={this.props.id} onClick = {this.deleteFolder}
             title="Usuń folder"  class={classEntity}>&#43;</div> ;
             
-        shareIcon = this.props.shared? <div id={this.props.id} title="Obserwujących"  className="lockIcon openIcon"><i id={this.props.id}  class="icon-lock-open-alt"/></div> 
+        shareIcon = this.props.shared? <div id={this.props.id} title="Publiczny"  className="lockIcon openIcon"><i id={this.props.id}  class="icon-lock-open-alt"/></div> 
             : <div id={this.props.id} title="Prywatny" className="lockIcon"><i id={this.props.id} class="icon-lock"/></div>;
             
             editIconField = <i id={this.props.id} title="Edytuj/udostępnij" class="icon-edit" onClick={this.editFolder}/>
