@@ -160,7 +160,7 @@ class UserDesktop extends Component {
       // document.getElementById(addingIcon.id).className = "disable";
       //debugger;
 
-      if(nextProps.addingIcon.type == "YT" || nextProps.addingIcon.type == "MOVIE") {
+      if(nextProps.addingIcon.type == "YT") {
           this.disableAddingIcon(nextProps.addingIcon.id)
                 this.setState(prevState => ({
                     icons: [...prevState.icons, nextProps.addingIcon]
@@ -457,10 +457,7 @@ class UserDesktop extends Component {
 
 
     neonShadowHandler = (id) => {
-        var icon =  this.getIconById(id);
-        if(icon) {
-            this.setState({fieldType: icon.type});
-        }
+
     //if(!this.state.addingIcon) {
         var played = document.getElementById(this.state.nowPlayed);
         if (played !== null) {
@@ -469,10 +466,9 @@ class UserDesktop extends Component {
                 prevPlayed: [...prevState.prevPlayed, prevId]
               }))
         }
-     
+        
         this.setState({ nowPlayed: id });
         this.setState({ entityID: id });
-      // this.setState({ entityID: "https://soundcloud.com/jacuss/queen-3" });
     //}
     this.setState({entityTags: this.getIconTags(id)});
 
@@ -508,7 +504,7 @@ class UserDesktop extends Component {
            // this.setState({addingID: id});
         //}
         //else {
-          //  this.setState({fieldType: "YT"});
+            this.setState({fieldType: "YT"});
         //}
         this.neonShadowHandler(id);
 
@@ -987,20 +983,21 @@ class UserDesktop extends Component {
 
 
         var entity = document.getElementById(id);
-        if(entity) {
-            var title = entity.title;
-            this.setState({ mainTitle: "" });
-            document.getElementById("258").innerHTML = "";
-            this.setState({editedId: id});
-            this.setState({editedTitle: title});
-            var tags = this.getIconTags(id);
-            this.setState({editedTags: tags.toString()});
-            this.setState({titleToEdit: title});
-            this.setState({showTitleEdit: true});
-        }
-        else {
-            this.Alert("Nie znaleziono ikony");
-        }
+        var title = entity.title;
+        this.setState({ mainTitle: "" });
+        document.getElementById("258").innerHTML = "";
+        
+        this.setState({editedId: id});
+        this.setState({editedTitle: title});
+
+
+        var tags = this.getIconTags(id);
+
+        this.setState({editedTags: tags.toString()});
+
+        this.setState({titleToEdit: title});
+
+        this.setState({showTitleEdit: true});
       
     }
 
@@ -1172,10 +1169,11 @@ class UserDesktop extends Component {
         this.setState({explQuery: url});
         const data = {
            // UserId: this.props.userId,
-            Title: url,
-            Type: this.state.addingType
+            Title: url
             }
-                  var goFind = url.includes("iframe") || url.match(regex);
+           var switcher =  this.state.addSwitcher;
+
+           var goFind = url.includes("iframe") || url.match(regex);
 
             if (goFind && url !== "") {
                 this.setState({wrongWWW: false});
@@ -1193,7 +1191,7 @@ class UserDesktop extends Component {
                        
                         this.setState({ newIcons:
                             Array.prototype.filter.call(result.data, function(icon){
-                                return ((icon.type).includes("YT") || (icon.type).includes("MOVIE"));
+                                return (icon.type).includes("YT");
                             })
                         });
                         //debugger;
@@ -1587,8 +1585,7 @@ class UserDesktop extends Component {
        
         switch(this.state.fieldType) {
             case "YT":
-            case "MOVIE":
-                field = <Field showReflect={this.state.fieldType == "YT"} addingIcon={this.state.addingIcon} play={this.state.entityID} show={this.state.loadedIcons} nextSong={this.nextSongHandler} loadText={this.props.fetchData} />
+                field = <Field addingIcon={this.state.addingIcon} play={this.state.entityID} show={this.state.loadedIcons} nextSong={this.nextSongHandler} loadText={this.props.fetchData} />
            break;
                 case "IMG":
                 field = <ImageField addingIcon={this.state.addingIcon} src={this.state.entityID} sourceShow={this.getNiceHttp(this.state.imgSource)} 
@@ -1683,8 +1680,7 @@ class UserDesktop extends Component {
             }
 
             getIconById = (Id) => {
-                var allIcons = [...this.state.icons, ...this.state.images, ...this.state.spotify, ...this.state.folders, 
-                    ...this.state.newFolders, ...this.state.newIcons, ...this.state.newImages, ...this.state.newSpotify ];
+                var allIcons = [...this.state.icons, ...this.state.images, ...this.state.spotify, ...this.state.folders, ...this.state.newFolders ];
                 var icon = allIcons.find( icon => icon.id === Id);
                 if(!icon) {
                     icon = allIcons[allIcons.length-1];
@@ -1695,7 +1691,7 @@ class UserDesktop extends Component {
             getIconTags(Id) {
                 var icon = this.getIconById(Id);
                 if(icon && icon.type !== 'FOLDER') {
-                    return icon.tags?  icon.tags : [];
+                    return icon.tags;
                 }
                 return [];
         
@@ -1744,8 +1740,6 @@ setAddingIcon = () => {
                     fromDesk = {true}
                     public={false}
                     guidId={song.guidId}
-                    src = {song.source}
-                    type={song.type}
                 />
             )
         })
@@ -1910,8 +1904,6 @@ setAddingIcon = () => {
                     leftEdit = "70%"
                     public={false}
                     newIcon={true}
-                    src = {song.source}
-                    type={song.type}
                 />
             )
         })
@@ -1986,6 +1978,51 @@ setAddingIcon = () => {
         let loading = (this.state.searchingIcons && !this.state.wrongWWW && !this.state.noIconsFound && !this.state.iconsFound)?
         (<div className="lds-ellipsiss"><div></div><div></div><div></div></div>) : "";
 
+
+/*         let addingIcon = <div id="ownField" style={{display: this.state.addingIcon? 'block' : 'none'}} >
+        <p>Dodaj nowe ikony z:</p>
+
+        <div  style={{display: "flex"}}>
+
+        <div id="addYouTube" onClick={this.switchAddIcon} class={(this.state.addSwitcher == "addYouTube")? "addSwitcherActive" : "addSwitcher" }  >YouTube</div>
+        <div id="addWWW" onClick={this.switchAddIcon} style={{marginLeft: "10px"}}  class={(this.state.addSwitcher == "addWWW")? "addSwitcherActive" : "addSwitcher" } >WWW</div>
+        <div id="addInstagram" onClick={this.switchAddIcon} style={{marginLeft: "10px"}}  class={(this.state.addSwitcher == "addInstagram")? "addSwitcherActive" : "addSwitcher" } >Instagram</div>
+        <div id="addSpotify" onClick={this.switchAddIcon} style={{marginLeft: "10px"}}  class={(this.state.addSwitcher == "addSpotify")? "addSwitcherActive" : "addSwitcher" } >Spotify</div>
+
+        </div>
+       
+        <p></p>
+        <div style={{display: "flex"}}>
+        <input type="text" placeholder={this.state.addPlaceholder}
+        onKeyPress={this.addIconHandlerPress}
+        style={{width: "230px"}} id="iLink"/>
+        <button class= { "popupButtton" } style={{fontSize: 12, padding: "4px",  width: '90px', marginLeft: "10px"}}  
+        onClick={this.addIconHandler} >Znajdź ikony</button>
+         <div title="Zakończ" class= { "stopAdding" }
+        onClick={this.stopAdding}>&#43;</div>
+        </div>
+        <div style={{marginLeft: '0px'}} id="infoLink">&#9432;info
+                <div id="info">
+                            Aby odszukać i dodać ikony reprezentujące film YouTube lub zdjęcia,
+                            wklej link do filmu, strony www lub postu na Instagramie.
+                            W celu dodania ikony z serwisu Spotify skopiuj i wklej osadzony kod, który znajduje się
+                            w zakładce "Udostępnij" w opcjach utworu, albumu, artysty lub playlisty. 
+                        </div>
+                </div>
+            <div style={{display: "flex"}}>
+           {addingInfo}
+           {noIcons}
+           {iconsInfo}
+           {loading}
+        </div>
+        </div>; */
+
+        let tagsField = "";
+
+        if(!this.state.addingIcon) {
+            tagsField = this.state.loadedIcons? <TagsField fieldType={this.state.fieldType} noIcons = {!this.anyIcons()}  searchTag={this.props.searchTag} fromDesk={true} setTags={this.showTitleEditor}  id={this.state.entityID} tags = {this.state.entityTags} />  : "";
+        }
+
             let field = "";
 
         if(this.props.isAuthenticated) {
@@ -1997,14 +2034,6 @@ setAddingIcon = () => {
             field = <LoginField/>
  
         }
-
-
-        let tagsField = "";
-
-        if(!this.state.addingIcon && !this.state.editingFolder && field!=="") {
-            tagsField = this.state.loadedIcons? <TagsField fieldType={this.state.fieldType} noIcons = {!this.anyIcons()}  searchTag={this.props.searchTag} fromDesk={true} setTags={this.showTitleEditor}  id={this.state.entityID} tags = {this.state.entityTags} />  : "";
-        }
-
 
         let addingField = this.state.addingIcon? 
         <AddingField addingType = {this.state.addingType}  onKeyPress={this.addIconHandlerPress} findIcon={this.addIconHandler} stopAdding={this.stopAdding} />
@@ -2072,7 +2101,7 @@ let iconIcons = <div style={{fontSize: "17px"}}><i class="icon-youtube"/>
 
         
         let addOwnYT =
-        <div id="addOwn" class= {(this.state.addingIcon && this.state.addingType == "MOVIE")? "addOwn activePlus" : "addOwn" }  onClick={()=>{this.showAddingIcon("MOVIE")}}> 
+        <div id="addOwn" class= {(this.state.addingIcon && this.state.addingType == "YT")? "addOwn activePlus" : "addOwn" }  onClick={()=>{this.showAddingIcon("YT")}}> 
         {/* &#43; */}<i class="icon-video"/>
         <div id="addText" className="hoverInfo" style={{left: "300px"}}>
         Dodaj ikony wideo  
@@ -2146,7 +2175,7 @@ let iconIcons = <div style={{fontSize: "17px"}}><i class="icon-youtube"/>
                   </div> : ""; 
 
         
-    let  deskMenu =  (<div class= {"deskMenu"} style={{left: !this.state.loadedIcons? "-150px" : "110px"}}>
+    let  deskMenu =  (<div class= {"deskMenu"} style={{left: !this.state.loadedIcons? "-110px" : "110px"}}>
            {addOwnYT}         {addOwnIMG}         {addOwnSPOTIFY}        
            {folderIcon}
         {saveIcons}
