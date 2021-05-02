@@ -11,6 +11,8 @@ using Serilog;
 using Live.Services;
 using System.Net.Mail;
 using Microsoft.Extensions.Configuration;
+using System.Net.Http;
+using System.Collections.Generic;
 
 namespace Live.Controllers
 {
@@ -66,17 +68,25 @@ namespace Live.Controllers
 
 
         [HttpPost("userregister")]
-        public async Task<IActionResult> Register([FromBody] Login socialLogin)
+        public async Task<IActionResult> Register([FromBody] Login login)
         {
             string error = "error";
+            string captchaError = "captcha";
+
+
 
             string passwordRegex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,20}$";
             var reg = new Regex(passwordRegex);
-            var pass = reg.IsMatch(socialLogin.Password);
+            var pass = reg.IsMatch(login.Password);
 
-            if (pass && IsMailValid(socialLogin.Email))
+            if (pass && IsMailValid(login.Email))
             {
-                var user = await _userRepository.RegisterAsync(socialLogin.Email, socialLogin.Password);
+                if (!CaptchaVerify(login.captchaToken))
+                {
+                    return Json(captchaError);
+                }
+
+                var user = await _userRepository.RegisterAsync(login.Email, login.Password);
                 return Json(user);
             }
             return Json(error);
@@ -112,6 +122,28 @@ namespace Live.Controllers
             {
                 return false;
             }
+        }
+
+        private bool CaptchaVerify(string captchaToken)
+        {
+            if (string.IsNullOrEmpty(captchaToken))
+            {
+                return false;
+            }
+
+            using (var client = new HttpClient())
+            {
+                var apiGoogle = "https://www.google.com/recaptcha/api/siteverify";
+                var values = new Dictionary<string, string>
+                    {
+                        { "secret", captchaToken },
+                        { "response", GoogleKey.captchaLocal }
+                    };
+
+                var content = new FormUrlEncodedContent(values);
+                var response = client.PostAsync(apiGoogle, content);
+            }
+                return true;
         }
     }
 }

@@ -9,12 +9,13 @@ using System.IO;
 
 namespace Live.Controllers
 {
-    public class Login 
+    public class Login
     {
-        public string Email {get; set;}
-        public string Password {get; set;}
-        public string ID {get; set;}
-         public string resetID {get; set;}
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string ID { get; set; }
+        public string resetID { get; set; }
+        public string captchaToken {get; set;}
    
     }
 

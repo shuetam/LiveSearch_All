@@ -9,6 +9,8 @@ using System.IO;
 using System.Text.RegularExpressions;
 using Serilog;
 using Live.Services;
+using System.Net.Http;
+using System.Collections.Generic;
 
 namespace Live.Controllers
 {
@@ -53,6 +55,9 @@ namespace Live.Controllers
 		[HttpPost("user")]
         public async Task<IActionResult> SocialLogin([FromBody] SocialLogin socialLogin)
         {
+
+            CaptchaVerify(socialLogin.CaptchaToken);
+
 
         string googlePattern = "^G_"; 
         string facebookPattern = "^F_";
@@ -118,6 +123,27 @@ namespace Live.Controllers
             return Json(error);
 
       
+        }
+        private bool CaptchaVerify(string captchaToken)
+        {
+            if (string.IsNullOrEmpty(captchaToken))
+            {
+                return false;
+            }
+
+            using (var client = new HttpClient())
+            {
+                var apiGoogle = "https://www.google.com/recaptcha/api/siteverify";
+                var values = new Dictionary<string, string>
+                    {
+                        { "secret", captchaToken },
+                        { "response", GoogleKey.captchaLocal }
+                    };
+
+                var content = new FormUrlEncodedContent(values);
+                var response = client.PostAsync(apiGoogle, content);
+            }
+            return true;
         }
     }
 }
