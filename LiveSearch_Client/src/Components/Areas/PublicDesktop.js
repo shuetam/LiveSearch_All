@@ -1446,7 +1446,7 @@ folderInfoHeader = <div class="folderInfoHeader">
                     guidId={song.guidId}
                     src = {song.source}
                     type={song.type}
-                    type={song.type}
+                   
                 />
             )
         })

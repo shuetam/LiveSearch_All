@@ -1742,6 +1742,8 @@ setAddingIcon = () => {
                     fromDesk = {true}
                     public={false}
                     guidId={song.guidId}
+                    src = {song.source}
+                    type={song.type}
                 />
             )
         })

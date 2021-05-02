@@ -502,6 +502,7 @@ let field = "";
                     public={true}
                     guidId={song.guidId}
                     src = {song.source}
+                    type={song.type}
                 />
             )
         })
