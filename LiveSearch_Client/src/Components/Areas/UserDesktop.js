@@ -107,8 +107,6 @@ class UserDesktop extends Component {
             fieldType: "",
             smallFolder: true,
             addingType: "",
-           
-            
         }
     }
 
@@ -653,7 +651,7 @@ class UserDesktop extends Component {
             var folder = this.getIconById(entity.id);
         
             //folder.followers?
-            var folderState = folder.shared? "<span  className='lockIcon openIcon'><i class='icon-lock-open-alt'/></span>Publiczny, obserwujących: <span class='openIconF'>" + folder.followers + "</span>" : "<i class='icon-lock'/>Prywatny";
+            var folderState = folder.shared? "<i class='icon-lock-open-alt'/>Publiczny, obserwujących: <span class='openIconF'>" + folder.followers + "</span>" : "<i class='icon-lock'/>Prywatny";
             var titleMain =  folder.title + "<br/>" + "<span class=folderFollowers>"+folderState+"</span>";
             dragElement(document.getElementById(event.target.id));
             var iconTitle = document.getElementById("258");
@@ -2009,7 +2007,7 @@ setAddingIcon = () => {
 
 
         let addingField = this.state.addingIcon? 
-        <AddingField  onKeyPress={this.addIconHandlerPress} findIcon={this.addIconHandler} stopAdding={this.stopAdding} />
+        <AddingField addingType = {this.state.addingType}  onKeyPress={this.addIconHandlerPress} findIcon={this.addIconHandler} stopAdding={this.stopAdding} />
           : "";
          
           let tagsEdit =  this.state.folderEditing?  ""

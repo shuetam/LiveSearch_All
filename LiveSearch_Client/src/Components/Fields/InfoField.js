@@ -28,11 +28,10 @@ class InfoField extends Component {
     <p/>
     <span style={{fontSize: "20px", color: "rgba(255, 255, 255, 0.801)"}}>Nie posiadasz jeszcze ikon na głównym pulpicie.</span><p/>
         Naciśnij <span class="addIconInfo">&#43;
-        </span> przy wybranej ikonie w sekcji <i class="icon-fire"/>Aktualności lub <i class="icon-search"/>Eksploruj 
-        <br/>lub<span class="addOwnInfo" > &#43; </span>
-        w lewym górnym rogu ekranu, aby dodać nowe ikony.
+        </span> przy wybranej ikonie lub <span class="addOwnInfo" > &#43; </span>
+        dodaj własne używając funkcji powyżej.
         <div> W celu usunięcia ikony z pulpitu naciśnij przy niej <div class="removeEntityInfo">&#43;</div>. 
-        <br/>Ikony znajdujące się już na Twoim pulpicie mogą być z niego usuwane również w sekcjach <i class="icon-fire"/>Aktualności lub <i class="icon-search"/>Eksploruj.
+        <br/>Ikony znajdujące się już na Twoim pulpicie mogą być z niego usuwane również z poziomu publicznych pulpitów.
 <br/>Wszelkie dodatkowe informacje znajdziesz pod znakami &#9432;info oraz w dziale "Informacje i pomoc".
          </div>
         </div>)

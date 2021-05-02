@@ -198,6 +198,8 @@ class YTAreaAdmin extends Component {
         if(this.state.iconsType === "radio") {
             return this.setSizeSong(c);
         }
+
+        return this.setSizeSong(c);
     }
 
 
@@ -357,6 +359,10 @@ class YTAreaAdmin extends Component {
 
         var entity = document.getElementById(event.target.id);
 
+        if(entity) {
+
+        
+
         var titleMain = entity.title.replace("||","<br/>");
         titleMain = titleMain.replace("||","<br/>");
         titleMain = titleMain.replace("||","<br/>");
@@ -432,13 +438,14 @@ class YTAreaAdmin extends Component {
             }
         }
     }
+}
 
     ////////////////////////////////////////////////
 
 
 
     userOwner = (id) => {
-        return  this.state.userIconsId.includes(id);
+        return  false;
     }
 
 
@@ -718,6 +725,7 @@ var i = 0;
 
       <input id="editID" type="text"
         autofocus="true"
+        
         style={{backgroundColor: "white" }} 
         onKeyPress = {this.onKeyTitle}
          onChange={e => this.editID(e.target.value)} 
@@ -725,6 +733,7 @@ var i = 0;
 
           <input id="editR" type="text"
         autofocus="true"
+        placeholder = "This is for movie rating"
         style={{backgroundColor: "white" }} 
         onKeyPress = {this.onKeyTitle}
          onChange={e => this.editRating(e.target.value)} 

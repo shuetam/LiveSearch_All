@@ -34,24 +34,46 @@ class AddingField extends Component {
 
     render() {
 
-        let iconIcons = <div style={{fontSize: "17px"}}><i class="icon-youtube"/>
-        <i class="icon-spotify"/>
-        <i class="icon-picture"/></div>
+        let addingIcon = "";
+        let infoContent = "";
+        let placeHolder = "";
+        let infoMovie = "";
+        switch(this.props.addingType) {   
+            case "MOVIE":
+                addingIcon = <i class="icon-video"/>;
+                infoContent = "Aby odszukać i dodać ikony reprezentujące klip wideo, wklej link do filmu";
+                infoMovie = "(na przykład z serwisu YouTube, SoundCloud, Facebook itp.)";
+                placeHolder = "Wklej link do filmu";
+                break;
+            case "IMG":  
+            addingIcon = <i class="icon-picture"/>;
+            infoContent = "Wklej adres strony lub link do postu na Instagramie, aby odszukać i dodać ikony ze zdjęciami.";
+            placeHolder = "Wklej link do strony lub postu na Instagramie";
+            break;
+            case "SPOTIFY": 
+            addingIcon = <i class="icon-spotify"/>;
+            infoContent = " W celu dodania ikony z serwisu Spotify skopiuj i wklej osadzony kod, który znajduje się w zakładce 'Udostępnij' w opcjach utworu, albumu, artysty lub playlisty.";
+            placeHolder = "Wklej kod osadzenia z serwisu Spotify";
+            break;
+        }
+        let iconIcons = <div style={{fontSize: "18px"}}>{addingIcon}
+       </div>
 
 let inputPaste =
 <span   class="fieldEditorInput">
 <input id="addingIconLink" type="text"
 autofocus="true"
 onKeyPress = {this.props.onKeyPress}
-placeholder =  "Wklej link lub kod osadzenia"/> 
+placeholder = {placeHolder}/> 
  </span>
 
 
 var infoText =  <div  className="lockIconF" style={{fontSize: "13px", padding: "5px", color: "rgba(255, 255, 255, 0.701)"}}>
-  Aby odszukać i dodać ikony reprezentujące film YouTube lub zdjęcia,
+ {infoContent}<br/>{infoMovie}
+ {/*  Aby odszukać i dodać ikony reprezentujące film YouTube lub zdjęcia,
   wklej link do filmu, strony www lub postu na Instagramie.
   W celu dodania ikony z serwisu Spotify skopiuj i wklej osadzony kod, który znajduje się
-  w zakładce "Udostępnij" w opcjach utworu, albumu, artysty lub playlisty.</div>
+  w zakładce "Udostępnij" w opcjach utworu, albumu, artysty lub playlisty. */}</div>
 
 
 
