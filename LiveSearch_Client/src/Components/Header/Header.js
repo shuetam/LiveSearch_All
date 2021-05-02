@@ -33,7 +33,8 @@ import UserDesktop from '../Areas/UserDesktop';
 import axios from 'axios';
 import {URL, PATHES} from '../../environment';
 import InputNumber from 'react-input-number';
-import {manageLogin, manageLiveSearchLogin} from '../../CommonManager'
+import {manageLogin, manageLiveSearchLogin} from '../../CommonManager';
+import ReCAPTCHA from "react-google-recaptcha";
 
 
 
@@ -335,7 +336,8 @@ if(email !== undefined) {
 
     const data = {
         Email: email,
-        Token: token
+        Token: token,
+        CaptchaToken: this.state.captchaToken
     };
    
     axios.post(URL.api+URL.login, data)
@@ -670,6 +672,9 @@ responseErrorGoogle = (response) => {
     
     }
 
+    onCapchaChange = (value) => {
+        this.setState({captchaToken: value});
+    }
         
     searchTag = (query) => {
         this.setState({showActuallHeader: false});
@@ -952,7 +957,14 @@ let infoArrowBest = this.state.showBooksArrow? <div  class="infoArrowBestsellers
 let loginWindow = 
 <div id="loginWindow" class="disable">Zaloguj się aby przejść do swojego pulpitu i dodawać do niego nowe ikony
 <p/>
-{loginButtons}</div>;
+{loginButtons}
+
+<div className={!this.props.addingIcon? "field" : "field previewField"}> <ReCAPTCHA
+sitekey="6LefE8MaAAAAAIDJsCtx-cwqKQEqXnIDFGOfo4YY"
+onChange={this.onCapchaChange}
+/></div>
+
+</div>;
 
 
 let loginLivesearch = 
@@ -1378,6 +1390,11 @@ Bestsellery
 return (
           <div className="container"  >
               
+
+      
+
+
+
             <div id="allLive" className="header">
             
 
@@ -1429,7 +1446,8 @@ return (
             <div onClick={this.openLink} id={PATHES.policy} class="switchFooter">Polityka prywatności</div>
             <div onClick={this.openLink} id={PATHES.information} class="switchFooter">Informacje i pomoc</div>
             </div>
-           
+
+         
             </div>
         )
 

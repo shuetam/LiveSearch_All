@@ -8,6 +8,7 @@ import ReactScrollWheelHandler from "react-scroll-wheel-handler";
 //import {scrollU, scrollD} from '../../Store/Actions/scroll';
 import InstagramEmbed from 'react-instagram-embed';
 import ReactPlayer from 'react-player'
+import ReCAPTCHA from "react-google-recaptcha";
 
 class Field extends Component {
 
@@ -112,7 +113,7 @@ class Field extends Component {
 
     }
 
-
+   
 
     pauseReflect = (event) => {
         if(this.props.showReflect) {
@@ -184,6 +185,12 @@ url= {(this.props.play.includes("http") || this.props.play.includes("www."))? th
     muted={true}
 />
 </div>) : "";
+
+
+/* let capcha =   <div className={!this.props.addingIcon? "field" : "field previewField"}> <ReCAPTCHA
+sitekey="6LefE8MaAAAAAIDJsCtx-cwqKQEqXnIDFGOfo4YY"
+onChange={this.onCapchaChange}
+/></div> */
 
         let field =  (
             <div>
