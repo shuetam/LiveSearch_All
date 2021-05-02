@@ -26,7 +26,9 @@ namespace Live.Controllers
         {
             var top = await _actuallRepository.GetAllActuallYTAsync();
             var topImg = await _actuallRepository.GetAllActuallIMGAsync();
-            top.AddRange(topImg);
+
+            if (top.Count > 0)
+                top.AddRange(topImg);
 
             top.Shuffle();
             return Json(top);

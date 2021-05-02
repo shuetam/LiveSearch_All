@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import './Style.css';
 import { Route, NavLink, Switch, withRouter } from 'react-router-dom';
+import reducer from '../../Store/Reducers/auth';
 
 
 class Information extends Component {
@@ -20,7 +21,7 @@ class Information extends Component {
 
     render() {
 
-        let field =
+  /*       let field =
         <div class="fieldAct firstField">
         Witaj w 
         <span style={{ color: "rgba(231, 173, 64, 0.637)" }}> Live<span style={{ color: "rgba(255, 255, 255, 0.5)" }}>S</span>earch </span> 
@@ -35,10 +36,10 @@ class Information extends Component {
             <p/>
     <span style={{ fontSize: "13px"}}> Po dwukrotnym kliknięciu na wybranej ikonie jej zawartość zostanie wyświetlona w tym polu - jeżeli ikona posiada tagi, zostaną one pokazane powyżej. Tytuł ikony wyświetlany jest pod tym polem po najechaniu na nią kursorem. Wszelkie dodatkowe informacje znajdziesz w poszczególnych sekcjach pod znakami &#9432;info oraz w dziale "Informacje i pomoc".</span>
 
-            </div>;
+            </div>; */
 
 
-let field1 = this.props.fromFolder?
+/* let field1 = this.props.fromFolder?
 (<div class="fieldAct"><span style={{fontSize: "20px", color: "rgba(255, 255, 255, 0.801)"}}>Nie posiadasz jeszcze ikon w tym folderze.</span><p/>
     Upuść nad folderem wybrane ikony na pulpicie głównym
     <br/>lub naciśnij <span  class="addOwn" > &#43; </span>
@@ -57,7 +58,7 @@ let field1 = this.props.fromFolder?
     <br/>Ikony znajdujące się już na Twoim pulpicie mogą być z niego usuwane również w sekcjach <i class="icon-fire"/>Aktualności lub <i class="icon-search"/>Eksploruj.
 <br/>Wszelkie dodatkowe informacje znajdziesz pod znakami &#9432;info oraz w dziale "Informacje i pomoc".
      </div>
-    </div>)
+    </div>) */
 
 
 
@@ -69,33 +70,48 @@ let field1 = this.props.fromFolder?
          wizualizuje dane w postaci ikon i umożliwia ich gromadzenie,
          przeszukiwanie oraz dzielenie się nimi pomiędzy użytkownikami.</p> 
          <p/>
-         Portal posiada trzy sekcje: 
-            <span style={{ color: "rgba(255, 255, 255, 0.8)"}}><i class="icon-fire"/>Aktualności, <i class="icon-search"/> Eksploruj i <i class="icon-doc-landscape"/> Mój pulpit</span>  - aby przełączać się pomiędzy nimi użyj ikony:<span style={{fontSize: "19px", color: "rgba(255, 255, 255, 0.8)"}}><i class="icon-down-open"/></span> w lewym górnym rogu ekranu.
+         Portal posiada pięć głównch sekcji: 
+            <span style={{ color: "rgba(255, 255, 255, 0.8)"}}><i class="icon-fire"/>Aktualności, <i class="icon-doc-landscape"/>Mój pulpit, <i class="icon-folder-open"/>Obserwowane foldery, <i class="icon-group"/>Foldery użytkowników   i <i class="icon-search"/>Eksploruj</span>:
             <p/> 
-            <span style={{color: 'white', textDecoration: 'underline'}}><i class="icon-fire"/>Aktualności:</span>
+            <span style={{color: 'white'}}><i class="icon-fire"/> Aktualności:</span>
             <br/>
             W tej sekcji znajdują się wizualizacje aktualnych danych internetowych dotyczących muzyki, filmów i literatury. W dziale 'Muzyka' znajdziesz ikony prezentujące linki do utworów muzycznych zagranych w ostatnich 12 godzinach w wymienionych stacjach radiowych.
             W jednym czasie możesz wizualizować dane z maksymalnie 3 stacji, a w przypadku braku zaznaczenia jakiegokolwiek radia utwory zostaną zaprezentowane w sposób losowy. Wielkości ikon zależne są od ich aktualnej popularności, czyli sumarycznej ilości pojawienia się utworu w wybranych stacjach radiowych.<br/> Dział 'Filmy' to wizualizacje zwiastunów filmowych. Aktualnie w dziale tym odnajdziesz zwiastuny produkcji, które zostaną wyemitowane w najbliższych 24 godzinach w stacjach talewizji naziemnej czyli: TVP1, TVP2, TVN, Polsat, TVN7, TV4, Tv Puls, Stopklatka, Focus TV, Nowa TV, Metro, WP1 oraz Zoom TV. Wielkości ikon odzwierciedlają ocenę danego filmu w serwisie filmweb.pl.<br/>
             'Literatura' jest wizualizacją która prezentuje okładki książek, które aktualnie znajdują się na listach bestsellerów w największych księgarniach internetowych.
             <br/>W dziale 'Top' wyświetlane są najpopularniejsze ikony z powyżej omówionych działów
             czyli najczęściej zagrane utwory, najwyżej ocenione filmy oraz najlepiej sprzedające się pozycje książkowe.
-
+            <hr/>
              <p/> 
-            <span style={{color: 'white', textDecoration: 'underline'}}><i class="icon-search"/>Eksploruj:</span>
-            <br/>
-            Sekcja 'Eksploruj' umożliwia wyszukiwanie ikon wśród wszytskich zasobów portalu - w tym w indywidualnych kolekcjach ikon znajdujących się na Pulpitach Użytkowników. Wpisana fraza wyszukiwana jest w tytułach oraz tagach ikon.
-
-               <p/> 
-            <span style={{color: 'white', textDecoration: 'underline'}}><i class="icon-doc-landscape"/>Mój pulpit:</span>
+ 
+             <span style={{color: 'white'}}><i class="icon-doc-landscape"/> Mój pulpit:</span>
             <br/>
             Pulpit jest indywidualnym miejscem gdzie zapisywane są ikony dodawane przez zalogowanego
             użytkownika.<br/> W celu zapisania wybranej ikony na swoim pulpicie w sekcji 'Eksploruj' lub 'Aktulaności' kliknij przy niej znaczek <span class="addIconInfo">&#43;</span> - ikona zostanie zapisana na Twoim pulpicie i pojawi się na nim w miejscu w którym znajdowała się podczas dodawania.<br/>Każdą ikonę możesz usunąć ze swojego pulpitu w dowolnym momencie klikając w <span class="removeEntityInfo">&#43;</span>.<br/> Chcąc wyszukać i dodać własne ikony w sekcji Mój pulpit kliknij w znak plus u góry ekranu. Zostanie wyświetlone pole w którym należy wkleić link do źródła z którego zostaną wyszukane ikony. Wklejając adres strony internetowej lub link do postu na Instagramie, zostaną wyszukane zdjęcia znajdujące się na wpisanej stronie. Wklejając link do filmu YouTube, który chcemy umieścić na naszym pulpicie pojawi się ikona reprezentująca dany film. Istnieje również możliwość umieszczenia na pulpicie ikony linkującej do utworów, artystów i albumów w serwisie Spotify. Możesz to zrobić w łatwy sposób kopiując i wklejając kod osadzenia w opcjach udostępniania w serwisie Spotify.<br/>
             Po dodaniu wyszukanej ikony do pulpitu zostaną wyświetlone pola w których możesz nadać ikonie tytuł oraz tagi - jeżeli zależy Ci na tym aby Twoja ikona została łatwo wyszukana w sekcji Eksploruj przez innych Użytkowników nadaj jej tytuł oraz tagi najbardziej pasujące do zawartości.<br/>
             Swoją kolekcję ikon możesz dowolnie segregować umieszczając ikony w folderach. Aby to zrobić kliknij w znaczek reprezentującą folder u góry ekranu i nadaj folderowi tytuł.<br/>
             Lokalizacje ikon na pulpicie możesz dowolnie zmieniać, lecz aby zapamietać bieżące ulokowanie, tak aby było ono dostępne w interesującej Cię formie po ponownym uruchomieniu strony, należy kliknąć w znak  <i class="icon-floppy" />.
+           <hr/>
+            <p/> 
 
-
-        <p><span style={{color: 'white', textDecoration: 'underline'}}>Ogólne porady dotyczące wizualizacji i obsługi serwisu:</span>
+            <span style={{color: 'white'}}><i class="icon-folder-open"/> Obserwowane foldery: </span>
+            <br/>
+            Podobnie jak w przypadku Pulpitu, sekcja dostępna jest po zalogowaniu się i znajdują się w niej wszystkie obserwowane przez Ciebie foldery udostępnione przez innych użytkowników.
+            Lokalizację obserwowanych folderów możesz dowolnie zmieniać i zapisywać, lecz ich zawartość dostępna jest w formie "tylko do odczytu" i ikony w folderach mogą być edytowane 
+            jedynie przez ich właścicieli. W przypadku gdy osoba do której należy dany folder, odznaczy go jako prywatny lub usunie, automatycznie zniknie on z Twojej sekji obserwowanych folderów.
+            <hr/>
+            <p/> 
+            <span style={{color: 'white'}}><i class="icon-group"/> Foldery użytkowników: </span>
+            <br/>
+            Publiczna sekcja w której znajdują się wszystkie publiczne udostępnione foldery. Każdy z folderów możesz obserowawać, aby być na bieżąco z jego zawartością.   
+            <hr/>
+            <p/> 
+            <span style={{color: 'white'}}><i class="icon-search"/>Eksploruj:</span>
+            <br/>
+            Sekcja 'Eksploruj' umożliwia wyszukiwanie ikon wśród wszytskich zasobów portalu - w tym w indywidualnych kolekcjach ikon znajdujących się na Pulpitach Użytkowników. Wpisana fraza wyszukiwana jest w tytułach oraz tagach ikon.
+            <hr/>
+            <p>
+            
+            <span style={{color: 'white', textDecoration: 'underline'}}>Ogólne porady dotyczące wizualizacji i obsługi serwisu:</span>
             <ul>
                 <li>Wszystkie ważne informacje wyświetlane są na bieżąco i dostępne pod znakami &#9432;info.</li>
                 <li>Zalecane jest użytkowanie serwisu w trybie pełnego ekranu.</li>

@@ -90,6 +90,7 @@ class PublicDesktop extends Component {
         var firstField = localStorage.getItem("firstField");
         this.setState({smallFolder: this.props.sizeFactor < 0.8});
         this.setState({firstField: this.props.firstField});
+       
         this.startFetchingIcons();
         this.getUserIconsId();
     }
@@ -346,6 +347,12 @@ handleScroll = (event) => {
             })
         });
 
+        this.setState({ spotify:
+            Array.prototype.filter.call(result.data, function(icon){
+                return (icon.type=="SPOTIFY");
+            })
+        });
+
         this.setState({ sharedFolders:
             Array.prototype.filter.call(result.data, function(icon) {
                 return icon.type=="FOLDER";
@@ -457,7 +464,7 @@ handleScroll = (event) => {
               }))
         }
         this.setState({ nowPlayed: vidID});
-        this.setState({ fieldType: icon.Type});
+        this.setState({ fieldType: icon.type});
     }
 
 
@@ -504,7 +511,7 @@ handleScroll = (event) => {
         this.setState({ entityID: id });
         var note = document.getElementById(id);
         var icon = this.getIconById(id);
-
+        this.setState({ fieldType: icon.type});
         if(note) {
            
             note.style.boxShadow = this.state.playedShadow;
@@ -1331,7 +1338,7 @@ if(!this.userOwner(this.props.match.params.folderId)) {
 
 followButton = !this.state.folderInfo.followed?   <button onClick={this.followFolder} id={this.props.id}   className= { "titleButton followButtton " + this.state.waiting}>Obserwuj
 </button> :
-<button onClick={this.unFollowFolderPop} id={this.props.id}   className= { "titleButton privateButton " + this.state.waiting}>Przestań obserwować</button> ;
+<button title="Kliknij aby zakończyć obserwowanie tego folderu." onClick={this.unFollowFolderPop} id={this.props.id}   className= { "titleButton privateButton " + this.state.waiting}>Obserwujesz</button> ;
 }
 folderInfoHeader = <div class="folderInfoHeader">
 
@@ -1492,7 +1499,7 @@ folderInfoHeader = <div class="folderInfoHeader">
                 <SpotifyIcon  remover= {this.userOwner(song.id)? 1 : 0}  isAuth={this.props.isAuthenticated}   
                 title={song.title} id={song.id}
                 src = {song.source}
-                classname= {this.getClass(song.id)}
+                classname="entity"
                     linkTo={this.onDbSpotifyClick}
                     
                     location={ this.state.loadedIcons? 

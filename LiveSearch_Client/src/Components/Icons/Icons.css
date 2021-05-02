@@ -275,27 +275,27 @@
 
 .addEntity {
     position: absolute;
-    top: -19px;
+    top: -25px;
     left: 86%;
     color: rgb(86, 159, 255);
     font-family: Verdana, Geneva, sans-serif;
     cursor: pointer;
     display: none;
     text-shadow: -9px 13px 15px -1px #000000;
-    font-size: 25px;
+    font-size: 35px;
     text-shadow: rgba(0, 0, 0, 0.979) 0px 0px 1px, rgba(0, 0, 0, 0.911) 0px 0px 5px
 }
 
 .addingEntity {
     position: absolute;
-    top: -19px;
+    top: -25px;
     left: 86%;
     color: rgb(86, 159, 255);
     font-family: Verdana, Geneva, sans-serif;
     cursor: pointer;
     display: none;
     text-shadow: -9px 13px 15px -1px #000000;
-    font-size: 25px;
+    font-size: 35px;
     text-shadow: rgba(0, 0, 0, 0.979) 0px 0px 1px, rgba(0, 0, 0, 0.911) 0px 0px 5px
 }
 
@@ -395,15 +395,15 @@
 
 .removeEntity {
     position: absolute;
-    top: -19px;
-    left: 86%;
+    top: -25px;
+    left: 80%;
     color: rgba(255, 60, 60, 0.945);
    
     font-family: Verdana, Geneva, sans-serif;
     cursor: pointer;
     display: none;
     text-shadow: -9px 13px 15px -1px #000000;
-    font-size: 25px;
+    font-size: 35px;
   transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
   -moz-transform: rotate(-45deg);
@@ -453,15 +453,15 @@ z-index: 600;
 
 .disableEntity {
     position: absolute;
-    top: -19px;
-    left: 86%;
+    top: -25px;
+    left: 80%;
     color: rgba(255, 60, 60, 0.945);
    
     font-family: Verdana, Geneva, sans-serif;
     cursor: pointer;
     display: none;
     text-shadow: -9px 13px 15px -1px #000000;
-    font-size: 25px;
+    font-size: 35px;
   transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
   -moz-transform: rotate(-45deg);

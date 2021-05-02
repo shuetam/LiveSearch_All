@@ -107,8 +107,6 @@ class UserDesktop extends Component {
             fieldType: "",
             smallFolder: true,
             addingType: "",
-           
-            
         }
     }
 
@@ -2040,7 +2038,7 @@ setAddingIcon = () => {
         }
 
         let addingField = this.state.addingIcon? 
-        <AddingField  onKeyPress={this.addIconHandlerPress} findIcon={this.addIconHandler} stopAdding={this.stopAdding} />
+        <AddingField addingType = {this.state.addingType}  onKeyPress={this.addIconHandlerPress} findIcon={this.addIconHandler} stopAdding={this.stopAdding} />
           : "";
          
           let tagsEdit =  this.state.folderEditing?  ""

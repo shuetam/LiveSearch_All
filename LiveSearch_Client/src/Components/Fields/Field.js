@@ -162,8 +162,8 @@ class Field extends Component {
         </div>)
 
         let  noFollowedFolders = (<div className="fieldAct"><br/>
-        Nie obserwujesz żadnych folderów. Naciśnij w <i style={{color: "rgba(0, 201, 43, 0.945)"}} class="icon-eye"/> przy wybranym 
-        folderze w dziale 'Foldery użytkowników', aby zacząć go obserwować.
+        Nie obserwujesz żadnych folderów. Kliknij w  <span style={{color: 'white'}}>Obserwuj</span> przy wybranym 
+        folderze w dziale  <span style={{color: 'white'}}>Foldery użytkowników</span>, aby zacząć go obserwować.
         </div>)
 
 //"https://i1.sndcdn.com/artworks-000117213722-45m4uv-t200x200.jpg"
