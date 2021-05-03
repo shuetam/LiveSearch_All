@@ -73,15 +73,15 @@ namespace Live.Controllers
             string error = "error";
             string captchaError = "captcha";
 
-
-
             string passwordRegex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,20}$";
             var reg = new Regex(passwordRegex);
             var pass = reg.IsMatch(login.Password);
 
             if (pass && IsMailValid(login.Email))
             {
-                if (!CaptchaVerify(login.captchaToken))
+                var captcha = new CaptchaValidate().CaptchaVerify(login.captchaToken);
+
+                if (!captcha)
                 {
                     return Json(captchaError);
                 }

@@ -34,8 +34,6 @@ import axios from 'axios';
 import {URL, PATHES} from '../../environment';
 import InputNumber from 'react-input-number';
 import {manageLogin, manageLiveSearchLogin} from '../../CommonManager';
-import ReCAPTCHA from "react-google-recaptcha";
-
 
 
 var fetchData = "";
@@ -336,8 +334,7 @@ if(email !== undefined) {
 
     const data = {
         Email: email,
-        Token: token,
-        CaptchaToken: this.state.captchaToken
+        Token: token
     };
    
     axios.post(URL.api+URL.login, data)
@@ -671,11 +668,7 @@ responseErrorGoogle = (response) => {
         this.setState({headerType: "explore"});
     
     }
-
-    onCapchaChange = (value) => {
-        this.setState({captchaToken: value});
-    }
-        
+   
     searchTag = (query) => {
         this.setState({showActuallHeader: false});
         this.props.showFirst(false);
@@ -958,12 +951,6 @@ let loginWindow =
 <div id="loginWindow" class="disable">Zaloguj się aby przejść do swojego pulpitu i dodawać do niego nowe ikony
 <p/>
 {loginButtons}
-
-<div className={!this.props.addingIcon? "field" : "field previewField"}> <ReCAPTCHA
-sitekey="6LefE8MaAAAAAIDJsCtx-cwqKQEqXnIDFGOfo4YY"
-onChange={this.onCapchaChange}
-/></div>
-
 </div>;
 
 

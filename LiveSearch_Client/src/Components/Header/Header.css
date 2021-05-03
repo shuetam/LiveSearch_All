@@ -35,14 +35,21 @@
   margin-top: 55vh;
   height: 240px;
   width: 400px;
-  text-align: center;
   background-color: rgba(255, 255, 255, 0.226);
   font-family: 'Mandali', sans-serif;
-  color: rgba(255, 255, 255, 0.575);
+  color: rgba(255, 255, 255, 0.74);
   font-size: 16px;
   padding-top: 10px;
   padding-left: 20px;
   padding-right: 20px;
+}
+
+.loginWindowInputs {
+    text-align: center;
+}
+
+.loginInputF {
+    width: 300px;
 }
 
 .forgetPassword {
@@ -505,10 +512,16 @@
     font-family: 'Mandali', sans-serif;
     color: rgba(202, 202, 202, 0.678);
     z-index: 300;
-    width: 300px;
+    width: 200px;
     font-size: 14px;
+    margin-left: 10px;
 }
 
+.captchaDiv {
+    position: absolute;
+    top: 15px;
+    left: 250px;
+}
 
 
 
@@ -716,7 +729,7 @@
 }
 
 #userPulpit:hover #userPulpitField {
-    left: 120px;
+    left: 130px;
     display: block;
     font-size: 14px;
 }
@@ -1622,7 +1635,7 @@ display: inline-block;
     color: rgba(255, 255, 255, 0.842);
     font-size: 13px;
     margin-top: 11px;
-    margin-left: 20px;
+    margin-left: 52px;
 } 
 
 
@@ -1632,7 +1645,7 @@ display: inline-block;
     color: rgb(231, 0, 0);
     font-size: 13px;
     position: absolute;
-    left: 50px;
+    left: 35px;
     text-shadow: 1px 1px 2px rgb(19, 19, 19);
     text-align: left;
 

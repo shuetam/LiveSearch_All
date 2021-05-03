@@ -3,9 +3,10 @@ import { Route, NavLink, Switch, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { URL, PATHES } from '../../environment';
 import ServerPopup from '../Popup/ServerPopup';
-import {authLogin, authLogout, showServerPopup, escManage, manageScreen, showFirst} from '../../Store/Actions/auth';
+import {authLogin, showServerPopup} from '../../Store/Actions/auth';
 import { connect } from 'react-redux';
-import {manageLogin, manageLiveSearchLogin, hideLiveSearchLogin} from '../../CommonManager'
+import { hideLiveSearchLogin} from '../../CommonManager';
+import ReCAPTCHA from "react-google-recaptcha";
 
 class LiveRegister extends Component {
 
@@ -28,7 +29,8 @@ class LiveRegister extends Component {
             emailSended: false,
             authConfig: {
                 headers: {Authorization: "Bearer " + this.props.jwtToken}
-            }
+            },
+            captchaToken: ""
         }
     }
 
@@ -85,7 +87,8 @@ class LiveRegister extends Component {
     liveRegister = (email, password) => {
             const data = {
                 Email: email,
-                Password: password
+                Password: password,
+                CaptchaToken: this.state.captchaToken
             };
             var image = ""
            
@@ -94,6 +97,11 @@ class LiveRegister extends Component {
              
                 if(response.data == "error") {
                     this.Alert("Wystąpił błąd przy próbie zarejestrowania.");
+                    this.setState({loading: false});
+                    return false;
+                }
+                if(response.data == "captcha") {
+                    this.Alert("Błąd weryfikacji Captcha.");
                     this.setState({loading: false});
                     return false;
                 }
@@ -322,6 +330,10 @@ class LiveRegister extends Component {
         }
     }
 
+    onCaptchaChange = (value) => {
+        this.setState({captchaToken: value});
+    }
+
     Alert = (message) => {
         this.props.serverAlert(message);
     }
@@ -335,6 +347,13 @@ let emailInfo = this.state.emailSended? <div class="wrongRegister" style={{color
 
  let disable = <div class="disableRegister" onClick={this.hideLiveLogin}>&#43;</div>
 
+ let captchaCheck = <div class="captchaDiv"> <ReCAPTCHA
+ sitekey="6LefE8MaAAAAAIDJsCtx-cwqKQEqXnIDFGOfo4YY"
+ onChange={this.onCaptchaChange}
+ theme = "dark"
+ size="compact"/>
+</div>
+
  let registerInputs = <div id="registerInputs"> 
 
 <input id="emailRegister" onChange={this.setEmailRegister} value={this.state.emailRegister}  onKeyPress = {this.onKeyRegister}  placeholder="Adres email" class="registerInput" type="email" />
@@ -346,6 +365,7 @@ let emailInfo = this.state.emailSended? <div class="wrongRegister" style={{color
 {wrongPassword1}
 {wrongPassword}
 <p/> 
+{captchaCheck}
 <button class= {this.state.loading? "registerButtonEnabled " : "registerButton"}  onClick={this.liveSearchRegister}>ZAREJESTRUJ SIĘ</button>
 
 {disable}
@@ -356,22 +376,22 @@ let emailInfo = this.state.emailSended? <div class="wrongRegister" style={{color
 
 let loginInputs = <div id="loginInputs"> 
 
-<input id="emailLogin" onChange={this.setEmailLogin} value={this.state.emailLogin}  onKeyPress = {this.onKeyLogin}  placeholder="Twój adres email" class="registerInput" type="text"/>
+<input id="emailLogin" onChange={this.setEmailLogin} value={this.state.emailLogin}  onKeyPress = {this.onKeyLogin}  placeholder="Twój adres email" class="registerInput" type="text" style={{width: "300px", marginLeft: "48px"}}/>
 <p/>
-<input id="passwordLogin" onChange={this.setPasswordLogin} value={this.state.passwordLogin} onKeyPress = {this.onKeyLogin}  placeholder="Twoje hasło" class="registerInput" type="password"/>
+<input id="passwordLogin" onChange={this.setPasswordLogin} value={this.state.passwordLogin} onKeyPress = {this.onKeyLogin}  placeholder="Twoje hasło" class="registerInput" type="password" style={{width: "300px", marginLeft: "48px"}}/>
 <br/>
 
-<label style={{fontSize: "11px", position: 'absolute', left:'30px', top:'97px'}} onClick={this.passwordReset}> Nie pamiętasz hasła? </label>
+<label style={{fontSize: "11px", position: 'absolute', left:'15px', top:'97px'}} onClick={this.passwordReset}> Nie pamiętasz hasła? </label>
 <p/>
 <button class= {this.state.loading? "registerButtonEnabled " : "registerButton"}onClick={this.liveSearchLogin}>ZALOGUJ SIĘ</button>
 
 {disable}
 
-<label onClick={this.showRegister} > Nie masz jeszcze konta? Zarejestruj się! </label>
+<label style={{fontSize: "15px"}} onClick={this.showRegister} > Nie masz jeszcze konta? <span style={{textDecoration: "underline"}}>Zarejestruj się!</span> </label>
 {wrongLogin}
 </div>
 
-let emailSet = this.props.isAuthenticated? "" : <input id="emailRegister"  onChange={this.setEmailRegister} value={this.state.emailRegister}  onKeyPress = {this.onKeyRegister}  placeholder="Twój adres email użyty przy rejestracji" class="registerInput" type="email"/>
+let emailSet = this.props.isAuthenticated? "" : <input id="emailRegister"  onChange={this.setEmailRegister} value={this.state.emailRegister}  onKeyPress = {this.onKeyRegister}  placeholder="Twój adres email użyty przy rejestracji" class="registerInput" type="email" style={{width: "300px", marginLeft: "48px"}}/>
 
 
 let reset = <div id="registerInputs"> 
@@ -379,13 +399,14 @@ let reset = <div id="registerInputs">
 {emailSet}
 {wrongEmail}
 <p/>
-<input id="passwordRegister" onChange={this.setPasswordReg} value={this.state.passwordRegister}   onKeyPress = {this.onKeyRegister}  placeholder="Utwórz nowe hasło" class="registerInput" type="password" autocomplete="new-password"/>
+<input id="passwordRegister" onChange={this.setPasswordReg} value={this.state.passwordRegister}   onKeyPress = {this.onKeyRegister}  placeholder="Utwórz nowe hasło" class="registerInput" type="password" autocomplete="new-password" style={{width: "300px", marginLeft: "48px"}}/>
 <p/>
- <input id="passwordRegister1" onChange={this.setPasswordReg1} value={this.state.passwordRegister1}   onKeyPress = {this.onKeyRegister}  placeholder="Powtórz nowe hasło" class="registerInput" type="password" autocomplete="new-password"/>
+ <input id="passwordRegister1" onChange={this.setPasswordReg1} value={this.state.passwordRegister1}   onKeyPress = {this.onKeyRegister}  placeholder="Powtórz nowe hasło" class="registerInput" type="password" autocomplete="new-password" style={{width: "300px", marginLeft: "48px"}}/>
 {wrongPassword1}
 {wrongPassword}
 {emailInfo}
 <p/> 
+
 <button class= {this.state.loading? "registerButtonEnabled " : "registerButton"}  onClick={this.liveSearchRegister}>WYŚLIJ LINK RESETUJĄCY HASŁO</button>
 {disable}
 </div>
