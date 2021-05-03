@@ -27,6 +27,7 @@ class LiveRegister extends Component {
             wrongPassword: false,
             wrongPassword1: false,
             emailSended: false,
+            noCaptcha: false,
             authConfig: {
                 headers: {Authorization: "Bearer " + this.props.jwtToken}
             },
@@ -78,6 +79,7 @@ class LiveRegister extends Component {
             emailRegister: "",
             passwordRegister: "",
             passwordRegister1: "",
+            noCaptcha: false,
             emailLogin: "",
             passwordLogin: ""});
         hideLiveSearchLogin();
@@ -245,6 +247,7 @@ class LiveRegister extends Component {
                 passwordRegister: "",
                 passwordRegister1: "",
                 emailLogin: "",
+                noCaptcha: false,
                 passwordLogin: ""});
         }
 
@@ -252,7 +255,8 @@ class LiveRegister extends Component {
     liveSearchRegister = () => {
         this.setState({wrongEmail: false});
         this.setState({wrongPassword: false});
-        this.setState({wrongPassword1: false})
+        this.setState({wrongPassword1: false});
+        this.setState({noCaptcha: false});
         var login = this.state.emailRegister;
         var password = this.state.passwordRegister;
         var password1 = this.state.passwordRegister1;
@@ -275,6 +279,11 @@ class LiveRegister extends Component {
 
         if(passwordLen) {
             this.setState({wrongPassword1: !theSame})
+        }
+
+        if(!this.state.captchaToken)
+        {
+            this.setState({noCaptcha: true});
         }
 
            if(email && passwordLen && theSame) {
@@ -331,6 +340,10 @@ class LiveRegister extends Component {
     }
 
     onCaptchaChange = (value) => {
+        if(value)
+        {
+            this.setState({noCaptcha: false});
+        }
         this.setState({captchaToken: value});
     }
 
@@ -341,17 +354,22 @@ class LiveRegister extends Component {
     render() {
  let wrongEmail = this.state.wrongEmail? <div class="wrongRegister"> Wpisz prowidłowy adres email </div>  : "";
  let wrongPassword = this.state.wrongPassword? <div class="wrongRegister"> Hasło powinno zawierać od 6 do 20 znaków<br/> w tym conajmniej jedną wielką literę oraz jedną cyfrę. </div>  : "";
- let wrongPassword1 = this.state.wrongPassword1? <div class="wrongRegister"> Niezgodność haseł </div>  : "";
- let wrongLogin = this.state.wrongLogin? <div class="wrongRegister"> Nieprawidłowy adres email lub hasło </div>  : "";
+ let wrongPassword1 = this.state.wrongPassword1? <div class="wrongRegister"> Niezgodność haseł. </div>  : "";
+ let wrongLogin = this.state.wrongLogin? <div class="wrongRegister"> Nieprawidłowy adres email lub hasło. </div>  : "";
 let emailInfo = this.state.emailSended? <div class="wrongRegister" style={{color: 'green'}}> Na podany adres email został wysłany link resetujący <br/>hasło, będzie on aktywny przez 24 godziny. </div>  : "";
+
+let noCaptcha = this.state.noCaptcha? <div style={{marginTop: "-14px"}} class="wrongRegister"> Zaznacz Captcha </div>  : "";
 
  let disable = <div class="disableRegister" onClick={this.hideLiveLogin}>&#43;</div>
 
- let captchaCheck = <div class="captchaDiv"> <ReCAPTCHA
+ let captchaCheck = <div class="captchaDiv"> 
+ {noCaptcha}
+ <ReCAPTCHA
  sitekey="6LefE8MaAAAAAIDJsCtx-cwqKQEqXnIDFGOfo4YY"
  onChange={this.onCaptchaChange}
  theme = "dark"
  size="compact"/>
+ 
 </div>
 
  let registerInputs = <div id="registerInputs"> 
