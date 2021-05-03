@@ -160,7 +160,7 @@ class UserDesktop extends Component {
       // document.getElementById(addingIcon.id).className = "disable";
       //debugger;
 
-      if(nextProps.addingIcon.type == "YT") {
+      if(nextProps.addingIcon.type == "YT" || nextProps.addingIcon.type == "MOVIE") {
           this.disableAddingIcon(nextProps.addingIcon.id)
                 this.setState(prevState => ({
                     icons: [...prevState.icons, nextProps.addingIcon]
@@ -1169,7 +1169,8 @@ class UserDesktop extends Component {
         this.setState({explQuery: url});
         const data = {
            // UserId: this.props.userId,
-            Title: url
+            Title: url,
+            Type: this.state.addingType
             }
            var switcher =  this.state.addSwitcher;
 
@@ -1191,7 +1192,7 @@ class UserDesktop extends Component {
                        
                         this.setState({ newIcons:
                             Array.prototype.filter.call(result.data, function(icon){
-                                return (icon.type).includes("YT");
+                                return ((icon.type).includes("YT") || (icon.type).includes("MOVIE"));
                             })
                         });
                         //debugger;
@@ -1906,6 +1907,8 @@ setAddingIcon = () => {
                     leftEdit = "70%"
                     public={false}
                     newIcon={true}
+                    type={song.type}
+                    src = {song.source}
                 />
             )
         })
@@ -1954,7 +1957,10 @@ setAddingIcon = () => {
                         classname= "folder"
                         linkTo={this.openFolder}         
                         location={ this.state.loadedIcons?
-                        {boxShadow: this.getShadow(parseInt(song.left), parseInt(song.top), song.id), top: song.top, left: song.left, transition: 'top '+2+'s, left '+2+'s'}:
+                        {boxShadow: this.getShadow(parseInt(song.left), parseInt(song.top), song.id), top: song.top, left: song.left, 
+                            height: 80 * this.props.sizeFactor + "px",
+                            width: 80 * this.props.sizeFactor + "px",
+                            transition: 'top '+2+'s, left '+2+'s'}:
                         {top: randomInt(101,200)+'vh', left: randomInt(-50,200)+'vw'}}
                         onHover={this.onHoverFolder}
                         onLeave={this.leaveFolder}
@@ -2103,7 +2109,7 @@ let iconIcons = <div style={{fontSize: "17px"}}><i class="icon-youtube"/>
 
         
         let addOwnYT =
-        <div id="addOwn" class= {(this.state.addingIcon && this.state.addingType == "YT")? "addOwn activePlus" : "addOwn" }  onClick={()=>{this.showAddingIcon("YT")}}> 
+        <div id="addOwn" class= {(this.state.addingIcon && this.state.addingType == "YT")? "addOwn activePlus" : "addOwn" }  onClick={()=>{this.showAddingIcon("MOVIE")}}> 
         {/* &#43; */}<i class="icon-video"/>
         <div id="addText" className="hoverInfo" style={{left: "300px"}}>
         Dodaj ikony wideo  
