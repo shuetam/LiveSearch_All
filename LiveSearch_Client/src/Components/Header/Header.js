@@ -74,21 +74,13 @@ class Header extends Component {
     componentDidMount() {    
         Update();
 
-        var firstField = localStorage.getItem("firstField");
-        //this.props.showFirst(true);
-        if(firstField === null) {
-            this.props.showFirst(true);
-            localStorage.setItem("firstField", new Date());
-
-        }
-        
-
         //this.manageFullScreenState();
         //document.addEventListener('fullscreenchange', this.manageFullScreenState, false);
         //document.addEventListener('mozfullscreenchange', this.manageFullScreenState, false);
         //document.addEventListener('webkitfullscreenchange', this.manageFullScreenState, false);
         //document.addEventListener('msfullscreenchange', this.manageFullScreenState, false);
 
+        this.setHeaderType();
     
         var cookieAkcept = localStorage.getItem("cookieAkcept");
 
@@ -96,7 +88,13 @@ class Header extends Component {
         var filmsArrows = localStorage.getItem("filmsArrow");
         var booksArrows = localStorage.getItem("booksArrow");
 
-       
+        if(!this.props.match.params.id) {
+        var firstField = localStorage.getItem("firstField");
+        if(firstField === null) {
+            this.props.showFirst(true);
+            localStorage.setItem("firstField", new Date());
+        }
+    }
 
         if(musicArrows == 1){
             this.setState({showMusicArrow: false});
@@ -110,14 +108,10 @@ class Header extends Component {
             this.setState({showBooksArrow: false});
         }
 
-        if(cookieAkcept == 1){
+        if(cookieAkcept != 1){
            // this.setState({showCookie: false});
+           this.animatedCookie();
         }
-        else {
-           // this.setState({showCookie: true});
-            this.animatedCookie();
-        }
-    
 
         this.liveResponsive();
         //window.addEventListener('resize', this.liveResponsive);
@@ -125,7 +119,7 @@ class Header extends Component {
 
 this.setState({fromFolder: this.props.match.params.fid? true : false });
 
-this.setHeaderType();
+
 
 this.isConfirm(); 
     }
@@ -163,16 +157,42 @@ this.isConfirm();
 
       setHeaderType = () => {
 
-       var qqq = this.props.location;
-       var fol =  this.props.match.params.fid;
-   
         if(this.props.match.params.id) {
 
             var paramsId = this.props.match.params.id;
 
             this.setState({showActuallHeader: this.isActuall(paramsId)});
 
-            if(paramsId == "eksploruj") {
+            switch(paramsId) {
+                case "eksploruj":
+                    this.setState({headerType: "explore"});
+                    break;
+
+                case "udostepnione_foldery":
+                    this.setState({headerType: "folders"});
+                    break;
+
+                case "obserwowane_foldery":
+                    this.setState({headerType: "followed"});
+                    break;
+
+                case "pulpit":
+                        this.setState({headerType: "desk"});
+                    break;
+                default:
+                    this.setState({showActuallHeader: true});
+                    this.setState({headerType: "hot"});
+                    break;
+            }
+        }
+        else {
+            this.setState({showActuallHeader: true});
+            this.setState({headerType: "hot"});
+        }
+    }
+
+
+     /*        if(paramsId == "eksploruj") {
                
                 this.setState({headerType: "explore"});
             }
@@ -195,8 +215,10 @@ this.isConfirm();
         else {
             this.setState({showActuallHeader: true});
             this.setState({headerType: "hot"});
-        } 
-      }
+        }  */
+
+
+      
 
 
 
@@ -285,7 +307,7 @@ this.isConfirm();
        // this.setState({showCookie: false});
        var cookieField = document.getElementById("cookieId");
        if(cookieField) {
-        cookieField.style.left="-400px";
+        cookieField.style.left="-450px";
        }
         localStorage.setItem("cookieAkcept", 1);
       
@@ -294,9 +316,11 @@ this.isConfirm();
     animatedCookie = () => {
         setTimeout(() => {
          
-            this.setState({
-                cookieLeft: '50px'
-            })
+
+            var cookieField = document.getElementById("cookieId");
+            if(cookieField) {
+             cookieField.style.left="40px";
+            }
         }, 1000)
     }
 
@@ -615,7 +639,7 @@ responseErrorGoogle = (response) => {
 
 
     activeDesk = () => {
-
+        this.props.showFirst(false);
         if(this.props.isAuthenticated) {
             this.setState({showActuallHeader: false});
             var paramsId = this.props.match.params.id;
@@ -630,6 +654,7 @@ responseErrorGoogle = (response) => {
     }
 
     activeFollowedFolders = () => {
+        this.props.showFirst(false);
         if(this.props.isAuthenticated) {
             this.setState({showActuallHeader: false});
             this.props.history.push(PATHES.followedFolders + "?from=1");
@@ -645,6 +670,7 @@ responseErrorGoogle = (response) => {
     activeSharedFolders = () => {
         //var paramsId = this.props.match.params.id;
         //if(paramsId !== "foldery") {
+            this.props.showFirst(false);
             this.setState({showActuallHeader: false});
             this.props.history.push(PATHES.sharedFolders+ "?q="+ this.state.explQuery + "&skip=0"+"&from=1");
             this.setState({headerType: "folders"});
@@ -654,6 +680,7 @@ responseErrorGoogle = (response) => {
     activeActuall = () => {
 
         //setTimeout(() => {
+            this.props.showFirst(false);
             this.setState({showActuallHeader: true});
             this.props.history.push('/');
             this.setState({headerType: "hot"});

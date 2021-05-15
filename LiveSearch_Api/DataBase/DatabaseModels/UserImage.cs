@@ -82,9 +82,6 @@ public class UserImage : Live.Core.Entity
 
         public void ChangeTags(string newTags)
         {
-
-           
-          
             this.Tags = newTags;
         }
 

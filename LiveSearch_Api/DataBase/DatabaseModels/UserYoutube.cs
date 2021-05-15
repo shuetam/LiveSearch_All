@@ -105,4 +105,13 @@ public class UserYoutube : Live.Core.Entity
             return  Regex.Split(this.Tags, @"[|]{2}").ToList();
         }
 
+    public string GetTitle()
+    {
+        if(!string.IsNullOrEmpty(this.Title))
+        {
+            return Title;
+        }
+        return "";
+    }
+
 }

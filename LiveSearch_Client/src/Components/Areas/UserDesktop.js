@@ -187,7 +187,7 @@ class UserDesktop extends Component {
                             this.props.stopAdding();
                       }
 
-                      this.showTitleEditor(nextProps.addingIcon.id, nextProps.addingIcon.type);
+                      this.showTitleEditor(nextProps.addingIcon.id, nextProps.addingIcon.type, true);
       }
 
 
@@ -969,7 +969,7 @@ class UserDesktop extends Component {
 
 
 
-    showTitleEditor = (id, iconType) => {
+    showTitleEditor = (id, iconType, isNew = false) => {
 
     if(iconType == "FOLDER") {
         //this.setState({folderEditing: true});
@@ -990,10 +990,13 @@ class UserDesktop extends Component {
         this.setState({editedId: id});
         this.setState({editedTitle: title});
 
-
-        var tags = this.getIconTags(id);
-
-        this.setState({editedTags: tags.toString()});
+        if(isNew) {
+            this.setState({editedTags: ""});
+        }
+        else {
+            var tags = this.getIconTags(id);
+            this.setState({editedTags: tags.toString()});
+        }
 
         this.setState({titleToEdit: title});
 
@@ -1586,7 +1589,8 @@ class UserDesktop extends Component {
        
         switch(this.state.fieldType) {
             case "YT":
-                field = <Field addingIcon={this.state.addingIcon} play={this.state.entityID} show={this.state.loadedIcons} nextSong={this.nextSongHandler} loadText={this.props.fetchData} />
+            case "MOVIE":
+                field = <Field showReflect={this.state.fieldType == "YT"} addingIcon={this.state.addingIcon} play={this.state.entityID} show={this.state.loadedIcons} nextSong={this.nextSongHandler} loadText={this.props.fetchData} />
            break;
                 case "IMG":
                 field = <ImageField addingIcon={this.state.addingIcon} src={this.state.entityID} sourceShow={this.getNiceHttp(this.state.imgSource)} 

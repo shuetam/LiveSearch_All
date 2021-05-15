@@ -241,7 +241,7 @@ handleScroll = (event) => {
             
         }
        
-    if(this.props.headerType=="folders" && !this.props.match.params.folderId) {
+    if((this.props.headerType=="folders" || this.props.headerType=="followed") && !this.props.match.params.folderId) {
         this.setState({foldersIcons: true});
         }
 
@@ -1363,7 +1363,7 @@ folderInfoHeader = <div class="folderInfoHeader">
         let tagsField = this.state.loadedIcons? <TagsField  noIcons={this.state.noIcons} searchTag={this.props.searchTag}  tags = {this.getIconTags(this.state.entityID)} />  : "";
     
 
-        if(this.state.firstField || this.state.foldersIcons || this.state.followedIcons) {
+        if(this.state.firstField || this.state.foldersIcons) {
             tagsField = "";
         }
 

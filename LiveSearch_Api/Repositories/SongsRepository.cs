@@ -180,7 +180,7 @@ namespace Live.Repositories
 
           foreach(string radio in stations)
           {
-              songs.AddRange(all_songs.Where(s => s.Station == radio).ToList());
+              songs.AddRange(all_songs.Where(s => s.Station == radio));
           }
         
 
