@@ -44,7 +44,6 @@ namespace Live.Repositories
             var songs = await _radioSongsRepository.GetActualByRadioAsync(stations);
             var movies = await _tvMovieRepository.GetActuallMovies();
 
-
             songs = songs.Count > 0 ? songs.OrderByDescending(x => x.countValue).Take(50).ToList() : songs;
             movies = movies.Count > 0 ? movies.OrderByDescending(x => x.countValue).Take(10).ToList() : movies;
 
@@ -146,7 +145,7 @@ namespace Live.Repositories
 
         }
 
-        //Podobno teoria i tresci na studiach psychologicznych s¹ teraz mocno sfeminizowane, jak siê tam odnajdujesz?
+        //Podobno teoria i tresci na studiach psychologicznych sï¿½ teraz mocno sfeminizowane, jak siï¿½ tam odnajdujesz?
 
         private void FillFromSongs(List<IconDto> listToFill, string query, int deep, ExploreCounter count, int skip)
         {
