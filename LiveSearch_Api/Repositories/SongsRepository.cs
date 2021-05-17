@@ -21,6 +21,7 @@ namespace Live.Repositories
         private readonly LiveContext _liveContext;
         private readonly IMapper _autoMapper;
          private readonly SqlConnectingSettings _sql;
+        private readonly IUpdatingRepository _updateRepository;
 
      // private readonly ILogger _logger;
 
@@ -180,10 +181,13 @@ namespace Live.Repositories
 
           foreach(string radio in stations)
           {
-              songs.AddRange(all_songs.Where(s => s.Station == radio).ToList());
+              songs.AddRange(all_songs.Where(s => s.Station == radio));
           }
         
-
+        if(songs.Count == 0)
+        {
+            await _updateRepository.SongsUpdateAsync();
+        }
 
           while(songs.Count != 0)
           {

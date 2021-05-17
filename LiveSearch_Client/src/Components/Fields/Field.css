@@ -106,7 +106,15 @@
     left: 50%;
     margin-left: -280px;
     top: 60px;
+    transition: margin-left 0.7s;
 }
+
+.previewField {
+  top: 220px;
+  margin-left: -150px;
+}
+
+
 
 .fieldAct {
     font-family: 'Mandali', sans-serif;
@@ -114,21 +122,130 @@
     font-weight: 100;
     display: inline-block;
     position: fixed;
-    width: 600px;
-    height: 400px;
-    margin-left: -300px;
+    width: 560px;
+    height: 220px;
+    margin-left: -280px;
     left: 50%;
-    top: 120px;
+    top: 90px;
     text-align: center;
     color: rgb(150, 150, 150);
     opacity: 0,3;
     font-size: 16px;
     color: rgba(255, 255, 255, 0.5);
+    z-index: 10;
+    
 }
 
-.firstField {
-  font-size: 14px;
+.fieldEditor {
+  text-align: left;
   top: 40px;
+  padding: 10px;
+  height: 150px;
+  -webkit-box-shadow: inset 0px 0px 5px 0px rgba(255, 255, 255, 0.445);
+  -moz-box-shadow: inset 0px 0px 5px 0px  rgba(255, 255, 255, 0.445);
+  box-shadow: inset 0px 0px 5px 0px  rgba(255, 255, 255, 0.445);
+  font-size: 15px;
+  color: rgba(226, 226, 226, 0.897);
+  z-index: 10;
+}
+
+.folderEditField {
+  height: 280px;
+  top: 70px;
+}
+
+
+.folderInfo {
+  text-align: left;
+  top: 70px;
+  -webkit-box-shadow: inset 0px 0px 5px 0px rgba(255, 255, 255, 0.445);
+  -moz-box-shadow: inset 0px 0px 5px 0px  rgba(255, 255, 255, 0.445);
+  box-shadow: inset 0px 0px 5px 0px  rgba(255, 255, 255, 0.445);
+  width: 600px;
+  height: auto;
+  padding: 10px;
+
+}
+
+ .folderInfo hr {
+  border: 0; border-top: 1px solid rgb(90, 90, 90);
+} 
+
+
+.fieldEditorInput {
+  z-index: 700;
+  font-family: 'Mandali', sans-serif;
+  font-size: 25px;
+  font-weight: 100;
+  text-align: left;
+  color: rgba(241, 241, 241, 0.836);
+  opacity: 0.9;
+  padding: 1px;
+  z-index: 500;
+  
+}
+
+.fieldEditorInput #addingIconLink {
+  border-radius: 0px;
+  background-color: rgba(78, 78, 78, 0.562);
+  border-width: 0px;
+  height: 27px;
+  font-family: 'Mandali', sans-serif;
+  font-size: 15px;
+  font-weight: 100;
+  color: rgba(197, 197, 197, 0.815);
+  width: 390px;
+}
+
+.fieldEditorInput #editTitleFolder {
+  border-radius: 0px;
+  background-color: rgba(78, 78, 78, 0.555);
+  border-width: 0px;
+  height: 23px;
+  font-family: 'Mandali', sans-serif;
+  font-size: 15px;
+  font-weight: 100;
+  color: rgba(197, 197, 197, 0.815);
+  width: 340px;
+ 
+}
+.fieldEditorInput #editDescFolder {
+  border-radius: 0px;
+  background-color: rgba(78, 78, 78, 0.555);
+  border-width: 0px;
+  height: 100px;
+  font-family: 'Mandali', sans-serif;
+  font-size: 15px;
+  font-weight: 100;
+  color: rgba(197, 197, 197, 0.815);
+  width: 540px;
+}
+
+.editHandler {
+  align-items: center;
+  position: absolute;
+  bottom: 10px;
+}
+
+.lockIconF {
+  color: rgba(221, 221, 221, 0.945);
+  font-family: 'Mandali', sans-serif;
+  font-size: 20px;
+  
+}
+
+.openIconF {
+
+  color: rgba(0, 201, 43, 0.945);
+
+}
+
+
+.firstField {
+  font-size: 13px;
+  top: 40px;
+  height: 330px;
+  padding-top: 5px;
 }
 
 .imageField {
@@ -140,7 +257,39 @@
   height: 315px;
   width: 560px;
   text-align: center;
- 
+  transition: margin-left 0.7s;
+}
+
+.addingIconImg {
+  height: 155px;
+  width: 280px;
+  top: 220px;
+  margin-left: -140px;
+  transition: margin-left 0.7s;
+}
+
+
+.imgGlass {
+
+  -webkit-transform: scaleY(-1);
+  transform: scaleY(-1);
+  position: fixed;
+  top: 385px;
+  left: 50%;
+  margin-left: -280px;
+  z-index: 90;
+  height: 315px;
+  width: 560px;
+  text-align: center;
+  transition: margin-left 0.7s;
+}
+
+.addingIconImgGlass {
+  transition: margin-left 0.7s;
+  height: 155px;
+  width: 280px;
+  margin-left: -140px;
+  transition: margin-left 0.7s;
 }
 
 
@@ -194,30 +343,32 @@
 
 .glass {
     width: 560px;
-    transition: opacity 1.5s;
+    transition: opacity 1.5s, margin-left 0.7s;
     -webkit-transform: scaleY(-1);
     transform: scaleY(-1);
     position: fixed;
-    top: 385px;
+    top: 385px; 
     left: 50%;
     margin-left: -280px;
     z-index: 90;
 }
 
-.imgGlass {
+.previewGlass {
 
+  transition: opacity 1.5s, margin-left 0.7s;
   -webkit-transform: scaleY(-1);
   transform: scaleY(-1);
   position: fixed;
-  top: 385px;
   left: 50%;
   margin-left: -280px;
   z-index: 90;
-  height: 315px;
-  width: 560px;
-  text-align: center;
-
+  top: 385px; 
+  margin-left: -150px;
 }
+
+
+
+
 
 .blur1 {
     background: rgba(255,255,255,0.02);
@@ -278,6 +429,11 @@
     top: 380px;
     left: 0px;
     right: 0px;
+}
+
+.inputDis {
+    pointer-events: none;
+    opacity: 0.7;
 }
 
 .loader {
@@ -419,3 +575,20 @@
     display: block;
   }
 
+  .followFiledIcon {
+    position: absolute;
+    right: 10px;
+    padding: 3px;
+    top: 10px;
+  }
+
+  .addingPreview {
+    margin-left: 100px;
+    margin-right: 100px;
+    
+    border-color: red;
+    border-width: 2px;
+    border-style: solid;
+   margin-top: 10px;
+   margin-bottom: 10px;
+  }

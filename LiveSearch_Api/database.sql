@@ -40,6 +40,26 @@ ADD ResetId UNIQUEIDENTIFIER NULL;
 ALTER TABLE Users
 ADD NewSalt NVARCHAR (MAX) NULL;
 
+ALTER TABLE Folders
+DROP COLUMN Followers;
+
+ALTER TABLE Folders
+DROP COLUMN IconsCount;
+
+
+DELETE FROM SharedFolders WHERE ID IS NOT NULL
+select * from SharedFolders
+select * from Folders
+
+ALTER TABLE Folders
+ADD SharedAt DATETIME NULL;
+
+ALTER TABLE Folders
+ADD UpdatedAt DATETIME NULL;
+
+ALTER TABLE Folders
+ADD ShareDescription NVARCHAR (600) NULL;
+
 ALTER TABLE Users
 ADD NewPasswordHash NVARCHAR (MAX) NULL;
 
@@ -73,9 +93,14 @@ WHERE AuthType like 'Facebook'
 
 UPDATE Users
 SET IsActive = 1
-WHERE AuthType like 'Facebook' 
+WHERE TRUE
 
-select * from Users
+
+UPDATE Folders
+SET IsShared = 0
+
+
+select * from Folders
 
 delete from Users 
 WHERE AuthType like 'LiveSearch'
@@ -127,11 +152,18 @@ add Station NVARCHAR (50) NULL
 
 alter table ArchiveSongs
 add Station NVARCHAR (50) NULL
+
+alter table UserYoutubes
+add ImgSource NVARCHAR (MAX)  NULL
+
+alter table UserYoutubes
+add MovieType NVARCHAR (20)  NULL
+
 ---------------------------------
 select * from ArchiveMovies
 select * from ArchiveSongs
 
-select * from TVMovies
+select * from Folders
 
 select * from Bestsellers
 
@@ -221,7 +253,12 @@ drop table UserYoutubes
 
 UPDATE Folders
 SET LocLeft = '50vw'
-WHERE ParentId is NULL;  
+WHERE ParentId is NULL; 
+
+
+UPDATE Folders
+SET IsShared = 0
+WHERE IsShared is NULL;
 
 UPDATE UserYoutubes
 SET LocLeft = '50vw', LocTop = '10vh'
@@ -243,6 +280,27 @@ select * from UserImages
 DELETE FROM Folders WHERE
 Title like '%www%'
 
+CREATE TABLE SharedFolders
+(
+	ID UNIQUEIDENTIFIER PRIMARY KEY,
+    UserId UNIQUEIDENTIFIER NOT NULL,
+    FolderId UNIQUEIDENTIFIER NOT NULL,
+	LocLeft NVARCHAR (50) NOT NULL,
+    LocTop NVARCHAR (50) NOT NULL,
+    FallowedAt DATETIME NOT NULL,
+)
+
+DROP TABLE SharedFolders
+
+select * from SharedFolders
+
+ALTER TABLE SharedFolders ADD CONSTRAINT 
+FK_UserID FOREIGN KEY (UserId) 
+REFERENCES Users(ID)
+
+ALTER TABLE SharedFolders ADD CONSTRAINT 
+FK_FolderID FOREIGN KEY (FolderId) 
+REFERENCES Folders(ID)
 
 CREATE TABLE Folders
 (

@@ -3315,3 +3315,1034 @@
 2020-07-18 19:00:07.709 +02:00 [Information] Finish radio songs update with 83 songs and 1 youtube errors
 2020-07-18 19:04:26.144 +02:00 [Information] Finish TV movies update with 63 and 6 youtube errors
 2020-07-18 20:12:17.743 +02:00 [Information] Finish radio songs update with 68 songs and 0 youtube errors
+2020-09-23 12:37:58.451 +02:00 [Error] Error in updating songs The entity type 'SharedFolder' requires a primary key to be defined.
+2020-09-23 12:37:58.522 +02:00 [Error]    at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.ValidateNonNullPrimaryKeys(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Internal.SqlServerModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.CreateModel(DbContext context, IConventionSetBuilder conventionSetBuilder, IModelValidator validator)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.<>c__DisplayClass5_0.<GetModel>b__0(Object k)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.GetModel(DbContext context, IConventionSetBuilder conventionSetBuilder, IModelValidator validator)
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.CreateModel()
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.get_Model()
+   at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkServicesBuilder.<>c.<TryAddCoreServices>b__7_1(IServiceProvider p)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, ServiceProvider provider)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScoped(ScopedCallSite scopedCallSite, ServiceProvider provider)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, ServiceProvider provider)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScoped(ScopedCallSite scopedCallSite, ServiceProvider provider)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.<>c__DisplayClass22_0.<RealizeService>b__0(ServiceProvider provider)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_InternalServiceProvider()
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_Model()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityType()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityQueryable()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.Microsoft.EntityFrameworkCore.Query.Internal.IAsyncEnumerableAccessor<TEntity>.get_AsyncEnumerable()
+   at Microsoft.EntityFrameworkCore.Extensions.Internal.QueryableExtensions.AsAsyncEnumerable[TSource](IQueryable`1 source)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Live.Repositories.UpdatingRepository.<GetLastDate>d__6.MoveNext() in C:\HiltiLive\Mse\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 220
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Live.Repositories.UpdatingRepository.<SongsUpdateAsync>d__5.MoveNext() in C:\HiltiLive\Mse\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 59
+2020-09-23 12:38:23.241 +02:00 [Error] Error in updating songs The entity type 'SharedFolder' requires a primary key to be defined.
+2020-09-23 12:38:23.279 +02:00 [Error]    at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.ValidateNonNullPrimaryKeys(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Internal.SqlServerModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.CreateModel(DbContext context, IConventionSetBuilder conventionSetBuilder, IModelValidator validator)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.<>c__DisplayClass5_0.<GetModel>b__0(Object k)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.GetModel(DbContext context, IConventionSetBuilder conventionSetBuilder, IModelValidator validator)
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.CreateModel()
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.get_Model()
+   at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkServicesBuilder.<>c.<TryAddCoreServices>b__7_1(IServiceProvider p)
+   at lambda_method(Closure , ServiceProvider )
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_InternalServiceProvider()
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_Model()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityType()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityQueryable()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.Microsoft.EntityFrameworkCore.Query.Internal.IAsyncEnumerableAccessor<TEntity>.get_AsyncEnumerable()
+   at Microsoft.EntityFrameworkCore.Extensions.Internal.QueryableExtensions.AsAsyncEnumerable[TSource](IQueryable`1 source)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Live.Repositories.UpdatingRepository.<GetLastDate>d__6.MoveNext() in C:\HiltiLive\Mse\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 220
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Live.Repositories.UpdatingRepository.<SongsUpdateAsync>d__5.MoveNext() in C:\HiltiLive\Mse\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 59
+2020-09-23 12:41:26.726 +02:00 [Error] Error in updating songs The entity type 'SharedFolder' requires a primary key to be defined.
+2020-09-23 12:41:26.798 +02:00 [Error]    at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.ValidateNonNullPrimaryKeys(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Internal.SqlServerModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.CreateModel(DbContext context, IConventionSetBuilder conventionSetBuilder, IModelValidator validator)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.<>c__DisplayClass5_0.<GetModel>b__0(Object k)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.GetModel(DbContext context, IConventionSetBuilder conventionSetBuilder, IModelValidator validator)
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.CreateModel()
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.get_Model()
+   at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkServicesBuilder.<>c.<TryAddCoreServices>b__7_1(IServiceProvider p)
+   at lambda_method(Closure , ServiceProvider )
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_InternalServiceProvider()
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_Model()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityType()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityQueryable()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.Microsoft.EntityFrameworkCore.Query.Internal.IAsyncEnumerableAccessor<TEntity>.get_AsyncEnumerable()
+   at Microsoft.EntityFrameworkCore.Extensions.Internal.QueryableExtensions.AsAsyncEnumerable[TSource](IQueryable`1 source)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Live.Repositories.UpdatingRepository.<GetLastDate>d__6.MoveNext() in C:\HiltiLive\Mse\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 220
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Live.Repositories.UpdatingRepository.<SongsUpdateAsync>d__5.MoveNext() in C:\HiltiLive\Mse\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 59
+2020-09-23 12:42:25.353 +02:00 [Error] Error in updating songs The entity type 'SharedFolder' requires a primary key to be defined.
+2020-09-23 12:42:25.544 +02:00 [Error]    at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.ValidateNonNullPrimaryKeys(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Internal.SqlServerModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.CreateModel(DbContext context, IConventionSetBuilder conventionSetBuilder, IModelValidator validator)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.<>c__DisplayClass5_0.<GetModel>b__0(Object k)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.GetModel(DbContext context, IConventionSetBuilder conventionSetBuilder, IModelValidator validator)
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.CreateModel()
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.get_Model()
+   at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkServicesBuilder.<>c.<TryAddCoreServices>b__7_1(IServiceProvider p)
+   at lambda_method(Closure , ServiceProvider )
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_InternalServiceProvider()
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_Model()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityType()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityQueryable()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.Microsoft.EntityFrameworkCore.Query.Internal.IAsyncEnumerableAccessor<TEntity>.get_AsyncEnumerable()
+   at Microsoft.EntityFrameworkCore.Extensions.Internal.QueryableExtensions.AsAsyncEnumerable[TSource](IQueryable`1 source)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Live.Repositories.UpdatingRepository.<GetLastDate>d__6.MoveNext() in C:\HiltiLive\Mse\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 220
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Live.Repositories.UpdatingRepository.<SongsUpdateAsync>d__5.MoveNext() in C:\HiltiLive\Mse\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 59
+2020-09-23 12:43:17.693 +02:00 [Error] Error in updating songs The entity type 'SharedFolder' requires a primary key to be defined.
+2020-09-23 12:43:17.815 +02:00 [Error]    at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.ValidateNonNullPrimaryKeys(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Internal.SqlServerModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.CreateModel(DbContext context, IConventionSetBuilder conventionSetBuilder, IModelValidator validator)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.<>c__DisplayClass5_0.<GetModel>b__0(Object k)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.GetModel(DbContext context, IConventionSetBuilder conventionSetBuilder, IModelValidator validator)
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.CreateModel()
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.get_Model()
+   at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkServicesBuilder.<>c.<TryAddCoreServices>b__7_1(IServiceProvider p)
+   at lambda_method(Closure , ServiceProvider )
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_InternalServiceProvider()
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_Model()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityType()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityQueryable()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.Microsoft.EntityFrameworkCore.Query.Internal.IAsyncEnumerableAccessor<TEntity>.get_AsyncEnumerable()
+   at Microsoft.EntityFrameworkCore.Extensions.Internal.QueryableExtensions.AsAsyncEnumerable[TSource](IQueryable`1 source)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Live.Repositories.UpdatingRepository.<GetLastDate>d__6.MoveNext() in C:\HiltiLive\Mse\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 220
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Live.Repositories.UpdatingRepository.<SongsUpdateAsync>d__5.MoveNext() in C:\HiltiLive\Mse\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 59
+2020-09-23 12:44:21.073 +02:00 [Error] Error in updating songs The entity type 'SharedFolder' requires a primary key to be defined.
+2020-09-23 12:44:21.091 +02:00 [Error]    at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.ValidateNonNullPrimaryKeys(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Internal.SqlServerModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.CreateModel(DbContext context, IConventionSetBuilder conventionSetBuilder, IModelValidator validator)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.<>c__DisplayClass5_0.<GetModel>b__0(Object k)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.GetModel(DbContext context, IConventionSetBuilder conventionSetBuilder, IModelValidator validator)
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.CreateModel()
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.get_Model()
+   at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkServicesBuilder.<>c.<TryAddCoreServices>b__7_1(IServiceProvider p)
+   at lambda_method(Closure , ServiceProvider )
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_InternalServiceProvider()
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_Model()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityType()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityQueryable()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.Microsoft.EntityFrameworkCore.Query.Internal.IAsyncEnumerableAccessor<TEntity>.get_AsyncEnumerable()
+   at Microsoft.EntityFrameworkCore.Extensions.Internal.QueryableExtensions.AsAsyncEnumerable[TSource](IQueryable`1 source)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Live.Repositories.UpdatingRepository.<GetLastDate>d__6.MoveNext() in C:\HiltiLive\Mse\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 220
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Live.Repositories.UpdatingRepository.<SongsUpdateAsync>d__5.MoveNext() in C:\HiltiLive\Mse\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 59
+2020-09-23 13:27:53.677 +02:00 [Error] Error in updating songs The entity type 'SharedFolder' requires a primary key to be defined.
+2020-09-23 13:27:53.729 +02:00 [Error]    at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.ValidateNonNullPrimaryKeys(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Internal.SqlServerModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.CreateModel(DbContext context, IConventionSetBuilder conventionSetBuilder, IModelValidator validator)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.<>c__DisplayClass5_0.<GetModel>b__0(Object k)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.GetModel(DbContext context, IConventionSetBuilder conventionSetBuilder, IModelValidator validator)
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.CreateModel()
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.get_Model()
+   at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkServicesBuilder.<>c.<TryAddCoreServices>b__7_1(IServiceProvider p)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, ServiceProvider provider)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScoped(ScopedCallSite scopedCallSite, ServiceProvider provider)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, ServiceProvider provider)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScoped(ScopedCallSite scopedCallSite, ServiceProvider provider)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(IServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.<>c__DisplayClass22_0.<RealizeService>b__0(ServiceProvider provider)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_InternalServiceProvider()
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_Model()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityType()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityQueryable()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.Microsoft.EntityFrameworkCore.Query.Internal.IAsyncEnumerableAccessor<TEntity>.get_AsyncEnumerable()
+   at Microsoft.EntityFrameworkCore.Extensions.Internal.QueryableExtensions.AsAsyncEnumerable[TSource](IQueryable`1 source)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Live.Repositories.UpdatingRepository.<GetLastDate>d__6.MoveNext() in C:\HiltiLive\Mse\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 220
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Live.Repositories.UpdatingRepository.<SongsUpdateAsync>d__5.MoveNext() in C:\HiltiLive\Mse\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 59
+2020-09-23 13:28:19.547 +02:00 [Error] Error in updating songs The entity type 'SharedFolder' requires a primary key to be defined.
+2020-09-23 13:28:19.614 +02:00 [Error]    at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.ValidateNonNullPrimaryKeys(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Internal.SqlServerModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.CreateModel(DbContext context, IConventionSetBuilder conventionSetBuilder, IModelValidator validator)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.<>c__DisplayClass5_0.<GetModel>b__0(Object k)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.GetModel(DbContext context, IConventionSetBuilder conventionSetBuilder, IModelValidator validator)
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.CreateModel()
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.get_Model()
+   at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkServicesBuilder.<>c.<TryAddCoreServices>b__7_1(IServiceProvider p)
+   at lambda_method(Closure , ServiceProvider )
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_InternalServiceProvider()
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_Model()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityType()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityQueryable()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.Microsoft.EntityFrameworkCore.Query.Internal.IAsyncEnumerableAccessor<TEntity>.get_AsyncEnumerable()
+   at Microsoft.EntityFrameworkCore.Extensions.Internal.QueryableExtensions.AsAsyncEnumerable[TSource](IQueryable`1 source)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Live.Repositories.UpdatingRepository.<GetLastDate>d__6.MoveNext() in C:\HiltiLive\Mse\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 220
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Live.Repositories.UpdatingRepository.<SongsUpdateAsync>d__5.MoveNext() in C:\HiltiLive\Mse\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 59
+2020-09-23 14:20:33.684 +02:00 [Error] Error in updating songs The entity type 'SharedFolder' requires a primary key to be defined.
+2020-09-23 14:20:33.708 +02:00 [Error]    at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.ValidateNonNullPrimaryKeys(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Internal.SqlServerModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.CreateModel(DbContext context, IConventionSetBuilder conventionSetBuilder, IModelValidator validator)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.<>c__DisplayClass5_0.<GetModel>b__0(Object k)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.GetModel(DbContext context, IConventionSetBuilder conventionSetBuilder, IModelValidator validator)
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.CreateModel()
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.get_Model()
+   at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkServicesBuilder.<>c.<TryAddCoreServices>b__7_1(IServiceProvider p)
+   at lambda_method(Closure , ServiceProvider )
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_InternalServiceProvider()
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_Model()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityType()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityQueryable()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.Microsoft.EntityFrameworkCore.Query.Internal.IAsyncEnumerableAccessor<TEntity>.get_AsyncEnumerable()
+   at Microsoft.EntityFrameworkCore.Extensions.Internal.QueryableExtensions.AsAsyncEnumerable[TSource](IQueryable`1 source)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Live.Repositories.UpdatingRepository.<GetLastDate>d__6.MoveNext() in C:\HiltiLive\Mse\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 220
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Live.Repositories.UpdatingRepository.<SongsUpdateAsync>d__5.MoveNext() in C:\HiltiLive\Mse\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 59
+2020-09-23 14:26:19.219 +02:00 [Error] Error in updating songs The entity type 'SharedFolder' requires a primary key to be defined.
+2020-09-23 14:26:19.234 +02:00 [Error]    at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.ValidateNonNullPrimaryKeys(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Internal.SqlServerModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.CreateModel(DbContext context, IConventionSetBuilder conventionSetBuilder, IModelValidator validator)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.<>c__DisplayClass5_0.<GetModel>b__0(Object k)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.GetModel(DbContext context, IConventionSetBuilder conventionSetBuilder, IModelValidator validator)
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.CreateModel()
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.get_Model()
+   at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkServicesBuilder.<>c.<TryAddCoreServices>b__7_1(IServiceProvider p)
+   at lambda_method(Closure , ServiceProvider )
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_InternalServiceProvider()
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_Model()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityType()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityQueryable()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.Microsoft.EntityFrameworkCore.Query.Internal.IAsyncEnumerableAccessor<TEntity>.get_AsyncEnumerable()
+   at Microsoft.EntityFrameworkCore.Extensions.Internal.QueryableExtensions.AsAsyncEnumerable[TSource](IQueryable`1 source)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Live.Repositories.UpdatingRepository.<GetLastDate>d__6.MoveNext() in C:\HiltiLive\Mse\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 220
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Live.Repositories.UpdatingRepository.<SongsUpdateAsync>d__5.MoveNext() in C:\HiltiLive\Mse\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 59
+2020-09-23 14:31:11.521 +02:00 [Error] Error in updating songs The entity type 'SharedFolder' requires a primary key to be defined.
+2020-09-23 14:31:11.616 +02:00 [Error]    at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.ValidateNonNullPrimaryKeys(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Internal.SqlServerModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.CreateModel(DbContext context, IConventionSetBuilder conventionSetBuilder, IModelValidator validator)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.<>c__DisplayClass5_0.<GetModel>b__0(Object k)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.GetModel(DbContext context, IConventionSetBuilder conventionSetBuilder, IModelValidator validator)
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.CreateModel()
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.get_Model()
+   at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkServicesBuilder.<>c.<TryAddCoreServices>b__7_1(IServiceProvider p)
+   at lambda_method(Closure , ServiceProvider )
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_InternalServiceProvider()
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_Model()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityType()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityQueryable()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.Microsoft.EntityFrameworkCore.Query.Internal.IAsyncEnumerableAccessor<TEntity>.get_AsyncEnumerable()
+   at Microsoft.EntityFrameworkCore.Extensions.Internal.QueryableExtensions.AsAsyncEnumerable[TSource](IQueryable`1 source)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Live.Repositories.UpdatingRepository.<GetLastDate>d__6.MoveNext() in C:\HiltiLive\Mse\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 220
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Live.Repositories.UpdatingRepository.<SongsUpdateAsync>d__5.MoveNext() in C:\HiltiLive\Mse\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 59
+2020-09-23 14:32:36.653 +02:00 [Error] Error in updating songs The entity type 'SharedFolder' requires a primary key to be defined.
+2020-09-23 14:32:36.683 +02:00 [Error]    at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.ValidateNonNullPrimaryKeys(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Internal.SqlServerModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.CreateModel(DbContext context, IConventionSetBuilder conventionSetBuilder, IModelValidator validator)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.<>c__DisplayClass5_0.<GetModel>b__0(Object k)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.GetModel(DbContext context, IConventionSetBuilder conventionSetBuilder, IModelValidator validator)
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.CreateModel()
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.get_Model()
+   at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkServicesBuilder.<>c.<TryAddCoreServices>b__7_1(IServiceProvider p)
+   at lambda_method(Closure , ServiceProvider )
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_InternalServiceProvider()
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_Model()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityType()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityQueryable()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.Microsoft.EntityFrameworkCore.Query.Internal.IAsyncEnumerableAccessor<TEntity>.get_AsyncEnumerable()
+   at Microsoft.EntityFrameworkCore.Extensions.Internal.QueryableExtensions.AsAsyncEnumerable[TSource](IQueryable`1 source)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Live.Repositories.UpdatingRepository.<GetLastDate>d__6.MoveNext() in C:\HiltiLive\Mse\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 220
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Live.Repositories.UpdatingRepository.<SongsUpdateAsync>d__5.MoveNext() in C:\HiltiLive\Mse\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 59
+2020-09-24 23:43:46.834 +02:00 [Error] Error in updating songs The entity type 'SharedFolder' requires a primary key to be defined.
+2020-09-24 23:43:48.006 +02:00 [Error]    at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.ValidateNonNullPrimaryKeys(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Internal.SqlServerModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.CreateModel(DbContext context, IConventionSetBuilder conventionSetBuilder, IModelValidator validator)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.CreateModel()
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.get_Model()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScoped(ScopedCallSite scopedCallSite, ServiceProvider provider)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, ServiceProvider provider)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScoped(ScopedCallSite scopedCallSite, ServiceProvider provider)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_InternalServiceProvider()
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_Model()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityType()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityQueryable()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Live.Repositories.UpdatingRepository.GetLastDate() in C:\Users\ATM PROJEKT\Dysk Google\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 220
+   at Live.Repositories.UpdatingRepository.SongsUpdateAsync() in C:\Users\ATM PROJEKT\Dysk Google\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 59
+2020-09-24 23:51:26.747 +02:00 [Error] Error in updating songs The entity type 'SharedFolder' requires a primary key to be defined.
+2020-09-24 23:51:26.781 +02:00 [Error]    at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.ValidateNonNullPrimaryKeys(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Internal.SqlServerModelValidator.Validate(IModel model)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.CreateModel(DbContext context, IConventionSetBuilder conventionSetBuilder, IModelValidator validator)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.CreateModel()
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.get_Model()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScoped(ScopedCallSite scopedCallSite, ServiceProvider provider)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, ServiceProvider provider)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScoped(ScopedCallSite scopedCallSite, ServiceProvider provider)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_InternalServiceProvider()
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.get_Model()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityType()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityQueryable()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Live.Repositories.UpdatingRepository.GetLastDate() in C:\Users\ATM PROJEKT\Dysk Google\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 220
+   at Live.Repositories.UpdatingRepository.SongsUpdateAsync() in C:\Users\ATM PROJEKT\Dysk Google\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 59
+2020-09-25 00:16:41.545 +02:00 [Information] Finish radio songs update with 103 songs and 1 youtube errors
+2020-09-25 22:14:18.568 +02:00 [Information] Finish radio songs update with 135 songs and 0 youtube errors
+2020-09-25 23:01:11.682 +02:00 [Information] Finish radio songs update with 73 songs and 0 youtube errors
+2020-09-26 17:31:22.070 +02:00 [Information] Finish radio songs update with 548 songs and 3 youtube errors
+2020-09-26 19:00:34.071 +02:00 [Information] Finish radio songs update with 92 songs and 0 youtube errors
+2020-09-26 20:00:56.628 +02:00 [Information] Finish radio songs update with 86 songs and 1 youtube errors
+2020-09-26 21:00:37.450 +02:00 [Information] Finish radio songs update with 66 songs and 1 youtube errors
+2020-09-26 22:03:15.992 +02:00 [Information] Finish radio songs update with 69 songs and 0 youtube errors
+2020-09-26 23:08:39.872 +02:00 [Information] Finish radio songs update with 80 songs and 0 youtube errors
+2020-09-28 20:21:24.251 +02:00 [Information] Finish radio songs update with 90 songs and 0 youtube errors
+2020-09-28 21:29:31.262 +02:00 [Information] Finish radio songs update with 88 songs and 0 youtube errors
+2020-09-28 23:34:31.319 +02:00 [Error] Error while updating songs: An exception has been raised that is likely due to a transient failure. If you are connecting to a SQL Azure database consider using SqlAzureExecutionStrategy.
+2020-09-28 23:34:31.320 +02:00 [Error]    at Microsoft.EntityFrameworkCore.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.SelectEnumerableAsyncIterator`2.MoveNextCore(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.AsyncIterator`1.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.FirstOrDefault_[TSource](IAsyncEnumerable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.TaskResultAsyncEnumerable`1.Enumerator.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.SelectEnumerableAsyncIterator`2.MoveNextCore(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.AsyncIterator`1.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteSingletonAsyncQuery[TResult](QueryContext queryContext, Func`2 compiledQuery, IDiagnosticsLogger`1 logger, Type contextType)
+   at Live.Repositories.UpdatingRepository.SongsUpdateAsync() in C:\Users\ATM PROJEKT\Dysk Google\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 140
+2020-09-28 23:34:50.248 +02:00 [Error] Error in updating songs An exception has been raised that is likely due to a transient failure. If you are connecting to a SQL Azure database consider using SqlAzureExecutionStrategy.
+2020-09-28 23:34:50.248 +02:00 [Error]    at Microsoft.EntityFrameworkCore.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.MoveNext()
+   at Microsoft.EntityFrameworkCore.Query.Internal.LinqOperatorProvider._TrackEntities[TOut,TIn](IEnumerable`1 results, QueryContext queryContext, IList`1 entityTrackingInfos, IList`1 entityAccessors)+MoveNext()
+   at Microsoft.EntityFrameworkCore.Query.Internal.LinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext()
+   at Microsoft.EntityFrameworkCore.DbContext.RemoveRange(IEnumerable`1 entities)
+   at Live.Repositories.UpdatingRepository.SongsUpdateAsync() in C:\Users\ATM PROJEKT\Dysk Google\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 192
+2020-09-29 00:11:08.074 +02:00 [Error] Error while updating songs: Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+2020-09-29 00:11:08.086 +02:00 [Error]    at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__108_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.ExecuteAsync(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.BufferlessMoveNext(Boolean buffer, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.SelectEnumerableAsyncIterator`2.MoveNextCore(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.AsyncIterator`1.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.FirstOrDefault_[TSource](IAsyncEnumerable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.TaskResultAsyncEnumerable`1.Enumerator.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.SelectEnumerableAsyncIterator`2.MoveNextCore(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.AsyncIterator`1.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteSingletonAsyncQuery[TResult](QueryContext queryContext, Func`2 compiledQuery, IDiagnosticsLogger`1 logger, Type contextType)
+   at Live.Repositories.UpdatingRepository.SongsUpdateAsync() in C:\Users\ATM PROJEKT\Dysk Google\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 140
+2020-09-29 00:11:12.549 +02:00 [Error] Error in updating songs An exception has been raised that is likely due to a transient failure. If you are connecting to a SQL Azure database consider using SqlAzureExecutionStrategy.
+2020-09-29 00:11:12.550 +02:00 [Error]    at Microsoft.EntityFrameworkCore.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.MoveNext()
+   at Microsoft.EntityFrameworkCore.Query.Internal.LinqOperatorProvider._TrackEntities[TOut,TIn](IEnumerable`1 results, QueryContext queryContext, IList`1 entityTrackingInfos, IList`1 entityAccessors)+MoveNext()
+   at Microsoft.EntityFrameworkCore.Query.Internal.LinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext()
+   at Microsoft.EntityFrameworkCore.DbContext.RemoveRange(IEnumerable`1 entities)
+   at Live.Repositories.UpdatingRepository.SongsUpdateAsync() in C:\Users\ATM PROJEKT\Dysk Google\LiveSearch_All\LiveSearch_Api\Repositories\UpdatingRepository.cs:line 192
+2020-09-29 00:14:44.574 +02:00 [Information] Finish radio songs update with 99 songs and 1 youtube errors
+2020-09-29 01:01:52.293 +02:00 [Information] Finish radio songs update with 105 songs and 0 youtube errors
+2020-09-29 21:42:50.357 +02:00 [Information] Finish radio songs update with 454 songs and 1 youtube errors
+2020-09-29 22:05:52.869 +02:00 [Information] Finish radio songs update with 87 songs and 1 youtube errors
+2020-09-29 23:06:35.601 +02:00 [Information] Finish radio songs update with 100 songs and 0 youtube errors
+2020-09-30 00:02:18.191 +02:00 [Information] Finish radio songs update with 104 songs and 0 youtube errors
+2020-09-30 01:02:25.482 +02:00 [Information] Finish radio songs update with 106 songs and 1 youtube errors
+2020-10-04 00:25:18.934 +02:00 [Information] Finish radio songs update with 1077 songs and 5 youtube errors
+2020-10-04 01:04:14.942 +02:00 [Information] Finish radio songs update with 109 songs and 2 youtube errors
+2020-10-04 13:33:06.215 +02:00 [Information] Finish radio songs update with 1215 songs and 6 youtube errors
+2020-10-06 23:41:04.292 +02:00 [Information] Finish radio songs update with 1113 songs and 1 youtube errors
+2020-10-07 00:11:08.703 +02:00 [Information] Finish radio songs update with 101 songs and 1 youtube errors
+2020-10-07 23:16:30.866 +02:00 [Information] Finish radio songs update with 535 songs and 2 youtube errors
+2020-10-08 00:12:08.268 +02:00 [Information] Finish radio songs update with 103 songs and 0 youtube errors
+2020-10-08 22:29:39.518 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=3&date=08-10-2020&time_from=12&time_to=13
+2020-10-08 22:29:39.547 +02:00 [Error] An error occurred while sending the request. The server returned an invalid or unrecognized response.
+2020-10-08 22:31:13.699 +02:00 [Information] Finish radio songs update with 1084 songs and 1 youtube errors
+2020-10-08 23:04:59.801 +02:00 [Information] Finish radio songs update with 97 songs and 0 youtube errors
+2020-10-10 16:21:09.261 +02:00 [Information] Finish radio songs update with 96 songs and 0 youtube errors
+2020-10-10 17:02:20.585 +02:00 [Information] Finish radio songs update with 100 songs and 1 youtube errors
+2020-10-10 20:42:01.398 +02:00 [Information] Finish radio songs update with 285 songs and 0 youtube errors
+2020-10-10 21:00:42.442 +02:00 [Information] Finish radio songs update with 71 songs and 0 youtube errors
+2020-10-10 23:35:28.803 +02:00 [Information] Finish radio songs update with 149 songs and 1 youtube errors
+2020-10-11 00:03:43.061 +02:00 [Information] Finish radio songs update with 79 songs and 0 youtube errors
+2020-10-11 01:03:31.338 +02:00 [Information] Finish radio songs update with 91 songs and 1 youtube errors
+2020-10-11 10:58:30.192 +02:00 [Information] Finish radio songs update with 935 songs and 2 youtube errors
+2020-10-11 11:00:53.763 +02:00 [Information] Finish radio songs update with 101 songs and 1 youtube errors
+2020-10-11 12:15:29.200 +02:00 [Information] Finish radio songs update with 106 songs and 0 youtube errors
+2020-10-11 13:13:07.011 +02:00 [Information] Finish radio songs update with 99 songs and 0 youtube errors
+2020-10-11 14:01:31.443 +02:00 [Information] Finish radio songs update with 100 songs and 0 youtube errors
+2020-10-11 15:01:39.525 +02:00 [Information] Finish radio songs update with 103 songs and 1 youtube errors
+2020-10-11 16:07:00.151 +02:00 [Information] Finish radio songs update with 97 songs and 0 youtube errors
+2020-10-11 17:07:12.107 +02:00 [Information] Finish radio songs update with 94 songs and 0 youtube errors
+2020-10-11 18:04:09.889 +02:00 [Information] Finish radio songs update with 94 songs and 0 youtube errors
+2020-10-16 18:44:43.463 +02:00 [Information] Finish radio songs update with 88 songs and 0 youtube errors
+2020-10-16 19:43:09.307 +02:00 [Information] Finish radio songs update with 97 songs and 1 youtube errors
+2020-10-16 20:29:46.362 +02:00 [Information] Finish radio songs update with 86 songs and 0 youtube errors
+2020-10-16 21:08:20.595 +02:00 [Information] Finish radio songs update with 69 songs and 0 youtube errors
+2020-10-16 22:10:44.043 +02:00 [Information] Finish radio songs update with 59 songs and 0 youtube errors
+2020-10-16 23:00:12.375 +02:00 [Information] Finish radio songs update with 67 songs and 1 youtube errors
+2020-10-16 23:12:48.459 +02:00 [Error] Error in updating songs Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+2020-10-16 23:12:57.130 +02:00 [Error]    at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__108_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.<ExecuteAsync>d__17.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.<BufferlessMoveNext>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.EntityFrameworkCore.Storage.Internal.SqlServerExecutionStrategy.<ExecuteAsync>d__7`2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.<MoveNext>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at System.Linq.AsyncEnumerable.SelectEnumerableAsyncIterator`2.<MoveNextCore>d__7.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at System.Linq.AsyncEnumerable.AsyncIterator`1.<MoveNext>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.<MoveNext>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at System.Linq.AsyncEnumerable.<Aggregate_>d__6`3.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Live.Repositories.UpdatingRepository.<GetLastDate>d__6.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Repositories/UpdatingRepository.cs:line 220
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Live.Repositories.UpdatingRepository.<SongsUpdateAsync>d__5.MoveNext() in /Users/mateuszbieda/DyskGoogle/LiveSearch_All/LiveSearch_Api/Repositories/UpdatingRepository.cs:line 59
+2020-10-17 00:03:01.431 +02:00 [Information] Finish radio songs update with 101 songs and 0 youtube errors
+2020-10-17 15:05:56.916 +02:00 [Information] Finish radio songs update with 1111 songs and 4 youtube errors
+2020-10-17 16:06:45.710 +02:00 [Information] Finish radio songs update with 96 songs and 0 youtube errors
+2020-10-17 20:43:50.749 +02:00 [Information] Finish radio songs update with 386 songs and 3 youtube errors
+2020-10-17 21:01:32.297 +02:00 [Information] Finish radio songs update with 72 songs and 1 youtube errors
+2020-10-17 22:28:38.537 +02:00 [Information] Finish radio songs update with 71 songs and 0 youtube errors
+2020-10-17 23:40:13.547 +02:00 [Information] Finish radio songs update with 84 songs and 0 youtube errors
+2020-10-18 00:00:20.369 +02:00 [Information] Finish radio songs update with 78 songs and 0 youtube errors
+2020-11-21 01:03:53.855 +01:00 [Information] Finish radio songs update with 118 songs and 4 youtube errors
+2020-11-21 02:01:27.323 +01:00 [Information] Finish radio songs update with 121 songs and 9 youtube errors
+2020-11-21 15:11:18.844 +01:00 [Information] Finish radio songs update with 1130 songs and 6 youtube errors
+2020-11-21 16:04:36.512 +01:00 [Information] Finish radio songs update with 95 songs and 0 youtube errors
+2020-11-21 17:19:10.318 +01:00 [Information] Finish radio songs update with 97 songs and 0 youtube errors
+2020-11-21 23:13:25.163 +01:00 [Information] Finish radio songs update with 516 songs and 2 youtube errors
+2020-11-22 00:55:55.532 +01:00 [Information] Finish radio songs update with 82 songs and 0 youtube errors
+2020-11-22 01:07:58.842 +01:00 [Information] Finish radio songs update with 114 songs and 2 youtube errors
+2020-11-22 02:03:03.192 +01:00 [Information] Finish radio songs update with 115 songs and 0 youtube errors
+2020-11-22 18:14:38.319 +01:00 [Information] Finish radio songs update with 1136 songs and 3 youtube errors
+2020-11-22 19:00:45.816 +01:00 [Information] Finish radio songs update with 100 songs and 1 youtube errors
+2020-11-22 20:09:22.062 +01:00 [Information] Finish radio songs update with 102 songs and 0 youtube errors
+2020-11-22 21:58:41.698 +01:00 [Information] Finish radio songs update with 105 songs and 1 youtube errors
+2020-11-22 22:05:53.300 +01:00 [Information] Finish radio songs update with 96 songs and 1 youtube errors
+2020-11-22 23:28:15.508 +01:00 [Information] Finish radio songs update with 120 songs and 1 youtube errors
+2020-11-23 00:39:45.919 +01:00 [Information] Finish radio songs update with 103 songs and 1 youtube errors
+2020-11-23 01:03:47.423 +01:00 [Information] Finish radio songs update with 112 songs and 3 youtube errors
+2020-11-23 23:29:39.474 +01:00 [Information] Finish radio songs update with 1073 songs and 2 youtube errors
+2020-11-24 00:02:43.407 +01:00 [Information] Finish radio songs update with 106 songs and 0 youtube errors
+2020-11-27 21:57:22.525 +01:00 [Information] Finish radio songs update with 1010 songs and 1 youtube errors
+2020-11-28 00:00:06.064 +01:00 [Information] Finish radio songs update with 125 songs and 0 youtube errors
+2020-11-28 00:01:07.095 +01:00 [Information] Finish radio songs update with 97 songs and 0 youtube errors
+2020-11-28 01:14:32.115 +01:00 [Information] Finish radio songs update with 117 songs and 3 youtube errors
+2020-11-28 12:37:06.167 +01:00 [Information] Finish radio songs update with 1055 songs and 7 youtube errors
+2020-11-28 13:33:32.047 +01:00 [Information] Finish radio songs update with 88 songs and 1 youtube errors
+2020-11-28 15:59:19.351 +01:00 [Information] Finish radio songs update with 183 songs and 0 youtube errors
+2020-11-28 16:00:36.478 +01:00 [Information] Finish radio songs update with 95 songs and 0 youtube errors
+2020-11-29 22:07:04.256 +01:00 [Information] Finish radio songs update with 95 songs and 0 youtube errors
+2020-11-29 23:40:03.528 +01:00 [Information] Finish radio songs update with 117 songs and 0 youtube errors
+2020-11-30 00:01:00.454 +01:00 [Information] Finish radio songs update with 113 songs and 1 youtube errors
+2021-02-11 00:22:21.078 +01:00 [Information] Finish radio songs update with 263 songs and 1 youtube errors
+2021-02-11 01:35:02.873 +01:00 [Information] Finish radio songs update with 69 songs and 3 youtube errors
+2021-02-11 17:34:11.662 +01:00 [Information] Finish radio songs update with 1089 songs and 5 youtube errors
+2021-02-11 17:34:15.274 +01:00 [Error] Error in adding spotify: The remote server returned an error: (400) Bad Request.
+2021-02-11 17:34:15.457 +01:00 [Error]    at System.Net.HttpWebRequest.GetResponse()
+   at System.Net.WebClient.GetWebResponse(WebRequest request)
+   at System.Net.WebClient.DownloadBits(WebRequest request, Stream writeStream)
+   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   at System.Net.WebClient.DownloadString(Uri address)
+   at System.Net.WebClient.DownloadString(String address)
+   at Live.Core.IconsUrl.<>c__DisplayClass2_2.<GetIdsFromUrl>b__2() in C:\Users\ATM PROJEKT\Documents\livesearch\LiveSearch_All\LiveSearch_Api\Live.Core\IconsUrl.cs:line 112
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at Live.Core.IconsUrl.GetIdsFromUrl(String url) in C:\Users\ATM PROJEKT\Documents\livesearch\LiveSearch_All\LiveSearch_Api\Live.Core\IconsUrl.cs:line 110
+2021-02-11 18:03:32.837 +01:00 [Information] Finish radio songs update with 90 songs and 0 youtube errors
+2021-02-11 21:48:46.716 +01:00 [Information] Finish radio songs update with 263 songs and 0 youtube errors
+2021-02-11 22:22:46.775 +01:00 [Information] Finish radio songs update with 79 songs and 0 youtube errors
+2021-02-11 23:01:03.395 +01:00 [Information] Finish radio songs update with 91 songs and 0 youtube errors
+2021-02-11 23:07:23.221 +01:00 [Information] Finish TV movies update with 151 and 13 youtube errors
+2021-02-14 11:26:51.971 +01:00 [Information] Finish radio songs update with 968 songs and 3 youtube errors
+2021-02-14 18:48:54.064 +01:00 [Information] Finish radio songs update with 661 songs and 1 youtube errors
+2021-02-14 19:20:03.481 +01:00 [Information] Finish radio songs update with 95 songs and 0 youtube errors
+2021-02-14 23:29:18.183 +01:00 [Information] Finish radio songs update with 415 songs and 1 youtube errors
+2021-02-15 00:20:17.412 +01:00 [Information] Finish radio songs update with 104 songs and 1 youtube errors
+2021-02-15 01:09:10.258 +01:00 [Information] Finish radio songs update with 105 songs and 3 youtube errors
+2021-02-15 22:45:47.894 +01:00 [Information] Finish radio songs update with 506 songs and 2 youtube errors
+2021-02-15 23:09:36.924 +01:00 [Information] Finish radio songs update with 95 songs and 0 youtube errors
+2021-02-16 00:05:55.869 +01:00 [Information] Finish radio songs update with 104 songs and 0 youtube errors
+2021-02-16 14:30:30.860 +01:00 [Information] Finish radio songs update with 1162 songs and 7 youtube errors
+2021-02-16 15:23:23.157 +01:00 [Information] Finish radio songs update with 91 songs and 0 youtube errors
+2021-02-16 19:53:29.878 +01:00 [Information] Finish radio songs update with 348 songs and 1 youtube errors
+2021-02-16 20:06:51.702 +01:00 [Information] Finish radio songs update with 89 songs and 0 youtube errors
+2021-02-16 21:04:14.433 +01:00 [Information] Finish radio songs update with 92 songs and 0 youtube errors
+2021-02-16 23:14:03.119 +01:00 [Information] Finish radio songs update with 178 songs and 0 youtube errors
+2021-02-17 00:02:47.639 +01:00 [Information] Finish radio songs update with 101 songs and 0 youtube errors
+2021-04-19 23:47:54.729 +02:00 [Information] Finish radio songs update with 565 songs and 1 youtube errors
+2021-04-21 20:45:28.277 +02:00 [Information] Finish radio songs update with 748 songs and 0 youtube errors
+2021-04-21 23:32:39.338 +02:00 [Information] Finish radio songs update with 303 songs and 1 youtube errors
+2021-04-22 11:33:39.059 +02:00 [Information] Finish radio songs update with 1197 songs and 5 youtube errors
+2021-04-22 21:49:16.413 +02:00 [Information] Finish radio songs update with 826 songs and 1 youtube errors
+2021-04-22 22:54:37.180 +02:00 [Information] Finish radio songs update with 95 songs and 0 youtube errors
+2021-04-22 23:08:38.243 +02:00 [Information] Finish radio songs update with 110 songs and 0 youtube errors
+2021-04-24 21:49:31.977 +02:00 [Information] Finish radio songs update with 1115 songs and 3 youtube errors
+2021-04-24 23:33:49.350 +02:00 [Information] Finish radio songs update with 153 songs and 1 youtube errors
+2021-04-25 00:29:47.845 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=1&date=24-04-2021&time_from=23&time_to=0
+2021-04-25 00:29:47.845 +02:00 [Error] The remote server returned an error: (504) Gateway Time-out.
+2021-04-25 00:30:48.360 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=2&date=24-04-2021&time_from=23&time_to=0
+2021-04-25 00:30:48.360 +02:00 [Error] The remote server returned an error: (504) Gateway Time-out.
+2021-04-25 00:31:13.432 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=3&date=24-04-2021&time_from=23&time_to=0
+2021-04-25 00:31:13.432 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-04-25 00:31:13.879 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=4&date=24-04-2021&time_from=23&time_to=0
+2021-04-25 00:31:13.879 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-04-25 00:31:14.352 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=9&date=24-04-2021&time_from=23&time_to=0
+2021-04-25 00:31:14.352 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-04-25 00:31:14.783 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=30&date=24-04-2021&time_from=23&time_to=0
+2021-04-25 00:31:14.783 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-04-25 00:31:15.075 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=40&date=24-04-2021&time_from=23&time_to=0
+2021-04-25 00:31:15.075 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-04-25 01:29:36.303 +02:00 [Information] Finish radio songs update with 182 songs and 0 youtube errors
+2021-04-25 20:24:07.411 +02:00 [Information] Finish radio songs update with 189 songs and 0 youtube errors
+2021-04-25 22:36:34.986 +02:00 [Information] Finish radio songs update with 199 songs and 0 youtube errors
+2021-04-25 23:00:26.076 +02:00 [Information] Finish radio songs update with 116 songs and 0 youtube errors
+2021-04-25 23:53:51.592 +02:00 [Information] Finish TV movies update with 81 and 2 youtube errors
+2021-05-02 18:00:17.320 +02:00 [Information] Finish radio songs update with 97 songs and 0 youtube errors
+2021-05-02 19:10:07.975 +02:00 [Information] Finish radio songs update with 95 songs and 0 youtube errors
+2021-05-02 20:04:22.836 +02:00 [Information] Finish radio songs update with 83 songs and 0 youtube errors
+2021-05-06 15:06:02.231 +02:00 [Information] Finish radio songs update with 442 songs and 0 youtube errors
+2021-05-08 00:47:24.739 +02:00 [Information] Finish radio songs update with 562 songs and 1 youtube errors
+2021-05-08 01:02:12.658 +02:00 [Information] Finish radio songs update with 99 songs and 0 youtube errors
+2021-05-10 00:33:49.885 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=1&date=09-05-2021&time_from=23&time_to=0
+2021-05-10 00:33:49.886 +02:00 [Error] The remote server returned an error: (504) Gateway Time-out.
+2021-05-10 00:34:22.483 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=2&date=09-05-2021&time_from=23&time_to=0
+2021-05-10 00:34:22.483 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:22.771 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=3&date=09-05-2021&time_from=23&time_to=0
+2021-05-10 00:34:22.777 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:23.051 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=4&date=09-05-2021&time_from=23&time_to=0
+2021-05-10 00:34:23.051 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:23.304 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=9&date=09-05-2021&time_from=23&time_to=0
+2021-05-10 00:34:23.304 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:23.800 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=30&date=09-05-2021&time_from=23&time_to=0
+2021-05-10 00:34:23.800 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:24.112 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=40&date=09-05-2021&time_from=23&time_to=0
+2021-05-10 00:34:24.112 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:24.351 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=1&date=09-05-2021&time_from=22&time_to=23
+2021-05-10 00:34:24.351 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:24.595 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=2&date=09-05-2021&time_from=22&time_to=23
+2021-05-10 00:34:24.595 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:24.927 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=3&date=09-05-2021&time_from=22&time_to=23
+2021-05-10 00:34:24.927 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:25.405 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=4&date=09-05-2021&time_from=22&time_to=23
+2021-05-10 00:34:25.405 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:25.789 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=9&date=09-05-2021&time_from=22&time_to=23
+2021-05-10 00:34:25.789 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:26.630 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=30&date=09-05-2021&time_from=22&time_to=23
+2021-05-10 00:34:26.630 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:27.248 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=40&date=09-05-2021&time_from=22&time_to=23
+2021-05-10 00:34:27.248 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:27.565 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=1&date=09-05-2021&time_from=21&time_to=22
+2021-05-10 00:34:27.565 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:27.925 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=2&date=09-05-2021&time_from=21&time_to=22
+2021-05-10 00:34:27.925 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:28.241 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=3&date=09-05-2021&time_from=21&time_to=22
+2021-05-10 00:34:28.241 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:28.894 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=4&date=09-05-2021&time_from=21&time_to=22
+2021-05-10 00:34:28.894 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:29.209 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=9&date=09-05-2021&time_from=21&time_to=22
+2021-05-10 00:34:29.209 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:29.461 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=30&date=09-05-2021&time_from=21&time_to=22
+2021-05-10 00:34:29.461 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:29.707 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=40&date=09-05-2021&time_from=21&time_to=22
+2021-05-10 00:34:29.707 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:29.950 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=1&date=09-05-2021&time_from=20&time_to=21
+2021-05-10 00:34:29.950 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:30.187 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=2&date=09-05-2021&time_from=20&time_to=21
+2021-05-10 00:34:30.187 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:30.421 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=3&date=09-05-2021&time_from=20&time_to=21
+2021-05-10 00:34:30.421 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:30.669 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=4&date=09-05-2021&time_from=20&time_to=21
+2021-05-10 00:34:30.669 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:30.903 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=9&date=09-05-2021&time_from=20&time_to=21
+2021-05-10 00:34:30.903 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:31.160 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=30&date=09-05-2021&time_from=20&time_to=21
+2021-05-10 00:34:31.160 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:31.503 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=40&date=09-05-2021&time_from=20&time_to=21
+2021-05-10 00:34:31.503 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:31.812 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=1&date=09-05-2021&time_from=19&time_to=20
+2021-05-10 00:34:31.812 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:32.062 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=2&date=09-05-2021&time_from=19&time_to=20
+2021-05-10 00:34:32.062 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:32.357 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=3&date=09-05-2021&time_from=19&time_to=20
+2021-05-10 00:34:32.357 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:32.597 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=4&date=09-05-2021&time_from=19&time_to=20
+2021-05-10 00:34:32.597 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:32.841 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=9&date=09-05-2021&time_from=19&time_to=20
+2021-05-10 00:34:32.841 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:33.278 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=30&date=09-05-2021&time_from=19&time_to=20
+2021-05-10 00:34:33.278 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:33.936 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=40&date=09-05-2021&time_from=19&time_to=20
+2021-05-10 00:34:33.936 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:34.285 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=1&date=09-05-2021&time_from=18&time_to=19
+2021-05-10 00:34:34.285 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:34.583 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=2&date=09-05-2021&time_from=18&time_to=19
+2021-05-10 00:34:34.583 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:34.889 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=3&date=09-05-2021&time_from=18&time_to=19
+2021-05-10 00:34:34.889 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:35.179 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=4&date=09-05-2021&time_from=18&time_to=19
+2021-05-10 00:34:35.179 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:35.450 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=9&date=09-05-2021&time_from=18&time_to=19
+2021-05-10 00:34:35.450 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:35.727 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=30&date=09-05-2021&time_from=18&time_to=19
+2021-05-10 00:34:35.727 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:35.976 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=40&date=09-05-2021&time_from=18&time_to=19
+2021-05-10 00:34:35.976 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:36.348 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=1&date=09-05-2021&time_from=17&time_to=18
+2021-05-10 00:34:36.348 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:36.660 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=2&date=09-05-2021&time_from=17&time_to=18
+2021-05-10 00:34:36.660 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:37.214 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=3&date=09-05-2021&time_from=17&time_to=18
+2021-05-10 00:34:37.214 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:37.539 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=4&date=09-05-2021&time_from=17&time_to=18
+2021-05-10 00:34:37.539 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:37.805 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=9&date=09-05-2021&time_from=17&time_to=18
+2021-05-10 00:34:37.805 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:38.057 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=30&date=09-05-2021&time_from=17&time_to=18
+2021-05-10 00:34:38.057 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:38.298 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=40&date=09-05-2021&time_from=17&time_to=18
+2021-05-10 00:34:38.298 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:38.585 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=1&date=09-05-2021&time_from=16&time_to=17
+2021-05-10 00:34:38.585 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:38.932 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=2&date=09-05-2021&time_from=16&time_to=17
+2021-05-10 00:34:38.932 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:39.406 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=3&date=09-05-2021&time_from=16&time_to=17
+2021-05-10 00:34:39.406 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:39.712 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=4&date=09-05-2021&time_from=16&time_to=17
+2021-05-10 00:34:39.712 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:39.959 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=9&date=09-05-2021&time_from=16&time_to=17
+2021-05-10 00:34:39.959 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:40.317 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=30&date=09-05-2021&time_from=16&time_to=17
+2021-05-10 00:34:40.318 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:40.618 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=40&date=09-05-2021&time_from=16&time_to=17
+2021-05-10 00:34:40.619 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:40.870 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=1&date=09-05-2021&time_from=15&time_to=16
+2021-05-10 00:34:40.870 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:41.109 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=2&date=09-05-2021&time_from=15&time_to=16
+2021-05-10 00:34:41.109 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:41.503 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=3&date=09-05-2021&time_from=15&time_to=16
+2021-05-10 00:34:41.503 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:42.263 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=4&date=09-05-2021&time_from=15&time_to=16
+2021-05-10 00:34:42.263 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:42.622 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=9&date=09-05-2021&time_from=15&time_to=16
+2021-05-10 00:34:42.622 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:42.914 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=30&date=09-05-2021&time_from=15&time_to=16
+2021-05-10 00:34:42.914 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:43.156 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=40&date=09-05-2021&time_from=15&time_to=16
+2021-05-10 00:34:43.156 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:43.516 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=1&date=09-05-2021&time_from=14&time_to=15
+2021-05-10 00:34:43.516 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:43.838 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=2&date=09-05-2021&time_from=14&time_to=15
+2021-05-10 00:34:43.838 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:44.227 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=3&date=09-05-2021&time_from=14&time_to=15
+2021-05-10 00:34:44.227 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:44.520 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=4&date=09-05-2021&time_from=14&time_to=15
+2021-05-10 00:34:44.521 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:44.880 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=9&date=09-05-2021&time_from=14&time_to=15
+2021-05-10 00:34:44.880 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:45.164 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=30&date=09-05-2021&time_from=14&time_to=15
+2021-05-10 00:34:45.164 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:45.525 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=40&date=09-05-2021&time_from=14&time_to=15
+2021-05-10 00:34:45.525 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:45.865 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=1&date=09-05-2021&time_from=13&time_to=14
+2021-05-10 00:34:45.865 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:46.226 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=2&date=09-05-2021&time_from=13&time_to=14
+2021-05-10 00:34:46.226 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:46.551 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=3&date=09-05-2021&time_from=13&time_to=14
+2021-05-10 00:34:46.551 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:47.109 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=4&date=09-05-2021&time_from=13&time_to=14
+2021-05-10 00:34:47.109 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:47.391 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=9&date=09-05-2021&time_from=13&time_to=14
+2021-05-10 00:34:47.391 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:48.108 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=30&date=09-05-2021&time_from=13&time_to=14
+2021-05-10 00:34:48.108 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:48.392 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=40&date=09-05-2021&time_from=13&time_to=14
+2021-05-10 00:34:48.392 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:48.752 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=1&date=09-05-2021&time_from=12&time_to=13
+2021-05-10 00:34:48.752 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:49.127 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=2&date=09-05-2021&time_from=12&time_to=13
+2021-05-10 00:34:49.127 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:49.409 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=3&date=09-05-2021&time_from=12&time_to=13
+2021-05-10 00:34:49.409 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:49.712 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=4&date=09-05-2021&time_from=12&time_to=13
+2021-05-10 00:34:49.712 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:50.224 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=9&date=09-05-2021&time_from=12&time_to=13
+2021-05-10 00:34:50.224 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:50.528 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=30&date=09-05-2021&time_from=12&time_to=13
+2021-05-10 00:34:50.528 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:34:50.781 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=40&date=09-05-2021&time_from=12&time_to=13
+2021-05-10 00:34:50.781 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:28.641 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=1&date=09-05-2021&time_from=23&time_to=0
+2021-05-10 00:36:28.641 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:29.002 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=2&date=09-05-2021&time_from=23&time_to=0
+2021-05-10 00:36:29.002 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:29.241 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=3&date=09-05-2021&time_from=23&time_to=0
+2021-05-10 00:36:29.241 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:29.477 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=4&date=09-05-2021&time_from=23&time_to=0
+2021-05-10 00:36:29.477 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:29.710 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=9&date=09-05-2021&time_from=23&time_to=0
+2021-05-10 00:36:29.710 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:30.049 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=30&date=09-05-2021&time_from=23&time_to=0
+2021-05-10 00:36:30.049 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:30.289 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=40&date=09-05-2021&time_from=23&time_to=0
+2021-05-10 00:36:30.289 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:30.529 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=1&date=09-05-2021&time_from=22&time_to=23
+2021-05-10 00:36:30.529 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:30.806 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=2&date=09-05-2021&time_from=22&time_to=23
+2021-05-10 00:36:30.806 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:31.175 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=3&date=09-05-2021&time_from=22&time_to=23
+2021-05-10 00:36:31.175 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:31.464 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=4&date=09-05-2021&time_from=22&time_to=23
+2021-05-10 00:36:31.464 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:31.701 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=9&date=09-05-2021&time_from=22&time_to=23
+2021-05-10 00:36:31.701 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:31.950 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=30&date=09-05-2021&time_from=22&time_to=23
+2021-05-10 00:36:31.950 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:32.188 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=40&date=09-05-2021&time_from=22&time_to=23
+2021-05-10 00:36:32.188 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:32.459 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=1&date=09-05-2021&time_from=21&time_to=22
+2021-05-10 00:36:32.459 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:32.792 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=2&date=09-05-2021&time_from=21&time_to=22
+2021-05-10 00:36:32.792 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:33.138 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=3&date=09-05-2021&time_from=21&time_to=22
+2021-05-10 00:36:33.138 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:33.572 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=4&date=09-05-2021&time_from=21&time_to=22
+2021-05-10 00:36:33.572 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:33.820 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=9&date=09-05-2021&time_from=21&time_to=22
+2021-05-10 00:36:33.821 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:34.174 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=30&date=09-05-2021&time_from=21&time_to=22
+2021-05-10 00:36:34.174 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:34.475 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=40&date=09-05-2021&time_from=21&time_to=22
+2021-05-10 00:36:34.475 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:34.773 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=1&date=09-05-2021&time_from=20&time_to=21
+2021-05-10 00:36:34.773 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:35.007 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=2&date=09-05-2021&time_from=20&time_to=21
+2021-05-10 00:36:35.007 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:35.265 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=3&date=09-05-2021&time_from=20&time_to=21
+2021-05-10 00:36:35.265 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:35.525 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=4&date=09-05-2021&time_from=20&time_to=21
+2021-05-10 00:36:35.525 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:35.796 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=9&date=09-05-2021&time_from=20&time_to=21
+2021-05-10 00:36:35.796 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:36.038 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=30&date=09-05-2021&time_from=20&time_to=21
+2021-05-10 00:36:36.038 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:36.281 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=40&date=09-05-2021&time_from=20&time_to=21
+2021-05-10 00:36:36.281 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:36.523 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=1&date=09-05-2021&time_from=19&time_to=20
+2021-05-10 00:36:36.523 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:36.871 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=2&date=09-05-2021&time_from=19&time_to=20
+2021-05-10 00:36:36.871 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:37.211 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=3&date=09-05-2021&time_from=19&time_to=20
+2021-05-10 00:36:37.211 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:37.584 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=4&date=09-05-2021&time_from=19&time_to=20
+2021-05-10 00:36:37.585 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:37.875 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=9&date=09-05-2021&time_from=19&time_to=20
+2021-05-10 00:36:37.875 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:38.158 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=30&date=09-05-2021&time_from=19&time_to=20
+2021-05-10 00:36:38.158 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:38.446 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=40&date=09-05-2021&time_from=19&time_to=20
+2021-05-10 00:36:38.446 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:38.742 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=1&date=09-05-2021&time_from=18&time_to=19
+2021-05-10 00:36:38.742 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:39.156 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=2&date=09-05-2021&time_from=18&time_to=19
+2021-05-10 00:36:39.156 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:39.527 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=3&date=09-05-2021&time_from=18&time_to=19
+2021-05-10 00:36:39.527 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:39.931 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=4&date=09-05-2021&time_from=18&time_to=19
+2021-05-10 00:36:39.931 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:40.240 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=9&date=09-05-2021&time_from=18&time_to=19
+2021-05-10 00:36:40.240 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:40.483 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=30&date=09-05-2021&time_from=18&time_to=19
+2021-05-10 00:36:40.483 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:40.836 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=40&date=09-05-2021&time_from=18&time_to=19
+2021-05-10 00:36:40.836 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:41.138 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=1&date=09-05-2021&time_from=17&time_to=18
+2021-05-10 00:36:41.138 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:41.373 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=2&date=09-05-2021&time_from=17&time_to=18
+2021-05-10 00:36:41.373 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:41.612 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=3&date=09-05-2021&time_from=17&time_to=18
+2021-05-10 00:36:41.612 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:42.027 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=4&date=09-05-2021&time_from=17&time_to=18
+2021-05-10 00:36:42.027 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:42.326 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=9&date=09-05-2021&time_from=17&time_to=18
+2021-05-10 00:36:42.327 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:42.587 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=30&date=09-05-2021&time_from=17&time_to=18
+2021-05-10 00:36:42.587 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:42.974 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=40&date=09-05-2021&time_from=17&time_to=18
+2021-05-10 00:36:42.974 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:43.284 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=1&date=09-05-2021&time_from=16&time_to=17
+2021-05-10 00:36:43.284 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:43.517 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=2&date=09-05-2021&time_from=16&time_to=17
+2021-05-10 00:36:43.517 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:43.884 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=3&date=09-05-2021&time_from=16&time_to=17
+2021-05-10 00:36:43.884 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:44.211 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=4&date=09-05-2021&time_from=16&time_to=17
+2021-05-10 00:36:44.211 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:44.496 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=9&date=09-05-2021&time_from=16&time_to=17
+2021-05-10 00:36:44.496 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:44.746 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=30&date=09-05-2021&time_from=16&time_to=17
+2021-05-10 00:36:44.746 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:45.028 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=40&date=09-05-2021&time_from=16&time_to=17
+2021-05-10 00:36:45.028 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:45.269 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=1&date=09-05-2021&time_from=15&time_to=16
+2021-05-10 00:36:45.269 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:45.641 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=2&date=09-05-2021&time_from=15&time_to=16
+2021-05-10 00:36:45.641 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:45.950 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=3&date=09-05-2021&time_from=15&time_to=16
+2021-05-10 00:36:45.950 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:46.210 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=4&date=09-05-2021&time_from=15&time_to=16
+2021-05-10 00:36:46.210 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:46.449 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=9&date=09-05-2021&time_from=15&time_to=16
+2021-05-10 00:36:46.449 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:46.680 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=30&date=09-05-2021&time_from=15&time_to=16
+2021-05-10 00:36:46.680 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:47.048 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=40&date=09-05-2021&time_from=15&time_to=16
+2021-05-10 00:36:47.048 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:47.332 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=1&date=09-05-2021&time_from=14&time_to=15
+2021-05-10 00:36:47.332 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:47.617 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=2&date=09-05-2021&time_from=14&time_to=15
+2021-05-10 00:36:47.617 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:47.877 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=3&date=09-05-2021&time_from=14&time_to=15
+2021-05-10 00:36:47.877 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:48.256 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=4&date=09-05-2021&time_from=14&time_to=15
+2021-05-10 00:36:48.256 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:48.809 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=9&date=09-05-2021&time_from=14&time_to=15
+2021-05-10 00:36:48.809 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:49.320 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=30&date=09-05-2021&time_from=14&time_to=15
+2021-05-10 00:36:49.320 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:50.070 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=40&date=09-05-2021&time_from=14&time_to=15
+2021-05-10 00:36:50.070 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:50.439 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=1&date=09-05-2021&time_from=13&time_to=14
+2021-05-10 00:36:50.439 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:50.757 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=2&date=09-05-2021&time_from=13&time_to=14
+2021-05-10 00:36:50.757 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:51.112 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=3&date=09-05-2021&time_from=13&time_to=14
+2021-05-10 00:36:51.112 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:51.436 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=4&date=09-05-2021&time_from=13&time_to=14
+2021-05-10 00:36:51.436 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:51.812 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=9&date=09-05-2021&time_from=13&time_to=14
+2021-05-10 00:36:51.812 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:52.109 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=30&date=09-05-2021&time_from=13&time_to=14
+2021-05-10 00:36:52.109 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:52.371 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=40&date=09-05-2021&time_from=13&time_to=14
+2021-05-10 00:36:52.371 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:52.608 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=1&date=09-05-2021&time_from=12&time_to=13
+2021-05-10 00:36:52.608 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:52.961 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=2&date=09-05-2021&time_from=12&time_to=13
+2021-05-10 00:36:52.961 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:53.240 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=3&date=09-05-2021&time_from=12&time_to=13
+2021-05-10 00:36:53.240 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:53.588 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=4&date=09-05-2021&time_from=12&time_to=13
+2021-05-10 00:36:53.588 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:53.993 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=9&date=09-05-2021&time_from=12&time_to=13
+2021-05-10 00:36:53.993 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:54.227 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=30&date=09-05-2021&time_from=12&time_to=13
+2021-05-10 00:36:54.228 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:36:54.636 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=40&date=09-05-2021&time_from=12&time_to=13
+2021-05-10 00:36:54.636 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
+2021-05-10 00:40:18.487 +02:00 [Information] Finish radio songs update with 1172 songs and 3 youtube errors

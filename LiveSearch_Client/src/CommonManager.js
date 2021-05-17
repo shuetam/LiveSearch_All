@@ -9,9 +9,15 @@ export const  manageLogin = () => {
     }
 
      var icons = document.querySelectorAll(".entity");
-
-    for(var i=0;i<icons.length;i++) {
-        icons[i].className = "entityDis";
+     
+     
+     for(var i=0;i<icons.length;i++) {
+         icons[i].className = "entityDis";
+        }
+        
+var folders = document.querySelectorAll(".folder");
+    for(var i=0;i<folders.length;i++) {
+        folders[i].className = "folderDis";
     }
 
     if(body) {
@@ -35,6 +41,11 @@ export const  manageLiveSearchLogin = () => {
         icons[i].className = "entityDis";
     }
 
+    var folders = document.querySelectorAll(".folder");
+    for(var i=0;i<folders.length;i++) {
+        folders[i].className = "folderDis";
+    }
+
 }
 
 export const hideLiveSearchLogin = () => {
@@ -43,6 +54,11 @@ export const hideLiveSearchLogin = () => {
 
     for(var i=0;i<icons.length;i++) {
         icons[i].className = "entity";
+    }
+
+    var folders = document.querySelectorAll(".folderDis");
+    for(var i=0;i<folders.length;i++) {
+        folders[i].className = "folder";
     }
 
     var login = document.getElementById("loginLivesearch");
@@ -69,6 +85,11 @@ export const hideLogin = () => {
 
     for(var i=0;i<icons.length;i++) {
         icons[i].className = "entity";
+    }
+
+    var folders = document.querySelectorAll(".folderDis");
+    for(var i=0;i<folders.length;i++) {
+        folders[i].className = "folder";
     }
 
     var login = document.getElementById("loginWindow");

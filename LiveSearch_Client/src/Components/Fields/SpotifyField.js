@@ -38,10 +38,10 @@ class SpotifyField extends Component {
     let field = (
             <div>
 
-                <div className="imageField">
-              
+                <div className= {!this.props.addingIcon? "imageField" : "imageField addingIconImg"} >
                 
-                <iframe src={this.props.id}  width="300" height="315" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                
+                <iframe src={this.props.id}  width= "300" height= {!this.props.addingIcon? "315" : "150"} frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 
                   
                 </div>

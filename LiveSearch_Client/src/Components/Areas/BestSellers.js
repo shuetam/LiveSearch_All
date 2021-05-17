@@ -11,7 +11,7 @@ import randoom from 'random-int';
 import axios from '../../axios-song';
 import ReactScrollWheelHandler from "react-scroll-wheel-handler";
 import { connect } from 'react-redux';
-import {showServerPopup, manageScreen} from '../../Store/Actions/auth';
+import {showServerPopup, setSizeFactor} from '../../Store/Actions/auth';
 import {URL} from '../../environment'
 import TagsField from '../Fields/TagsField';
 import ImageIcon from '../Icons/ImageIcon';
@@ -342,16 +342,30 @@ class BestSellers extends Component {
             return address;
         }
     }
+
+    handleScroll = (event) => {
+   
+        if (event.deltaY > 0 && this.props.sizeFactor<2)
+        {
+            this.props.setFactor(this.props.sizeFactor + 0.1);
+        }
+         if (event.deltaY < 0 && this.props.sizeFactor>0.6)
+        {
+            this.props.setFactor(this.props.sizeFactor - 0.1);
+        }
+       
+      }
+
       
     getBookWidth = (count) => {
                 //debugger;
-        var width = (20+ parseInt(count)*10) + "px";
+        var width = (20+ parseInt(count)*10) * this.props.sizeFactor + "px";
         return width;
     }
 
     getBookHeight = (count) => {
         
-        var height = (30+ parseInt(count)*10) + "px";
+        var height = (30+ parseInt(count)*10) * this.props.sizeFactor + "px";
         return height;
     }
 
@@ -457,7 +471,7 @@ class BestSellers extends Component {
 
             return (
                 
-                <div>
+                <div  onWheel ={this.handleScroll}>
 
      
             <div> <input id="ls"  onChange={this.liveSearch} placeholder="Wyszukaj..." class="switchSearch" type="text"/></div>
@@ -499,6 +513,7 @@ const mapDispatchToProps = dispatch => {
     return {
 
         serverAlert: (message) => dispatch(showServerPopup(message)),
+        setFactor: (factor) => dispatch(setSizeFactor(factor))
     };
 };
 
@@ -507,7 +522,7 @@ const mapStateToProps = state => {
     return {
         isAuthenticated: state.auth.userId !== null,
         userId: state.auth.userId,
-        //fullScreen: state.auth.fullScreen,
+        sizeFactor: state.auth.sizeFactor
     };
 };
 

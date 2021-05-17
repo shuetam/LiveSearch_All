@@ -32,9 +32,14 @@ class IconEditor extends Component {
         var left = ent.style.left;
         var top = ent.style.top;  */
         //debugger;
-        this.props.showTitleEditor(this.props.id, this.props.iconType);
+
+    this.props.showTitleEditor(this.props.id, this.props.iconType);
+
+
+
     }
 
+  
 
  shareIconName = (event) => {
     var id =this.props.id;
@@ -99,7 +104,7 @@ class IconEditor extends Component {
     class="switcher"><i id={this.props.id} class="icon-resize-full-alt"/> 
     Podgląd zdjęcia <hr/></div> : "";
 
-    let editorText = this.props.iconType == 'FOLDER'? <span>Edytuj tytuł</span> : <span>Edytuj tytuł i tagi<hr/></span>;
+    let editorText = this.props.iconType == 'FOLDER'? <span>Edytuj/udostępnij folder</span> : <span>Edytuj tytuł i tagi<hr/></span>;
     
 let editTitle = this.props.public? "" : 
 <div id={this.props.id}  class="switcher"
@@ -110,6 +115,20 @@ let editTitle = this.props.public? "" :
     </div>
 
     let icon = this.state.copied? <span id={this.props.id}>&#x2714;  </span> : <i id={this.props.id} class="icon-link-ext"/>;
+
+let shareFolder = "";
+//let shareText = this.props.shared? "Ustaw jako prywatny" : "Udostępnij folder";
+
+
+/* if(!this.props.public && this.props.iconType == 'FOLDER') {
+    shareFolder = 
+    <div id={this.props.id}  class="switcher"
+    onDbClick={this.shareFolder}
+
+    onClick={this.shareFolder}><i id={this.props.id} class="icon-edit"/>
+    {shareText}
+    </div>
+} */
 
     let share = this.props.iconType == 'FOLDER'? "" : <div id={this.props.id}  class="switcher">
     {icon}
@@ -127,6 +146,7 @@ let editTitle = this.props.public? "" :
         {moveFromFolder}    
         {editTitle}
         {share}
+     
 
 {/* <input value={this.state.value}
           onChange={({target: {value}}) => this.setState({value, copied: false})} />

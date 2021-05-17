@@ -102,6 +102,14 @@ export const login = (userName, imageUrl, token, userRole, userNick) => {
     };
 
 
+ export const setSizeFactor = (sizeFactor) => {
+    return {
+        type: 'SIZE_FACTOR',
+        sizeFactor: sizeFactor
+    };
+    };
+
+
 export const authLogout = () => {
 debugger;
     //document.cookie = "user_Id" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
@@ -155,7 +163,7 @@ export const authLogin = (userId, userName, imageUrl, token, userRole, userNick)
                     userName: userName,
                     imageUrl: imageUrl
                 };
-                var exdays = 2;
+                var exdays = 7; // sesion in days
                 var d = new Date();
                 //d.setTime(d.getTime() + (60 * 1000));
                 d.setTime(d.getTime() + (exdays*24*60*60*1000));
@@ -223,6 +231,18 @@ export const authCheckState = () => {
             }   
         }
     };
+ 
+    export const checkSizeFactor = () => {
+        return dispatch => {
+            var sizeFactor = localStorage.getItem("size_Factor");
+
+            if (sizeFactor == 'undefined' || sizeFactor == null || sizeFactor == 'null' ) {
+                sizeFactor = 1;
+            } 
+            dispatch(setSizeFactor(sizeFactor));
+            }
+        }; 
+
 
     function getCookie(cname) {
         var name = cname + "=";

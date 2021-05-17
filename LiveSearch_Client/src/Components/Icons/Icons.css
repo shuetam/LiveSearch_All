@@ -36,6 +36,25 @@
     transition: all 1s ease-in-out;
 }
 
+.folderDis {
+    position: fixed;
+    /* color: rgb(0, 0, 0); */
+    color: rgb(255, 255, 255);
+    z-index: 155;
+    background-color: rgba(0, 0, 0, 0.61);
+    pointer-events: none;
+    text-align: center;
+    margin: 0px;
+    transition: opacity 0.2s;
+    opacity: 0.3;
+    filter: blur(2px);
+    -webkit-transition: all 1s ease-in-out;
+	-moz-transition: all 1s ease-in-out;
+	-o-transition: all 1s ease-in-out;
+	-ms-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+}
+
 .newEntity {
     position: fixed;
     /* color: rgb(0, 0, 0); */
@@ -177,6 +196,10 @@
     display: block;
 }
 
+.folder:hover .followIcon  {
+    display: block;
+}
+
 .entity:hover .moveEntity  {
     display: block;
 }
@@ -252,27 +275,27 @@
 
 .addEntity {
     position: absolute;
-    top: -19px;
+    top: -25px;
     left: 86%;
     color: rgb(86, 159, 255);
     font-family: Verdana, Geneva, sans-serif;
     cursor: pointer;
     display: none;
     text-shadow: -9px 13px 15px -1px #000000;
-    font-size: 25px;
+    font-size: 35px;
     text-shadow: rgba(0, 0, 0, 0.979) 0px 0px 1px, rgba(0, 0, 0, 0.911) 0px 0px 5px
 }
 
 .addingEntity {
     position: absolute;
-    top: -19px;
+    top: -25px;
     left: 86%;
     color: rgb(86, 159, 255);
     font-family: Verdana, Geneva, sans-serif;
     cursor: pointer;
     display: none;
     text-shadow: -9px 13px 15px -1px #000000;
-    font-size: 25px;
+    font-size: 35px;
     text-shadow: rgba(0, 0, 0, 0.979) 0px 0px 1px, rgba(0, 0, 0, 0.911) 0px 0px 5px
 }
 
@@ -340,6 +363,13 @@
     text-shadow: rgba(29, 29, 29, 0.979) -3px 2px 1px, rgba(0, 0, 0, 0.911) 0px 0px 5px
 }
 
+.followIcon {
+    display: none;
+    position: absolute;
+    top: -16px;
+    left: -13px;
+    text-shadow: rgba(29, 29, 29, 0.979) 3px 2px 3px, rgba(0, 0, 0, 0.911) 1px 0px 5px
+}
 
 
 .addingEntity:hover {
@@ -365,15 +395,15 @@
 
 .removeEntity {
     position: absolute;
-    top: -19px;
-    left: 86%;
+    top: -25px;
+    left: 80%;
     color: rgba(255, 60, 60, 0.945);
    
     font-family: Verdana, Geneva, sans-serif;
     cursor: pointer;
     display: none;
     text-shadow: -9px 13px 15px -1px #000000;
-    font-size: 25px;
+    font-size: 35px;
   transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
   -moz-transform: rotate(-45deg);
@@ -423,15 +453,15 @@ z-index: 600;
 
 .disableEntity {
     position: absolute;
-    top: -19px;
-    left: 86%;
+    top: -25px;
+    left: 80%;
     color: rgba(255, 60, 60, 0.945);
    
     font-family: Verdana, Geneva, sans-serif;
     cursor: pointer;
     display: none;
     text-shadow: -9px 13px 15px -1px #000000;
-    font-size: 25px;
+    font-size: 35px;
   transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
   -moz-transform: rotate(-45deg);
@@ -440,6 +470,21 @@ z-index: 600;
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 
+.lockIcon {
+    position: absolute;
+    top: -16px;
+    left: -13px;
+    color: rgba(221, 221, 221, 0.945);
+    font-family: Verdana, Geneva, sans-serif;
+    text-shadow: rgba(29, 29, 29, 0.979) -3px 2px 1px, rgba(0, 0, 0, 0.911) 0px 0px 5px;
+    font-size: 17px;
+}
+
+.openIcon {
+
+    color: rgba(0, 201, 43, 0.945);
+
+}
 
 .disableEntity:hover {
    
@@ -509,8 +554,7 @@ z-index: 600;
 
 .entImg {
     object-fit: cover;
-    width: 60px;
-    height: 50px;
+
     border-radius: 6px;
 }
 
@@ -527,8 +571,10 @@ z-index: 600;
   
 
 .folderTd {
-  
-    width: 35px;
     margin: 0;
+}
 
+.folderFollowers {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.61);
 }

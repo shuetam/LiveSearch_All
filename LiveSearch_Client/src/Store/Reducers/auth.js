@@ -1,6 +1,7 @@
 import { updateStore } from '../updateStore';
 import { connect } from 'react-redux';
 import axios from 'axios';
+//import { setSizeFactor } from '../Actions/auth';
 
 const initialState = {
     jwttoken: null,
@@ -14,7 +15,8 @@ const initialState = {
     addingIcon: null,
     removingIconId: null,
     fullScreen: false,
-    firstField: false
+    firstField: false,
+    sizeFactor: 1
 };
 
 const  manageEsc = (state, action) => {
@@ -92,12 +94,31 @@ const iconAdding = (state, action) => {
  };
 
  const showFirst = (state, action) => {
-     debugger;
      return updateStore( state, { 
         firstField: action.data,
      } ); 
  };
  
+ 
+ const setSizeFactor = (state, action) => {
+
+     var sizeFactor = Number(action.sizeFactor);
+     if (sizeFactor == 'undefined' || sizeFactor == null || sizeFactor == 'null' ) {
+        sizeFactor = 1;
+    } 
+
+    if(sizeFactor > 2)
+        sizeFactor = 2
+
+    if(sizeFactor < 0.6)
+        sizeFactor = 0.6
+ 
+    localStorage.setItem('size_Factor', sizeFactor);
+
+    return updateStore( state, { 
+       sizeFactor: sizeFactor,
+    } ); 
+};
 
  const hideLogin = (state, action) => {
     // debugger;
@@ -199,7 +220,8 @@ const reducer = ( state = initialState, action ) => {
         case ('ESC_MANAGE'): return manageEsc(state, action);
        // case ('LOGIN_MANAGE'): return showLogin(state, action);
         case ('FIRST_SHOW'): return showFirst(state, action);
-        
+        case('SIZE_FACTOR'): return setSizeFactor(state, action);
+   
         default:
             return state;
     }

@@ -7,9 +7,9 @@ import LiveRegister from './LiveRegister.js';
 
 //import "../../Fontello/css/fontello.css";
 //import "../../icon/css/fontello.css";
-//import "../../Icons/css/fontello.css";
-import "../../Icons/css/folder-add.css";
-//import "../../Fontello/css/folder-add.css";
+//import "../../Icons1/css/fontello.css";
+//import "../../Icons/css/folder-add.css";
+import "../../Fontello/css/fontello.css";
 import { Link, Route, NavLink, BrowserRouter, Switch } from 'react-router-dom';
 import YTArea from '../Areas/YTArea';
 import PublicDesktop from '../Areas/PublicDesktop';
@@ -17,28 +17,23 @@ import YTAreaAdmin from '../Admin/YTAreaAdmin';
 import BestSellersAdmin from '../Admin/BestSellersAdmin';
 import AdminPanel from '../Admin/AdminPanel';
 import BestSellers from '../Areas/BestSellers';
-import Field from '../Fields/Field';
+
 import Policy from '../Informations/Policy';
 import Contact from '../Informations/Contact';
 import Information from '../Informations/Information';
-import Popup from '../Popup/Popup';
-import First from '../../First';
-import LoginWindow from '../Login/LoginWindow';
-import {GoogleLogout} from 'react-google-login';
 
-import ServerPopup from '../Popup/ServerPopup';
+
+
 import {authLogin, authLogout, showServerPopup, escManage, manageScreen, showFirst} from '../../Store/Actions/auth';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 
-import ReactScrollWheelHandler from "react-scroll-wheel-handler";
-//import {scrollU, scrollD} from '../../Store/Actions/scroll';
+
 import UserDesktop from '../Areas/UserDesktop';
 import axios from 'axios';
 import {URL, PATHES} from '../../environment';
 import InputNumber from 'react-input-number';
-import {manageLogin, manageLiveSearchLogin, hideLiveSearchLogin} from '../../CommonManager'
-
+import {manageLogin, manageLiveSearchLogin} from '../../CommonManager';
 
 
 var fetchData = "";
@@ -67,28 +62,17 @@ class Header extends Component {
             },
             fromFolder: false,
             addingIcon: false,
-
+            showActuallHeader: false,
             explQuery: "",
-            firstField: false,
+            firstField: false
    
         }
     }
 
 
     
-    componentDidMount() {
-       
-       
+    componentDidMount() {    
         Update();
-
-        var firstField = localStorage.getItem("firstField");
-        //this.props.showFirst(true);
-        if(firstField === null) {
-            this.props.showFirst(true);
-            localStorage.setItem("firstField", new Date());
-
-        }
-        
 
         //this.manageFullScreenState();
         //document.addEventListener('fullscreenchange', this.manageFullScreenState, false);
@@ -96,6 +80,7 @@ class Header extends Component {
         //document.addEventListener('webkitfullscreenchange', this.manageFullScreenState, false);
         //document.addEventListener('msfullscreenchange', this.manageFullScreenState, false);
 
+        this.setHeaderType();
     
         var cookieAkcept = localStorage.getItem("cookieAkcept");
 
@@ -103,7 +88,13 @@ class Header extends Component {
         var filmsArrows = localStorage.getItem("filmsArrow");
         var booksArrows = localStorage.getItem("booksArrow");
 
-       
+        if(!this.props.match.params.id) {
+        var firstField = localStorage.getItem("firstField");
+        if(firstField === null) {
+            this.props.showFirst(true);
+            localStorage.setItem("firstField", new Date());
+        }
+    }
 
         if(musicArrows == 1){
             this.setState({showMusicArrow: false});
@@ -117,14 +108,10 @@ class Header extends Component {
             this.setState({showBooksArrow: false});
         }
 
-        if(cookieAkcept == 1){
+        if(cookieAkcept != 1){
            // this.setState({showCookie: false});
+           this.animatedCookie();
         }
-        else {
-           // this.setState({showCookie: true});
-            this.animatedCookie();
-        }
-    
 
         this.liveResponsive();
         //window.addEventListener('resize', this.liveResponsive);
@@ -132,7 +119,7 @@ class Header extends Component {
 
 this.setState({fromFolder: this.props.match.params.fid? true : false });
 
-this.setHeaderType();
+
 
 this.isConfirm(); 
     }
@@ -170,29 +157,68 @@ this.isConfirm();
 
       setHeaderType = () => {
 
-       var qqq = this.props.location;
-       var fol =  this.props.match.params.fid;
-   
         if(this.props.match.params.id) {
 
             var paramsId = this.props.match.params.id;
 
-            if(paramsId == "eksploruj") {
+            this.setState({showActuallHeader: this.isActuall(paramsId)});
+
+            switch(paramsId) {
+                case "eksploruj":
+                    this.setState({headerType: "explore"});
+                    break;
+
+                case "udostepnione_foldery":
+                    this.setState({headerType: "folders"});
+                    break;
+
+                case "obserwowane_foldery":
+                    this.setState({headerType: "followed"});
+                    break;
+
+                case "pulpit":
+                        this.setState({headerType: "desk"});
+                    break;
+                default:
+                    this.setState({showActuallHeader: true});
+                    this.setState({headerType: "hot"});
+                    break;
+            }
+        }
+        else {
+            this.setState({showActuallHeader: true});
+            this.setState({headerType: "hot"});
+        }
+    }
+
+
+     /*        if(paramsId == "eksploruj") {
+               
                 this.setState({headerType: "explore"});
             }
 
-            if(paramsId == "foldery") {
+            if(paramsId == "udostepnione_foldery") {
+            
                 this.setState({headerType: "folders"});
+            }
+
+            if(paramsId == "obserwowane_foldery") {
+                
+                this.setState({headerType: "followed"});
             }
            
             if(paramsId == "pulpit")  {
+              
                 this.setState({headerType: "desk"});
             }
         } 
         else {
+            this.setState({showActuallHeader: true});
             this.setState({headerType: "hot"});
-        } 
-      }
+        }  */
+
+
+      
 
 
 
@@ -212,7 +238,8 @@ this.isConfirm();
  
 
     Main = () => {
-     //window.location.replace("/");
+
+    this.setState({showActuallHeader: true});
      this.props.showFirst(false);
      this.props.history.push('/');
 
@@ -280,7 +307,7 @@ this.isConfirm();
        // this.setState({showCookie: false});
        var cookieField = document.getElementById("cookieId");
        if(cookieField) {
-        cookieField.style.left="-400px";
+        cookieField.style.left="-450px";
        }
         localStorage.setItem("cookieAkcept", 1);
       
@@ -289,9 +316,11 @@ this.isConfirm();
     animatedCookie = () => {
         setTimeout(() => {
          
-            this.setState({
-                cookieLeft: '50px'
-            })
+
+            var cookieField = document.getElementById("cookieId");
+            if(cookieField) {
+             cookieField.style.left="40px";
+            }
         }, 1000)
     }
 
@@ -342,6 +371,7 @@ if(email !== undefined) {
             this.props.SocialLog(response.data.userId, name, image, response.data.jwtToken, response.data.role, response.data.userNick);
 
             this.setState({headerType: "desk"});
+            this.setState({showActuallHeader: false});
             this.props.history.push(PATHES.userPulpit);
         }
     }).catch(error => { this.Alert("Wystąpił błąd przy próbie zalogowania.")});
@@ -353,7 +383,9 @@ else {
 }
 
 
-
+isActuall = (paramsId) => {
+   return (paramsId.includes("muzyka") || paramsId.includes("filmy") || paramsId.includes("literatura"));
+}
 
 
 
@@ -607,8 +639,9 @@ responseErrorGoogle = (response) => {
 
 
     activeDesk = () => {
-
+        this.props.showFirst(false);
         if(this.props.isAuthenticated) {
+            this.setState({showActuallHeader: false});
             var paramsId = this.props.match.params.id;
             this.props.history.push(PATHES.userPulpit);
             this.setState({headerType: "desk"});
@@ -620,40 +653,62 @@ responseErrorGoogle = (response) => {
        
     }
 
-    activeFallowedFolders = () => {
-        var paramsId = this.props.match.params.id;
+    activeFollowedFolders = () => {
+        this.props.showFirst(false);
+        if(this.props.isAuthenticated) {
+            this.setState({showActuallHeader: false});
+            this.props.history.push(PATHES.followedFolders + "?from=1");
+            this.setState({headerType: "followed"});
+        }
+        else {
+            manageLogin();
+        }
+        
+    }
+
+
+    activeSharedFolders = () => {
+        //var paramsId = this.props.match.params.id;
         //if(paramsId !== "foldery") {
-            this.props.history.push(PATHES.folders);
+            this.props.showFirst(false);
+            this.setState({showActuallHeader: false});
+            this.props.history.push(PATHES.sharedFolders+ "?q="+ this.state.explQuery + "&skip=0"+"&from=1");
             this.setState({headerType: "folders"});
         //}
     }
 
     activeActuall = () => {
-        var paramsId = this.props.match.params.id;
-        //if(this.state.headerType !== "hot") {
+
+        //setTimeout(() => {
+            this.props.showFirst(false);
+            this.setState({showActuallHeader: true});
             this.props.history.push('/');
             this.setState({headerType: "hot"});
-        //}
+       // }, 1500);         
     }
 
 
     activeExplore = (query) => {
+        this.setState({showActuallHeader: false});
         this.props.showFirst(false);
-        this.props.history.push(PATHES.explore+ "?q="+ this.state.explQuery + "&skip=0");
+        this.props.history.push(PATHES.explore+ "?q="+ this.state.explQuery + "&skip=0"+"&from=1");
         this.setState({headerType: "explore"});
+    
     }
-
-        
+   
     searchTag = (query) => {
+        this.setState({showActuallHeader: false});
         this.props.showFirst(false);
+    if(this.state.headerType == "explore") {
         this.props.history.push(PATHES.explore + "?q="+ query + "&skip=0");
+    }
+    else {
+        this.props.history.push(PATHES.explore + "?q="+ query + "&skip=0"+"&from=1");
         this.setState({headerType: "explore"});
-        
     }
 
- 
-
-
+        
+    }
 
 
     getMovedIcons = () => {
@@ -739,6 +794,8 @@ responseErrorGoogle = (response) => {
         } 
 
 
+       
+
 
         confirmPassword = (email, Id, resetId) => {
             const data = {
@@ -771,7 +828,7 @@ responseErrorGoogle = (response) => {
                 }, 3500);
                
                 
-            }).catch(error => { this.Alert("LINK NIEAKTYWNY");;
+            }).catch(error => { this.Alert("LINK NIEAKTYWNY");
           
             //window.location.replace("/pulpit");
         });
@@ -810,8 +867,20 @@ let infoArrowBest = this.state.showBooksArrow? <div  class="infoArrowBestsellers
     )} />;
 
     let exploreArea =  <Route   path={PATHES.explore} exact component={(props) => (
-        <PublicDesktop {...props} searchTag={this.searchTag} headerType={this.state.headerType} 
+        <PublicDesktop {...props} searchTag={this.searchTag} 
         headerType="explore"
+        />
+    )} />;
+
+    let sharedFoldersArea =  <Route   path={PATHES.sharedFolders +'/:folderId?'} exact component={(props) => (
+        <PublicDesktop {...props} searchTag={this.searchTag} 
+        headerType="folders"
+        />
+    )} />;
+
+    let followedFoldersArea =  <Route   path={PATHES.followedFolders +'/:folderId?'} exact component={(props) => (
+        <PublicDesktop {...props} searchTag={this.searchTag} 
+        headerType="followed"
         />
     )} />;
 
@@ -908,7 +977,8 @@ let infoArrowBest = this.state.showBooksArrow? <div  class="infoArrowBestsellers
 let loginWindow = 
 <div id="loginWindow" class="disable">Zaloguj się aby przejść do swojego pulpitu i dodawać do niego nowe ikony
 <p/>
-{loginButtons}</div>;
+{loginButtons}
+</div>;
 
 
 let loginLivesearch = 
@@ -944,7 +1014,7 @@ let authenticate = (<div class="logIn" style={{marginTop: "6px"}} id="userP"> Za
 
 //let letsLogin = this.props.isAuthenticated? "": <p style={{color: "rgba(231, 173, 64, 0.937)"}}>Zaloguj się aby zapisywać ikony z tej wizualizacji na własnym pulpicie</p>; 
 
-let screenSwitch = <div id="screenS" style={{fontSize: '14px'}}  class="screenSwitch" onClick={this.screenManage}><i class="icon-resize-small"/>
+let screenSwitch = <div id="screenS" style={{fontSize: '18px'}}  class="screenSwitch" onClick={this.screenManage}><i class="icon-resize-small"/>
   <i class="icon-resize-full"/>
    <div id="screenField" class="hoverInfo" > Aktywuj / zamknij pełny ekran</div>
 </div>
@@ -989,7 +1059,7 @@ let infoForSmall = <div class="menuForSmall"> Wersja mobilna strony jest w przyg
   
 
 
-let activeHeader = <i class="icon-fire"/>;
+/* let activeHeader = <i class="icon-fire"/>;
 
 if(this.state.headerType == "folders") {
     activeHeader = <i class="icon-folder-open"/>
@@ -1001,66 +1071,55 @@ if(this.state.headerType == "explore") {
 if(this.state.headerType == "desk") {
     activeHeader = <i class="icon-doc-landscape"/>
 }
+if(this.state.headerType == "followed") {
+    activeHeader = <i class="icon-eye"/>
+} */
 
 
 
-let  explore =   <div  onClick={this.activeExplore}  class= {this.state.headerType == "explore"?
+let actuall = <div id="actuall" onClick={this.activeActuall}  class= {this.state.headerType == "hot"?
+"mainSwitch active" : "mainSwitch"}> <i class="icon-fire"/>{/* Aktualności */}
+ <div id="actuallField" class="hoverInfo" > Aktualności</div>
+</div>
+
+let  explore =   <div id="explore"   onClick={this.activeExplore}   class= {this.state.headerType == "explore"?
 "mainSwitch active" : "mainSwitch"}> 
-<i class="icon-search"/>Eksploruj
+<i class="icon-search"/>{/* Eksploruj */}
+<div id="exploreField" class="hoverInfo"> Eksploruj ikony</div>
 </div>
 
-let actuall = <div onClick={this.activeActuall}  class= {this.state.headerType == "hot"?
-"mainSwitch active" : "mainSwitch"}> <i class="icon-fire"/>Aktualności
+let followedFolders = <div id="followedFolders"  onClick={this.activeFollowedFolders}    class= {this.state.headerType == "followed"?
+"mainSwitch active" : "mainSwitch"} > <i class="icon-folder-open"/>  {/* Obserwowane foldery */}
+<div id="followedFoldersField" class="hoverInfo"> Obserwowane foldery</div>
+</div> 
+
+let sharedFolders = <div id="sharedFolders"  onClick={this.activeSharedFolders}   class= {this.state.headerType == "folders"?
+"mainSwitch active" : "mainSwitch"} > <i class="icon-group"/> {/* Foldery użytkowników */}
+<div id="sharedFoldersField" class="hoverInfo"> Foldery użytkowników</div>
+</div> 
+
+let userPulpit = <div id="userPulpit"  onClick={this.activeDesk}  class= {this.state.headerType == "desk"?
+"mainSwitch active" : "mainSwitch"} > <i class="icon-doc-landscape"/>{/* Mój pulpit */}
+<div id="userPulpitField" class="hoverInfo"> Mój pulpit</div>
 </div>
 
 
-let userPulpit = <div onClick={this.activeDesk}   class= {this.state.headerType == "desk"?
-"mainSwitch active" : "mainSwitch"} > <i class="icon-doc-landscape"/>Mój pulpit
-</div>
 
-/* let fallowedFolders = <div onClick={this.activeFallowedFolders}   class= {this.state.headerType == "folders"?
-"mainSwitch active" : "mainSwitch"} > <i class="icon-folder-open"/>Obserwowane foldery
-</div> */
-
-
-let mainMenu = <div id="switchMenu" class="switchMenu">{activeHeader}<i class="icon-down-open"/>
-                <div id="switchMenuField">
+let mainMenu = <div class = "switchMenu">{/* {activeHeader}<i class="icon-down-open"/> */}
+                {/* <div id="switchMenuField"> */}
+                <div className="main" onClick={this.Main} >Live<span style={{ color: "rgba(255, 255, 255, 0.5)" }}>S</span>earch</div>
                     {actuall}
-                    {explore}
-                  
                     {userPulpit}
+                    {followedFolders}
+                    {sharedFolders}
+                    {explore}
                      
                 </div>
-            </div>
 
-/* let  mainMenu = <div   class="mainMenu"> 
-       
-        {explore}
-        {actuall}
-        {usersFolders}
-          
- </div> */
+ //let actuallMenu = "";
 
- let actuallMenu = "";
-
-/*  if(this.state.headerType == "folders") {
-
-    actuallMenu =  (<div id="exploreMenu" class="actuallMenu">
-   
-    <div class="exploreDiv">
-        <input id="exploreT" type="text"
-            autofocus="true"
-           placeholder=  " Wyszukaj foldery..."
-            onKeyPress = {this.onKeyTitle}
-             onChange={e => this.editExplore(e.target.value)} 
-             value={this.state.editedExplore} /></div> 
-            
-            
-     </div>); } */
-
-
-if(this.state.headerType == "hot") {
- actuallMenu =  (<div id="actuallMenu" class="actuallMenu"> 
+//if(this.state.headerType == "hot") {
+ let actuallMenu =  (<div id="actuallMenu" class={"actuallMenu"} style={{left: !this.state.showActuallHeader? "-200px" : "320px" }}> 
 
 <div id="topSwitch"onClick={this.Main} class={this.inMain()? "activeSwitchTop": "switch"}>
 <i class="icon-fire"/>Top
@@ -1340,13 +1399,18 @@ Bestsellery
              {adminHeader}
            
         </div>
-        ) }
+        ) 
 
 return (
-          <div className="container">
+          <div className="container"  >
               
+
+      
+
+
+
             <div id="allLive" className="header">
-                <div className="main" onClick={this.Main} >Live<span style={{ color: "rgba(255, 255, 255, 0.5)" }}>S</span>earch</div>
+            
 
                 {mainMenu}
                 {infoForSmall}
@@ -1363,6 +1427,8 @@ return (
                     
                             {first}
                             {exploreArea}
+                            {sharedFoldersArea}
+                            {followedFoldersArea}
                             {books}
                             {songs}
                             {movies}
@@ -1394,7 +1460,8 @@ return (
             <div onClick={this.openLink} id={PATHES.policy} class="switchFooter">Polityka prywatności</div>
             <div onClick={this.openLink} id={PATHES.information} class="switchFooter">Informacje i pomoc</div>
             </div>
-           
+
+         
             </div>
         )
 
@@ -1418,7 +1485,8 @@ return (
         isAdmin: state.auth.userRole == "ADMIN",
         //userId: state.auth.userId,
         imageUrl: state.auth.imageUrl,
-        firstField: state.auth.firstField
+        firstField: state.auth.firstField,
+       
     };
 };
 
@@ -1432,6 +1500,7 @@ const mapDispatchToProps = dispatch => {
         serverAlert: (message) => dispatch(showServerPopup(message)),
         screenManage: () => dispatch(manageScreen()),
         showFirst: (show) => dispatch(showFirst(show)),
+        
     };
 };
 

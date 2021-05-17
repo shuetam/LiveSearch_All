@@ -11,6 +11,13 @@ namespace Live.Core
     public class FolderDto: IconDto
     {
         public DateTime? DateCreated {get; set;}
+        public string sharedAt { get; set; }
+        public string updatedAt { get; set; }
+        public string shareDescription { get; set; }
+        public int followers { get; set; }
+        public int iconsCount {get; set;}
+        public bool hasDescription { get; set; }
+        public bool followed { get; set; }
         public FolderDto(string _id, string _type) : base(_id, "", _type)
         {
         }
@@ -30,5 +37,8 @@ namespace Live.Core
         public string icon1 {get; set;}
         public string icon2 {get; set;}
         public string icon3 {get; set;}
+        public bool shared { get; set; }
+        public bool hasIcons { get; set; }
+
     }
 }

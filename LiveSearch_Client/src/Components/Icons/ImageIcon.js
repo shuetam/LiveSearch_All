@@ -160,7 +160,7 @@ console.log(event);
                         Top: Top_,
                         Left: Left_,
                         FolderId: this.props.folderId,
-                        Type: 'IMG'
+                     
                         }
 
     
@@ -390,6 +390,7 @@ console.log(event);
 
                 <img 
                    class= {this.props.type =="BOOK"?  "entBook" : "entImg"}
+                 
                    id={this.props.id}
                    title={this.props.title} 
                    src={this.state.src}

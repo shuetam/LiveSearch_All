@@ -10,12 +10,13 @@
     left: 0px;
     right: 0px;
     font-family: 'Mandali', sans-serif;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 100;
     text-align: center;
-    color: rgba(235, 235, 235, 0.589);
+    color: rgba(235, 235, 235, 0.788);
     opacity: 0.7;
 }
+
 
 #prev:hover #prevField {
     display: block;
@@ -26,16 +27,21 @@
 }
 
 .nextPrev {
-    margin-top: 6px;
+    margin-top: 10px;
     margin-left: 15px;
     pointer-events: none;
+    font-family: 'Mandali', sans-serif;
+    font-size: 13px;
 }
 
 .nextPrevAct {
-    margin-top: 6px;
+    margin-top: 10px;
     margin-left: 15px;
-    color: white;
+    color: rgba(248, 248, 248, 0.781);
     pointer-events: auto;
+    font-family: 'Mandali', sans-serif;
+    
+    text-decoration: underline white;
 
 }
 
@@ -173,6 +179,11 @@
     width: 80px;
 }
 
+.followButtton {
+  top: 10px;
+  font-size: 13px;
+  width: 100px;
+}
 
 
 
@@ -233,6 +244,11 @@
     text-shadow: rgba(14, 14, 14, 0.979) -3px 2px 3px, rgba(0, 0, 0, 0.911) 0px 0px 15px
 }
 
+.fontAdd {
+    padding-right: 3px;
+   font-size: 20px;
+  
+}
 
 .stopAdding {
    
@@ -269,26 +285,33 @@
 }
 
 
+.area {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+}
+
 
 
 
 .lds-ellipsiss {
     display: inline-block;
     position: relative;
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     margin-left: auto;
     margin-right: auto;
+ 
 }
    
 
 
   .lds-ellipsiss div {
     position: absolute;
-    width: 7px;
-    height: 7px;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
-    background: rgba(218, 218, 218, 0.295);
+    background: rgba(248, 248, 248, 0.863);
     animation-timing-function: cubic-bezier(0, 1, 1, 0);
 
     

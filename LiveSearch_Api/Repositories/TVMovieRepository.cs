@@ -21,6 +21,7 @@ namespace Live.Repositories
         private readonly LiveContext _liveContext;
         private readonly IMapper _autoMapper;
         private readonly SqlConnectingSettings _sql;
+         private readonly IUpdatingRepository _updateRepository;
 
         public TVMovieRepository(LiveContext liveContext, IMapper autoMapper, SqlConnectingSettings sql)
         {
@@ -85,6 +86,13 @@ namespace Live.Repositories
             .ToListAsync();
 
             var frontMovies = new List<FrontYouTube>();
+
+
+            if(movies.Count == 0)
+            {
+                await _updateRepository.TvMoviesUpdateAsync(true);
+            }
+
             foreach (var movie in movies)
             {
                 var dates = movies.Where(x => x.Title == movie.Title && x.PlayAt != movie.PlayAt).Select(x => x.PlayAt).ToList();
@@ -93,6 +101,9 @@ namespace Live.Repositories
 
             }
             var frontMoviesToReturn = new List<FrontYouTube>();
+
+
+
             while (frontMovies.Count != 0)
             {
                 var movie = frontMovies[0];

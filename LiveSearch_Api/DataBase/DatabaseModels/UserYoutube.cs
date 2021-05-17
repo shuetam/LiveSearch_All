@@ -12,8 +12,9 @@ public class UserYoutube : Live.Core.Entity
     public string LocLeft {get; protected set;}
     public string LocTop {get; protected set;}
     public string Title {get; protected set;}
+    public string ImgSource { get; protected set; }
 
-     public string Tags {get; protected set;}
+    public string Tags {get; protected set;}
     //public User User {get; protected set;}
     public DateTime CreatedAt {get; protected set;}
     public DateTime? AddedToFolder {get; protected set;}
@@ -23,7 +24,7 @@ public class UserYoutube : Live.Core.Entity
         {
         }
 
-        public UserYoutube(Guid userId, string videoId, string title, string left, string top, string folderId, string tagsString) 
+        public UserYoutube(Guid userId, string videoId, string title, string left, string top, string folderId, string tagsString, string imgSource) 
         {
             UserId = userId;
             Title = title;
@@ -42,6 +43,7 @@ public class UserYoutube : Live.Core.Entity
             LocTop = top;
             CreatedAt = DateTime.Now;
             Tags = tagsString;
+            ImgSource = imgSource;
         }
 
 
@@ -102,5 +104,14 @@ public class UserYoutube : Live.Core.Entity
                 return new List<string>();
             return  Regex.Split(this.Tags, @"[|]{2}").ToList();
         }
-   
+
+    public string GetTitle()
+    {
+        if(!string.IsNullOrEmpty(this.Title))
+        {
+            return Title;
+        }
+        return "";
+    }
+
 }

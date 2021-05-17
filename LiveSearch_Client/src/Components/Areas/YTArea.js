@@ -13,7 +13,7 @@ import axios from '../../axios-song';
 import ReactScrollWheelHandler from "react-scroll-wheel-handler";
 //import {scrollU, scrollD} from '../../Store/Actions/scroll';
 import { connect } from 'react-redux';
-import {showServerPopup, manageScreen} from '../../Store/Actions/auth';
+import {showServerPopup, setSizeFactor} from '../../Store/Actions/auth';
 import {URL} from '../../environment';
 import { leftToVw, topToVh } from '../../Converters.js';
 import { bottomIcon, getQuarter } from '../../CommonManager.js';
@@ -92,7 +92,7 @@ class YTArea extends Component {
                 })});  */
 
         this.getUserIconsId();
-        console.log(this.state.icons);
+      //  console.log(this.state.icons);
         
 }
 
@@ -117,7 +117,7 @@ class YTArea extends Component {
         axios.post(URL.api+URL.userIconsIds, null, config)
         .then((result) => {
             debugger;
-            this.setState({ userIconsId: result.data })});
+            this.setState({ userIconsId: result.data.userIds })});
         //.catch(error => {this.Alert()}); 
         }
     }
@@ -162,35 +162,35 @@ class YTArea extends Component {
 
     setSize = (c) => {
         if(this.state.iconsType === "movie") {
-            return this.setSizeMovie(c);
+            return (this.props.sizeFactor * this.setSizeMovie(c)) + "px";
         }
         if(this.state.iconsType === "radio") {
-            return this.setSizeSong(c);
+            return (this.props.sizeFactor * this.setSizeSong(c)) + "px";
         }
     }
 
 
     setSizeSong = (c) => {
         if (c === 0) {
-            return "30px";
+            return 30;
         }
         if (c === 1) {
-            return "30px";
+            return 30;
         }
         if (c === this.state.maxCount && this.state.maxCount === 2) {
-            return "50px";
+            return 50;
         }
         if (this.state.maxCount === 1) {
-            return "30px";
+            return 30;
         }
         else {
             var result = (((30 * (c - this.state.maxCount)) / (this.state.maxCount - 1)) + 70);
-            return result + 'px';
+            return result;
         }
     }
 
     setSizeMovie = (c) => {
-        return 0.75*c + 'px'
+        return 0.75*c;
     }
 
     nextSongHandler = () => {
@@ -428,6 +428,21 @@ class YTArea extends Component {
         }
     }
 
+
+    handleScroll = (event) => {
+   
+        if (event.deltaY > 0 && this.props.sizeFactor<2)
+        {
+            this.props.setFactor(this.props.sizeFactor + 0.1);
+        }
+         if (event.deltaY < 0 && this.props.sizeFactor>0.6)
+        {
+            this.props.setFactor(this.props.sizeFactor - 0.1);
+        }
+       
+      }
+
+
     getClass = () => {
 
         if(this.props.showLoginWindow) {
@@ -471,7 +486,7 @@ let field = "";
             field = <LoadingField/>
         }
         else {
-            field = <Field play={this.state.ytID} noIcons={this.state.noIcons} fromDesktop={false} show={this.state.loaded} nextSong={this.nextSongHandler} loadText={this.props.fetchData} />
+            field = <Field play={this.state.ytID} showReflect={true} noIcons={this.state.noIcons} fromDesktop={false} show={this.state.loaded} nextSong={this.nextSongHandler} loadText={this.props.fetchData} />
 
         }
 
@@ -479,8 +494,7 @@ let field = "";
         let tagsField = this.state.loaded? <TagsField  searchTag={this.props.searchTag} tags = {this.getIconTags(this.state.ytID)} />  : "";
 
         let icons = this.state.icons.map(song => {
-//tu 1 bedzie dla tych ktore user ma juz na pulpicie i bedzie removeentity bez znikania
-// zapis do bazy zawsze z vh i vw - przy dodaniu ikony brac z bazy, przy aktualizacji pozycji przeliczac z px na vh vw
+
             return (
                 <YTIcon  remover={this.userOwner(song.id)? 1 : 0} isAuth = {this.props.isAuthenticated} 
                   title={song.title} yt={song.id} id={song.id}
@@ -501,6 +515,8 @@ let field = "";
                     quarter = {getQuarter(song.id, song.left, song.top)}
                     public={true}
                     guidId={song.guidId}
+                    src = {song.source}
+                    type={song.type}
                 />
             )
         })
@@ -509,7 +525,7 @@ let field = "";
 
             return (
                 
-                <div>
+                <div onWheel ={this.handleScroll}>
 
      
             <div> <input id="ls"  onChange={this.liveSearch} placeholder="Wyszukaj..." class="switchSearch" type="text"/></div>
@@ -551,7 +567,7 @@ const mapDispatchToProps = dispatch => {
     return {
 
         serverAlert: (message) => dispatch(showServerPopup(message)),
-       
+        setFactor: (factor) => dispatch(setSizeFactor(factor))
 
     };
 };
@@ -562,8 +578,8 @@ const mapStateToProps = state => {
         isAuthenticated: state.auth.jwttoken !== null,
         //userId: state.auth.userId,
         jwtToken: state.auth.jwttoken,
-        showLoginWindow: state.auth.showLoginWindow
-        //fullScreen: state.auth.fullScreen
+        showLoginWindow: state.auth.showLoginWindow,
+        sizeFactor: state.auth.sizeFactor
     };
 };
 

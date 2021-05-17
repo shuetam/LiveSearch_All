@@ -1,5 +1,5 @@
 .header {
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(34, 34, 34);
     position: fixed;
     width: 100vw;
     top: 0px;
@@ -11,12 +11,20 @@
     color: #3b3b3b;
     font-weight: 100;
     display: flex;
+    height: 33px;
 }
 
 .actuallMenu {
     display: flex;
-    
+    position: absolute;
     z-index: 200;
+  
+    transition: left 1s linear;
+}
+
+.hideHeader {
+    left: 0px;
+    transition: left 1s linear;
 }
 
 .loginWindow {
@@ -27,12 +35,21 @@
   margin-top: 55vh;
   height: 240px;
   width: 400px;
-  text-align: center;
   background-color: rgba(255, 255, 255, 0.226);
   font-family: 'Mandali', sans-serif;
-  color: rgba(255, 255, 255, 0.575);
+  color: rgba(255, 255, 255, 0.74);
   font-size: 16px;
   padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.loginWindowInputs {
+    text-align: center;
+}
+
+.loginInputF {
+    width: 300px;
 }
 
 .forgetPassword {
@@ -47,17 +64,15 @@
 
 .deskMenu {
     display: flex;
-
     z-index: 300;
    position: absolute;
    top: 0px;
-   left: 0px;
+   left: 110px;
    min-width: 20px;
-   
    margin-left: 210px;
    margin-right: 100px;
-   
    margin-right: 310px;
+   transition: left 0.5s linear;
 }
 
 .deskMenu label {
@@ -104,13 +119,14 @@
   }
 
 .main {
-    margin-left: 30px;
+    margin-left: 15px;
     margin-top: 3px;
     cursor: pointer;
     font-size: 18px;
     padding: 3px;
     z-index: 170;
     color: rgba(231, 173, 64, 0.637);
+    float: left;
 }
 
     .main:hover {
@@ -126,8 +142,7 @@
     padding: 3px;
     color: rgba(255, 255, 255, 0.5);
     transition: color 0.3s;
-    white-space: nowrap; 
-   
+    white-space: nowrap;   
 }
 
 .switch:hover {
@@ -159,18 +174,15 @@
 }
 
 .switchMenu {
-    margin-left: 15px;
-    margin-top: 4px;
-    cursor: pointer;
-    opacity: 0,3;
-    font-size: 18px;
-    padding: 3px;
-    color: rgba(255, 255, 255, 0.788);
-    transition: all 0.3s;
-    white-space: nowrap; 
+    -webkit-box-shadow: 16px 2px 13px -5px #000000; 
+    box-shadow: 16px 2px 13px -5px #000000;
     z-index: 1000;
-    
+    width: 315px;
+    height: 33px;
+    margin-top: 0px;
+    background-color: rgb(39, 39, 39);
 }
+
 .switchMenu:hover {
     color: rgba(255, 255, 255, 0.945);
 
@@ -235,29 +247,31 @@
 }
 
 .addOwn {
-    color: rgb(67, 149, 255);
+    color: rgba(238, 238, 238, 0.658);
     font-family: Verdana, Geneva, sans-serif;
     cursor: pointer;
-    
-    font-size: 23px;
-    margin-left: 20px;
-    margin-top: 2px;
+    font-size: 22px;
+    margin-top: 3px;
+    margin-left: 19px;
     font-weight: 200;
-   
+    transition: all 0.7s;
 }
 
 .addOwnInfo {
-    color: rgb(67, 149, 255);
+    color: rgb(75, 153, 255);
     font-family: Verdana, Geneva, sans-serif;
-    font-size: 23px;
+   
     font-weight: 200;
    
 }
 
 
 .activePlus {
-    
-    color: white;
+    transition: all 0.7s;
+    color:  rgba(255, 255, 255, 0.986);
+    text-shadow: 16px 2px 13px -5px #000000;
+  
+    margin-top: 2px;
 }
 
 
@@ -274,22 +288,72 @@
 
 .switchB {
     margin-left: 10px;
-    margin-top: 5px;
+    margin-top: 2px;
     cursor: pointer;
     opacity: 0,3;
-    font-size: 18px;
+    font-size: 22px;
     padding: 3px;
     color: rgba(255, 255, 255, 0.5);
     transition: all 0.3s;
     white-space: nowrap;
 }
 
+.backFromFolder {
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 2px;
+    padding: 0px;
+    font-size: 17px;
+    float: left;
+  }
+
+.folderInfoHeader {
+    margin-left: 0px;
+    margin-top: 4px;
+    font-size: 20px;
+}
+
+#folderTitle  {
+    margin-left: 10px;
+    margin-right: 20px;
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.74);
+    float: left;
+    margin-top: 3px;
+    border-left: solid 0.5px rgba(255, 255, 255, 0.705);
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+#folderTitle:hover {
+    color: rgba(255, 255, 255, 0.897);
+    transition: all 0.2s;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#folderTitle:hover #folderTitleField {
+    display: block;
+}
+#folderTitleField {
+    display: none;
+    cursor: default;
+    padding: 10px;
+    position: fixed;
+    top: 30px;
+    left: 200px;
+    background-color: rgb(32, 32, 32);
+    z-index: 155;
+    color: rgba(255, 255, 255, 0.678);
+}
+
+
 .switchA {
     margin-left: 10px;
-    margin-top: 5px;
+    margin-top: 2px;
     cursor: pointer;
     opacity: 0,3;
-    font-size: 18px;
+    font-size: 22px;
     padding: 3px;
     color: rgba(255, 255, 255, 0.986);
     transition: all 0.3s;
@@ -309,7 +373,7 @@
 
 #plusField {
     top: 30px;
-    left: 200px;
+    left: 320px;
 }
 
 #plus:hover #plusField {
@@ -321,18 +385,19 @@
     display: none;
     padding: 10px;
     font-family: 'Mandali', sans-serif;
-    font-size: 12px;
+    font-size: 13px;
     position: fixed;
-    background-color: rgba(32, 32, 32, 0.932);
-    z-index: 155;
+    background-color: rgb(32, 32, 32);
+    z-index: 1000;
     color: rgba(255, 255, 255, 0.678);
     text-shadow: none;
 }
 
 #addText {
     top: 30px;
-    left: 180px;
+    left: 280px;
 }
+
 
 
 
@@ -353,13 +418,14 @@
     margin-left: 10px; 
     margin-right: 20px;
     align-items: left;
+    z-index: 400;
 }
 
 .screenSwitch {
     margin-top: 5px;
     cursor: pointer;
     opacity: 0,3;
-    font-size: 16px;
+    font-size: 35px;
     padding: 3px;
     color: rgba(255, 255, 255, 0.582);
     transition: all 0.3s;
@@ -367,6 +433,7 @@
     margin-left: auto; 
     margin-right: 0px;
     align-items: left;
+    z-index: 400;
 }
 
 .screenSwitch:hover {
@@ -377,25 +444,28 @@
 .mainSwitch {
     cursor: pointer;
     opacity: 0,3;
-    font-size: 15px;
+    font-size: 20px;
     padding: 3px;
-     color: rgba(255, 255, 255, 0.644);
+   
     transition: all 0.3s;
     white-space: nowrap;
-    margin-left: 0px;
-    margin-top: 3px;
+    margin-left: 5px;
+    margin-top: 2px;
+    float: left;
+    color: #FFFFFF;
+    
 }
 
-.active {
-    color: rgb(255, 255, 255);
-    text-decoration-line: underline;
+.active { 
+    text-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, #ff1e1e 0px 0px 20px, 2px 2px 2px rgba(206,93,93,0);
+    margin-top: 0px;
 }
 
 
 
 .mainSwitch:hover {
-    color: rgba(255, 255, 255, 0.966);
-    text-decoration-line: underline;
+    margin-top: 0px;
+  
 }
 
 .desktop {
@@ -442,10 +512,16 @@
     font-family: 'Mandali', sans-serif;
     color: rgba(202, 202, 202, 0.678);
     z-index: 300;
-    width: 300px;
+    width: 200px;
     font-size: 14px;
+    margin-left: 10px;
 }
 
+.captchaDiv {
+    position: absolute;
+    top: 18px;
+    left: 250px;
+}
 
 
 
@@ -545,8 +621,8 @@
     font-size: 12px;
     position: fixed;
     top: 30px;
-    left: 180px;
-    background-color: rgba(32, 32, 32, 0.856);
+    left: 320px;
+    background-color: rgb(32, 32, 32);
     z-index: 155;
     color: rgba(255, 255, 255, 0.678);
 }
@@ -559,11 +635,11 @@
     cursor: default;
     display: none;
     padding: 10px;
-    font-size: 12px;
+  
     position: fixed;
     top: 30px;
-    left: 190px;
-    background-color: rgba(32, 32, 32, 0.856);
+    left: 310px;
+    background-color: rgb(32, 32, 32);
     z-index: 155;
     color: rgba(255, 255, 255, 0.678);
 }
@@ -571,6 +647,8 @@
 #backFolder:hover #backFolderField {
     display: block;
 }
+
+
 
 #prop:hover #propField {
     display: block;
@@ -624,6 +702,38 @@
     color: rgba(255, 255, 255, 0.842);
     margin-left: 10px;
 }
+
+
+#actuall:hover #actuallField {
+    left: 90px;
+    display: block;
+    font-size: 14px;
+}
+
+#explore:hover #exploreField {
+    left: 250px;
+    display: block;
+    font-size: 14px;
+}
+
+#followedFolders:hover #followedFoldersField {
+    left: 150px;
+    display: block;
+    font-size: 14px;
+}
+
+#sharedFolders:hover #sharedFoldersField {
+    left: 180px;
+    display: block;
+    font-size: 14px;
+}
+
+#userPulpit:hover #userPulpitField {
+    left: 130px;
+    display: block;
+    font-size: 14px;
+}
+
 
 
 #music label input {
@@ -681,7 +791,7 @@
     display: none;
     position: absolute;
     top: 30px;
-    left: 440px;
+    left: 230px;
     background-color: rgba(32, 32, 32, 0.918);
     z-index: 155;
     color: rgba(255, 255, 255, 0.678);
@@ -735,7 +845,7 @@
     display: none;
     position: absolute;
     top: 30px;
-    left: 350px;
+    left: 130px;
     background-color: rgba(32, 32, 32, 0.918);
     z-index: 155;
     color: rgba(255, 255, 255, 0.678);
@@ -754,7 +864,7 @@
     display: none;
     position: absolute;
     top: 30px;
-    left: 150px;
+    left: -70px;
     background-color: rgba(32, 32, 32, 0.856);
     z-index: 155;
     color: rgba(255, 255, 255, 0.678);
@@ -770,7 +880,7 @@
     display: none;
     position: absolute;
     top: 30px;
-    left: 250px;
+    left: 50px;
     background-color: rgba(32, 32, 32, 0.9);
     z-index: 155;
     color: rgba(255, 255, 255, 0.678);
@@ -982,6 +1092,7 @@
         background-color: rgba(0, 110, 255, 0.342);
     }
 
+  
     .bookButtton {
         width: 210px;
         height: 25px;
@@ -1219,10 +1330,32 @@ button:focus {
     transition: all 0.5s;
   }
 
+
+
   .titleButton:hover {
     border: rgba(187, 187, 187, 0.801) 1px solid;
     cursor: pointer;
     color: white;
+  }
+
+  #privFolderText {
+      display: none;
+  }
+
+
+  #privateButtonB:hover #privFolderText {
+      display: block;
+  }
+
+  .privateButton {
+    background-color: rgb(47, 48, 49);
+  }
+
+  .deleteButton {
+    background-color: red;
+    position: absolute;
+    top: 15px;
+    right: 10px;
   }
 
   .explButton {
@@ -1248,6 +1381,11 @@ button:focus {
     font-size: 14px;
     padding: 2px;
 }
+
+.popupAnother {
+    background-color: rgba(0, 110, 255, 0.658);
+}
+
 
 .popupButttonDis {
     width: 50px;
@@ -1392,9 +1530,9 @@ display: inline-block;
    #exploreT
   {
     
-    background-color: rgba(196, 196, 196, 0.089);
+    background-color: rgba(204, 204, 204, 0.096);
     border-width: 0px;
-    color: rgba(223, 223, 223, 0.637);
+    color: rgba(223, 223, 223, 0.89);
     text-align: left;
     font-size: 12px;
     height: 100%;
@@ -1427,31 +1565,30 @@ display: inline-block;
 
   #iconCount:hover {
     color: rgb(223, 223, 223);
-  
     cursor: pointer;
   }
 
 
 
   .exploreDiv {
-      position: relative;
+    position: relative;
     border-width: 1px; 
     border-style: solid; 
     margin-top: 7px;
     margin-left: 13px;
-    width: 30vw;
+    width: 20vw;
     height: 20px;
     display: flex;
     border: rgba(119, 119, 119, 0.582) solid 0.5px;
   }
 
   .addingDiv {
-      position: relative;
+    position: relative;
     border-width: 1px; 
     border-style: solid; 
     margin-top: 7px;
     margin-left: 13px;
-    width: 30vw;
+    width: 25vw;
     height: 20px;
     display: flex;
   }
@@ -1460,8 +1597,7 @@ display: inline-block;
 
   #exploreMenu {
     position: absolute;
-   
-    left: 200px;
+    left: 300px;
 
   }
 
@@ -1499,7 +1635,7 @@ display: inline-block;
     color: rgba(255, 255, 255, 0.842);
     font-size: 13px;
     margin-top: 11px;
-    margin-left: 20px;
+    margin-left: 52px;
 } 
 
 
@@ -1509,7 +1645,7 @@ display: inline-block;
     color: rgb(231, 0, 0);
     font-size: 13px;
     position: absolute;
-    left: 50px;
+    left: 35px;
     text-shadow: 1px 1px 2px rgb(19, 19, 19);
     text-align: left;
 
