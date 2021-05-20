@@ -329,7 +329,7 @@ handleScroll = (event) => {
 
         axios.post(fetchData, data, config)
         .then((result) => { 
-            debugger;
+   
             //var deep = result.data.deep;
             if(result.data.length == parseInt(this.state.explIconsCount)) {
               this.setState({showNextPrev: true})
@@ -372,6 +372,9 @@ handleScroll = (event) => {
 
     getLastIcon = () => {
         var allIcons = [ ...this.state.spotify, ...this.state.images, ...this.state.icons, ...this.state.sharedFolders];
+
+        allIcons = allIcons.sort((i,j) => Date.parse(i.created) - Date.parse(j.created));
+
         if(allIcons.length>0) {
            return allIcons[allIcons.length-1];
         }

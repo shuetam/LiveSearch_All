@@ -13,14 +13,12 @@ namespace Live.Controllers
     public class SongController : LiveController
     {
         private readonly  ISongsRepository _songRepository;
-        
+      
+      
 
-        //private readonly ILogger _logger;
-        
         public SongController (ISongsRepository songRepository)
         {
             this._songRepository = songRepository;
-           
         }
 
   /*       [HttpPost("update")]

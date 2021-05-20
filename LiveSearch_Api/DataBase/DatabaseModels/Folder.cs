@@ -124,7 +124,7 @@ public class Folder : Live.Core.Entity
         list.AddRange(listImg);
         list.AddRange(listSpot);
 
-        list = list.OrderByDescending(x => x.DateCreated).ToList();
+        list = list.OrderByDescending(x => x.created).ToList();
 
         //var listofId = this.UserYouTubes.Select(x => x.VideoId).ToList();
         //listofId.Reverse();

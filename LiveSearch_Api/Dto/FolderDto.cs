@@ -10,7 +10,7 @@ namespace Live.Core
 {
     public class FolderDto: IconDto
     {
-        public DateTime? DateCreated {get; set;}
+        public DateTime? created {get; set;}
         public string sharedAt { get; set; }
         public string updatedAt { get; set; }
         public string shareDescription { get; set; }
@@ -29,7 +29,7 @@ namespace Live.Core
     
         public FolderDto(DateTime? date, string ID)
         {
-          DateCreated = date;
+          created = date;
           id = ID;
         }
 

@@ -19,8 +19,7 @@ class InfoField extends Component {
     let field = this.props.fromFolder?
     (<div class="fieldAct"><span style={{fontSize: "20px", color: "rgba(255, 255, 255, 0.801)"}}>Nie posiadasz jeszcze ikon w tym folderze.</span><p/>
         Upuść nad folderem wybrane ikony na pulpicie głównym
-        <br/>lub naciśnij <span  class="addOwn" > &#43; </span>
-        w prawym dolnym rogu ekranu aby dodać nowe ikony.
+        <br/>lub użyj funkcji powyżej aby utworzyć nowe ikony.
         </div>)
     :
     (<div class="fieldAct">
@@ -28,8 +27,7 @@ class InfoField extends Component {
     <p/>
     <span style={{fontSize: "20px", color: "rgba(255, 255, 255, 0.801)"}}>Nie posiadasz jeszcze ikon na głównym pulpicie.</span><p/>
         Naciśnij <span class="addIconInfo">&#43;
-        </span> przy wybranej ikonie lub <span class="addOwnInfo" > &#43; </span>
-        dodaj własne używając funkcji powyżej.
+        </span> przy wybranej ikonie lub stwórz własne ikony używając funkcji powyżej.
         <div> W celu usunięcia ikony z pulpitu naciśnij przy niej <div class="removeEntityInfo">&#43;</div>. 
         <br/>Ikony znajdujące się już na Twoim pulpicie mogą być z niego usuwane również z poziomu publicznych pulpitów.
 <br/>Wszelkie dodatkowe informacje znajdziesz pod znakami &#9432;info oraz w dziale "Informacje i pomoc".

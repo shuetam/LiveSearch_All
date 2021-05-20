@@ -21,7 +21,7 @@ namespace Live.Repositories
         private readonly LiveContext _liveContext;
         private readonly IMapper _autoMapper;
          private readonly SqlConnectingSettings _sql;
-        private readonly IUpdatingRepository _updateRepository;
+       // private readonly IUpdatingRepository _updateRepository;
 
      // private readonly ILogger _logger;
 
@@ -31,8 +31,7 @@ namespace Live.Repositories
             this._liveContext = liveContext;
             this._autoMapper = autoMapper;
             this._sql = sql;
-       
-
+           // this._updateRepository = updateRepository;
         }
 
         public async Task<List<IconDto>> GetFromArchiveByIndex(int i, int j)
@@ -184,10 +183,10 @@ namespace Live.Repositories
               songs.AddRange(all_songs.Where(s => s.Station == radio));
           }
         
-        if(songs.Count == 0)
-        {
-            await _updateRepository.SongsUpdateAsync();
-        }
+        //if(songs.Count == 0)
+        //{
+        //    await _updateRepository.SongsUpdateAsync();
+        //}
 
           while(songs.Count != 0)
           {

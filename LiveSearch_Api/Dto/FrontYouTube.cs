@@ -24,6 +24,7 @@ namespace Live.Core
         public int countValue {get; set;}
      public List<string>  tags {get; set;}
     public DateTime  playAt {get; set;}
+        public bool isSong { get; set; }
 
     public FrontYouTube(Song song, int count)
     {
@@ -36,6 +37,7 @@ namespace Live.Core
         this.countValue = count;
         this.guidId = song.ID.ToString();
         this.tags = new HashSet<string>(song.getTags()).ToList();
+        this.isSong = true;
     }
 
 //for admin
@@ -70,6 +72,7 @@ namespace Live.Core
         this.guidId = movie.ID.ToString();
         this.tags = movie.getTags();
         this.playAt = movie.PlayAt;
+        this.isSong = false;
         var dateTimeFormats = new CultureInfo("pl-PL").DateTimeFormat;
         var day = movie.PlayAt.ToString("dddd", dateTimeFormats);
         if(day == DateTime.Now.ToString("dddd", dateTimeFormats))

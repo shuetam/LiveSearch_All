@@ -75,9 +75,10 @@ namespace Live.Mapper
                 .ForMember(d => d.count, s => s.MapFrom(x => "1"))
                 .ForMember(d => d.title, s => s.MapFrom(x => x.Title))
                 .ForMember(d => d.tags, s => s.MapFrom(x => Regex.Split(x.Tags, @"[|]{2}").ToList()))
-                .ForMember(d => d.type, s => s.MapFrom(x => (string.IsNullOrEmpty(x.ImgSource) || x.ImgSource == "YT")?  "YT" : "MOVIE"))
-                .ForMember(d => d.source, s => s.MapFrom(x => x.ImgSource));
-                
+                .ForMember(d => d.type, s => s.MapFrom(x => (string.IsNullOrEmpty(x.ImgSource) || x.ImgSource == "YT") ? "YT" : "MOVIE"))
+                .ForMember(d => d.source, s => s.MapFrom(x => x.ImgSource))
+                .ForMember(d => d.created, s => s.MapFrom(x => (x.AddedToFolder.HasValue && x.FolderId.HasValue) ? x.AddedToFolder : x.CreatedAt));
+
 
             config.CreateMap<UserImage, IconDto>()
                 .ForMember(d => d.id, s => s.MapFrom(x => x.UrlAddress))
@@ -88,7 +89,8 @@ namespace Live.Mapper
                 .ForMember(d => d.title, s => s.MapFrom(x => x.Title))
                 .ForMember(d => d.source, s => s.MapFrom(x => x.Source))
                 .ForMember(d => d.tags, s => s.MapFrom(x => Regex.Split(x.Tags, @"[|]{2}").ToList()))
-                .ForMember(d => d.type, s => s.MapFrom(x => x.ImgType));
+                .ForMember(d => d.type, s => s.MapFrom(x => x.ImgType))
+                .ForMember(d => d.created, s => s.MapFrom(x => (x.AddedToFolder.HasValue && x.FolderId.HasValue) ? x.AddedToFolder : x.CreatedAt));
 
             config.CreateMap<UserSpotify, IconDto>()
                 .ForMember(d => d.id, s => s.MapFrom(x => x.SpotifyId))
@@ -99,7 +101,8 @@ namespace Live.Mapper
                 .ForMember(d => d.title, s => s.MapFrom(x => x.Title))
                  .ForMember(d => d.tags, s => s.MapFrom(x => Regex.Split(x.Tags, @"[|]{2}").ToList()))
                 .ForMember(d => d.source, s => s.MapFrom(x => x.ImgSource))
-                .ForMember(d => d.type, s => s.MapFrom(x => "SPOTIFY"));
+                .ForMember(d => d.type, s => s.MapFrom(x => "SPOTIFY"))
+                .ForMember(d => d.created, s => s.MapFrom(x => (x.AddedToFolder.HasValue && x.FolderId.HasValue)? x.AddedToFolder : x.CreatedAt));
 
 
 
@@ -114,6 +117,7 @@ namespace Live.Mapper
                 .ForMember(d => d.playAt, s => s.MapFrom(x => x.playAt))
                 .ForMember(d => d.tags, s => s.MapFrom(x => x.tags))
                 .ForMember(d => d.source, s => s.MapFrom(x => x.source))
+                .ForMember(d => d.isSong, s => s.MapFrom(x => x.isSong))
                 .ForMember(d => d.type, s => s.MapFrom(x => "YT"));
 
 
@@ -129,7 +133,7 @@ namespace Live.Mapper
                 .ForMember(d => d.title, s => s.MapFrom(x => x.Title))
                 .ForMember(d => d.type, s => s.MapFrom(x => "FOLDER"))
                 .ForMember(d => d.shared, s => s.MapFrom(x => x.IsShared))
-                .ForMember(d => d.DateCreated, s => s.MapFrom(x => x.CreatedAt))
+                .ForMember(d => d.created, s => s.MapFrom(x => x.CreatedAt))
                 .ForMember(d => d.hasIcons, s => s.MapFrom(x => x.HasIcons()))
                 .ForMember(d => d.sharedAt, s => s.MapFrom(x => x.GetDate(x.SharedAt)))
                 .ForMember(d => d.updatedAt, s => s.MapFrom(x => x.GetDate(x.UpdatedAt)))

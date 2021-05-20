@@ -62,7 +62,10 @@ namespace Live.Core
         public DateTime  playAt {get; set;}
         public int countValue;
         public int groupBook {get; set;}
-      
+        public DateTime created { get; set; }
+        public bool isSong { get; set; }
+
+
 
         private void setAddingLocation () 
         {

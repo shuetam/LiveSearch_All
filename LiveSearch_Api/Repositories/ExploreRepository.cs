@@ -77,6 +77,7 @@ namespace Live.Repositories
                 icons.AddRange(images);
                 icons.AddRange(spotify);
                 icons.AddRange(youtubes);
+
                 return icons;
             }
             return icons;

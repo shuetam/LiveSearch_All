@@ -1,5 +1,5 @@
 .header {
-    background-color: rgb(34, 34, 34);
+    background-color: rgb(34, 34, 34); 
     position: fixed;
     width: 100vw;
     top: 0px;
@@ -275,9 +275,26 @@
 }
 
 
+.addIconHeader {
+    font-weight: 800;
+    font-size: 20px;
+    color: rgba(0, 110, 255, 0.979);
+    text-shadow: rgba(14, 14, 14, 0.979) -3px 2px 3px, rgba(0, 0, 0, 0.911) 0px 0px 15px;
+    position: absolute;
+    top: -5px;
+    left: 40px;
+    display: none;
+  }
+
+
 
 .addOwn:hover {
     color: rgba(243, 243, 243, 0.932);
+}
+
+
+.addOwn:hover .addIconHeader {
+    display: block;
 }
 
 

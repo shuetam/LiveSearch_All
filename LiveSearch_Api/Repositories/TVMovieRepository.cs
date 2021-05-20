@@ -21,13 +21,14 @@ namespace Live.Repositories
         private readonly LiveContext _liveContext;
         private readonly IMapper _autoMapper;
         private readonly SqlConnectingSettings _sql;
-         private readonly IUpdatingRepository _updateRepository;
+         //private readonly IUpdatingRepository _updateRepository;
 
         public TVMovieRepository(LiveContext liveContext, IMapper autoMapper, SqlConnectingSettings sql)
         {
             this._liveContext = liveContext;
             this._autoMapper = autoMapper;
             this._sql = sql;
+          //  this._updateRepository = updateRepository;
         }
 
         private bool GetExists(TVMovie tvMovie)
@@ -90,7 +91,7 @@ namespace Live.Repositories
 
             if(movies.Count == 0)
             {
-                await _updateRepository.TvMoviesUpdateAsync(true);
+               // await _updateRepository.TvMoviesUpdateAsync(true);
             }
 
             foreach (var movie in movies)

@@ -3,6 +3,7 @@ using Live.Extensions;
 using Live.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Live.Controllers
@@ -13,11 +14,13 @@ namespace Live.Controllers
     {
         private readonly IExploreRepository _actuallRepository;
         private readonly IUserDesktopRepository _desktopRepository;
+        private readonly IUpdatingRepository _updateRepository;
 
-        public ActuallController(IExploreRepository repository, IUserDesktopRepository desktopRepository)
+        public ActuallController(IExploreRepository repository, IUserDesktopRepository desktopRepository, IUpdatingRepository updateRepository)
         {
             this._actuallRepository = repository;
             this._desktopRepository = desktopRepository;
+            this._updateRepository = updateRepository;
         }
 
 
@@ -26,6 +29,14 @@ namespace Live.Controllers
         {
             var top = await _actuallRepository.GetAllActuallYTAsync();
             var topImg = await _actuallRepository.GetAllActuallIMGAsync();
+
+
+            if (top.Where(x => x.isSong).Count() == 0)
+                await _updateRepository.SongsUpdateAsync();
+            
+            if (top.Where(x => !x.isSong).Count() == 0)
+                await _updateRepository.TvMoviesUpdateAsync(true);
+
 
             if (top.Count > 0)
                 top.AddRange(topImg);

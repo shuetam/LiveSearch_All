@@ -235,17 +235,18 @@ onChange={this.onCapchaChange}
             
 
             if(!this.props.fromDesktop && this.props.noIcons) {
-                if(this.props.folders) {
-                    return noFoldersFound;
+                if(this.props.folders && this.props.headerType == "followed") {
+                    return noFollowedFolders;
             }
+
+            if(this.props.folders && this.props.headerType == "folders") {
+                return noFoldersFound;
+        }
                 if(this.props.headerType == "explore") {
                     
                     return noIconsFound;
                 }
 
-                if(this.props.headerType == "followed") {
-                    return noFollowedFolders;
-                }
                 return actualization;
             }
             return field;   

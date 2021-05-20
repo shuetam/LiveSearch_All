@@ -160,8 +160,8 @@ Folder jest pusty. Dodaj do niego ikony aby móc udostępniać jego zawartość 
 } */
 
 
-var privateText = this.state.privText?  <div  className="lockIconF" style={{fontSize: "12px", padding: "5px", color: "rgba(255, 27, 27, 0.73)"}}>
-Po zapisaniu folderu jako prywatny, wszystkie statystyki folderu zostaną wyzerowane.</div> : "";
+var privateText = this.state.privText?  <div  className="lockIconF" style={{fontSize: "12px", padding: "5px", color: "rgba(255, 255, 255, 0.501)"}}>
+Po zapisaniu folderu jako prywatny, osoby obserwujące jego zawartość nie będą miały do niego dostępu (do czasu kolejnego upublicznienia).</div> : "";
 
 
 let titleNum = this.state.titleNum?  this.state.titleLength : "";

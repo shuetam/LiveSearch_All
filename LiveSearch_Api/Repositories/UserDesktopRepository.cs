@@ -550,7 +550,7 @@ namespace Live.Repositories
                 bool shared = folder.ShareFolder(folderSetter.Shared);
                 if (!shared)
                 {
-                    _liveContext.SharedFolders.RemoveRange(_liveContext.SharedFolders.Where(x => x.FolderId == FolderId));
+                   // _liveContext.SharedFolders.RemoveRange(_liveContext.SharedFolders.Where(x => x.FolderId == FolderId));
                 }
 
                 _liveContext.Update(folder);

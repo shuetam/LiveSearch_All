@@ -4346,3 +4346,12 @@
 2021-05-10 00:36:54.636 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=40&date=09-05-2021&time_from=12&time_to=13
 2021-05-10 00:36:54.636 +02:00 [Error] The remote server returned an error: (500) Internal Server Error.
 2021-05-10 00:40:18.487 +02:00 [Information] Finish radio songs update with 1172 songs and 3 youtube errors
+2021-05-17 12:03:53.639 +02:00 [Information] Finish radio songs update with 102 songs and 2 youtube errors
+2021-05-17 13:26:29.573 +02:00 [Information] Finish radio songs update with 92 songs and 0 youtube errors
+2021-05-17 15:02:26.703 +02:00 [Information] Finish radio songs update with 102 songs and 0 youtube errors
+2021-05-18 13:51:06.053 +02:00 [Error] Exception DownloadString: https://www.odsluchane.eu/szukaj.php?r=1&date=18-05-2021&time_from=12&time_to=13
+2021-05-18 13:51:06.093 +02:00 [Error] The SSL connection could not be established, see inner exception. Authentication failed because the remote party has closed the transport stream.
+2021-05-18 13:51:41.524 +02:00 [Information] Finish radio songs update with 283 songs and 0 youtube errors
+2021-05-19 22:57:53.718 +02:00 [Information] Finish radio songs update with 912 songs and 0 youtube errors
+2021-05-19 23:56:07.515 +02:00 [Information] Finish radio songs update with 115 songs and 0 youtube errors
+2021-05-20 00:00:29.610 +02:00 [Information] Finish radio songs update with 104 songs and 0 youtube errors

@@ -297,7 +297,10 @@ class UserDesktop extends Component {
      }
 
     getLastIcon = () => {
-        var allIcons = [...this.state.folders, ...this.state.spotify, ...this.state.images, ...this.state.icons];
+        var allIcons = [...this.state.spotify, ...this.state.images, ...this.state.icons];
+
+        allIcons = allIcons.sort((i,j) => Date.parse(i.created) - Date.parse(j.created));
+
         if(allIcons.length>0) {
            return allIcons[allIcons.length-1];
         }
@@ -355,11 +358,11 @@ class UserDesktop extends Component {
 
         if(lastIcon) {
             var type = lastIcon.type;
-            if(type != "FOLDER") {
+            
                 this.setState({ nowPlayed: lastIcon.id });
                 this.setState({ entityID:  lastIcon.id });
                 this.setState({entityTags: this.getIconTags(lastIcon.id)});
-            }
+            
             //this.setState({ytField: false});
 
             this.setState({fieldType: type});
@@ -396,10 +399,11 @@ class UserDesktop extends Component {
         }
         else {
             //this.setState({infoField: true});
+            this.setState({ entityID:  "" });
             this.setState({fieldType: "INFO"});
-            this.setState({
-                loadedIcons: true
-              });
+            setTimeout(() => {
+                this.setState({ loadedIcons: true});
+            }, 500);
         }
         
     }
@@ -1100,7 +1104,7 @@ class UserDesktop extends Component {
               }));
              // document.getElementById("exploreT").value = "";
             
-            })
+            }).then(()=> {this.stopAddingFolder()})
         .catch(error => {this.Alert("Wystąpił błąd przy próbie utworzenia folderu. Spróbuj ponownie później.")}); 
     }
 
@@ -2114,25 +2118,25 @@ let iconIcons = <div style={{fontSize: "17px"}}><i class="icon-youtube"/>
         
         let addOwnYT =
         <div id="addOwn" class= {(this.state.addingIcon && this.state.addingType == "YT")? "addOwn activePlus" : "addOwn" }  onClick={()=>{this.showAddingIcon("MOVIE")}}> 
-        {/* &#43; */}<i class="icon-video"/>
+        {/* &#43; */}<i class="icon-video"/> <span class="addIconHeader">&#43;</span>
         <div id="addText" className="hoverInfo" style={{left: "300px"}}>
-        Dodaj ikony wideo  
+        Utwórz ikony reprezentujące klipy wideo  
         </div>
         </div>
 
         let addOwnSPOTIFY =
         <div id="addOwn" class= {(this.state.addingIcon && this.state.addingType == "SPOTIFY")? "addOwn activePlus" : "addOwn" }  onClick={()=>{this.showAddingIcon("SPOTIFY")}}> 
-        {/* &#43; */}<i class="icon-spotify"/>
+        {/* &#43; */}<i class="icon-spotify"/><span class="addIconHeader" style={{left: "135px"}}>&#43;</span>
         <div id="addText" className="hoverInfo" style={{left: "380px"}}>
-        Dodaj ikony Spotify  
+        Utwórz ikony reprezentujace utwory Spotify  
         </div>
         </div>
 
         let addOwnIMG =
         <div id="addOwn" class= {(this.state.addingIcon && this.state.addingType == "IMG")? "addOwn activePlus" : "addOwn" } onClick={()=>{this.showAddingIcon("IMG")}}> 
-        {/* &#43; */}<i class="icon-picture"/>
+        {/* &#43; */}<i class="icon-picture"/><span class="addIconHeader" style={{left: "90px"}}>&#43;</span>
         <div id="addText" className="hoverInfo" style={{left: "350px"}}>
-        Dodaj zdjęcia
+        Utwórz ikony reprezentujące zdjęcia
         </div>
         </div>
 
@@ -2187,7 +2191,7 @@ let iconIcons = <div style={{fontSize: "17px"}}><i class="icon-youtube"/>
                   </div> : ""; 
 
         
-    let  deskMenu =  (<div class= {"deskMenu"} style={{left: !this.state.loadedIcons? "-110px" : "110px"}}>
+    let  deskMenu =  (<div class= {"deskMenu"} style={{left: !this.state.loadedIcons? "-130px" : "110px"}}>
            {addOwnYT}         {addOwnIMG}         {addOwnSPOTIFY}        
            {folderIcon}
         {saveIcons}
