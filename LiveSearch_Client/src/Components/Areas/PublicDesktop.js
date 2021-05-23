@@ -360,12 +360,12 @@ handleScroll = (event) => {
         });
 
     })
-    .then(() => {
-        this.prepareIcons()})
         .catch(error => {console.log(error);
             this.Alert("Wystąpił błąd przy pobieraniu ikon. Spróbuj ponownie za chwilę.");
-            this.setState({ loadedIcons: true });
-        });
+        })
+        .finally(() => {
+            this.prepareIcons()})
+        ;
     }
 }
 

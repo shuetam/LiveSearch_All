@@ -41,6 +41,9 @@ namespace Live.Controllers
             if (top.Count > 0)
                 top.AddRange(topImg);
 
+
+            top = top.Where(x => !x.id.Contains("Error")).ToList();
+
             top.Shuffle();
             return Json(top);
         }
