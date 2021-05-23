@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, NavLink, Switch, withRouter } from 'react-router-dom';
 import axios from 'axios';
-import { URL, PATHES } from '../../environment';
+import { URL, PATHES, CODES } from '../../environment';
 import ServerPopup from '../Popup/ServerPopup';
 import {authLogin, showServerPopup} from '../../Store/Actions/auth';
 import { connect } from 'react-redux';
@@ -365,7 +365,7 @@ let noCaptcha = this.state.noCaptcha? <div style={{marginTop: "-14px"}} class="w
  let captchaCheck = <div class="captchaDiv"> 
  {noCaptcha}
  <ReCAPTCHA
- sitekey="6LefE8MaAAAAAIDJsCtx-cwqKQEqXnIDFGOfo4YY"
+ sitekey = {CODES.ReCAPTCHA}
  onChange={this.onCaptchaChange}
  theme = "dark"
  size="compact"/>

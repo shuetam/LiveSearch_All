@@ -80,6 +80,10 @@ export const PATHES = {
     followedFolders: "/obserwowane_foldery"
 }
 
+export const CODES = {
+    ReCAPTCHA: '6Lc9DcMaAAAAAJuUX-fHXOEjuKsgaw7MZEX3v-uL'
+}
+
 
 
 
