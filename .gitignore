@@ -6,6 +6,8 @@ appsettings.json
 appsettings.production.json
 appsettings.development.json
 
+environment.js
+
 # User-specific files
 *.suo
 *.user
