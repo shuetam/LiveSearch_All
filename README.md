@@ -1,2 +1,2 @@
 # LiveSearch
-![Alt Text](http://livesearch.pl/static/media/livesearch-gif.gif)
+![Alt Text](livesearch.pl/static/media/livesearch-gif.gif)
