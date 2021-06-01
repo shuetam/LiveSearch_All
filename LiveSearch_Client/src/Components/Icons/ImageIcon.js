@@ -92,7 +92,7 @@ class ImageIcon extends Component {
     }
 
     onError = (event) => {
-        //alert('The image could not be loaded.');
+        alert('The image could not be loaded.');
         const logo = require('./149932.png');
        // this.setState({src: logo });
 console.log(event);
@@ -322,7 +322,8 @@ console.log(event);
         title={this.props.title} 
         src={this.state.src}
         onMouseLeave={this.outZoom}
-        onError={this.onError}>
+        onError={this.onError}
+        >
         </img>: "";
 
 
@@ -397,7 +398,8 @@ console.log(event);
                    height={this.props.srcHeight}
                    width={this.props.srcWidth}
                    onMouseLeave={this.outZoom}
-                   onError={this.onError}>
+                   //onError={this.onError}
+                   >
                 </img> 
 
                  {imgPreview}

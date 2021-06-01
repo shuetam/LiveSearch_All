@@ -945,7 +945,9 @@ let infoArrowBest = this.state.showBooksArrow? <div  class="infoArrowBestsellers
         <table class="dna-table"> 
         <tr>
           <button onClick={this.manageLiveSearch}
-            class="loginBtn loginBtn--livesearch loginLive">Zaloguj przez LiveSearch</button>
+            class="loginBtn loginBtn--livesearch loginLive"><span class="logBr">Zaloguj / zarejestruj się</span>
+            <span class="br"></span>
+            przez adres e-mail</button>
             </tr>
             <p/>
 <tr>  

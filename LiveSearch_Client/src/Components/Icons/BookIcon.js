@@ -85,7 +85,7 @@ class BookIcon extends Component {
 
 
     onError = () => {
-        //alert('The image could not be loaded.');
+        alert('The image could not be loaded.');
         const logo = require('./149932.png');
         this.setState({src: logo });
 

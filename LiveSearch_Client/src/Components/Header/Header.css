@@ -1281,6 +1281,17 @@ button:focus {
     background-image: linear-gradient(#5B7BD5, #4864B1);
   }
 
+.br {
+    display: block;
+    margin-top: -20px;
+}
+
+.logBr {
+    display: block;
+    margin-bottom: -20px;
+    font-size: 13px;
+}
+
 .loginLive {
     color: rgba(73, 73, 73, 0.925);
 }
@@ -1288,16 +1299,15 @@ button:focus {
     background-color: rgb(245, 245, 245);
     background-image: linear-gradient(rgba(219, 219, 219, 0.89), rgb(218, 218, 218));
     font-size: 12px;
-    
     cursor: pointer;
     /* left: -4px; */
   }
   .loginBtn--livesearch:before {
     border-right: #747a8a 0px solid;
-    background: url("livesearch.png") no-repeat;
+    background: url("email1.png") no-repeat;
     background-size: 80%;
     margin-left: 5px;
-    margin-top: 4px;
+    margin-top: 9px;
   }
   .loginBtn--livesearch:hover,
   .loginBtn--livesearch:focus {
@@ -1312,6 +1322,14 @@ button:focus {
 
   .construction {
     width: 14px;
+    height: 14px;
+    background:  url("underconstruction.png") no-repeat;
+    background-size: 100%;
+    float: left;
+  }
+
+  .emailPng {
+      width: 14px;
     height: 14px;
     background:  url("underconstruction.png") no-repeat;
     background-size: 100%;
