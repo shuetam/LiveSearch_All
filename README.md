@@ -1,8 +1,7 @@
-<p align="center">
-  # www.LiveSearch.pl
-</p>
+            # www.LiveSearch.pl
 
-  ![livesearch](https://media.giphy.com/media/0dOgFAIPsNgBXMqwtx/giphy.gif)
+
+                ![livesearch](https://media.giphy.com/media/0dOgFAIPsNgBXMqwtx/giphy.gif)
 
 
 ## Livesearch is a social media site which visualizes popular content in a nice user-friendly way. Users can collect data that interests them and share it with one another in public folders.
