@@ -18,7 +18,8 @@ namespace Live.Services
 
             using (var client = new WebClient())
             {
-                string apiGoogle = $"https://www.google.com/recaptcha/api/siteverify?secret={GoogleKey.captchaLocal}&response={captchaToken}";
+                string captchaKey = GoogleKey.captcha;
+                string apiGoogle = $"https://www.google.com/recaptcha/api/siteverify?secret={captchaKey}&response={captchaToken}";
                 var response = client.DownloadString(apiGoogle);
                 var captchaObject = JsonConvert.DeserializeObject<CaptchaResponse>(response);
                 isHuman = captchaObject.success;

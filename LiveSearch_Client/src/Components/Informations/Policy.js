@@ -25,7 +25,7 @@ class Policy extends Component {
               <br/>Przedstawia również działanie plików cookies (tzw. "ciasteczek") używanych na stronie.</p>
         <br/>
         <p style={{color: "rgba(255, 255, 255, 0.719)"}}>Administrator danych osobowych:</p>
-        Właścicielem i twórcą serwisu oraz administratorem Waszych danych osobowych jest Mateusz Bieda zam. ul. Barska 61a/4 Kraków - kontakt email: admin@livesearch.pl.
+        Właścicielem i twórcą serwisu oraz administratorem Waszych danych osobowych jest Mateusz Bieda zam. ul. Barska 61 Kraków - kontakt email: admin@livesearch.pl.
         <br/>
         <br/>
         <br/>
