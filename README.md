@@ -1,2 +1,2 @@
 # LiveSearch
-![Alt Text](https://livesearch.pl/static/media/livesearch-gif.gif)
+![Alt Text](https://s3.gifyu.com/images/livesearch-gif.gif)
