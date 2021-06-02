@@ -390,7 +390,8 @@ isActuall = (paramsId) => {
 
 
 responseErrorGoogle = (response) => {
-    this.Alert("Wystąpił błąd przy próbie zalogowania.");
+    //this.Alert("Wystąpił błąd przy próbie zalogowania.");
+    console.log("Google error catche");
 }
 
         

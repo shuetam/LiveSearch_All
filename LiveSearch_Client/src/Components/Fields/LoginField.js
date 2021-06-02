@@ -18,7 +18,7 @@ class LoginField extends Component {
     (<div class="fieldAct"><span style={{fontSize: "20px", color: "rgba(255, 255, 255, 0.801)"}}>
     </span><p/>
     <div style={{marginLeft: "20px"}}>
-       Zaloguj dasdasdasdasdas się aby przeglądać swój pulpit i dodawać do niego nowe ikony
+       Zaloguj się aby przeglądać swój pulpit i dodawać do niego nowe ikony
        </div>
         </div>)
 
