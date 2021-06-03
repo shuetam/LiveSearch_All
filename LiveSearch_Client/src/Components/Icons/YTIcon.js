@@ -279,7 +279,30 @@ class YTIcon extends Component {
             {editIconField}
             </div>;
 
-        return (
+       
+
+if(this.props.isList) {
+
+return ( <div onDoubleClick={this.props.linkTo}
+            
+    title={this.props.title} id={this.props.id}
+    class="entityList"
+    
+    onMouseOver={this.props.onHover}
+    onMouseLeave={this.props.onLeave}>
+        <img 
+          id={this.props.id}
+          title={this.props.title} 
+          src={this.state.src} height="60px" style={{ margin: '0px'}} 
+          onError={this.onError}>
+          </img> 
+            {addIcon}
+            {editIcon}
+            {indexIcon}
+    </div>)
+}
+else {
+    return (
             <div onDoubleClick={this.props.linkTo}
             
             title={this.props.title} id={this.props.id}
@@ -294,22 +317,14 @@ class YTIcon extends Component {
                   src={this.state.src} height={this.props.size} style={{ margin: '0px'}} 
                   onError={this.onError}>
                   </img> 
-
-                {/* <i class="icon-note" id={this.props.id}
-                  title={this.props.title}  /> */} 
                     {addIcon}
-                    
                     {editIcon}
                     {indexIcon}
-                 
-                   
-               
-               {/*    <div id={this.props.id} onClick = {this.saveYT}
-                  title={this.props.title}  class="addEntity">&#43;</div> */}
             </div>
                   
         )
     }
+}
 }
 const mapStateToProps = state => {
     return {

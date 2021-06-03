@@ -36,6 +36,16 @@
     transition: all 1s ease-in-out;
 }
 
+.entityList {
+    color: rgb(255, 255, 255);
+    z-index: 555;
+    background-color: rgba(0, 0, 0, 0.61);
+    text-align: left;
+    margin: 0px;
+    opacity: 0.5;
+    padding: 10px;
+}
+
 .folderDis {
     position: fixed;
     /* color: rgb(0, 0, 0); */

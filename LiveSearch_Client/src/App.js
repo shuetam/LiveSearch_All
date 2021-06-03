@@ -7,7 +7,7 @@ import YTArea from './Components/Areas/YTArea';
 import { Route } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import Switch from 'react-router-dom/Switch';
-import {authCheckState, checkSizeFactor} from './Store/Actions/auth';
+import {authCheckState, checkSizeFactor, checkListView} from './Store/Actions/auth';
 import ReactScrollWheelHandler from "react-scroll-wheel-handler";
 import Popup from './Components/Popup/Popup';
 import ServerPopup from './Components/Popup/ServerPopup';
@@ -22,6 +22,8 @@ class App extends Component {
         document.title = "LiveSearch";
         this.props.onTryAutoSignup(); 
         this.props.checkSizeFactor();
+        this.props.checkListView();
+
     }
        
  
@@ -45,8 +47,9 @@ class App extends Component {
   
   const mapDispatchToProps = dispatch => {
     return {
-      onTryAutoSignup: () => dispatch(authCheckState() ),
-      checkSizeFactor: () => dispatch(checkSizeFactor())
+      onTryAutoSignup: () => dispatch(authCheckState()),
+      checkSizeFactor: () => dispatch(checkSizeFactor()),
+      checkListView: () => dispatch(checkListView()),
     };
   };
 

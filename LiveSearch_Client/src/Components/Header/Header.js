@@ -24,7 +24,7 @@ import Information from '../Informations/Information';
 
 
 
-import {authLogin, authLogout, showServerPopup, escManage, manageScreen, showFirst} from '../../Store/Actions/auth';
+import {authLogin, authLogout, showServerPopup, escManage, manageScreen, showFirst, setListView} from '../../Store/Actions/auth';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 
@@ -711,6 +711,10 @@ responseErrorGoogle = (response) => {
     }
 
 
+    listManage = () => {
+        this.props.setListView(!this.props.isList);
+    }
+
     getMovedIcons = () => {
 
         var iconsClass = document.getElementsByClassName("entity");
@@ -1019,6 +1023,10 @@ let authenticate = (<div class="logIn" style={{marginTop: "6px"}} id="userP"> Za
 let screenSwitch = <div id="screenS" style={{fontSize: '18px'}}  class="screenSwitch" onClick={this.screenManage}><i class="icon-resize-small"/>
   <i class="icon-resize-full"/>
    <div id="screenField" class="hoverInfo" > Aktywuj / zamknij pełny ekran</div>
+</div>
+
+let listSwitch = <div id="listS" style={{fontSize: '22px'}}  class= {this.props.isList? "listActive screenSwitch":  "listSwitch screenSwitch"} onClick={this.listManage}><i class="icon-list"/>
+   <div id="listField" class="hoverInfo" > Włącz widok listy</div>
 </div>
 
 let adminHeader = this.props.isAdmin?  <div onClick={this.changeAllLocaions} class="switch">ADMIN</div> : "";
@@ -1417,6 +1425,7 @@ return (
                 {mainMenu}
                 {infoForSmall}
                 {actuallMenu}
+                {listSwitch}
                 {screenSwitch}
                 {userHeader}
                 {cookieInfo}
@@ -1488,6 +1497,7 @@ return (
         //userId: state.auth.userId,
         imageUrl: state.auth.imageUrl,
         firstField: state.auth.firstField,
+        isList: state.auth.isList,
        
     };
 };
@@ -1502,6 +1512,7 @@ const mapDispatchToProps = dispatch => {
         serverAlert: (message) => dispatch(showServerPopup(message)),
         screenManage: () => dispatch(manageScreen()),
         showFirst: (show) => dispatch(showFirst(show)),
+        setListView: (isList) => dispatch(setListView(isList))
         
     };
 };

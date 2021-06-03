@@ -109,6 +109,13 @@ export const login = (userName, imageUrl, token, userRole, userNick) => {
     };
     };
 
+    export const setListView = (isList) => {
+        return {
+            type: 'LIST_VIEW',
+            isList: isList
+        };
+        };
+
 
 export const authLogout = () => {
 debugger;
@@ -242,6 +249,18 @@ export const authCheckState = () => {
             dispatch(setSizeFactor(sizeFactor));
             }
         }; 
+
+
+        export const checkListView = () => {
+            return dispatch => {
+                var isList = localStorage.getItem("is_List");
+    
+                if (isList == 'undefined' || isList == null || isList == 'null'|| isList == 'false' ) {
+                    isList = false;
+                } 
+                dispatch(setListView(isList));
+                }
+            }; 
 
 
     function getCookie(cname) {

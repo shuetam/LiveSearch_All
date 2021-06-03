@@ -16,7 +16,8 @@ const initialState = {
     removingIconId: null,
     fullScreen: false,
     firstField: false,
-    sizeFactor: 1
+    sizeFactor: 1,
+    isList: false
 };
 
 const  manageEsc = (state, action) => {
@@ -102,6 +103,8 @@ const iconAdding = (state, action) => {
  
  const setSizeFactor = (state, action) => {
 
+if(!state.isList)
+{
      var sizeFactor = Number(action.sizeFactor);
      if (sizeFactor == 'undefined' || sizeFactor == null || sizeFactor == 'null' ) {
         sizeFactor = 1;
@@ -118,7 +121,22 @@ const iconAdding = (state, action) => {
     return updateStore( state, { 
        sizeFactor: sizeFactor,
     } ); 
+}
+return updateStore( state, { 
+    sizeFactor: 1,
+ } ); 
 };
+
+
+const setListView = (state, action) => {
+
+   localStorage.setItem('is_List', action.isList);
+
+   return updateStore( state, { 
+      isList: action.isList,
+   } ); 
+};
+
 
  const hideLogin = (state, action) => {
     // debugger;
@@ -221,6 +239,8 @@ const reducer = ( state = initialState, action ) => {
        // case ('LOGIN_MANAGE'): return showLogin(state, action);
         case ('FIRST_SHOW'): return showFirst(state, action);
         case('SIZE_FACTOR'): return setSizeFactor(state, action);
+        case('LIST_VIEW'): return setListView(state, action);
+        
    
         default:
             return state;

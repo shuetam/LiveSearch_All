@@ -1242,20 +1242,23 @@ class UserDesktop extends Component {
 
         liveSearch = (event) => {  
         var iconsEntity = document.getElementsByClassName("entity");
+        var listEntity = document.getElementsByClassName("entityList");
         var folders = document.getElementsByClassName("folder");
         
-            var icons = [...folders,...iconsEntity];
+            var icons = [...folders,...iconsEntity, ...listEntity];
 
         for (var i = 0; i < icons.length; i++) {
             if(icons[i].title.toString().toLowerCase().includes(event.target.value.toString().toLowerCase()))
             {
                 icons[i].style.visibility = 'visible';
+                icons[i].style.display = "block";
                // icons[i].style.filter = "";
                // icons[i].style.opacity = this.state.actuallOpacity;
             }
             else
             {
                 icons[i].style.visibility = 'hidden';
+                icons[i].style.display = "none";
                 //icons[i].style.filter = "blur(5px)";
                // icons[i].style.opacity = 0.3;
             }
@@ -1510,7 +1513,6 @@ class UserDesktop extends Component {
 
     getShadow = (left, top, id) => {
 
-        
         if(this.state.nowPlayed == id)
         {
             return this.state.playedShadow;
@@ -1534,7 +1536,6 @@ class UserDesktop extends Component {
     }
 
     getClass = (id) => {
-
       
         if (id !== "dis" && !this.state.addingIcon && !this.state.addingFolder &&  !this.state.editingFolder) {
             return "entity";
@@ -1751,6 +1752,7 @@ setAddingIcon = () => {
                     guidId={song.guidId}
                     src = {song.source}
                     type={song.type}
+                    isList = {this.props.isList}
                 />
             )
         })
@@ -1765,7 +1767,7 @@ setAddingIcon = () => {
                 classname= {this.getClass(song.id)}
                     linkTo={this.onDbSpotifyClick}
                     
-                    location={ this.state.loadedIcons? 
+                    location=  {this.state.loadedIcons? 
                       {boxShadow: this.getShadow(parseInt(song.left), parseInt(song.top), song.id), 
                         top: song.top, left: song.left, transition: 'top '+2+'s, left '+2+'s',
                         width: this.getImgWidth(song.type), height: this.getImgHeight(song.type), 
@@ -2238,21 +2240,23 @@ let iconIcons = <div style={{fontSize: "17px"}}><i class="icon-youtube"/>
                 {titleEdit}
                 
                 
-                {icons}
+              
+                
+                {addingIcon}
+
+                <div class="containerIconsContainer">
+               <div class="iconsContainer">
+               {icons}
                 {folders}
                 {images}
                 {spotifies}
                 {newIcons}
                 {newImages}
                 {newSpotifies}
-                {addingIcon}
                 {newFolders}
-                
-
-               {/* <div class="containerIconsContainer">
-               <div class="iconsContainer">
+             
                 </div>
-                </div> */}
+                </div> 
             
             </div>
         );
@@ -2266,8 +2270,8 @@ const mapStateToProps = state => {
       jwtToken: state.auth.jwttoken,
       addingIcon: state.auth.addingIcon,
       removedId: state.auth.removingIconId,
-      sizeFactor: state.auth.sizeFactor
-      //fullScreen: state.auth.fullScreen,
+      sizeFactor: state.auth.sizeFactor,
+      isList: state.auth.isList,
   };
 };
 

@@ -432,7 +432,7 @@
     color: rgba(231, 173, 64, 0.637);
     transition: all 0.3s;
     white-space: nowrap;
-    margin-left: 10px; 
+    margin-left: 0px; 
     margin-right: 20px;
     align-items: left;
     z-index: 400;
@@ -447,15 +447,27 @@
     color: rgba(255, 255, 255, 0.582);
     transition: all 0.3s;
     white-space: nowrap;
-    margin-left: auto; 
+    margin-left: 0px; 
     margin-right: 0px;
     align-items: left;
     z-index: 400;
+   
 }
 
 .screenSwitch:hover {
     color: rgba(255, 255, 255, 0.986);
    
+}
+
+.listSwitch {
+    margin-left: auto; 
+    margin-top: 2px;
+}
+
+.listActive {
+    margin-left: auto; 
+    margin-top: 2px;
+    color: rgba(231, 173, 64, 0.637);
 }
 
 .mainSwitch {
@@ -707,6 +719,10 @@
 
 
 #screenS:hover #screenField {
+    display: block;
+}
+
+#listS:hover #listField {
     display: block;
 }
 

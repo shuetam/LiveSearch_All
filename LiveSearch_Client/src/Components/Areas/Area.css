@@ -192,7 +192,7 @@
     position: absolute;
     top: 50px;
     right: 175px;
-    z-index: 0;
+    z-index: 5000;
 }
 
 
@@ -201,7 +201,7 @@
     position: relative;
     height: 80vh;
     width: 170px;
-    z-index: 0;
+    z-index: 5000;
    
 }
 

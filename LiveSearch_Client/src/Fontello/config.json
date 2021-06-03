@@ -203,6 +203,18 @@
       "css": "video",
       "code": 59413,
       "src": "elusive"
+    },
+    {
+      "uid": "493hui9b6xiqaf04slclmqnwpap3oxjj",
+      "css": "popup",
+      "code": 59414,
+      "src": "typicons"
+    },
+    {
+      "uid": "ef47651da3866460f27baf85ae234e5c",
+      "css": "list",
+      "code": 59415,
+      "src": "iconic"
     }
   ]
 }
