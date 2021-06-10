@@ -45,6 +45,8 @@
 
 }
 
+
+
 .titleDiv {
     position: fixed;
     height: 50px;
@@ -185,7 +187,9 @@
   width: 100px;
 }
 
-
+.folderDesktop {
+  border-radius: 5px;
+}
 
 
 .containerIconsContainer {

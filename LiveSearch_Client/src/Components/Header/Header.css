@@ -342,16 +342,8 @@
     cursor: pointer;
 }
 
-#folderTitle:hover {
-    color: rgba(255, 255, 255, 0.897);
-    transition: all 0.2s;
-    text-decoration: underline;
-    cursor: pointer;
-}
 
-#folderTitle:hover #folderTitleField {
-    display: block;
-}
+
 #folderTitleField {
     display: none;
     cursor: default;

@@ -4,20 +4,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using Live.Core;
 
-public class SharedFolder : Live.Core.Entity
+public class SharedDesktop : Live.Core.Entity
 {
     public Guid UserId { get; protected set; }
-    public Guid FolderId { get; protected set; }
+    public Guid OwnerId { get; protected set; }
     public DateTime FallowedAt { get; protected set; }
     public string LocLeft { get; protected set; }
     public string LocTop { get; protected set; }
 
-    protected SharedFolder()
+    protected SharedDesktop()
     {
     }
-    public SharedFolder(Guid userId, Guid folderId, string left, string top)
+    public SharedDesktop(Guid userId, Guid ownerId, string left, string top)
     {
-        this.FolderId = folderId;
+        this.OwnerId = ownerId;
         this.UserId = userId;
         FallowedAt = DateTime.Now;
         this.LocLeft = left;
@@ -30,5 +30,3 @@ public class SharedFolder : Live.Core.Entity
         this.LocTop = top;
     }
 }
-
-

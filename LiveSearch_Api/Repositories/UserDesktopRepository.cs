@@ -37,6 +37,7 @@ namespace Live.Repositories
                 var newYoutube = new UserYoutube(userId, addYoutube.Id, title, addYoutube.Left, addYoutube.Top, addYoutube.FolderId, tagsString, addYoutube.Source);
               
                 _liveContext.UserYoutubes.Add(newYoutube);
+                await this.UpdateUserById(userId);
                 await _liveContext.SaveChangesAsync();
                 return true;
             }
@@ -119,7 +120,9 @@ namespace Live.Repositories
             iconsIds.AddRange(spotifyIds);
             iconsIds.AddRange(foldersIds);
 
-            var followedIds = await _liveContext.SharedFolders.Where(x => x.UserId == userId).Select(x => x.FolderId.ToString().ToLower()).ToListAsync();
+            iconsIds.Add(userId.ToString());
+
+            var followedIds = await _liveContext.SharedDesktops.Where(x => x.UserId == userId).Select(x => x.OwnerId.ToString()).ToListAsync();
 
             var iconsIDS = new { userIds = iconsIds, followedIds = followedIds };
             return iconsIDS;
@@ -128,16 +131,29 @@ namespace Live.Repositories
         }
 
 
-        public async Task<List<FolderDto>> GetAllFoldersForUserAsync(Guid userId)
+        public async Task<List<FolderDto>> GetAllFoldersForUserAsync(Guid userId, bool onlyPublic)
         {
 
-            //var folers = await _liveContext.Folders.Where(x => x.UserId.ToString() == userId ).ToListAsync();
-            var folders = await _liveContext.Folders
-            .Where(x => x.UserId == userId)
-            .Include(x => x.UserYouTubes)
-            .Include(x => x.UserImages)
-            .Include(x => x.UserSpotify)
-            .ToListAsync();
+            var folders = new List<Folder>();
+
+            if (onlyPublic)
+            {
+                folders = await _liveContext.Folders
+                                .Where(x => x.UserId == userId)
+                                .Include(x => x.UserYouTubes)
+                                .Include(x => x.UserImages)
+                                .Include(x => x.UserSpotify)
+                                .ToListAsync();
+            }
+            else
+            {
+                folders = await _liveContext.Folders
+                               .Where(x => x.UserId == userId && x.IsShared == true)
+                               .Include(x => x.UserYouTubes)
+                               .Include(x => x.UserImages)
+                               .Include(x => x.UserSpotify)
+                               .ToListAsync();
+            }
 
             foreach (var folder in folders)
             {
@@ -147,40 +163,43 @@ namespace Live.Repositories
 
              foreach (var icon in icons)
             {
-            int followers = _liveContext.SharedFolders.Where(x => x.FolderId.ToString() == icon.id).Count();
-            icon.followers = followers;
+                int followers = _liveContext.SharedFolders.Where(x => x.FolderId.ToString() == icon.id).Count();
+                icon.followers = followers;
              }
 
-            //icons.AddRange(folders.Select(x => _autoMapper.Map<IconDto>(x)).ToList());
-            //Console.WriteLine("Getting folders");
             return icons;
         }
 
-        public async Task<List<FolderDto>> GetFollowedFoldersForUserAsync(Guid userId)
+        public async Task<List<FolderDto>> GetFollowedDesktopsForUserAsync(Guid userId)
         {
-            var foldersIds = _liveContext.SharedFolders.Where(x => x.UserId == userId)
-            .Select(x => x.FolderId);
+            var deskIds = _liveContext.SharedDesktops.Where(x => x.UserId == userId)
+            .Select(x => x.OwnerId);
 
 
-            var folders = await _liveContext.Folders.Where(x => x.IsShared && foldersIds.Contains(x.ID))
-            .Include(x => x.UserYouTubes)
-            .Include(x => x.UserSpotify)
-            .Include(x => x.UserImages).ToListAsync();
+           // var desktops = await _liveContext.Users.Where(p => p.IsPublic.HasValue).Where(x => x.IsPublic.Value && deskIds.Contains(x.ID))
+           // .Include(x => x.UserYoutubes)
+           // .Include(x => x.UserSpotify)
+          //  .Include(x => x.UserImages).ToListAsync();
+
+            var desktops = await _liveContext.Users.Where(x => deskIds.Contains(x.ID))
+                          .Include(x => x.UserYoutubes)
+                          .Include(x => x.UserSpotify)
+                          .Include(x => x.UserImages).ToListAsync();
 
 
-            foreach (var folder in folders)
+            foreach (var desk in desktops)
             {
-                folder.SetFourIcons();
+                desk.SetFourIcons();
             }
-            var icons = folders.Select(x => _autoMapper.Map<FolderDto>(x)).ToList();
+            var icons = desktops.Select(x => _autoMapper.Map<FolderDto>(x)).ToList();
 
             foreach (var icon in icons)
             {
-                int followers = _liveContext.SharedFolders.Where(x => x.FolderId.ToString() == icon.id).Count();
-                var followFolder = _liveContext.SharedFolders.FirstOrDefault(x => x.UserId == userId && x.FolderId.ToString() == icon.id);
+                int followers = _liveContext.SharedDesktops.Where(x => x.OwnerId.ToString() == icon.id).Count();
+                var followDesk = _liveContext.SharedDesktops.FirstOrDefault(x => x.UserId == userId && x.OwnerId.ToString() == icon.id);
                 icon.followers = followers;
-                icon.left = followFolder.LocLeft;
-                icon.top = followFolder.LocTop;
+                icon.left = followDesk.LocLeft;
+                icon.top = followDesk.LocTop;
             }
 
             return icons;
@@ -430,6 +449,7 @@ namespace Live.Repositories
                 var newImage = new UserImage(userId, addImage.Source, addImage.Id,
                 addImage.Title, addImage.Left, addImage.Top, addImage.FolderId, addImage.Type, tagsString);
                 _liveContext.UserImages.Add(newImage);
+                await this.UpdateUserById(userId);
                 await _liveContext.SaveChangesAsync();
                 return true;
             }
@@ -448,6 +468,7 @@ namespace Live.Repositories
                 var newSpot = new UserSpotify(userId, addSpotify.Id, addSpotify.Source,
                 addSpotify.Title, addSpotify.Left, addSpotify.Top, addSpotify.FolderId, tagsString);
                 _liveContext.UserSpotify.Add(newSpot);
+                await this.UpdateUserById(userId);
                 await _liveContext.SaveChangesAsync();
                 return true;
             }
@@ -589,6 +610,44 @@ namespace Live.Repositories
             return null;
         }
 
+
+
+        public async Task<FolderDto> FollowDesk(Guid UserId, Guid ownerId, string left, string top)
+        {
+
+            if (UserId != ownerId)
+            {
+                var sharedDesk = _liveContext.SharedDesktops.FirstOrDefault(x => x.UserId == UserId && x.OwnerId == ownerId);
+
+                var userDesk = _liveContext.Users.Include(x => x.UserYoutubes)
+                                                .Include(x => x.UserImages)
+                                                .Include(x => x.UserSpotify)
+                                                .FirstOrDefault(x => x.ID == ownerId);
+
+                if (userDesk != null && sharedDesk == null)
+                {
+                    //if(userDesk.IsPublic.HasValue)
+                    // if (userDesk.IsPublic.Value)
+                    // {
+                    sharedDesk = new SharedDesktop(UserId, ownerId, left, top);
+                    _liveContext.SharedDesktops.Add(sharedDesk);
+
+                    await _liveContext.SaveChangesAsync();
+
+                    var desktopDto = _autoMapper.Map<FolderDto>(userDesk);
+                    var followers = _liveContext.SharedDesktops.Where(x => x.OwnerId == ownerId).ToList().Count;
+                    desktopDto.followers = followers;
+                    desktopDto.followed = true;
+                    return desktopDto;
+                    // }
+                }
+            }
+
+            return null;
+        }
+
+
+
         public async Task<FolderDto> UnFollowFolder(Guid UserId, Guid FolderId)
         {
             var sharedFolder = _liveContext.SharedFolders.FirstOrDefault(x => x.UserId == UserId && x.FolderId == FolderId);
@@ -616,24 +675,60 @@ namespace Live.Repositories
             return null;
         }
 
-        public async Task<FolderDto> GetFolderInfoAsync(Guid userId, Guid folderId)
+
+        public async Task<FolderDto> UnFollowDesk(Guid UserId, Guid OwnerId)
         {
-            var sharedFolder = await _liveContext.SharedFolders.FirstOrDefaultAsync(x => x.UserId == userId && x.FolderId == folderId);
-            var folder = _liveContext.Folders.Include(x => x.UserYouTubes)
+            var sharedDesk = _liveContext.SharedDesktops.FirstOrDefault(x => x.UserId == UserId && x.OwnerId == OwnerId);
+
+            var desk = _liveContext.Folders.Include(x => x.UserYouTubes)
                                   .Include(x => x.UserImages)
                                   .Include(x => x.UserSpotify)
-                .FirstOrDefault(x => x.ID == folderId);
+                                  .FirstOrDefault(x => x.ID == OwnerId);
 
-            if (folder != null )
+            if (desk != null && sharedDesk != null)
             {
-                var folderDto = _autoMapper.Map<FolderDto>(folder);
-                var followers = _liveContext.SharedFolders.Where(x => x.FolderId == folder.ID).ToList().Count;
+                _liveContext.SharedDesktops.Remove(sharedDesk);
+                //folder.RemoveFollower();
+                _liveContext.Update(desk);
+                await _liveContext.SaveChangesAsync();
+
+                var folderDto = _autoMapper.Map<FolderDto>(desk);
+                var followers = _liveContext.SharedDesktops.Where(x => x.OwnerId == desk.ID).ToList().Count;
                 folderDto.followers = followers;
-                folderDto.followed = sharedFolder != null;
+                folderDto.followed = false;
+                return folderDto;
+
+            }
+
+            return null;
+        }
+
+
+
+        public async Task<FolderDto> GetDeskInfoAsync(Guid userId, Guid ownerId)
+        {
+            var sharedDesk = await _liveContext.SharedDesktops.FirstOrDefaultAsync(x => x.UserId == userId && x.OwnerId == ownerId);
+            var desk = _liveContext.Users.FirstOrDefault(x => x.ID == ownerId);
+
+            if (desk != null )
+            {
+                var folderDto = _autoMapper.Map<FolderDto>(desk);
+                var followers = _liveContext.SharedDesktops.Where(x => x.OwnerId == desk.ID).ToList().Count;
+                folderDto.followers = followers;
+                folderDto.followed = sharedDesk != null;
                 return folderDto;
             }
 
             return null;
+        }
+
+        private async Task UpdateUserById(Guid userId)
+        {
+            var user = await _liveContext.Users.FirstOrDefaultAsync(x => x.ID == userId);
+            if(user != null)
+            {
+                user.UpdateDate();
+            }
         }
     }
 

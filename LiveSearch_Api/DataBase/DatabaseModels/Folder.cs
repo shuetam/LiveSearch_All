@@ -80,23 +80,6 @@ public class Folder : Live.Core.Entity
         return count;
     }
 
-    /*     public void AddFollower()
-        {
-            if (this.IsShared)
-                ++this.Followers;
-        }
-
-        public void RemoveFollower()
-        {
-            if (Followers > 0 && this.IsShared)
-                --this.Followers;
-        }
-
-        private void CleanFollowers()
-        {
-            this.Followers = 0;
-        } */
-
 
     public void UpdateFolder()
     {
@@ -125,12 +108,6 @@ public class Folder : Live.Core.Entity
         list.AddRange(listSpot);
 
         list = list.OrderByDescending(x => x.created).ToList();
-
-        //var listofId = this.UserYouTubes.Select(x => x.VideoId).ToList();
-        //listofId.Reverse();
-        //var listImg = this.UserImages.ToList();
-
-
 
         for (int i = 0; i < 4; i++)
         {

@@ -48,11 +48,11 @@ namespace Live.Controllers
             return Json(top);
         }
 
-        [HttpPost("getFolderInfo")]
-        public async Task<IActionResult> GetFolderInfo([FromBody] EntitySetter entity)
+        [HttpPost("getDeskInfo")]
+        public async Task<IActionResult> GetDeskInfo([FromBody] EntitySetter entity)
         {
-            var folderId = new Guid(entity.FolderId);
-            var folderInfo = await _desktopRepository.GetFolderInfoAsync(folderId, folderId);
+            var ownerId = new Guid(entity.OwnerId);
+            var folderInfo = await _desktopRepository.GetDeskInfoAsync(ownerId, ownerId);
             return Json(folderInfo);
         }
 

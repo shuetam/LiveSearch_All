@@ -24,8 +24,8 @@ namespace Live.Repositories
     
         Task RemoveEntity(Guid userId, string entityId, string entityType);
         Task MoveEntityFromFolder(Guid userId, string entityId, string entityType);
-        Task<List<FolderDto>> GetAllFoldersForUserAsync(Guid userId);
-        Task<List<FolderDto>> GetFollowedFoldersForUserAsync(Guid userId);
+        Task<List<FolderDto>> GetAllFoldersForUserAsync(Guid userId, bool onlyPublic);
+        Task<List<FolderDto>> GetFollowedDesktopsForUserAsync(Guid userId);
         Task<object> GetAllIconsIdAsync(Guid userId);
 
         Task SaveIconsLocations(Guid userId, List<EntitySetter> icons);
@@ -34,7 +34,9 @@ namespace Live.Repositories
         Task<FolderDto> EditFolder(Guid UserId, EntitySetter folderSetter);
         Task<FolderDto> FollowFolder(Guid UserId, Guid FolderId, string left, string top);
         Task<FolderDto> UnFollowFolder(Guid UserId, Guid FolderId);
-        Task<FolderDto> GetFolderInfoAsync(Guid userId, Guid folderId);
+        Task<FolderDto> GetDeskInfoAsync(Guid userId, Guid folderId);
+        Task<FolderDto> FollowDesk(Guid UserId, Guid OwnerId, string left, string top);
+        Task<FolderDto> UnFollowDesk(Guid UserId, Guid FolderId);
     }
 
 }

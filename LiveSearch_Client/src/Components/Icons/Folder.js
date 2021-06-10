@@ -100,7 +100,7 @@ class Folder extends Component {
         }
         else{
 
-         if(!this.props.owner) {
+         if(!this.props.owner && this.props.isDesktopFolder) {
             followedIcon = this.props.followed?
             // <div onClick={this.unFollowFolder} id={this.props.id} title="Przestań obserwować"  className= {"editEntity followIcon" } style={{fontSize: "17px"}}><i id={this.props.id}  class="icon-eye-off"/></div>  
             
@@ -135,7 +135,7 @@ class Folder extends Component {
 
         var content = this.props.icon0?
 
-        <table id={this.props.id} style={{marginTop: this.props.smallFolder? "2px" : "8px", width: "100%", height: "100%"}}>
+        <table id={this.props.id} style={ this.props.isDesktopFolder? {marginTop: "2px" , width: "100%", height: "100%"}  :  {marginTop: this.props.smallFolder? "2px" : "8px", width: "100%", height: "100%"}}>
         <tbody>
         <tr  id={this.props.id}>
         <td  id={this.props.id}>

@@ -158,13 +158,14 @@ class Field extends Component {
          Nie znaleziono żadnych ikon pasujacych do wpisanego wyrażenia.
         </div>)
 
-        let  noFoldersFound = (<div className="fieldAct"><br/>
+        let  noDesktopsFound = (<div className="fieldAct"><br/>
         Nie znaleziono żadnych folderów.
         </div>)
 
-        let  noFollowedFolders = (<div className="fieldAct"><br/>
-        Nie obserwujesz żadnych folderów. Kliknij w  <span style={{color: 'white'}}>Obserwuj</span> przy wybranym 
-        folderze w dziale  <span style={{color: 'white'}}>Foldery użytkowników</span>, aby zacząć go obserwować.
+        let  noFollowedDesktops = (<div className="fieldAct"><br/>
+        Nie obserwujesz żadnych pulpitów. Kliknij w   <button  className= { "titleButton followButtton noEvents"}>Obserwuj</button> przy wybranym
+        <p/> 
+        pulpicie w dziale  <span style={{color: 'white'}}><i class="icon-group"/>Pulpity użytkowników</span>, aby zacząć go obserwować.
         </div>)
 
 //"https://i1.sndcdn.com/artworks-000117213722-45m4uv-t200x200.jpg"
@@ -235,12 +236,12 @@ onChange={this.onCapchaChange}
             
 
             if(!this.props.fromDesktop && this.props.noIcons) {
-                if(this.props.folders && this.props.headerType == "followed") {
-                    return noFollowedFolders;
+                if(this.props.headerType == "followed") {
+                    return noFollowedDesktops;
             }
 
-            if(this.props.folders && this.props.headerType == "folders") {
-                return noFoldersFound;
+            if(this.props.desktops && this.props.headerType == "desktops") {
+                return noDesktopsFound;
         }
                 if(this.props.headerType == "explore") {
                     

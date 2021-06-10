@@ -126,23 +126,15 @@ namespace Live.Controllers
         [HttpPost("getfolders")]
         public async Task<IActionResult> GetFolders([FromBody] AuthUser user)
         {
-            var icons = await _desktopRepository.GetAllFoldersForUserAsync(this.UserId);
+            var icons = await _desktopRepository.GetAllFoldersForUserAsync(this.UserId, false);
             return Json(icons);
         }
 
-        [HttpPost("getfollowedfolders")]
-        public async Task<IActionResult> GetFollowedFolders([FromBody] ExploreQuery Query)
+        [HttpPost("getfolloweddesktops")]
+        public async Task<IActionResult> GetFollowedDesktops([FromBody] ExploreQuery Query)
         {
 
-            string folderId = Query.folderId;
-
-            if (!string.IsNullOrEmpty(folderId))
-            {
-                var folderContent = await _exploreRepository.GetIconsForFolder(folderId);
-                return Json(folderContent);
-            }
-
-            var icons = await _desktopRepository.GetFollowedFoldersForUserAsync(this.UserId);
+            var icons = await _desktopRepository.GetFollowedDesktopsForUserAsync(this.UserId);
             return Json(icons);
         }
 
@@ -179,27 +171,28 @@ namespace Live.Controllers
             return Json(folder);
         }
 
-        [HttpPost("followfolder")]
-        public async Task<IActionResult> FollowFolder([FromBody] EntitySetter entity)
+
+        [HttpPost("followdesk")]
+        public async Task<IActionResult> FollowDesk([FromBody] EntitySetter entity)
         {
-            var folderId = new Guid(entity.FolderId);
-            var followed = await _desktopRepository.FollowFolder(this.UserId, folderId, entity.Left, entity.Top);
+            var ownerId = new Guid(entity.OwnerId);
+            var followed = await _desktopRepository.FollowDesk(this.UserId, ownerId, entity.Left, entity.Top);
             return Json(followed);
         }
 
-        [HttpPost("unfollowfolder")]
-        public async Task<IActionResult> UnFollowFolder([FromBody] EntitySetter entity)
+        [HttpPost("unfollowdesk")]
+        public async Task<IActionResult> UnFollowDesk([FromBody] EntitySetter entity)
         {
             var folderId = new Guid(entity.FolderId);
-            var unfollowed = await _desktopRepository.UnFollowFolder(this.UserId, folderId);
+            var unfollowed = await _desktopRepository.UnFollowDesk(this.UserId, folderId);
             return Json(unfollowed);
         }
 
-        [HttpPost("getFolderInfo")]
-        public async Task<IActionResult> GetFolderInfo([FromBody] EntitySetter entity)
+        [HttpPost("getDeskInfo")]
+        public async Task<IActionResult> GetDeskInfo([FromBody] EntitySetter entity)
         {
-            var folderId = new Guid(entity.FolderId);
-            var folderInfo = await _desktopRepository.GetFolderInfoAsync(this.UserId, folderId);
+            var ownerId = new Guid(entity.OwnerId);
+            var folderInfo = await _desktopRepository.GetDeskInfoAsync(this.UserId, ownerId);
             return Json(folderInfo);
         }
 

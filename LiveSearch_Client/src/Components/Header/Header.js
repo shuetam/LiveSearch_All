@@ -157,9 +157,9 @@ this.isConfirm();
 
       setHeaderType = () => {
 
-        if(this.props.match.params.id) {
+        if(this.props.match.params.id && this.props.match.params.id1) {
 
-            var paramsId = this.props.match.params.id;
+            var paramsId = this.props.match.params.id1;
 
             this.setState({showActuallHeader: this.isActuall(paramsId)});
 
@@ -168,11 +168,11 @@ this.isConfirm();
                     this.setState({headerType: "explore"});
                     break;
 
-                case "udostepnione_foldery":
-                    this.setState({headerType: "folders"});
+                case "udostepnione_pulpity":
+                    this.setState({headerType: "desktops"});
                     break;
 
-                case "obserwowane_foldery":
+                case "obserwowane_pulpity":
                     this.setState({headerType: "followed"});
                     break;
 
@@ -189,53 +189,21 @@ this.isConfirm();
             this.setState({showActuallHeader: true});
             this.setState({headerType: "hot"});
         }
+
+        if(this.props.match.params.id)
+        {
+            if(this.props.match.params.id != "ls") {
+                //var userName = this.props.match.params.id;
+                //this.setState({userPublicDesk: userName});
+                this.setState({showActuallHeader: false});
+            }
+        }
     }
-
-
-     /*        if(paramsId == "eksploruj") {
-               
-                this.setState({headerType: "explore"});
-            }
-
-            if(paramsId == "udostepnione_foldery") {
-            
-                this.setState({headerType: "folders"});
-            }
-
-            if(paramsId == "obserwowane_foldery") {
-                
-                this.setState({headerType: "followed"});
-            }
-           
-            if(paramsId == "pulpit")  {
-              
-                this.setState({headerType: "desk"});
-            }
-        } 
-        else {
-            this.setState({showActuallHeader: true});
-            this.setState({headerType: "hot"});
-        }  */
-
-
-      
-
-
 
 
     componentDidUpdate() {
-        
-        //debugger;
-
-       /*  if(!this.props.isAuthenticated) {
-            var facebooks = document.getElementsByClassName("loginBtn loginBtn--facebook");
-            for(var i=0;i<facebooks.length;i++) {
-                document.getElementsByClassName("loginBtn loginBtn--facebook")[i].innerHTML = "Zaloguj przez Facebook";
-            }
-        } */
     }
     
- 
 
     Main = () => {
 
@@ -255,16 +223,16 @@ this.isConfirm();
     }
 
     InMusic = () => {
-        return  this.props.match.params.id?   this.props.match.params.id.includes("muzyka") : false;
+        return  this.props.match.params.id1?   this.props.match.params.id1.includes("muzyka") : false;
     }
 
     InMovies = () => {
-        return  this.props.match.params.id?   this.props.match.params.id.includes("filmy") : false;
+        return  this.props.match.params.id1?   this.props.match.params.id1.includes("filmy") : false;
      }
 
 
      InBooks = () => {
-        return  this.props.match.params.id?   this.props.match.params.id.includes("literatura") : false;
+        return  this.props.match.params.id1?   this.props.match.params.id1.includes("literatura") : false;
      }
 
 
@@ -654,11 +622,11 @@ responseErrorGoogle = (response) => {
        
     }
 
-    activeFollowedFolders = () => {
+    activeFollowedDesktops = () => {
         this.props.showFirst(false);
         if(this.props.isAuthenticated) {
             this.setState({showActuallHeader: false});
-            this.props.history.push(PATHES.followedFolders + "?from=1");
+            this.props.history.push(PATHES.followedDesktops + "?from=1");
             this.setState({headerType: "followed"});
         }
         else {
@@ -668,13 +636,13 @@ responseErrorGoogle = (response) => {
     }
 
 
-    activeSharedFolders = () => {
+    activeSharedDesktops = () => {
         //var paramsId = this.props.match.params.id;
         //if(paramsId !== "foldery") {
             this.props.showFirst(false);
             this.setState({showActuallHeader: false});
-            this.props.history.push(PATHES.sharedFolders+ "?q="+ this.state.explQuery + "&skip=0"+"&from=1");
-            this.setState({headerType: "folders"});
+            this.props.history.push(PATHES.sharedDesktops+ "?q="+ this.state.explQuery + "&skip=0"+"&from=1");
+            this.setState({headerType: "desktops"});
         //}
     }
 
@@ -873,18 +841,24 @@ let infoArrowBest = this.state.showBooksArrow? <div  class="infoArrowBestsellers
         />
     )} />;
 
-    let sharedFoldersArea =  <Route   path={PATHES.sharedFolders +'/:folderId?'} exact component={(props) => (
+    let sharedFoldersArea =  <Route   path={PATHES.sharedDesktops} exact component={(props) => (
         <PublicDesktop {...props} searchTag={this.searchTag} 
-        headerType="folders"
+        headerType="desktops"
         />
     )} />;
 
-    let followedFoldersArea =  <Route   path={PATHES.followedFolders +'/:folderId?'} exact component={(props) => (
+    let followedFoldersArea =  <Route   path={PATHES.followedDesktops} exact component={(props) => (
         <PublicDesktop {...props} searchTag={this.searchTag} 
         headerType="followed"
         />
     )} />;
 
+
+    let publicUserDesk =  <Route   path={'/:userName?'} exact component={(props) => (
+        <PublicDesktop {...props} searchTag={this.searchTag} 
+        headerType="userDesk"
+        />
+    )} />;
    
 
     let songs =  <Route path={PATHES.songs} exact component={(props) => (
@@ -995,20 +969,11 @@ let loginLivesearch =
                 <UserDesktop searchTag={this.searchTag} {...props} showAddingIcon={this.state.showAddingIcon} />
             )} />);
 
-         /*    userFolder = (<Route path={PATHES.userFolder} component={(props) => (
-                <UserDesktop {...props} />
-            )} />); */
-
 
             let songs1 = (<Route path={PATHES.songs} component={(props) => (
                 <PublicDesktop searchTag={this.searchTag} {...props} fetchData={this.state.takeSongDataFrom}  />
             )} />);
        
-
-
-
-
-
 let authenticate = (<div class="logIn" style={{marginTop: "6px"}} id="userP"> Zaloguj się
 <div id="login" class="social"> 
 {loginButtons}
@@ -1091,14 +1056,14 @@ let  explore =   <div id="explore"   onClick={this.activeExplore}   class= {this
 <div id="exploreField" class="hoverInfo"> Eksploruj ikony</div>
 </div>
 
-let followedFolders = <div id="followedFolders"  onClick={this.activeFollowedFolders}    class= {this.state.headerType == "followed"?
+let followedFolders = <div id="followedFolders"  onClick={this.activeFollowedDesktops}    class= {this.state.headerType == "followed"?
 "mainSwitch active" : "mainSwitch"} > <i class="icon-folder-open"/>  {/* Obserwowane foldery */}
-<div id="followedFoldersField" class="hoverInfo"> Obserwowane foldery</div>
+<div id="followedFoldersField" class="hoverInfo"> Obserwowane pulpity</div>
 </div> 
 
-let sharedFolders = <div id="sharedFolders"  onClick={this.activeSharedFolders}   class= {this.state.headerType == "folders"?
+let sharedFolders = <div id="sharedFolders"  onClick={this.activeSharedDesktops}   class= {this.state.headerType == "desktops"?
 "mainSwitch active" : "mainSwitch"} > <i class="icon-group"/> {/* Foldery użytkowników */}
-<div id="sharedFoldersField" class="hoverInfo"> Foldery użytkowników</div>
+<div id="sharedFoldersField" class="hoverInfo"> Pulpity użytkowników</div>
 </div> 
 
 let userPulpit = <div id="userPulpit"  onClick={this.activeDesk}  class= {this.state.headerType == "desk"?
@@ -1432,6 +1397,7 @@ return (
                             {exploreArea}
                             {sharedFoldersArea}
                             {followedFoldersArea}
+                            {publicUserDesk}
                             {books}
                             {songs}
                             {movies}

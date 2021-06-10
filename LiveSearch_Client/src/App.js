@@ -31,7 +31,7 @@ class App extends Component {
             <BrowserRouter>
                 <div>
                 
-                    <Route path={'/:id?/:id1?/:id2?'} component={Header} />
+                    <Route path={'/:id?/:id1?/:id2?/:id3?'} component={Header} />
                     <Popup/>
                     <ServerPopup/>
                

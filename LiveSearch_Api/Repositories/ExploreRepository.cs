@@ -26,8 +26,9 @@ namespace Live.Repositories
         private readonly ITVMovieRepository _tvMovieRepository;
         private readonly ISongsRepository _radioSongsRepository;
         private readonly IBestsellersRepository _bestSellersRepository;
+        private readonly IUserDesktopRepository _userDesktopRepository;
 
-        public ExploreRepository(LiveContext liveContext, IMapper autoMapper, IJwtService jwtService, ITVMovieRepository tvMovieRepository, ISongsRepository radioSongsRepository, IBestsellersRepository bestSellersRepository)
+        public ExploreRepository(LiveContext liveContext, IMapper autoMapper, IJwtService jwtService, ITVMovieRepository tvMovieRepository, ISongsRepository radioSongsRepository, IBestsellersRepository bestSellersRepository, IUserDesktopRepository userDesktopRepository)
         {
             this._liveContext = liveContext;
             this._autoMapper = autoMapper;
@@ -35,6 +36,7 @@ namespace Live.Repositories
             this._tvMovieRepository = tvMovieRepository;
             this._radioSongsRepository = radioSongsRepository;
             this._bestSellersRepository = bestSellersRepository;
+            this._userDesktopRepository = userDesktopRepository;
         }
 
         public async Task<List<IconDto>> GetAllActuallYTAsync()
@@ -334,6 +336,61 @@ namespace Live.Repositories
 
         }
 
+
+
+        public async Task<List<FolderDto>> GetAllSharedDesktopsAsync(string query, int skip, int count)
+        {
+            var desktops = await _liveContext.Users
+            //.Where(x => x.IsPublic)
+            .Where(x => x.PublicName.Contains(query) || x.PublicDescription.Contains(query))
+            .Include(x => x.UserYoutubes)
+            .Include(x => x.UserImages)
+            .Include(x => x.UserSpotify).ToListAsync();
+
+            desktops = desktops
+            .Where(x => x.HasIcons())
+            .Skip(skip).Take(count)
+            .ToList();
+
+            // will be segereged by create date, populars, modyfy date
+
+            foreach (var desk in desktops)
+            {
+                desk.SetFourIcons();
+            }
+            var icons = desktops.Select(x => _autoMapper.Map<FolderDto>(x)).ToList();
+            foreach (var icon in icons)
+            {
+                int followers = _liveContext.SharedDesktops.Where(x => x.OwnerId.ToString() == icon.id).Count();
+                icon.followers = followers;
+                icon.setLocation(false);
+            }
+
+
+            return icons;
+
+        }
+
+
+        public async Task<List<FolderDto>> GetDeskIconsAsync(Guid ownerId, string folderId)
+        {
+            var icons = await _userDesktopRepository.GetAllIconsForUserAsync(ownerId, folderId);
+            var images = await _userDesktopRepository.GetAllImagesForUserAsync(ownerId, folderId);
+            var spotify = await _userDesktopRepository.GetAllSpotifyForUserAsync(ownerId, folderId);
+
+            icons.AddRange(images);
+            icons.AddRange(spotify);
+
+            var allIcons = icons.Select(x => new FolderDto(x)).ToList();
+
+            if (string.IsNullOrEmpty(folderId))
+            {
+                var folders = await _userDesktopRepository.GetAllFoldersForUserAsync(ownerId, true);
+                allIcons.AddRange(folders);
+            }
+                return allIcons;
+           
+        }
 
     }
 

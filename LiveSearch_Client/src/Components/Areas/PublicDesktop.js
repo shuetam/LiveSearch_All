@@ -6,7 +6,7 @@ import Field from '../Fields/Field';
 import ImageField from '../Fields/ImageField';
 import FirstField from '../Fields/FirstField';
 import SpotifyField from '../Fields/SpotifyField';
-import FolderField from '../Fields/FolderField';
+import DeskField from '../Fields/DeskField';
 import InfoField from '../Fields/InfoField';
 import { Link, Route, NavLink } from 'react-router-dom';
 import YTIcon from '../Icons/YTIcon';
@@ -52,7 +52,7 @@ class PublicDesktop extends Component {
             followedIds: [],
             prevPlayed: [],
             noIcons: false,
-            foldersIcons: false,
+            deskIcons: false,
             explPopCheck: true,
             explIconsCount: 10,
             explDesk: true,
@@ -64,9 +64,10 @@ class PublicDesktop extends Component {
             exploreSkip: 0,
             showNextPrev: false,
             sharedFolders: [],
-            openedFolder: "",
+            sharedDesktops: [],
+            openedDesk: "",
             showFolderField: false,
-            hoveredFolder: null,
+            hoveredDesk: null,
             followedIcons: false,
             unFollowTitle: "",
             showUnfollow: false,
@@ -74,7 +75,7 @@ class PublicDesktop extends Component {
             folderInfo: {},
             waiting: "",
             waitingPopup: "",
-            showFolderInfo: false,
+            showDeskInfo: false,
             fromHeader: false,
             smallFolder: true,
             userFolders: ""
@@ -188,15 +189,14 @@ handleScroll = (event) => {
 
         var query = this.props.location.search;
         var search = new URLSearchParams(query);
-    if(this.props.headerType=="explore" || this.props.headerType=="folders" || this.props.headerType=="followed") {
+        var fetchData = this.props.fetchData;
+    if(this.props.headerType=="explore" || this.props.headerType=="desktops" || this.props.headerType=="followed" || this.props.headerType == "userDesk") {
       
         var exploreQuery = search.get("q");
         var exploreSkip = search.get("skip");
         var from = search.get("from");
         var folder = search.get("folder");
         
-        var folderId = this.props.match.params.folderId? this.props.match.params.folderId : "";
-
         if(exploreQuery !== null){
             this.setState({explQuery: exploreQuery});
         }
@@ -204,18 +204,27 @@ handleScroll = (event) => {
             exploreQuery = "";
         }
        
-        if(folder !== null) {
-            this.setState({userFolders: folder});
-        }
-        
+      var deskId = "";
+      var folderId = folder;
 
-        if(this.props.match.params.folderId){
+        if(this.props.match.params.userName) {
+
+            if(this.props.match.params.userName != "ls" && this.props.headerType == "userDesk")
+            {
+                deskId = this.props.match.params.userName;
+                this.setState({openedDesk: this.props.match.params.id});
             
-            this.setState({openedFolder: folderId});
-            
-            let fetchFolderInfo = this.props.isAuthenticated? URL.api + URL.folderInfoAuth : URL.api + URL.folderInfo;
+
+            fetchData = URL.api + URL.getPublicIconsForDesk;
+            let fetchDeskInfo = this.props.isAuthenticated? URL.api + URL.deskInfoAuth : URL.api + URL.deskInfo;
+           
+
+            if(this.props.match.params.folderId)
+                folderId = this.props.match.params.folderId;
+
             var data = { 
-                folderId: folderId,     
+                ownerId: this.props.match.params.userName,     
+                folderId: folderId,
             }  
 
             var config = this.props.isAuthenticated?
@@ -223,11 +232,11 @@ handleScroll = (event) => {
                         headers: {Authorization: "Bearer " + this.props.jwtToken}
                     } : null;
 
-            axios.post(fetchFolderInfo, data, config)
+            axios.post(fetchDeskInfo, data, config)
             .then((result) => { 
                 if(result.data) {
-                  this.setState({folderInfo: result.data})
-                  this.setState({showFolderInfo: true})
+                  this.setState({deskInfo: result.data})
+                  this.setState({showDeskInfo: true})
                 }
         })
         
@@ -236,17 +245,13 @@ handleScroll = (event) => {
  
 
         }
-        else {
-            folderId = "";
-            
-        }
+    }
+  
        
-    if((this.props.headerType=="folders" || this.props.headerType=="followed") && !this.props.match.params.folderId) {
-        this.setState({foldersIcons: true});
+    if((this.props.headerType=="desktops" || this.props.headerType=="followed")) {
+        this.setState({deskIcons: true});
         }
 
-
-        
         if(exploreSkip !== null){
             this.setState({exploreSkip: parseInt(exploreSkip)});
         }
@@ -257,8 +262,6 @@ handleScroll = (event) => {
         if(from !== null){
             this.setState({fromHeader: true});
         }
-
-
 
         var explPopCheck = localStorage.getItem('explPopCheck');
         var explIconsCount =  localStorage.getItem('explIconsCount');
@@ -279,13 +282,14 @@ handleScroll = (event) => {
     }
 
 
-        var fetchData = this.props.fetchData;
+      
         var data = { 
-            folderId: folderId,
+            ownerId: deskId,
             query: exploreQuery,
             count: explIconsCount,
             next: exploreSkip,
-            userFolder: folder
+            userFolder: folder,
+            folderId: folderId,
         }
         
         if(this.props.headerType=="explore") {
@@ -293,11 +297,12 @@ handleScroll = (event) => {
             fetchData = URL.api + URL.explore;
         }
 
-        if(this.props.headerType=="folders") {
+        if(this.props.headerType=="desktops") {
        
-            fetchData = URL.api + URL.sharedFolders;
+            fetchData = URL.api + URL.sharedDesktops;
         }
 
+      
         var config = null;
         if(this.props.headerType=="followed" && this.props.isAuthenticated) {
 
@@ -307,7 +312,7 @@ handleScroll = (event) => {
                 }
        
             this.setState({followedIcons: true});
-            fetchData = URL.api + URL.followedFolders;
+            fetchData = URL.api + URL.followedDesktops;
         }
 
 
@@ -359,6 +364,12 @@ handleScroll = (event) => {
             })
         });
 
+        this.setState({ sharedDesktops:
+            Array.prototype.filter.call(result.data, function(icon) {
+                return icon.type=="DESK";
+            })
+        });
+
     })
         .catch(error => {console.log(error);
             this.Alert("Wystąpił błąd przy pobieraniu ikon. Spróbuj ponownie za chwilę.");
@@ -371,7 +382,7 @@ handleScroll = (event) => {
 
 
     getLastIcon = () => {
-        var allIcons = [ ...this.state.spotify, ...this.state.images, ...this.state.icons, ...this.state.sharedFolders];
+        var allIcons = [ ...this.state.spotify, ...this.state.images, ...this.state.icons, ...this.state.sharedDesktops];
 
         allIcons = allIcons.sort((i,j) => Date.parse(i.created) - Date.parse(j.created));
 
@@ -582,7 +593,7 @@ handleScroll = (event) => {
         }
     }
 
-    followFolder = (folderId) => {
+    followDesk = (deskId) => {
         if(this.props.isAuthenticated) {
             this.setState({waiting: "inputDis"});
             var config = {
@@ -592,7 +603,7 @@ handleScroll = (event) => {
             var Top_= 10 +"vh";
            var  Left_ = 10 + "vw";
 
-        var entity = document.getElementById(folderId);
+        var entity = document.getElementById(deskId);
 
         if(entity) {
 
@@ -615,38 +626,38 @@ handleScroll = (event) => {
                 Left_ = leftFlo + "vw";
             }
         }
-        else if (this.state.folderInfo) {
-            folderId = this.state.folderInfo.id;
-            Top_= this.state.folderInfo.top;
-            Left_ = this.state.folderInfo.left;
+        else if (this.state.deskInfo) {
+            deskId = this.state.deskInfo.id;
+            Top_= this.state.deskInfo.top;
+            Left_ = this.state.deskInfo.left;
         }
 
             var data = { 
-                FolderId: folderId,
+                OwnerId: deskId,
                 Left: Left_,
                 Top:  Top_
             }
-            axios.post(URL.api+URL.followFolder, data, config)
+            axios.post(URL.api+URL.followDesk, data, config)
             .then((result) => {
               
                 if(result.data) {
 
-                    var folder = this.getIconById(result.data.id);
-                    if(folder) {
-                        folder.followers = result.data.followers;
-                        this.setState({ hoveredFolder: folder });
+                    var desk = this.getIconById(result.data.id);
+                    if(desk) {
+                        desk.followers = result.data.followers;
+                        this.setState({ hoveredDesk: desk });
                         this.setState(prevState => ({
-                            followedIds: [...prevState.followedIds, folder.id]
+                            followedIds: [...prevState.followedIds, desk.id]
                           }))
 
                     }
-                    if(this.state.folderInfo) {
-                        this.setState({folderInfo: result.data});                  
+                    if(this.state.deskInfo) {
+                        this.setState({deskInfo: result.data});                  
                     }
 
                 }
                 else {
-                    this.Alert("Nie znaleziono folderu, spróbuj ponownie za chwilę.");
+                    this.Alert("Nie znaleziono pulpitu, spróbuj ponownie za chwilę.");
                 }
                 this.setState({waiting: ""});
                 }
@@ -661,7 +672,7 @@ handleScroll = (event) => {
 
 
     unFollowFolderPop = () => {
-        var folder = this.state.folderInfo;
+        var folder = this.state.deskInfo;
       
         if(folder) {
             this.setState({waiting: "inputDis"});
@@ -696,7 +707,7 @@ handleScroll = (event) => {
                     this.setState({folderInfo: result.data});        
                 }
                 else {
-                    this.Alert("Nie znaleziono folderu, spróbuj ponownie za chwilę.");
+                    this.Alert("Nie znaleziono pulpitu, spróbuj ponownie za chwilę.");
                     this.setState({waiting: ""});
                 }
                 this.setState({waiting: ""});
@@ -955,7 +966,7 @@ getHeaderPosition = (start, end) => {
         }
     }
     getIconById = (Id) => {
-        var allIcons = [...this.state.icons, ...this.state.images, ...this.state.spotify, ...this.state.sharedFolders ];
+        var allIcons = [...this.state.icons, ...this.state.images, ...this.state.spotify, ...this.state.sharedDesktops , ...this.state.sharedFolders];
         var icon = allIcons.find( icon => icon.id == Id);
         return icon;
     }
@@ -969,13 +980,17 @@ getHeaderPosition = (start, end) => {
 
     }
 
-    openFolder = (event) => {
-       
-        if(this.props.headerType=="followed")
-            this.props.history.push(PATHES.followedFolders + "/" + event.target.id);
-           
-        if(this.props.headerType=="folders")
-            this.props.history.push(PATHES.sharedFolders + "/" + event.target.id);
+    openDesk = (event) => {
+
+        var icon = this.getIconById(event.target.id);
+        if(icon.type == "FOLDER" && this.props.match.params.userName) {
+            this.props.history.push( this.props.match.params.userName +  "?folder=" + event.target.id);
+        }
+        else {
+
+            if(this.props.headerType=="desktops" || this.props.headerType=="followed")
+            this.props.history.push("/" + event.target.id);
+        }
     
     }
 
@@ -1049,8 +1064,8 @@ getHeaderPosition = (start, end) => {
             if(this.props.headerType=="explore")
                 this.exploreHandler();
 
-            if(this.props.headerType=="folders")
-                this.foldersExplore();
+            if(this.props.headerType=="desktops")
+                this.deskExplore();
         }
 
     }
@@ -1060,9 +1075,9 @@ getHeaderPosition = (start, end) => {
         this.props.history.push(PATHES.explore + "?q="+ this.state.explQuery + "&skip=0");
     }
 
-    foldersExplore = () => {
+    deskExplore = () => {
         
-        this.props.history.push(PATHES.sharedFolders + "?q="+ this.state.explQuery + "&skip=0");
+        this.props.history.push(PATHES.sharedDesktops + "?q="+ this.state.explQuery + "&skip=0");
     }
 
     addExplIconsCount = () => {
@@ -1100,12 +1115,12 @@ getHeaderPosition = (start, end) => {
             if(this.props.headerType=="explore") {
                 this.props.history.push(PATHES.explore + "?q="+ this.state.explQuery + "&skip=" +skip  );
             }
-            if(this.props.headerType=="folders") {
+            if(this.props.headerType=="desktops") {
                 if(this.state.userFolders !== "") {
-                    this.props.history.push(PATHES.sharedFolders + "?q="+ this.state.explQuery + "&skip=" +skip + "&folder="+ this.state.userFolders );
+                    this.props.history.push(PATHES.sharedDesktops + "?q="+ this.state.explQuery + "&skip=" +skip + "&folder="+ this.state.userFolders );
                 }
                 else {
-                    this.props.history.push(PATHES.sharedFolders + "?q="+ this.state.explQuery + "&skip=" +skip  );
+                    this.props.history.push(PATHES.sharedDesktops + "?q="+ this.state.explQuery + "&skip=" +skip  );
                 }
 
             }
@@ -1119,7 +1134,7 @@ getHeaderPosition = (start, end) => {
         if(this.props.headerType=="explore") {
             this.props.history.push(PATHES.explore + "?q="+ this.state.explQuery + "&skip=" +skip );
         }
-        if(this.props.headerType=="folders") {
+        if(this.props.headerType=="desktops") {
             if(this.state.userFolders !== "") {
             this.props.history.push(PATHES.sharedFolders + "?q="+ this.state.explQuery + "&skip=" +skip + "&folder="+ this.state.userFolders  );
         }
@@ -1133,16 +1148,8 @@ getHeaderPosition = (start, end) => {
 
     backFromFolder = () => {
         this.props.history.goBack();
-      /*   if(this.props.headerType=="followed")
-            this.props.history.push(PATHES.followedFolders + "?from=1");
-
-        if(this.props.headerType=="folders")
-            this.props.history.push(PATHES.sharedFolders+ "?q="+ this.state.explQuery + "&skip=0"+"&from=1"); */
     }
 
-    activeSharedFoldersFromUser = () => {     
-            this.props.history.push(PATHES.sharedFolders+ "?q="+ this.state.explQuery + "&skip=0"+"&from=1"+"&folder="+this.state.folderInfo.id);
-    }
 
 
     saveIcons = () => {
@@ -1191,13 +1198,13 @@ getHeaderPosition = (start, end) => {
     } 
 } 
 
-    onHoverFolder = (event) => {
+    onHoverDesk = (event) => {
 
         var entity = document.getElementById(event.target.id);
         if(entity) {
             var folder = this.getIconById(entity.id);
           
-            this.setState({hoveredFolder: folder})
+            this.setState({hoveredDesk: folder})
             this.setState({showFolderField: true});
 
             var topp = entity.style.top;
@@ -1255,7 +1262,7 @@ getHeaderPosition = (start, end) => {
     
 }
 
-leaveFolder = (event) => {
+leaveDesk = (event) => {
 
     this.setState({showFolderField: false});
 
@@ -1295,14 +1302,14 @@ Poprzednie
 let removingExplore = this.state.explQuery==""?  "" :
 <div  onClick = {this.cleanexplQuery}  class="removeExpl clickElem">&#43;</div>
    
- if(this.props.headerType == "explore" ||  this.props.headerType=="folders") {
+ if(this.props.headerType == "explore" ||  this.props.headerType=="desktops") {
  
 
-var exploreButton = this.state.foldersIcons? <button onClick={this.foldersExplore} 
+var exploreButton = this.state.deskIcons? <button onClick={this.deskExplore} 
 class='titleButton explButton'>Wyszukaj</button> :
 <button onClick={this.exploreHandler} class='titleButton explButton'>Eksploruj</button>
 
-actuallMenu = this.state.openedFolder != ""? "" :  (<div id="exploreMenu" class="actuallMenu" style={{left: this.getHeaderPosition("-500px", "300px") }} >
+actuallMenu = this.state.openedDesk != ""? "" :  (<div id="exploreMenu" class="actuallMenu" style={{left: this.getHeaderPosition("-500px", "300px") }} >
 
 
 <div id="explFilter" class="switch" style={{fontSize: "20px", marginTop: "3px", display: "inline"}}> 
@@ -1321,7 +1328,7 @@ Maksymalna ilość ikon na stronie:
     <input id="exploreT" type="text"
         autofocus="true"
         ref="textInput"
-        placeholder= {this.state.foldersIcons? "Wyszukaj foldery..." :  "Wyszukaj - autorzy, tytuły, wykonawcy..."}
+        placeholder= {this.state.deskIcons? "Wyszukaj pulpity..." :  "Wyszukaj - autorzy, tytuły, wykonawcy..."}
         onKeyPress = {this.onKeyExplore}
         onChange={e => this.editExplore(e.target.value)}
         value={this.state.explQuery}/>{removingExplore}</div> 
@@ -1333,15 +1340,15 @@ Maksymalna ilość ikon na stronie:
 
 let folderInfoHeader = "";
 
-if(this.props.match.params.folderId && this.state.showFolderInfo) {
+if(this.props.match.params.userName && this.state.showDeskInfo) {
 
 let followButton = "";
 
-if(!this.userOwner(this.props.match.params.folderId)) {
+if(!this.userOwner(this.props.match.params.userName)) {
 
-followButton = !this.state.folderInfo.followed?   <button onClick={this.followFolder} id={this.props.id}   className= { "titleButton followButtton " + this.state.waiting}>Obserwuj
+followButton = !this.state.deskInfo.followed?   <button onClick={this.followDesk} id={this.props.id}   className= { "titleButton followButtton " + this.state.waiting}>Obserwuj
 </button> :
-<button title="Kliknij aby zakończyć obserwowanie tego folderu." onClick={this.unFollowFolderPop} id={this.props.id}   className= { "titleButton privateButton " + this.state.waiting}>Obserwujesz</button> ;
+<button title="Kliknij aby zakończyć obserwowanie tego pulpitu." onClick={this.unFollowFolderPop} id={this.props.id}   className= { "titleButton privateButton " + this.state.waiting}>Obserwujesz</button> ;
 }
 folderInfoHeader = <div class="folderInfoHeader">
 
@@ -1352,10 +1359,7 @@ folderInfoHeader = <div class="folderInfoHeader">
         </div>
         </div>
         
-                       <div onClick={this.activeSharedFoldersFromUser} id="folderTitle"> {this.state.folderInfo.title}
-                       <div id="folderTitleField" class="hoverInfo" >
-                        Kliknij aby wyświetlić inne publiczne foldery osoby udostępniającej ten folder
-                        </div>
+                       <div id="folderTitle"> {this.state.deskInfo.title}
                        </div>
                         {followButton}
                        
@@ -1366,7 +1370,7 @@ folderInfoHeader = <div class="folderInfoHeader">
         let tagsField = this.state.loadedIcons? <TagsField  noIcons={this.state.noIcons} searchTag={this.props.searchTag}  tags = {this.getIconTags(this.state.entityID)} />  : "";
     
 
-        if(this.state.firstField || this.state.foldersIcons) {
+        if(this.state.firstField || this.state.deskIcons) {
             tagsField = "";
         }
 
@@ -1379,9 +1383,9 @@ folderInfoHeader = <div class="folderInfoHeader">
 
         let field = "";
 
-        if(this.state.foldersIcons || this.state.followedIcons) {
-            var folderId = this.state.showFolderField? this.state.hoveredFolder.id : 0;
-            field = <FolderField folder={this.state.hoveredFolder} followed={this.userFollow(folderId)}  show={this.state.showFolderField}/>
+        if(this.state.deskIcons || this.state.followedIcons) {
+            var deskId = this.state.showFolderField? this.state.hoveredDesk.id : 0;
+            field = <DeskField desk={this.state.hoveredDesk} followed={this.userFollow(deskId)}  show={this.state.showFolderField}/>
         
 
         }
@@ -1393,7 +1397,7 @@ folderInfoHeader = <div class="folderInfoHeader">
         }
         else {
 /*                 if(this.state.ytField)
-                    field = <Field play={this.state.entityID} folders={this.state.foldersIcons} noIcons={this.state.noIcons}
+                    field = <Field play={this.state.entityID} folders={this.state.deskIcons} noIcons={this.state.noIcons}
                     headerType={this.props.headerType}
                     show={this.state.loadedIcons} nextSong={this.nextSongHandler} loadText={this.props.fetchData} />
     
@@ -1412,7 +1416,7 @@ folderInfoHeader = <div class="folderInfoHeader">
                         switch(this.state.fieldType) {
                             case "YT":
                             case "MOVIE":
-                                field = <Field showReflect={this.state.fieldType == "YT"} play={this.state.entityID} folders={this.state.foldersIcons} noIcons={this.state.noIcons}
+                                field = <Field showReflect={this.state.fieldType == "YT"} play={this.state.entityID} folders={this.state.deskIcons} noIcons={this.state.noIcons}
                                 headerType={this.props.headerType}
                                 show={this.state.loadedIcons} nextSong={this.nextSongHandler} loadText={this.props.fetchData} />
                            break;
@@ -1536,8 +1540,8 @@ folderInfoHeader = <div class="folderInfoHeader">
             return (
                         
                 <Folder  title={song.title} yt={song.id} id={song.id}
-                    classname= {this.getFolderClass(song.id)}
-                    linkTo={this.openFolder}         
+                    linkTo={this.openDesk}      
+                    classname= {this.getFolderClass(song.id)}     
                     location={ this.state.loadedIcons? 
                     {boxShadow: this.getShadow(parseInt(song.left), parseInt(song.top), song.id, true), 
                         top: song.top, left: song.left,
@@ -1545,29 +1549,74 @@ folderInfoHeader = <div class="folderInfoHeader">
                         width: 80 * this.props.sizeFactor + "px",
                          transition: 'top '+2+'s, left '+2+'s'}:
                     {top: this.getHPosition(101,200)+'vh', left: this.getWPosition(-50,200)+'vw',}}
-                    onHover={this.onHoverFolder}
-                    onLeave={this.leaveFolder}
+                    onHover={this.onHoverDesk}
+                    onLeave={this.leaveDesk}
                     count={song.count}
                     icon0= {song.icon0}
                     icon1= {song.icon1}
                     icon2= {song.icon2}
                     icon3= {song.icon3}
-                    followFolder = {this.followFolder}
-                    unFollowFolder = {this.unFollowFolderPop}
+                    //followFolder = {this.followFolder}
+                    //unFollowFolder = {this.unFollowFolderPop}
                     leftEdit = "85%"
                     topEdit = "85%"
                     bottom = {bottomIcon(song.id, song.top)}
                     public={true}
-                    shared = {song.shared}
-                    owner = {this.userOwner(song.id)}
-                    followed = {this.userFollow(song.id)}
+                    //shared = {song.shared}
+                    owner = {false}
+                   // followed = {this.userFollow(song.id)}
                     waiting = {this.state.waiting}
                     factor = {this.props.sizeFactor}
                     smallFolder = {this.state.smallFolder}
+                    isDesktopFolder = {false}
                     />
                      
                 )
             })
+
+
+
+
+            let sharedDesktops = this.state.sharedDesktops.map(desk => {
+       
+                return (
+                            
+                    <Folder  title={desk.title} 
+                    yt={desk.id}
+                     id={desk.id}
+                        classname= "folder folderDesktop"
+                        linkTo={this.openDesk}         
+                        location={ this.state.loadedIcons? 
+                        {boxShadow: this.getShadow(parseInt(desk.left), parseInt(desk.top), desk.id, true), 
+                            top: desk.top, left: desk.left,
+                            height: 80 * this.props.sizeFactor + "px",
+                            width: 100 * this.props.sizeFactor + "px",
+                             transition: 'top '+2+'s, left '+2+'s'}:
+                        {top: this.getHPosition(101,200)+'vh', left: this.getWPosition(-50,200)+'vw',}}
+                        onHover={this.onHoverDesk}
+                        onLeave={this.leaveDesk}
+                        count={desk.count}
+                        icon0= {desk.icon0}
+                        icon1= {desk.icon1}
+                        icon2= {desk.icon2}
+                        icon3= {desk.icon3}
+                        followFolder = {this.followDesk}
+                        unFollowFolder = {this.unFollowFolderPop}
+                        leftEdit = "85%"
+                        topEdit = "85%"
+                        bottom = {bottomIcon(desk.id, desk.top)}
+                        public={true}
+                        shared = {desk.shared}
+                        owner = {this.userOwner(desk.id)}
+                        followed = {this.userFollow(desk.id)}
+                        waiting = {this.state.waiting}
+                        factor = {this.props.sizeFactor}
+                        smallFolder = {this.state.smallFolder}
+                        isDesktopFolder = {true}
+                        />
+                         
+                    )
+                })
 
 
             return (
@@ -1596,6 +1645,7 @@ folderInfoHeader = <div class="folderInfoHeader">
                 <div id = "258" class= "titleDiv"> </div>
                
                 {sharedFolders}
+                {sharedDesktops}
                 {icons}
                 {images}
                 {spotifies}

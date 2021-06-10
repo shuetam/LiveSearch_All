@@ -68,5 +68,29 @@ namespace Live.Controllers
             //var results = new ExploreResultsDto(folders, folders.Count);
             return Json(folders);
         }
+        
+        [HttpPost("getshareddesktops")]
+        public async Task<IActionResult> SharedDesktops([FromBody] ExploreQuery Query)
+        {
+            
+            int count = Query.count;
+            int skip = count * Query.next;
+            string query = Query.query;
+            var desktops = await _exploreRepository.GetAllSharedDesktopsAsync(query, skip, count);
+
+            return Json(desktops);
+        }
+
+
+        [HttpPost("getPublicIconsForDesk")]
+        public async Task<IActionResult> GetIconsForDesk([FromBody] EntitySetter entity)
+        {
+            if (string.IsNullOrEmpty(entity.OwnerId))
+                return null; 
+
+            var ownerId = new Guid(entity.OwnerId);
+            var icons = await _exploreRepository.GetDeskIconsAsync(ownerId, entity.FolderId);
+            return Json(icons);
+        }
     }
 }

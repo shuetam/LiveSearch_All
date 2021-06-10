@@ -51,14 +51,34 @@ DELETE FROM SharedFolders WHERE ID IS NOT NULL
 select * from SharedFolders
 select * from Folders
 
+
+  
+
+ 
+    public DateTime? SharedAt { get; protected set; }
+
+
+select * from Users
+
+
 ALTER TABLE Folders
 ADD SharedAt DATETIME NULL;
 
 ALTER TABLE Folders
 ADD UpdatedAt DATETIME NULL;
 
-ALTER TABLE Folders
-ADD ShareDescription NVARCHAR (600) NULL;
+ALTER TABLE Users
+ADD IsPublic NVARCHAR (100) NULL;
+
+ALTER TABLE Users
+ADD SharedAt DATETIME NULL;
+
+ALTER TABLE Users
+ADD UpdatedAt DATETIME NULL;
+
+
+SELECT * FROM USERS
+
 
 ALTER TABLE Users
 ADD NewPasswordHash NVARCHAR (MAX) NULL;
@@ -69,6 +89,14 @@ ADD  ResetPassword DATETIME NULL;
  public string NewPasswordHash {get; protected set;}
      public string NewSalt {get; protected set;}
      public DateTime? ResetPassword {get; protected set;}
+
+
+SELECT
+	IsPublic
+FROM
+  select * from	INFORMATION_SCHEMA.COLUMNS
+WHERE
+	TABLE_NAME = 'Users'
 
 SELECT * FROM Users
 
@@ -289,6 +317,19 @@ CREATE TABLE SharedFolders
     LocTop NVARCHAR (50) NOT NULL,
     FallowedAt DATETIME NOT NULL,
 )
+
+
+CREATE TABLE SharedDesktops
+(
+	ID UNIQUEIDENTIFIER PRIMARY KEY,
+    UserId UNIQUEIDENTIFIER NOT NULL,
+    OwnerId UNIQUEIDENTIFIER NOT NULL,
+	LocLeft NVARCHAR (50) NOT NULL,
+    LocTop NVARCHAR (50) NOT NULL,
+    FallowedAt DATETIME NOT NULL,
+)
+
+
 
 DROP TABLE SharedFolders
 

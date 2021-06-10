@@ -141,7 +141,26 @@ namespace Live.Mapper
                   //.ForMember(d => d.followers, s => s.MapFrom(x => x.Followers))
                 .ForMember(d => d.iconsCount, s => s.MapFrom(x => x.IconsCount()))
                 .ForMember(d => d.shareDescription, s => s.MapFrom(x => x.ShareDescription));
-               
+
+
+            config.CreateMap<User, FolderDto>()
+                .ForMember(d => d.id, s => s.MapFrom(x => x.ID.ToString()))
+                .ForMember(d => d.count, s => s.MapFrom(x => "2"))
+                .ForMember(d => d.icon0, s => s.MapFrom(x => x.icon0))
+                .ForMember(d => d.icon1, s => s.MapFrom(x => x.icon1))
+                .ForMember(d => d.icon2, s => s.MapFrom(x => x.icon2))
+                .ForMember(d => d.icon3, s => s.MapFrom(x => x.icon3))
+                .ForMember(d => d.title, s => s.MapFrom(x => x.UserName))
+                .ForMember(d => d.type, s => s.MapFrom(x => "DESK"))
+                .ForMember(d => d.shared, s => s.MapFrom(x => x.IsPublic))
+                .ForMember(d => d.created, s => s.MapFrom(x => x.CreatedAt))
+                .ForMember(d => d.hasIcons, s => s.MapFrom(x => x.HasIcons()))
+                .ForMember(d => d.sharedAt, s => s.MapFrom(x => x.GetDate(x.SharedAt)))
+                .ForMember(d => d.updatedAt, s => s.MapFrom(x => x.GetDate(x.UpdatedAt)))
+                .ForMember(d => d.hasDescription, s => s.MapFrom(x => !string.IsNullOrEmpty(x.PublicDescription)))
+                .ForMember(d => d.iconsCount, s => s.MapFrom(x => x.IconsCount()))
+                .ForMember(d => d.shareDescription, s => s.MapFrom(x => x.PublicDescription));
+
 
             config.CreateMap<Folder, IconDto>()
                 .ForMember(d => d.id, s => s.MapFrom(x => x.ID.ToString()))

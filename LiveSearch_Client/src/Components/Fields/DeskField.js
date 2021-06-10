@@ -4,7 +4,7 @@ import './Field.css';
 import { Route, NavLink, Switch, withRouter } from 'react-router-dom';
 
 
-class FolderField extends Component {
+class DeskField extends Component {
 
     constructor(props) {
         super(props);
@@ -24,22 +24,22 @@ class FolderField extends Component {
 
     render() {
  
-if(this.props.show && this.props.folder) {
+if(this.props.show && this.props.desk) {
 
     let youFollow = this.props.followed? <button class="titleButton followFiledIcon">Obserwujesz</button> : "";
 
-    let updateDate =  !this.props.folder.updatedAt ==""?   <div style={{padding: "2px"}}>
+    let updateDate =  !this.props.desk.updatedAt ==""?   <div style={{padding: "2px"}}>
     <span style={{color: "red"}}> 
-   <i class="icon-calendar-empty"/></span> Zaktualizowano: {this.props.folder.updatedAt}
+   <i class="icon-calendar-empty"/></span> Zaktualizowano: {this.props.desk.updatedAt}
    </div>: ""
     
 
     let editor = 
     (<div class="fieldAct folderInfo"> <div style={{fontSize: "19px", color: "white"}}>
-        {this.props.folder.title} {youFollow}</div>
-        {!this.props.folder.hasDescription? "": <hr/>}
+        {this.props.desk.title} {youFollow}</div>
+        {!this.props.desk.hasDescription? "": <hr/>}
             <div style={{fontSize: "14px"}}>
-                {this.props.folder.shareDescription}
+                {this.props.desk.shareDescription}
             </div>
         <hr/>
         <div style={{fontSize: "15px"}}>
@@ -47,11 +47,11 @@ if(this.props.show && this.props.folder) {
     
        <div style={{padding: "2px"}}>
        <span style={{color: "white"}}> 
-      <i class="icon-doc"/></span> Ilość ikon: {this.props.folder.iconsCount}
+      <i class="icon-doc"/></span> Ilość ikon: {this.props.desk.iconsCount}
       </div>
       <div style={{padding: "2px"}}>
        <span style={{color: " rgba(0, 201, 43, 0.945)"}}> 
-       <i class="icon-eye"/></span> Obserwujących: {this.props.folder.followers}  
+       <i class="icon-eye"/></span> Obserwujących: {this.props.desk.followers}  
        </div>
 {/*       <div style={{paddingLeft: "5px"}}>
       <span class="addIconInfo fontAdd">&#43; 
@@ -59,7 +59,7 @@ if(this.props.show && this.props.folder) {
       </div> */}
       <div style={{padding: "2px"}}>
        <span style={{color: "rgba(231, 173, 64, 0.637)"}}> 
-      <i class="icon-link-ext"/></span> Udostępniono: {this.props.folder.sharedAt}
+      <i class="icon-link-ext"/></span> Udostępniono: {this.props.desk.sharedAt}
       </div>
 
     {updateDate}
@@ -77,4 +77,4 @@ if(this.props.show && this.props.folder) {
     }
 }
 
-export default withRouter(FolderField);
+export default withRouter(DeskField);
