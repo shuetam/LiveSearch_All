@@ -92,8 +92,15 @@ class PublicDesktop extends Component {
         this.setState({smallFolder: this.props.sizeFactor < 0.8});
         this.setState({firstField: this.props.firstField});
        
+
         this.startFetchingIcons();
         this.getUserIconsId();
+        let icon = 7;
+        icon = 8;
+        this.changeicon(icon);
+        console.log("new value is "+ icon);
+    
+    
     }
     
     componentWillMount() {
@@ -109,6 +116,7 @@ class PublicDesktop extends Component {
     }
 
     ManageQueryUrl = () => {
+
         var query = this.props.location.search;
         var search = new URLSearchParams(query);
         var exploreQuery = search.get("q");
@@ -143,7 +151,10 @@ class PublicDesktop extends Component {
         }
     }
 
-
+changeicon = (icon) => {
+icon = 777;
+console.log("value is "+ icon);
+}
     setStatesForIcon = (icons) => {
 
         return new Promise(resolve => {

@@ -4382,3 +4382,11 @@
 2021-06-10 12:00:28.817 +02:00 [Information] Finish radio songs update with 94 songs and 0 youtube errors
 2021-06-10 13:08:14.351 +02:00 [Information] Finish radio songs update with 93 songs and 0 youtube errors
 2021-06-10 14:17:56.773 +02:00 [Information] Finish radio songs update with 94 songs and 0 youtube errors
+2021-06-11 13:18:26.853 +02:00 [Information] Finish radio songs update with 177 songs and 0 youtube errors
+2021-06-13 23:12:41.868 +02:00 [Information] Finish radio songs update with 411 songs and 0 youtube errors
+2021-06-14 20:03:29.293 +02:00 [Information] Finish radio songs update with 314 songs and 0 youtube errors
+2021-06-14 21:17:04.077 +02:00 [Information] Finish radio songs update with 80 songs and 0 youtube errors
+2021-06-14 22:48:14.722 +02:00 [Information] Finish radio songs update with 83 songs and 0 youtube errors
+2021-06-16 00:34:36.248 +02:00 [Information] Finish radio songs update with 212 songs and 0 youtube errors
+2021-06-16 23:57:29.951 +02:00 [Information] Finish radio songs update with 183 songs and 2 youtube errors
+2021-06-18 23:53:29.909 +02:00 [Information] Finish radio songs update with 538 songs and 3 youtube errors

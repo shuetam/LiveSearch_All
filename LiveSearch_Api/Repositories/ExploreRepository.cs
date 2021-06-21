@@ -148,7 +148,7 @@ namespace Live.Repositories
 
         }
 
-        //Podobno teoria i tresci na studiach psychologicznych s� teraz mocno sfeminizowane, jak si� tam odnajdujesz?
+       
 
         private void FillFromSongs(List<IconDto> listToFill, string query, int deep, ExploreCounter count, int skip)
         {

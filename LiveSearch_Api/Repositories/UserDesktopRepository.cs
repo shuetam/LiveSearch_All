@@ -122,7 +122,7 @@ namespace Live.Repositories
 
             iconsIds.Add(userId.ToString());
 
-            var followedIds = await _liveContext.SharedDesktops.Where(x => x.UserId == userId).Select(x => x.OwnerId.ToString()).ToListAsync();
+            var followedIds = await _liveContext.SharedDesktops.Where(x => x.UserId == userId).Select(x => x.OwnerId.ToString().ToLower()).ToListAsync();
 
             var iconsIDS = new { userIds = iconsIds, followedIds = followedIds };
             return iconsIDS;
